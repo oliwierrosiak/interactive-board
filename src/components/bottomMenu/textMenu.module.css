@@ -1,4 +1,4 @@
-.menu
+.container
 {
     position: fixed;
     bottom: 2rem;
@@ -13,10 +13,4 @@
 .display
 {
     transform: translate(0,0);
-}
-.item
-{
-    width: 3rem;
-    height: 3rem;
-    background-color: green;
 }

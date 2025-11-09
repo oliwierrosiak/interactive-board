@@ -3,12 +3,12 @@ import styles from './bottomMenu.module.css'
 function BottomMenu(props)
 {
     const textClicked = () =>{
-        props.addTextItem()
         props.clearElementEdit()
+        props.addTextItem()
     }
 
     return(
-        <div className={styles.menu}>
+        <div className={`${styles.menu} ${props.display?styles.display:''}`}>
             <div className={styles.item} onClick={textClicked}>
                 Text
             </div>

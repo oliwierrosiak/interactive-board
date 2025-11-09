@@ -1,8 +1,12 @@
+import { useEffect, useRef } from 'react'
 import styles from './textElement.module.css'
 
 function TextElement(props)
 {
-    let moveHandler
+
+    const containerRef = useRef()
+
+    let moveHandler, resizeHandler
 
     const moveElement = (e,mouseEvent) =>
     {
@@ -27,16 +31,39 @@ function TextElement(props)
 
 
     const checkEditMode = (e) =>{
-    if(!e.target.classList.contains(styles.editOn))
-    {
-        props.clearElementEdit()
-        e.target.classList.add(`editOn`)
+        if(!e.target.classList.contains('editOn') && e.target.classList.contains('element'))
+        {
+            props.clearElementEdit()
+            e.target.classList.add(`editOn`)
+            props.setEdit(props.id)
+        }
     }
-}
+
+    const resizeAction = (e) =>{
+
+        const width = (e.clientX-containerRef.current.offsetLeft)/window.innerWidth*200
+        const height = (e.clientY-containerRef.current.offsetTop)/window.innerHeight*200
+        containerRef.current.style.width = `${width}rem`
+        containerRef.current.style.height = `${height}vh`
+    }
+
+   const resizeMouseUp = ()=>{
+        props.board.removeEventListener('mousemove',resizeHandler)
+    }
+
+    const resizeElement = () =>{
+        resizeHandler = (e) => resizeAction(e)
+        props.board.addEventListener('mousemove',resizeHandler)
+        props.board.addEventListener('mouseup',resizeMouseUp)
+    }
 
     return(
-        <div className={`element editOn ${styles.element}`} onMouseDown={changePosition} onMouseUp={setSolidPosition} onClick={checkEditMode}>
-            <textarea placeholder="test" ></textarea>
+        <div className={`element editOn ${styles.element}`} onMouseDown={changePosition} onMouseUp={setSolidPosition} onClick={checkEditMode} ref={containerRef}>
+            <textarea placeholder="Wprowadź tekst..." className={styles.textArea} onFocus={e=>e.target.placeholder = ''} onBlur={e=>e.target.placeholder = 'Wprowadź tekst...'}></textarea>
+
+            
+            <div className={styles.resize} onMouseDown={resizeElement} onMouseUp={resizeMouseUp}></div>
+        
         </div>
     )
 }

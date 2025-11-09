@@ -16,6 +16,10 @@ html
 }
 .editOn
 {
-  border: .5rem solid grey;
-    cursor: move;
+  border: .2rem solid rgb(106, 106, 106) !important;
+  cursor: move !important;
+}
+.editOn>div
+{
+    display: block;
 }
