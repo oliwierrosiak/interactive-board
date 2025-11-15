@@ -3,9 +3,9 @@ class TextElementClass
     constructor(classNames)
     {
         this.class = classNames ? [...classNames] : []
-        const id = Math.floor(Math.random()*1000000)
-        this.id = id
-        // console.log(this.class)
+        const id = Math.floor(Math.random()*100)
+        this.id = `${new Date().getTime()}${id}`
+        this.type = 'text'
     }   
 
     setPosition(left,top)

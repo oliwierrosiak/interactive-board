@@ -1,11 +1,12 @@
-class ImgElement
+class ImgElementClass
 {
-    constructor()
+    constructor(link)
     {
-        
+        this.link = link
+        this.type = 'img'
     }
 
 
 }
 
-export default ImgElement
+export default ImgElementClass

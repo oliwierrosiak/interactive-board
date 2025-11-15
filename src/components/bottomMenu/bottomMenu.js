@@ -22,7 +22,7 @@ function BottomMenu(props)
     return(
         <div className={`${styles.menu} ${props.display?styles.display:''}`}>
 
-            <AddingImgForm display={props.showAddingImgForm}/>
+            <AddingImgForm display={props.showAddingImgForm} addImg={props.addImg}/>
 
             <div className={styles.item} onClick={textClicked}>
                 Text
