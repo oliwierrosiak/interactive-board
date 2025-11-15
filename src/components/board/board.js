@@ -13,7 +13,7 @@ function Board()
     const [textElements,setTextElements] = useState([])
     const [edit,setEdit] = useState(0)
     const [editUpdate,setEditUpdate] = useState(true)
-
+    const [showAddingImgForm,setShowAddingImgForm] = useState(false)
 
     const addTextItem = () =>
     {
@@ -37,6 +37,7 @@ function Board()
         if(e.target.classList.contains(styles.board))
         {
             clearElementEdit()
+            setShowAddingImgForm(false)
         }
     }
 
@@ -55,7 +56,9 @@ function Board()
                 {textElements.map(x=><TextElement setEdit={setEdit} key={x.id} board={boardRef.current} clearElementEdit={clearElementEdit} id={x.id} item={x} />)}
             </div>
 
-            <BottomMenu addTextItem={addTextItem} clearElementEdit={clearElementEdit} display={edit === 0}/>
+            <BottomMenu addTextItem={addTextItem} showAddingImgForm={showAddingImgForm} setShowAddingImgForm={setShowAddingImgForm} clearElementEdit={clearElementEdit} display={edit === 0}/>
+
+            
 
             <TextMenu display={edit!==0} element={edit} editUpdate={editUpdate} setEditUpdate={setEditUpdate} board={boardRef} deleteItem={deleteItem}/>
             

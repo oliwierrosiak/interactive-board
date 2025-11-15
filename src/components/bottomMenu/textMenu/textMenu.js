@@ -245,7 +245,6 @@ function TextMenu(props)
     {
         if(e.target.closest('div').classList.contains(styles.menuItem))
         {
-            // console.log("now")
             setShowAlignMenu(!showAlignMenu)
         }
     }
