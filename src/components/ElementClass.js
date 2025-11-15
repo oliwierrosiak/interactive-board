@@ -69,14 +69,14 @@ class ElementClass
     {
         const left = Math.round(mouseEvent.clientX/window.innerWidth*100)
         const top = Math.round(mouseEvent.clientY/window.innerHeight*100)
-        e.target.style.left = `${left}%`
-        e.target.style.top = `${top}%`
+        e.style.left = `${left}%`
+        e.style.top = `${top}%`
         this.setPosition(left,top)
     }
 
     changePosition(e,board)
     {
-        if(e.target.classList.contains(`editOn`))
+        if(e.classList.contains(`editOn`))
         {
             this.moveHandler = (ev) => this.moveElement(e,ev)
             board.addEventListener('mousemove',this.moveHandler) 
@@ -89,10 +89,10 @@ class ElementClass
 
     checkEditMode(e,clearElementEdit,setEdit,item)
     {
-        if(!e.target.classList.contains('editOn') && e.target.classList.contains('element'))
+        if(!e.classList.contains('editOn') && e.classList.contains('element'))
         {
             clearElementEdit()
-            e.target.classList.add(`editOn`)
+            e.classList.add(`editOn`)
             setEdit(item)
         }
     }

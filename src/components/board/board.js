@@ -6,6 +6,7 @@ import TextMenu from '../bottomMenu/textMenu/textMenu'
 import TextElementClass from '../textElement.js/textElementClass'
 import ImgElement from '../imgElement/imgElement'
 import ImgElementClass from '../imgElement/imgElementClass'
+import ImageMenu from '../bottomMenu/imageMenu/imageMenu'
 
 
 function Board()
@@ -78,8 +79,10 @@ function Board()
             <BottomMenu addTextItem={addTextItem} addImg={addImg} showAddingImgForm={showAddingImgForm} setShowAddingImgForm={setShowAddingImgForm} clearElementEdit={clearElementEdit} display={edit === 0}/>
 
             
-
-            <TextMenu display={edit!==0} element={edit} editUpdate={editUpdate} setEditUpdate={setEditUpdate} board={boardRef} deleteItem={deleteItem}/>
+            {edit.type === "text" ?
+            <TextMenu display={edit!==0 && edit.type === "text"} element={edit} editUpdate={editUpdate} setEditUpdate={setEditUpdate} board={boardRef} deleteItem={deleteItem}/>
+            :
+            (edit.type === 'img'? <ImageMenu display={edit !== 0 && edit.type === "img"} element={edit}/>:null)}
             
         </>
     )

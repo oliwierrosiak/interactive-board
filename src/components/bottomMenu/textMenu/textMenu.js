@@ -97,7 +97,7 @@ function TextMenu(props)
     const [showBgColorMenu,setShowBgColorMenu] = useState(false)
     const [fontFamily,setFontFamily] = useState(fontFamilySetter())
     const [showFontFamilyMenu,setShowFontFamilyMenu] = useState(false)
-
+    const [display,setDisplay] = useState(false)
     
 
     const boldHandle = () => {
@@ -249,8 +249,14 @@ function TextMenu(props)
         }
     }
 
+    useEffect(()=>{
+        setTimeout(()=>{
+            setDisplay(props.display)
+        },10)
+    },[props.display])
+
     return(
-        <div className={`${styles.container} ${props.display?styles.display:''}`}>
+        <div className={`${styles.container} ${display?styles.display:''}`}>
 
             <div className={`${styles.menuItem} ${styles.fontFamilyItem}`} onClick={e=>setShowFontFamilyMenu(!showFontFamilyMenu)}>
                 <p className={`${styles.fontFamilyHeader} ${fontFamily.class}`} onClick={e=>setShowFontFamilyMenu(!showFontFamilyMenu)}>{fontFamily.text}</p>

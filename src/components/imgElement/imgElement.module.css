@@ -8,10 +8,13 @@
     border:.2rem solid transparent;
     min-height: 3rem;
     min-width: 3rem;
-    width: 7rem;
-    height: 5rem;
+    width: 12rem;
+    height: 12rem;
     padding: .5rem;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .resize
 {
@@ -25,4 +28,13 @@
     right: -.2rem;
     cursor: nw-resize;
     
+}
+.img
+{
+    max-width: 100%;
+    max-height: 100%;
+}
+.img::selection
+{
+    background: none;
 }

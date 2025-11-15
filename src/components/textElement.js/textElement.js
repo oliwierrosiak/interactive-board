@@ -29,7 +29,7 @@ function TextElement(props)
     },[textValue])
 
     return(
-        <div className={`element editOn ${styles.element} ${props.item.getClass()}`} style={props.item.getStyles()} onMouseDown={changePosition} onMouseUp={setSolidPosition} onClick={checkEditMode} ref={containerRef}>
+        <div className={`element editOn ${styles.element} ${props.item.getClass()}`} style={props.item.getStyles()} onMouseDown={e=>changePosition(e.target)} onMouseUp={setSolidPosition} onClick={e=>checkEditMode(e.target)} ref={containerRef}>
             <textarea placeholder="Wprowadź tekst..." onChange={e=>setTextValue(e.target.value)} value={textValue} className={styles.textArea} onFocus={e=>e.target.placeholder = ''} onBlur={e=>e.target.placeholder = 'Wprowadź tekst...'}></textarea>
 
             <div className={styles.resize} onMouseDown={resizeElement}></div>
