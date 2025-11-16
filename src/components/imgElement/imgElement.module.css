@@ -31,8 +31,6 @@
 }
 .img
 {
-    /* max-width: 100%;
-    max-height: 100%; */
     width: 100%;
     height: auto;
 }
@@ -75,4 +73,9 @@
     font-weight: 900;
     font-size: 1.4rem;
     text-align: center;
+}
+.errorSVG
+{
+    width: 40%;
+    height: 40%;
 }

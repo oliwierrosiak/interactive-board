@@ -37,7 +37,7 @@ function ImgElement(props)
             </div>}
 
             {error && <div className={styles.error} onClick={e=>checkEditMode(e.target.closest('.element'))} onMouseDown={e=>changePosition(e.target.closest('.element'))} onMouseUp={setSolidPosition}>
-                <ImgErrorIcon />
+                <ImgErrorIcon class={styles.errorSVG}/>
                 <h2>Błąd ładowania</h2>
             </div>}
 

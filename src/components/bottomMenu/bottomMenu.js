@@ -1,9 +1,16 @@
 import styles from './bottomMenu.module.css'
 import AddingImgForm from '../addingImgForm/addingImgForm'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import ImgErrorIcon from '../../assets/svg/imgErrorIcon'
+import ImgLoadingIcon from '../../assets/svg/imgLoadingIcon'
 
 function BottomMenu(props)
 {
+
+    const [imageAddingLoading,setImageAddingLoading] = useState(false)
+    const [imageAddingError,setImageAddingError] = useState(false)
+
+
     const textClicked = () =>{
         props.clearElementEdit()
         props.addTextItem()
@@ -11,24 +18,46 @@ function BottomMenu(props)
     }
 
     const imgClicked = () =>{
-        props.clearElementEdit()
-        props.setShowAddingImgForm(true)
+        if(!imageAddingLoading && !imageAddingError)
+        {
+            props.clearElementEdit()
+            props.setShowAddingImgForm(true)
+        }
     }
 
     useEffect(()=>{
          props.setShowAddingImgForm(false)
     },[props.display])
 
+    useEffect(()=>{
+        if(imageAddingError)
+        {
+            setTimeout(() => {
+                setImageAddingError(false)
+            }, 3000);
+        }
+    },[imageAddingError])
+
     return(
         <div className={`${styles.menu} ${props.display?styles.display:''}`}>
 
-            <AddingImgForm display={props.showAddingImgForm} setShowAddingImgForm={props.setShowAddingImgForm} addImg={props.addImg}/>
+            <AddingImgForm display={props.showAddingImgForm} setImageAddingError={setImageAddingError} setImageAddingLoading={setImageAddingLoading} setShowAddingImgForm={props.setShowAddingImgForm} addImg={props.addImg}/>
 
             <div className={styles.item} onClick={textClicked}>
                 Text
             </div>
             <div className={styles.item} onClick={imgClicked}>
-                Foto
+                {imageAddingLoading?
+                <ImgLoadingIcon />
+                :(
+                    <>
+                    Foto
+                    <div className={`${styles.errorContainer} ${imageAddingError?styles.errorContainerDisplay:''}`}>
+                    <ImgErrorIcon class={styles.errorSVG}/>
+
+                    </div>
+                    </>
+                )}
             </div>
         </div>
     )

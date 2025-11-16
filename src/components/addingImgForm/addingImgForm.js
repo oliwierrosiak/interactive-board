@@ -5,7 +5,6 @@ function AddingImgForm(props)
 {
 
     const [linkValue,setLinkValue] = useState('')
-    const [file,setFile] = useState() 
     const [linkError,setLinkError] = useState(false)
 
     const inputFocused = (e) =>{
@@ -40,6 +39,24 @@ function AddingImgForm(props)
         }
     }
 
+    const fileChosen = (e) =>
+    {
+        const file = e.target.files[0]
+        if(file.type.includes('image/'))
+        {
+            console.log("porpawny plik")
+            props.setShowAddingImgForm(false)
+            props.setImageAddingLoading(true)
+        }
+        else
+        {
+            props.setShowAddingImgForm(false)
+            props.setImageAddingLoading(false)
+            props.setImageAddingError(true)
+        }
+        
+    }
+
     return(
         <div className={`${styles.container} ${props.display ? styles.display:''}`}>
             
@@ -47,7 +64,7 @@ function AddingImgForm(props)
             <button className={styles.btn} onClick={validLink}>Potwierdź</button>
             <div className={styles.line}></div>
             <button className={styles.btn}>
-                <input type='file' className={styles.inputFile}/>
+                <input type='file' onChange={fileChosen} className={styles.inputFile} accept='image/*'/>
                 Prześlij z urządzenia
             </button>
         </div>
