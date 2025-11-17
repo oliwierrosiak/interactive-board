@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import styles from './addingImgForm.module.css'
+import axios from 'axios'
+import ApiAddress from '../../ApiAddress'
 
 function AddingImgForm(props)
 {
@@ -39,12 +41,30 @@ function AddingImgForm(props)
         }
     }
 
+    const sendFile = async(file)=>{
+        try
+        {
+            const data = new FormData()
+            data.append('img',file)
+            const response = await axios.post(`${ApiAddress}/boardImg`,data)
+            props.addImg(response.data.link)
+            setLinkValue('')
+            props.setImageAddingLoading(false)
+        }
+        catch(ex)
+        {
+            props.setImageAddingError(true)
+            props.setImageAddingLoading(false)
+        }
+    }
+
     const fileChosen = (e) =>
     {
         const file = e.target.files[0]
         if(file.type.includes('image/'))
         {
-            console.log("porpawny plik")
+            sendFile(file)
+            e.target.value = ''
             props.setShowAddingImgForm(false)
             props.setImageAddingLoading(true)
         }
@@ -53,6 +73,7 @@ function AddingImgForm(props)
             props.setShowAddingImgForm(false)
             props.setImageAddingLoading(false)
             props.setImageAddingError(true)
+            e.target.value = ''
         }
         
     }
