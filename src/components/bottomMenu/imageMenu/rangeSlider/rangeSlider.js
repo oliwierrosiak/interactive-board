@@ -5,13 +5,13 @@ function RangeSlider(props)
 {
     const container = useRef()
 
-    const brightnessSetter = () =>
+    const propertySetter = () =>
     {
-        const percent = Math.round(props.brightness/2*100)
+        const percent = Math.round(props.property/2*100)
         return percent
     }
 
-    const [width,setWidth] = useState(brightnessSetter())
+    const [width,setWidth] = useState(propertySetter())
     const [showLabel,setShowLabel] = useState(false)
 
     const setPosition = (position) => {
@@ -30,7 +30,7 @@ function RangeSlider(props)
         {
             valueRound = 2
         }
-        props.setBrightness(valueRound)
+        props.setProperty(valueRound)
         setPosition(valueRound)
     }
 
@@ -46,10 +46,6 @@ function RangeSlider(props)
         window.addEventListener('mousemove',mouseMoveFunc)
         window.addEventListener('mouseup',setSolidPosition)
     }
-
-    useEffect(()=>{
-        console.log(showLabel)
-    },[showLabel])
 
     useEffect(()=>{
         return ()=>{

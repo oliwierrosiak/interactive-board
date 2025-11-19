@@ -7,6 +7,7 @@ import CornerMenu from './cornerMenu/cornerMenu'
 import BorderRadius from './cornerMenu/borderRadius'
 import RangeSlider from './rangeSlider/rangeSlider'
 import BrightnessIcon from '../../../assets/svg/brightnessIcon'
+import ContrastIcon from '../../../assets/svg/contrastIcon'
 
 function ImageMenu(props)
 {
@@ -48,7 +49,11 @@ function ImageMenu(props)
     }
 
     const brightnessSetter = () =>{
-        return props.element.brightness?props.element.brightness:1
+        return props.element.brightness || props.element.brightness == 0?props.element.brightness:1
+    }
+
+    const contrastSetter = () =>{
+        return props.element.contrast || props.element.contrast == 0?props.element.contrast:1
     }
 
     const [display,setDisplay] = useState(false)
@@ -60,6 +65,8 @@ function ImageMenu(props)
     const [borderRadius,setBorderRadius] = useState(borderRadiusSetter())
     const [displayBrightnessMenu,setDisplayBrightnessMenu] = useState(false)
     const [brightness,setBrightness] = useState(brightnessSetter())
+    const [displayContrastMenu,setDisplayContrastMenu] = useState(false)
+    const [contrast,setContrast] = useState(contrastSetter())
 
    useEffect(()=>{
         setTimeout(()=>{
@@ -71,6 +78,11 @@ function ImageMenu(props)
         props.element.setBrightness(brightness)
         props.setEditUpdate(!props.editUpdate)
     },[brightness])
+
+    useEffect(()=>{
+        props.element.setContrast(contrast)
+        props.setEditUpdate(!props.editUpdate)
+    },[contrast])
 
     const setBorderColorFunc = (color) =>{
         if(borderWidth === "borderWidth1")
@@ -132,10 +144,13 @@ function ImageMenu(props)
         {
             setDisplayCornerMenu(false)
         }
-        console.log(e.target)
         if(!e.target.classList.contains(styles.brightnessItem) && !e.target.classList.contains('range') && !e.target.classList.contains('brightnessSvg'))
         {
             setDisplayBrightnessMenu(false)
+        }
+        if(!e.target.classList.contains(styles.contrastItem) && !e.target.classList.contains('range') && !e.target.classList.contains('contrastSvg'))
+        {
+            setDisplayContrastMenu(false)
         }
     }
 
@@ -143,6 +158,8 @@ function ImageMenu(props)
         setBorderColor(borderColorSetter())
         setBorderWidth(borderWidthSetter())
         setBorderRadius(borderRadiusSetter())
+        setBrightness(brightnessSetter())
+        setContrast(contrastSetter())
     },[props.element])
 
     useEffect(()=>{
@@ -190,10 +207,15 @@ function ImageMenu(props)
             <div className={`${styles.item} ${styles.brightnessItem}`} onClick={e=>!e.target.classList.contains('range') && setDisplayBrightnessMenu(!displayBrightnessMenu)}>
                 <BrightnessIcon />
                 {displayBrightnessMenu && <div className={`${styles.filterMenu} range`}>
-                    <RangeSlider brightness={brightness} setBrightness={setBrightness}/>
+                    <RangeSlider property={brightness} setProperty={setBrightness}/>
                 </div>}
             </div>
-            <div className={styles.item}>Kontrast</div>
+            <div className={`${styles.item} ${styles.contrastItem}`} onClick={e=>setDisplayContrastMenu(!displayContrastMenu)}>
+                <ContrastIcon />
+                {displayContrastMenu && <div className={`${styles.filterMenu} range`}>
+                    <RangeSlider property={contrast} setProperty={setContrast}/>
+                </div>}
+            </div>
 
             <div className={styles.line}></div>
 

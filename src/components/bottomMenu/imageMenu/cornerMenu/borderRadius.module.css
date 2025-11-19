@@ -3,10 +3,10 @@
     position: absolute;
     bottom: .5rem;
     left: .5rem;
-    width: 55%;
-    height: 55%;
-    border-top:.5rem solid rgb(255, 255, 255);
-    border-right: .5rem solid rgb(255, 255, 255);
+    width: 52%;
+    height: 52%;
+    border-top:.4rem solid rgb(255, 255, 255);
+    border-right: .4rem solid rgb(255, 255, 255);
 }
 .borderRadius1
 {

@@ -139,6 +139,7 @@
     background-color: rgb(146, 146, 146) !important;
     cursor: default;
 }
+.contrastItem,
 .brightnessItem,
 .cornerItem,
 .borderWidth,

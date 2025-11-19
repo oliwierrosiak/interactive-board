@@ -10,6 +10,7 @@ class ImgElementClass extends ElementClass
         this.proportion = 1
         this.mimetype = mimetype
         this.brightness = 1
+        this.contrast = 1
     }
 
     setProportion(img)
@@ -45,15 +46,33 @@ class ImgElementClass extends ElementClass
         this.brightness = value
     }
 
-    getBrightness()
+    getBrightnessAndContrast()
     {
         const object = {}
         if(this.brightness || this.brightness === 0)
         {
             object.filter = `brightness(${this.brightness})`
         }
+        if(this.contrast || this.contrast === 0)
+        {
+            if(object.filter)
+            {
+                object.filter += ` contrast(${this.contrast})`
+            }
+            else
+            {
+                object.filter = `contrast(${this.contrast})`
+            }
+        }
         return object
     }
+
+    setContrast(value)
+    {
+        this.contrast = value
+    }
+
+
 
 }
 
