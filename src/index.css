@@ -539,3 +539,33 @@ img
 {
   border-color: rgba(0, 0, 0, 0);
 }
+.borderWidth1>img
+{
+  border-width: 0;
+  border-style: solid;
+}
+.borderWidth2>img
+{
+  border-width: .2rem;
+   border-style: solid;
+}
+.borderWidth3>img
+{
+  border-width: .4rem;
+   border-style: solid;
+}
+.borderWidth4>img
+{
+  border-width: .6rem;
+   border-style: solid;
+}
+.borderWidth5>img
+{
+  border-width: .8rem;
+   border-style: solid;
+}
+.borderWidth6>img
+{
+  border-width: 1rem;
+   border-style: solid;
+}
