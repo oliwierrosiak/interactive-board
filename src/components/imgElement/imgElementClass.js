@@ -9,11 +9,11 @@ class ImgElementClass extends ElementClass
         this.type = 'img'
         this.proportion = 1
         this.mimetype = mimetype
+        this.brightness = 1
     }
 
     setProportion(img)
     {
-        console.log('teraz')
         this.proportion = img.clientHeight/img.clientWidth
         this.width = `10rem`
         const width = 10
@@ -38,6 +38,21 @@ class ImgElementClass extends ElementClass
         containerRef.style.width = `${width}rem`
         containerRef.style.height = `${height*1.2}rem`
         this.setSizes(width,height*1.2)
+    }
+
+    setBrightness(value)
+    {
+        this.brightness = value
+    }
+
+    getBrightness()
+    {
+        const object = {}
+        if(this.brightness || this.brightness === 0)
+        {
+            object.filter = `brightness(${this.brightness})`
+        }
+        return object
     }
 
 }

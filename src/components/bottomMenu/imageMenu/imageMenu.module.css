@@ -83,7 +83,7 @@
     width: 70%;
     height: .5rem;
     border-radius: 10px;
-    background-color: rgb(76, 76, 76);
+    background-color: rgb(255, 255, 255);
 }
 .borderWidthOption
 {
@@ -139,6 +139,7 @@
     background-color: rgb(146, 146, 146) !important;
     cursor: default;
 }
+.brightnessItem,
 .cornerItem,
 .borderWidth,
 .borderColor
@@ -169,7 +170,18 @@
 {
     background-color: rgb(117, 117, 117);
 }
-.borderRadiusIconsColor
+.filterMenu
 {
-    border-color: rgb(76, 76, 76) !important;
+    position: absolute;
+    bottom: 3.3rem;
+    height: 3rem;
+    background-color: rgb(76, 76, 76);
+    position: absolute;
+    border-radius: .5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    cursor: default;
+    gap:.5rem;
 }

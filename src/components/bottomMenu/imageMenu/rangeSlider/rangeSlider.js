@@ -1,0 +1,91 @@
+import { useEffect, useRef, useState } from 'react'
+import styles from './rangeSlider.module.css'
+
+function RangeSlider(props)
+{
+    const container = useRef()
+
+    const brightnessSetter = () =>
+    {
+        const percent = Math.round(props.brightness/2*100)
+        return percent
+    }
+
+    const [width,setWidth] = useState(brightnessSetter())
+    const [showLabel,setShowLabel] = useState(false)
+
+    const setPosition = (position) => {
+        const percent = Math.round(position/2*100)
+        setWidth(percent)
+    }
+
+    const mouseMoveFunc = (e) =>{
+        const value = ((e.clientX-container.current.getBoundingClientRect().left)/(container.current.clientWidth/2))
+        let valueRound = (Math.round(value*100)/100)
+        if(valueRound < 0)
+        {
+            valueRound = 0
+        }
+        if(valueRound > 2)
+        {
+            valueRound = 2
+        }
+        props.setBrightness(valueRound)
+        setPosition(valueRound)
+    }
+
+    const setSolidPosition = () =>
+    {
+        setShowLabel(false)
+        window.removeEventListener('mousemove',mouseMoveFunc)
+    }
+
+    const containerClicked = (e) =>
+    {
+        setShowLabel(true)
+        window.addEventListener('mousemove',mouseMoveFunc)
+        window.addEventListener('mouseup',setSolidPosition)
+    }
+
+    useEffect(()=>{
+        console.log(showLabel)
+    },[showLabel])
+
+    useEffect(()=>{
+        return ()=>{
+            setShowLabel(false)
+            window.removeEventListener('mousemove',mouseMoveFunc)
+            window.removeEventListener('mouseup',setSolidPosition)
+        }
+    },[])
+
+    const calcWidth = () =>{
+        if(width === 50)
+        {
+            return 0
+        }
+        if(width < 50)
+        {
+            return -Math.round((1-width/50)*100)
+        }
+        else if(width > 50)
+        {
+            return Math.round((width/50-1)*100)
+        }
+    }
+
+   
+
+    return(
+        <>
+        <div className={`${styles.container} range`} ref={container} onMouseDown={containerClicked} onClick={mouseMoveFunc}>
+            <div className={`${styles.fill} range`} style={{'width':`${width}%`}}></div>
+            <div className={`${styles.ball} range`} style={{'left':`${width}%`}}>
+                <div className={`range ${styles.label} ${showLabel?styles.showLabel:''}`}>{calcWidth()}%</div>
+            </div>
+        </div>
+        </>
+    )
+}
+
+export default RangeSlider

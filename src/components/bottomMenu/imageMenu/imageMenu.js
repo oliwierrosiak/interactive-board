@@ -4,7 +4,9 @@ import DeleteIcon from '../../../assets/svg/deleteIcon'
 import BgColorMenu from '../textMenu/bgColorMenu'
 import borderColors from './borderMenuColors.module.css'
 import CornerMenu from './cornerMenu/cornerMenu'
-import BorderRadius from './cornerMenu/borderRadius1'
+import BorderRadius from './cornerMenu/borderRadius'
+import RangeSlider from './rangeSlider/rangeSlider'
+import BrightnessIcon from '../../../assets/svg/brightnessIcon'
 
 function ImageMenu(props)
 {
@@ -45,6 +47,10 @@ function ImageMenu(props)
         }
     }
 
+    const brightnessSetter = () =>{
+        return props.element.brightness?props.element.brightness:1
+    }
+
     const [display,setDisplay] = useState(false)
     const [displayColorMenu,setDisplayColorMenu] = useState(false)
     const [borderColor,setBorderColor] = useState(borderColorSetter())
@@ -52,6 +58,8 @@ function ImageMenu(props)
     const [borderWidth,setBorderWidth] = useState(borderWidthSetter())
     const [displayCornerMenu,setDisplayCornerMenu] = useState(false)
     const [borderRadius,setBorderRadius] = useState(borderRadiusSetter())
+    const [displayBrightnessMenu,setDisplayBrightnessMenu] = useState(false)
+    const [brightness,setBrightness] = useState(brightnessSetter())
 
    useEffect(()=>{
         setTimeout(()=>{
@@ -59,13 +67,18 @@ function ImageMenu(props)
         },10)
     },[props.display])
 
+    useEffect(()=>{
+        props.element.setBrightness(brightness)
+        props.setEditUpdate(!props.editUpdate)
+    },[brightness])
+
     const setBorderColorFunc = (color) =>{
         if(borderWidth === "borderWidth1")
         {
             props.element.removeClass("borderWidth1")
             props.element.addClass(`borderWidth3`)
+            setBorderWidth(`borderWidth3`)
         }
-        setBorderWidth(`borderWidth3`)
         setBorderColor(color)
         props.setEditUpdate(!props.editUpdate)
     }
@@ -119,6 +132,11 @@ function ImageMenu(props)
         {
             setDisplayCornerMenu(false)
         }
+        console.log(e.target)
+        if(!e.target.classList.contains(styles.brightnessItem) && !e.target.classList.contains('range') && !e.target.classList.contains('brightnessSvg'))
+        {
+            setDisplayBrightnessMenu(false)
+        }
     }
 
     useEffect(()=>{
@@ -165,11 +183,16 @@ function ImageMenu(props)
             </div>
             <div className={`${styles.item} ${styles.cornerItem}`} onClick={e=>setDisplayCornerMenu(!displayCornerMenu)}>
                 <div className={styles.borderRadiusPreview}>
-                    <BorderRadius borderRadius={borderRadius} bgColor={styles.borderRadiusIconsColor}/>
+                    <BorderRadius borderRadius={borderRadius}/>
                 </div>
                 {displayCornerMenu && <CornerMenu borderRadius={borderRadius} cornerItemClicked={cornerItemClicked}/>}
             </div>
-            <div className={styles.item}>jasność</div>
+            <div className={`${styles.item} ${styles.brightnessItem}`} onClick={e=>!e.target.classList.contains('range') && setDisplayBrightnessMenu(!displayBrightnessMenu)}>
+                <BrightnessIcon />
+                {displayBrightnessMenu && <div className={`${styles.filterMenu} range`}>
+                    <RangeSlider brightness={brightness} setBrightness={setBrightness}/>
+                </div>}
+            </div>
             <div className={styles.item}>Kontrast</div>
 
             <div className={styles.line}></div>

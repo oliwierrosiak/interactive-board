@@ -1,5 +1,5 @@
 import styles from '../imageMenu.module.css'
-import BorderRadius from './borderRadius1'
+import BorderRadius from './borderRadius'
 
 function CornerMenu(props)
 {
