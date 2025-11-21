@@ -8,7 +8,7 @@ import ImgElement from '../imgElement/imgElement'
 import ImgElementClass from '../imgElement/imgElementClass'
 import ImageMenu from '../bottomMenu/imageMenu/imageMenu'
 import BrushMenu from '../bottomMenu/brushMenu/brushMenu'
-
+import CanvasElement from '../canvasElement/canvasElement'
 
 function Board()
 {
@@ -71,6 +71,7 @@ function Board()
     return(
         <>
             <div className={styles.board} ref={boardRef} onClick={boardClicked}>
+                <CanvasElement drawing={edit !==0 && edit.type === "canvas"}/>
                 {elements.map((x)=>{
                     if(x.type === "text")
                     {

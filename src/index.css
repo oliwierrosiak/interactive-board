@@ -637,3 +637,11 @@ img
 {
   border-radius: 50%;
 }
+.canvas-container
+{
+  max-width: 100vw;
+  max-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
