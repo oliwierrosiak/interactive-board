@@ -18,7 +18,11 @@ function Board()
     const [edit,setEdit] = useState(0)
     const [editUpdate,setEditUpdate] = useState(true)
     const [showAddingImgForm,setShowAddingImgForm] = useState(false)
-    const [brush,setBrush] = useState({type:'',width:1,color:'black'})
+    const [brush,setBrush] = useState({type:'',width:20,color:'black'})
+
+    useEffect(()=>{
+        console.log(brush)
+    },[brush])
 
     const addTextItem = () =>
     {

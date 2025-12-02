@@ -8,7 +8,7 @@ function BrushMenu(props)
     const [brush,setBrush] = useState(props.brush)
 
     const [displayWidth,setDisplayWidth] = useState(false)
-    const [width,setWidth] = useState(20)
+    const [lineWidth,setLineWidth] = useState(20)
 
     useEffect(()=>{
         setTimeout(()=>{
@@ -17,9 +17,19 @@ function BrushMenu(props)
     },[props.display])
 
     const changePencil = (params) =>{
-        const {type,color="black",width=1} = params
+        const {type=brush.type,color=brush.color,width=brush.width} = params
         props.setBrush({type,color,width})
     }
+
+    useEffect(()=>{
+        changePencil({type:brush.type,width:lineWidth})
+    },[lineWidth])
+
+    useEffect(()=>{
+        return()=>{
+            console.log(brush)
+        }
+    },[])
 
     return(
         <div className={`${styles.container} ${display?styles.containerDisplay:''}`}>
@@ -29,7 +39,7 @@ function BrushMenu(props)
             <div className={styles.item} onClick={e=>changePencil({type:'circle'})}>circle</div>
             <div className={styles.item} onClick={e=>setDisplayWidth(true)}>
                 grubosc
-                {displayWidth && <div className={styles.filterMenu}><RangeSlider property={width} numberFormat={true} setProperty={setWidth}/></div>}    
+                {displayWidth && <div className={styles.filterMenu}><RangeSlider property={lineWidth} numberFormat={true} setProperty={setLineWidth}/></div>}    
             </div>
             <div className={styles.item}>Kolor</div>
             <div className={styles.item}>tył</div>
