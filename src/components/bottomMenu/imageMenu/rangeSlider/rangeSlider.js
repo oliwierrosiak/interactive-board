@@ -11,7 +11,7 @@ function RangeSlider(props)
         return percent
     }
 
-    const [width,setWidth] = useState(propertySetter())
+    const [width,setWidth] = useState(props.numberFormat?props.property:propertySetter())
     const [showLabel,setShowLabel] = useState(false)
 
     const setPosition = (position) => {
@@ -19,7 +19,27 @@ function RangeSlider(props)
         setWidth(percent)
     }
 
+    const  mouseMoveFuncInNumberFormat = (e) =>
+    {
+        const value = ((e.clientX-container.current.getBoundingClientRect().left)/(container.current.clientWidth))
+        let valueRound = (Math.round(value*100))
+        if(valueRound < 1)
+        {
+            valueRound = 1
+        }
+        if(valueRound > 100)
+        {
+            valueRound = 100
+        }
+        props.setProperty(valueRound)
+        setWidth(valueRound)
+    }
+
     const mouseMoveFunc = (e) =>{
+        if(props.numberFormat)
+        {
+            return mouseMoveFuncInNumberFormat(e)
+        }
         const value = ((e.clientX-container.current.getBoundingClientRect().left)/(container.current.clientWidth/2))
         let valueRound = (Math.round(value*100)/100)
         if(valueRound < 0)
@@ -77,7 +97,7 @@ function RangeSlider(props)
         <div className={`${styles.container} range`} ref={container} onMouseDown={containerClicked} onClick={mouseMoveFunc}>
             <div className={`${styles.fill} range`} style={{'width':`${width}%`}}></div>
             <div className={`${styles.ball} range`} style={{'left':`${width}%`}}>
-                <div className={`range ${styles.label} ${showLabel?styles.showLabel:''}`}>{calcWidth()}%</div>
+                <div className={`range ${styles.label} ${showLabel?styles.showLabel:''}`}>{props.numberFormat?width:calcWidth()}{props.numberFormat?"":'%'}</div>
             </div>
         </div>
         </>

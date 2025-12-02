@@ -1,4 +1,4 @@
-import { Canvas, CircleBrush, Pattern, PatternBrush, PencilBrush, SprayBrush } from 'fabric'
+import { Canvas, CircleBrush, PatternBrush, PencilBrush, SprayBrush } from 'fabric'
 import { useEffect, useRef, useState } from 'react'
 import styles from './canvasElement.module.css'
 

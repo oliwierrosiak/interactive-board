@@ -1,10 +1,14 @@
 import { useEffect, useState } from 'react'
 import styles from './brushMenu.module.css'
+import RangeSlider from '../imageMenu/rangeSlider/rangeSlider'
 
 function BrushMenu(props)
 {
     const [display,setDisplay] = useState()
     const [brush,setBrush] = useState(props.brush)
+
+    const [displayWidth,setDisplayWidth] = useState(false)
+    const [width,setWidth] = useState(20)
 
     useEffect(()=>{
         setTimeout(()=>{
@@ -23,8 +27,13 @@ function BrushMenu(props)
             <div className={styles.item} onClick={e=>changePencil({type:'pattern'})}>przer</div>
             <div className={styles.item} onClick={e=>changePencil({type:'spray'})}>spary</div>
             <div className={styles.item} onClick={e=>changePencil({type:'circle'})}>circle</div>
-            <div className={styles.item}>4</div>
-            <div className={styles.item}>5</div>
+            <div className={styles.item} onClick={e=>setDisplayWidth(true)}>
+                grubosc
+                {displayWidth && <div className={styles.filterMenu}><RangeSlider property={width} numberFormat={true} setProperty={setWidth}/></div>}    
+            </div>
+            <div className={styles.item}>Kolor</div>
+            <div className={styles.item}>tył</div>
+            <div className={styles.item}>przód</div>
             <div className={styles.item} onClick={e=>{props.brushMenuClosed();changePencil({type:''})}}>close</div>
         </div>
     )

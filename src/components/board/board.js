@@ -35,7 +35,7 @@ function Board()
         elements.forEach(x=>{
             x.classList.remove(`editOn`)
         })
-        if(edit.type !== "canvas")
+        if(edit.type !== "canvas" || !brush.type)
         {
             setEdit(0)
         }
