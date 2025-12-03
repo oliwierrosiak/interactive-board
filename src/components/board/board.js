@@ -20,10 +20,6 @@ function Board()
     const [showAddingImgForm,setShowAddingImgForm] = useState(false)
     const [brush,setBrush] = useState({type:'',width:20,color:'black'})
 
-    useEffect(()=>{
-        console.log(brush)
-    },[brush])
-
     const addTextItem = () =>
     {
         

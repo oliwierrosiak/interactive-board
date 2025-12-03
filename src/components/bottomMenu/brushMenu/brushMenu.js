@@ -6,9 +6,8 @@ function BrushMenu(props)
 {
     const [display,setDisplay] = useState()
     const [brush,setBrush] = useState(props.brush)
-
     const [displayWidth,setDisplayWidth] = useState(false)
-    const [lineWidth,setLineWidth] = useState(20)
+    const [lineWidth,setLineWidth] = useState(props.brush.width)
 
     useEffect(()=>{
         setTimeout(()=>{
@@ -19,17 +18,15 @@ function BrushMenu(props)
     const changePencil = (params) =>{
         const {type=brush.type,color=brush.color,width=brush.width} = params
         props.setBrush({type,color,width})
+        setBrush({type,color,width})
     }
 
     useEffect(()=>{
-        changePencil({type:brush.type,width:lineWidth})
-    },[lineWidth])
-
-    useEffect(()=>{
-        return()=>{
-            console.log(brush)
+        if(brush.type)
+        {
+            changePencil({width:lineWidth})
         }
-    },[])
+    },[lineWidth])
 
     return(
         <div className={`${styles.container} ${display?styles.containerDisplay:''}`}>
@@ -44,7 +41,7 @@ function BrushMenu(props)
             <div className={styles.item}>Kolor</div>
             <div className={styles.item}>tył</div>
             <div className={styles.item}>przód</div>
-            <div className={styles.item} onClick={e=>{props.brushMenuClosed();changePencil({type:''})}}>close</div>
+            <div className={styles.item} onClick={e=>{props.brushMenuClosed();changePencil({type:'',color:brush.color,width:brush.width})}}>close</div>
         </div>
     )
 }
