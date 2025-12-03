@@ -7,15 +7,21 @@ function CanvasElement(props)
     const canvasRef = useRef()
     const canvasObj = useRef()
 
+    const brushInitialWidth = window.innerWidth/20000
+
+    const getBrushWidth = () =>{
+        return brushInitialWidth * props.brush.width
+    }
+
     const resize = () =>{
         const width = document.documentElement.clientWidth
         const height = document.documentElement.clientHeight
         canvasObj.current.setWidth(width)
         canvasObj.current.setHeight(height)
-        if( canvasObj.current.freeDrawingBrush)
+        console.log('resize')
+        if(canvasObj.current.freeDrawingBrush)
         {
-            canvasObj.current.freeDrawingBrush.width = window.innerWidth/1000;
-
+            canvasObj.current.freeDrawingBrush.width = getBrushWidth();
         }
 
         // canvasObj.current.getObjects().forEach(obj=>{
@@ -33,10 +39,10 @@ function CanvasElement(props)
        const canvas = new Canvas(canvasRef.current,{
             isDrawingMode:props.drawing
         })
-        // canvas.freeDrawingBrush = new PencilBrush(canvas);
+
         if(canvas.freeDrawingBrush)
         {
-            canvas.freeDrawingBrush.width = window.innerWidth/1000;
+            canvas.freeDrawingBrush.width = 1000;
             canvas.freeDrawingBrush.color = "red";
 
         }
@@ -64,7 +70,7 @@ function CanvasElement(props)
         }
     },[props.drawing])
 
-    const getBrushMode = () =>{
+    const getBrushType = () =>{
         switch(props.brush.type)
         {
             case "":
@@ -83,7 +89,12 @@ function CanvasElement(props)
     useEffect(()=>{
         if(canvasObj.current)
         {
-            canvasObj.current.freeDrawingBrush = getBrushMode()
+            canvasObj.current.freeDrawingBrush = getBrushType()
+            if(props.brush.type)
+            {
+                canvasObj.current.freeDrawingBrush.width = getBrushWidth()
+
+            }
         }
     },[props.brush])
 
