@@ -1,6 +1,7 @@
 import { Canvas, CircleBrush, PatternBrush, PencilBrush, SprayBrush } from 'fabric'
 import { useEffect, useRef, useState } from 'react'
 import styles from './canvasElement.module.css'
+import brushColors from './brushColors'
 
 function CanvasElement(props)
 {
@@ -11,6 +12,11 @@ function CanvasElement(props)
 
     const getBrushWidth = () =>{
         return brushInitialWidth * props.brush.width
+    }
+
+    const getBrushColor = () =>
+    {
+        return brushColors[props.brush.color]
     }
 
     const resize = () =>{
@@ -40,12 +46,6 @@ function CanvasElement(props)
             isDrawingMode:props.drawing
         })
 
-        if(canvas.freeDrawingBrush)
-        {
-            canvas.freeDrawingBrush.width = 1000;
-            canvas.freeDrawingBrush.color = "red";
-
-        }
 
         canvas.selection = false
         canvas.skipTargetFind = false
@@ -93,6 +93,10 @@ function CanvasElement(props)
             if(props.brush.type)
             {
                 canvasObj.current.freeDrawingBrush.width = getBrushWidth()
+            }
+            if(props.brush.color &&  canvasObj.current.freeDrawingBrush)
+            {
+                canvasObj.current.freeDrawingBrush.color = getBrushColor()
 
             }
         }

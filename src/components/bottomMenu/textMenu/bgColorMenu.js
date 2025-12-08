@@ -12,6 +12,11 @@ function BgColorMenu(props)
     }
 
     const colorClicked = (color) =>{
+        if(props.brush)
+        {
+            return props.changeBgColor({color})
+        }
+
         const classes = props.item.class
         const filtered = classes.filter(x => x.includes('bg') || x.includes('borderBg'))
         filtered.forEach(x => {
@@ -62,9 +67,10 @@ function BgColorMenu(props)
             <div className={`${styles.bgColorMenuItem} bgPink3 ${props.color === "bgPink3"?styles.selectedBgColorItem:''}`} onClick={e=>colorClicked('bgPink3')}></div>
             <div className={`${styles.bgColorMenuItem} bgPink2 ${props.color === "bgPink2"?styles.selectedBgColorItem:''}`} onClick={e=>colorClicked('bgPink2')}></div>
             <div className={`${styles.bgColorMenuItem} bgPink1 ${props.color === "bgPink1"?styles.selectedBgColorItem:''}`} onClick={e=>colorClicked('bgPink1')}></div>
+            {!props.brush &&
             <div className={`${styles.bgColorMenuItem} bgBlack6 ${props.color === "bgBlack6"?styles.selectedBgColorItem:''}`} onClick={e=>colorClicked('bgBlack6')}>
                 <img src={transparentImg} className={styles.transparentImg}/>
-            </div>
+            </div>}
             <div className={`${styles.bgColorMenuItem} bgBlack5 ${props.color === "bgBlack5"?styles.selectedBgColorItem:''}`} onClick={e=>colorClicked('bgBlack5')}></div>
             <div className={`${styles.bgColorMenuItem} bgBlack4 ${props.color === "bgBlack4"?styles.selectedBgColorItem:''}`} onClick={e=>colorClicked('bgBlack4')}></div>
             <div className={`${styles.bgColorMenuItem} bgBlack3 ${props.color === "bgBlack3"?styles.selectedBgColorItem:''}`} onClick={e=>colorClicked('bgBlack3')}></div>

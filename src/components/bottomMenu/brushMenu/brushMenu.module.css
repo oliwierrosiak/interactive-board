@@ -52,3 +52,10 @@
     cursor: default;
     gap:.5rem;
 }
+.bgColorPreview
+{
+    width: 1.6rem;
+    height: 1.6rem;
+    border-radius: 50%;
+    border: .25rem solid rgb(65, 65, 65);
+}
