@@ -45,29 +45,58 @@ function BrushMenu(props)
         // }
     },[lineWidth])
 
+
+    const boardEvent = (e) =>{
+        const target = e.target.closest(`.${styles.item}`)
+        if(!target)
+        {
+            return;
+        }
+        if(!target.classList.contains(styles.width))
+        {
+            setDisplayWidth(false)
+        }
+        if(!target.classList.contains(styles.bgColorItem))
+        {
+            setShowColorMenu(false)
+        }
+    }
+
+    const pencilChanger = (e,target) =>{
+        if(e.target.closest(`.${styles.item}`).classList.contains(styles.brushSelected))
+        {
+            changePencil({type:''})
+        }
+        else
+        {
+            changePencil(target)
+
+        }
+    }
+
     return(
-        <div className={`${styles.container} ${display?styles.containerDisplay:''}`}>
-            <div className={`${styles.item} ${styles.brushItem} ${brush.type === "brush" ? styles.brushSelected:''}`} onClick={e=>changePencil({type:'brush'})}>
+        <div className={`${styles.container} ${display?styles.containerDisplay:''}`} onClick={boardEvent}>
+            <div className={`${styles.item} ${styles.brushItem} ${brush.type === "brush" ? styles.brushSelected:''}`} onClick={e=>pencilChanger(e,{type:'brush'})}>
                 <LineBrushIcon class={styles.brushSvg}/>
             </div>
-            <div className={`${styles.item} ${styles.brushItem} ${brush.type === "spray" ? styles.brushSelected:''}`} onClick={e=>changePencil({type:'spray'})}>
+            <div className={`${styles.item} ${styles.brushItem} ${brush.type === "spray" ? styles.brushSelected:''}`} onClick={e=>pencilChanger(e,{type:'spray'})}>
                 <SprayBrushIcon class={styles.brushSvg}/>
             </div>
-            <div className={`${styles.item} ${styles.brushItem} ${brush.type === "circle" ? styles.brushSelected:''}`} onClick={e=>changePencil({type:'circle'})}>
+            <div className={`${styles.item} ${styles.brushItem} ${brush.type === "circle" ? styles.brushSelected:''}`} onClick={e=>pencilChanger(e,{type:'circle'})}>
                 <CircleBrushIcon class={styles.brushSvg} />
             </div>
-             <div className={`${styles.item} ${styles.brushItem} ${brush.type === "eraser" ? styles.brushSelected:''}`} onClick={e=>changePencil({type:'circle'})}>
+             <div className={`${styles.item} ${styles.brushItem} ${brush.type === "eraser" ? styles.brushSelected:''}`} onClick={e=>pencilChanger(e,{type:'circle'})}>
                 <EraserIcon class={styles.brushSvg} />
             </div>
 
             <div className={styles.line}></div>
 
-            <div className={styles.item} onClick={e=>setDisplayWidth(true)}>
+            <div className={`${styles.item} ${styles.width}`} onClick={e=>setDisplayWidth(!displayWidth)}>
                 <div className={styles.widthPreview} ref={widthPreviewRef}>
                 </div>
-                {displayWidth && <div className={styles.filterMenu}><RangeSlider property={lineWidth} numberFormat={true} setProperty={setLineWidth}/></div>}    
+                {displayWidth && <div className={styles.filterMenu} ><RangeSlider property={lineWidth} numberFormat={true} setProperty={setLineWidth}/></div>}    
             </div>
-            <div className={styles.item} onClick={e=>setShowColorMenu(true)}>
+            <div className={`${styles.item} ${styles.bgColorItem}`} onClick={e=>setShowColorMenu(!showColorMenu)}>
                 <div className={`${styles.bgColorPreview} ${brush.color}`}></div>
                 {showColorMenu && <BgColorMenu brush={true} color={brush.color} changeBgColor={changePencil}/>}
             </div>
