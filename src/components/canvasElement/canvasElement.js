@@ -8,8 +8,10 @@ function CanvasElement(props)
 {
     const canvasRef = useRef()
     const canvasObj = useRef()
+    const currentScale = useRef({x:1,y:1})
 
-    const brushInitialWidth = window.innerWidth/20000
+    const [brushInitialWidth,setBrushInitialWidth] = useState(window.innerWidth/20000)
+    const initialSizes = {width:document.documentElement.clientWidth,height:document.documentElement.clientHeight}
 
     const getBrushWidth = (width = props.brush.width) =>{
         return brushInitialWidth * width
@@ -23,18 +25,39 @@ function CanvasElement(props)
     const resize = () =>{
         const width = document.documentElement.clientWidth
         const height = document.documentElement.clientHeight
-        canvasObj.current.setWidth(width)
-        canvasObj.current.setHeight(height)
-        console.log('resize')
-        if(canvasObj.current.freeDrawingBrush)
+        // canvasObj.current.setWidth(width)
+        // canvasObj.current.setHeight(height)
+        canvasObj.current.setWidth(10000)
+        canvasObj.current.setHeight(10000)
+
+        setBrushInitialWidth(window.innerWidth/20000)
+
+        const scaleX = width/initialSizes.width
+        const scaleY = height/initialSizes.height
+
+        const deltaX = scaleX / currentScale.current.x
+        const deltaY = scaleY / currentScale.current.y
+
+        canvasObj.current.getObjects().forEach(obj=>{
+            obj.scaleX *= deltaX
+            obj.scaleY *= deltaY
+            obj.left *= deltaX
+            obj.top *= deltaY
+            obj.setCoords()
+        })
+
+        currentScale.current = {x:scaleX,y:scaleY}
+
+        canvasObj.current.renderAll()
+    }
+
+    useEffect(()=>{
+        if(canvasObj.current?.freeDrawingBrush)
         {
+            console.log(getBrushWidth())
             canvasObj.current.freeDrawingBrush.width = getBrushWidth();
         }
-
-        // canvasObj.current.getObjects().forEach(obj=>{
-        //     console.log(obj)
-        // })
-    }
+    },[brushInitialWidth])
 
     const objectAddedToCanvas = (e) =>{
         const obj = e.target
@@ -42,28 +65,32 @@ function CanvasElement(props)
         obj.evented = false
     }
 
-    useEffect(()=>{
-       const canvas = new Canvas(canvasRef.current,{
+    const createCanvas = () =>
+    {
+        const canvas = new Canvas(canvasRef.current,{
             isDrawingMode:props.drawing
         })
         canvas.preserveObjectStacking = true;
         canvas.backgroundColor = "transparent";
         canvas.renderOnAddRemove = true;
-
         canvas.selection = false
         canvas.skipTargetFind = false
-
         canvas.freeDrawingCursor = `url(${cursor}) 16 16, auto`;
 
         canvas.on('object:added',objectAddedToCanvas)
 
         canvasObj.current = canvas
-        resize()
 
+        resize()
+    }
+
+    useEffect(()=>{
+       
+        createCanvas()
         window.addEventListener("resize",resize)
 
          return () => {
-            canvas.dispose();
+            canvasObj.current.dispose();
             window.removeEventListener("resize",resize)
         };
     },[])
@@ -92,16 +119,12 @@ function CanvasElement(props)
     }
 
     useEffect(()=>{
-        console.log(window.fabric)
-    },[])
-
-    useEffect(()=>{
         if(canvasObj.current)
         {
             canvasObj.current.freeDrawingBrush = getBrushType()
             if(props.brush.type === "eraser")
             {
-                canvasObj.current.freeDrawingBrush.width = getBrushWidth(100)
+                canvasObj.current.freeDrawingBrush.width = getBrushWidth(180)
                 canvasObj.current.freeDrawingBrush.color = `rgb(255,255,255)`
             }
             else
