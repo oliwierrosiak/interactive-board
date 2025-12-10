@@ -1,6 +1,5 @@
 import { Canvas, CircleBrush, PatternBrush, PencilBrush, SprayBrush } from 'fabric'
 import { useEffect, useRef, useState } from 'react'
-import styles from './canvasElement.module.css'
 import brushColors from './brushColors'
 import cursor from '../../assets/img/cursor.png'
 
@@ -27,10 +26,10 @@ function CanvasElement(props)
         const height = document.documentElement.clientHeight
         // canvasObj.current.setWidth(width)
         // canvasObj.current.setHeight(height)
-        canvasObj.current.setWidth(10000)
-        canvasObj.current.setHeight(10000)
+        canvasObj.current.setWidth(2500)
+        canvasObj.current.setHeight(2500)
 
-        setBrushInitialWidth(window.innerWidth/20000)
+        setBrushInitialWidth(window.innerWidth/40000)
 
         const scaleX = width/initialSizes.width
         const scaleY = height/initialSizes.height
@@ -76,7 +75,8 @@ function CanvasElement(props)
         canvas.selection = false
         canvas.skipTargetFind = false
         canvas.freeDrawingCursor = `url(${cursor}) 16 16, auto`;
-
+        canvas.selection = false;
+        canvas.renderOnAddRemove = false;
         canvas.on('object:added',objectAddedToCanvas)
 
         canvasObj.current = canvas
@@ -144,7 +144,7 @@ function CanvasElement(props)
     },[props.brush])
 
     return(
-        <canvas ref={canvasRef} className={`${styles.container} canvas`}></canvas>
+        <canvas ref={canvasRef} className={`canvas`}></canvas>
     )
 }
 

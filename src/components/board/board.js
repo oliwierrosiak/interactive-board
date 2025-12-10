@@ -76,9 +76,43 @@ function Board()
         setEdit(0)
     }
 
+    const setPosition = () =>{
+        window.scrollTo(boardRef.current.clientWidth/2 - window.innerWidth/2,boardRef.current.clientHeight/2 - window.innerHeight/2)
+    }
+
+    const mouseMoveListener = useRef()
+    const mouseDownTimeStamp = useRef()
+
+    useEffect(()=>{
+        setTimeout(() => {
+            setPosition()
+        }, 50);
+    },[])
+
+    const boardMouseDown = (e) =>
+    {
+        mouseDownTimeStamp.current = e.timeStamp
+        mouseMoveListener.current = (e) =>{
+            if(!(edit !== 0 && edit.type === "canvas" && brush.type !== ''))
+            {
+                window.scrollTo(window.scrollX+e.movementX,window.scrollY+e.movementY)
+            }
+        }
+        boardRef.current.addEventListener('mousemove',mouseMoveListener.current)
+    }
+
+    const boardMouseUp = (e) =>
+    {
+        if(e.timeStamp-mouseDownTimeStamp.current < 100)
+        {
+            boardClicked(e)
+        }
+        boardRef.current.removeEventListener('mousemove',mouseMoveListener.current)
+    }
+
     return(
         <>
-            <div className={styles.board} ref={boardRef} onClick={boardClicked}>
+            <div className={styles.board} ref={boardRef} onMouseDown={boardMouseDown} onMouseUp={boardMouseUp}>
                 <CanvasElement drawing={edit !== 0 && edit.type === "canvas" && brush.type !== ''} brush={brush}/>
                 {elements.map((x)=>{
                     if(x.type === "text")
