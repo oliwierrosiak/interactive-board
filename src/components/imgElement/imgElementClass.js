@@ -26,8 +26,12 @@ class ImgElementClass extends ElementClass
 
     }
 
-    resizeAction(e,containerRef)
+    resizeAction(e,containerRef,board,movingLocked)
     {
+         if(!e.buttons)
+        {
+            this.resizeMouseUp(board,movingLocked)
+        }
         const width = (e.pageX-containerRef.offsetLeft)*2
         const height = width * this.proportion
         containerRef.style.width = `${width}px`

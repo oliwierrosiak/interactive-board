@@ -73,8 +73,12 @@ class ElementClass
         return this.class.join(' ')
     }
 
-    moveElement(e,mouseEvent)
+    moveElement(e,mouseEvent,board,movingLocked)
     {
+        if(!mouseEvent.buttons)
+        {
+            this.setSolidPosition(board,movingLocked)
+        }
         const left = mouseEvent.pageX/5000*100
         const top = mouseEvent.pageY/5000*100
         e.style.left = `${left}%`
@@ -86,7 +90,7 @@ class ElementClass
     {
         if(e.classList.contains(`editOn`))
         {
-            this.moveHandler = (ev) => this.moveElement(e,ev)
+            this.moveHandler = (ev) => this.moveElement(e,ev,board,movingLocked)
             board.addEventListener('mousemove',this.moveHandler) 
             movingLocked.current = true
         }
@@ -107,8 +111,12 @@ class ElementClass
         }
     }
 
-    resizeAction(e,containerRef)
+    resizeAction(e,containerRef,board,movingLocked)
     {
+        if(!e.buttons)
+        {
+            this.resizeMouseUp(board,movingLocked)
+        }
         const width = (e.pageX-containerRef.offsetLeft)*2
         const height = (e.pageY-containerRef.offsetTop)*2
         containerRef.style.width = `${width}px`
@@ -124,7 +132,7 @@ class ElementClass
 
     resizeElement(board,containerRef,movingLocked)
     {
-        this.resizeHandler = (e) => this.resizeAction(e,containerRef)
+        this.resizeHandler = (e) => this.resizeAction(e,containerRef,board,movingLocked)
         board.addEventListener('mousemove',this.resizeHandler)
         board.addEventListener('mouseup',e=>this.resizeMouseUp(board,movingLocked))
         movingLocked.current = true

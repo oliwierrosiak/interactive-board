@@ -43,39 +43,39 @@ img
 }
 .fontSize24>textarea
 {
-  font-size: 2rem;
+  font-size: 45px;
 }
 .fontSize28>textarea
 {
-  font-size: 3rem;
+  font-size: 60px;
 }
 .fontSize32>textarea
 {
-  font-size: 4rem;
+  font-size: 80px;
 }
 .fontSize20>textarea
 {
-  font-size: 1rem;
+  font-size: 30px;
 }
 .fontSize18>textarea
 {
-  font-size: .9rem;
+  font-size: 25px;
 }
 .fontSize16>textarea
 {
-  font-size: .8rem;
+  font-size: 22px;
 }
 .fontSize14>textarea
 {
-  font-size: .7rem;
+  font-size: 19px;
 }
 .fontSize12>textarea
 {
-  font-size: .6rem;
+  font-size: 15px;
 }
 .fontSize10>textarea
 {
-  font-size: .5rem;
+  font-size: 12px;
 }
 .italic>textarea
 {
@@ -598,31 +598,31 @@ img
 .borderWidth2>video,
 .borderWidth2>img
 {
-  border-width: .2rem;
+  border-width: 3px;
    border-style: solid;
 }
 .borderWidth3>video,
 .borderWidth3>img
 {
-  border-width: .4rem;
+  border-width: 8px;
    border-style: solid;
 }
 .borderWidth4>video,
 .borderWidth4>img
 {
-  border-width: .6rem;
+  border-width: 12px;
    border-style: solid;
 }
 .borderWidth5>video,
 .borderWidth5>img
 {
-  border-width: .8rem;
+  border-width: 16px;
    border-style: solid;
 }
 .borderWidth6>video,
 .borderWidth6>img
 {
-  border-width: 1rem;
+  border-width: 20px;
    border-style: solid;
 }
 .borderRadius1>video,
@@ -633,12 +633,12 @@ img
 .borderRadius2>video,
 .borderRadius2>img
 {
-  border-radius: .8rem;
+  border-radius: 15px;
 }
 .borderRadius3>video,
 .borderRadius3>img
 {
-  border-radius: 1.5rem;
+  border-radius: 35px;
 }
 .borderRadius4>video,
 .borderRadius4>img
@@ -651,7 +651,6 @@ img
   padding: 0;
   width: 100% !important;
   height: 100% !important;
-  /* background-color: red; */
 }
 .canvas
 {
