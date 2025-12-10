@@ -95,7 +95,16 @@ function Board()
         mouseMoveListener.current = (e) =>{
             if(!(edit !== 0 && edit.type === "canvas" && brush.type !== ''))
             {
-                window.scrollTo(window.scrollX+e.movementX,window.scrollY+e.movementY)
+                if(e.buttons)
+                {
+                    window.scrollTo(window.scrollX+-e.movementX,window.scrollY+-e.movementY)
+
+                }
+                else
+                {
+                    boardRef.current.removeEventListener('mousemove',mouseMoveListener.current)
+                }
+                
             }
         }
         boardRef.current.addEventListener('mousemove',mouseMoveListener.current)

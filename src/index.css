@@ -7,9 +7,17 @@
 body
 {
   height: 100svh;
+  width: 100vw;
   background-color: white;
   color: black;
+  /* overflow: hidden; */
 }
+/* #root
+{
+  width: 5000px;
+  height: 5000px;
+  background-color: green;
+} */
 html
 {
   font-size: 1vw;
@@ -643,6 +651,7 @@ img
   padding: 0;
   width: 100% !important;
   height: 100% !important;
+  /* background-color: red; */
 }
 .canvas
 {
