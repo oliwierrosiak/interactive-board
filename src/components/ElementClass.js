@@ -21,6 +21,14 @@ class ElementClass
         this.height = `${height}vh`
     }
 
+    setPositionRelativeToScreen()
+    {
+        const left = (window.scrollX+window.innerWidth/2)/5000 * 100
+        const top = (window.scrollY+window.innerHeight/2)/5000 * 100
+        this.left = `${left}%`
+        this.top = `${top}%`
+    }
+
     getStyles()
     {
         const object = {}

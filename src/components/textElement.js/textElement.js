@@ -28,6 +28,13 @@ function TextElement(props)
         props.item.setText(textValue)
     },[textValue])
 
+    useEffect(()=>{
+        props.item.setPositionRelativeToScreen()
+        const {left,top} = props.item.getStyles()
+        containerRef.current.style.left = left
+        containerRef.current.style.top = top
+    },[])
+
     return(
         <div className={`element editOn ${styles.element} ${props.item.getClass()}`} style={props.item.getStyles()} onMouseDown={e=>changePosition(e.target)} onMouseUp={setSolidPosition} onClick={e=>checkEditMode(e.target)} ref={containerRef}>
             <textarea placeholder="Wprowadź tekst..." onChange={e=>setTextValue(e.target.value)} value={textValue} className={styles.textArea} onFocus={e=>e.target.placeholder = ''} onBlur={e=>e.target.placeholder = 'Wprowadź tekst...'}></textarea>

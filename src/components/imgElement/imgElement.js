@@ -27,6 +27,13 @@ function ImgElement(props)
         props.item.resizeElement(props.board,containerRef.current,props.movingLocked)
     }
 
+    useEffect(()=>{
+        props.item.setPositionRelativeToScreen()
+        const {left,top} = props.item.getStyles()
+        containerRef.current.style.left = left
+        containerRef.current.style.top = top
+    },[])
+
     return(
        <div className={`element editOn ${styles.element} ${props.item.getClass()}`} style={props.item.getStyles()} onMouseDown={e=>changePosition(e.target)} onMouseUp={setSolidPosition} onClick={e=>checkEditMode(e.target)} ref={containerRef}>
 

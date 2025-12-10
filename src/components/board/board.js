@@ -23,7 +23,6 @@ function Board()
 
     const addTextItem = () =>
     {
-        
         const localTextElement = [...elements]
         const item = new TextElementClass(['fontSize18','alignLeft','colorBlack','bgYellow6','fontArial'])
         localTextElement.push(item)
@@ -126,7 +125,7 @@ function Board()
 
     return(
         <>
-            <div className={styles.board} ref={boardRef} onMouseDown={boardMouseDown} onMouseUp={boardMouseUp}>
+            <div className={`${styles.board} board`} ref={boardRef} onMouseDown={boardMouseDown} onMouseUp={boardMouseUp}>
                 <CanvasElement movingLocked={movingLocked} drawing={edit !== 0 && edit.type === "canvas" && brush.type !== ''} brush={brush}/>
                 {elements.map((x)=>{
                     if(x.type === "text")
