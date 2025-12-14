@@ -89,9 +89,9 @@ function Board()
         }, 50);
     },[])
 
-    useEffect(()=>{
-        console.log(movingLocked)
-    },[movingLocked])
+    // useEffect(()=>{
+    //     console.log(movingLocked.current)
+    // },[movingLocked.current])
 
     const boardMouseDown = (e) =>
     {
@@ -130,7 +130,7 @@ function Board()
                 {elements.map((x)=>{
                     if(x.type === "text")
                     {
-                        return <TextElement movingLocked={movingLocked} setEdit={setEdit} key={x.id} board={boardRef.current} clearElementEdit={clearElementEdit} id={x.id} item={x} />
+                        return <TextElement movingLocked={movingLocked} setEdit={setEdit} edit={edit} key={x.id} board={boardRef.current} clearElementEdit={clearElementEdit} id={x.id} item={x} />
                     }
                     else if(x.type === "img")
                     {

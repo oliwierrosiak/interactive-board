@@ -9,6 +9,7 @@ function TextElement(props)
     const [textValue,setTextValue] = useState('') 
 
     const changePosition = (e)=>{
+        props.movingLocked.current = true
         props.item.changePosition(e,props.board,props.movingLocked)
     }   
 
@@ -17,7 +18,8 @@ function TextElement(props)
     }
 
     const checkEditMode = (e) =>{
-        props.item.checkEditMode(e,props.clearElementEdit,props.setEdit,props.item)
+        const div = e.closest('.element')
+        props.item.checkEditMode(div,props.clearElementEdit,props.setEdit,props.item)
     }
 
     const resizeElement = () =>{
@@ -35,9 +37,21 @@ function TextElement(props)
         containerRef.current.style.top = top
     },[])
 
+
+    const textAreaFocused = (e) =>
+    {
+        e.target.placeholder = ''
+        props.movingLocked.current = true
+    }
+
+    const textAreaBlur = (e) =>{
+        e.target.placeholder = 'Wprowadź tekst...'
+        props.movingLocked.current = false
+    }
+
     return(
         <div className={`element editOn ${styles.element} ${props.item.getClass()}`} style={props.item.getStyles()} onMouseDown={e=>changePosition(e.target)} onMouseUp={setSolidPosition} onClick={e=>checkEditMode(e.target)} ref={containerRef}>
-            <textarea placeholder="Wprowadź tekst..." onChange={e=>setTextValue(e.target.value)} value={textValue} className={styles.textArea} onFocus={e=>e.target.placeholder = ''} onBlur={e=>e.target.placeholder = 'Wprowadź tekst...'}></textarea>
+            <textarea placeholder="Wprowadź tekst..." onChange={e=>setTextValue(e.target.value)} value={textValue} className={styles.textArea} onFocus={textAreaFocused} onBlur={textAreaBlur}></textarea>
 
             <div className={styles.resize} onMouseDown={resizeElement}></div>
         
