@@ -7,3 +7,32 @@
     /* width: 2500px;
     height: 2500px; */
 }
+.dragElement
+{
+    position: fixed;
+    top:.2rem;
+    left:.2rem;
+    bottom: .2rem;
+    right: .2rem;
+    border-radius: 2rem;
+    background-color: rgba(0, 0, 0, 0.47);
+    backdrop-filter: blur(10px);
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:1rem;
+    border:.5rem dashed black;
+    color: white;
+}
+.dragDropIcon
+{
+    width: 5rem;
+    height: 5rem;
+    fill: white;
+}
+.dropHeader
+{
+    font-size: 3rem;
+    font-weight: 900;
+}

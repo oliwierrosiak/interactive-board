@@ -22,32 +22,10 @@ function CanvasElement(props)
     }
 
     const resize = () =>{
-        const width = document.documentElement.clientWidth
-        const height = document.documentElement.clientHeight
-        // canvasObj.current.setWidth(width)
-        // canvasObj.current.setHeight(height)
         canvasObj.current.setWidth(2500)
         canvasObj.current.setHeight(2500)
 
         setBrushInitialWidth(window.innerWidth/40000)
-
-        // const scaleX = width/initialSizes.width
-        // const scaleY = height/initialSizes.height
-
-        // const deltaX = scaleX / currentScale.current.x
-        // const deltaY = scaleY / currentScale.current.y
-
-        // canvasObj.current.getObjects().forEach(obj=>{
-        //     obj.scaleX *= deltaX
-        //     obj.scaleY *= deltaY
-        //     obj.left *= deltaX
-        //     obj.top *= deltaY
-        //     obj.setCoords()
-        // })
-
-        // currentScale.current = {x:scaleX,y:scaleY}
-
-        // canvasObj.current.renderAll()
     }
 
     useEffect(()=>{

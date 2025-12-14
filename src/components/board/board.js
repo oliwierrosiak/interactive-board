@@ -9,6 +9,7 @@ import ImgElementClass from '../imgElement/imgElementClass'
 import ImageMenu from '../bottomMenu/imageMenu/imageMenu'
 import BrushMenu from '../bottomMenu/brushMenu/brushMenu'
 import CanvasElement from '../canvasElement/canvasElement'
+import DragDropIcon from '../../assets/svg/drag&dropIcon'
 
 function Board()
 {
@@ -19,6 +20,8 @@ function Board()
     const [editUpdate,setEditUpdate] = useState(true)
     const [showAddingImgForm,setShowAddingImgForm] = useState(false)
     const [brush,setBrush] = useState({type:'',width:20,color:'bgBlack1'})
+    const [displayDragElement,setDisplayDragElement] = useState(false)
+
     const movingLocked = useRef(false)
 
     const addTextItem = () =>
@@ -123,9 +126,16 @@ function Board()
         boardRef.current.removeEventListener('mousemove',mouseMoveListener.current)
     }
 
+    const drop = (e) =>
+    {
+        e.preventDefault()
+        console.log(e)
+        setDisplayDragElement(false)
+    }
+
     return(
         <>
-            <div className={`${styles.board} board`} ref={boardRef} onMouseDown={boardMouseDown} onMouseUp={boardMouseUp}>
+            <div className={`${styles.board} board`} ref={boardRef} onMouseDown={boardMouseDown} onMouseUp={boardMouseUp} onDragOver={e=>e.preventDefault()} onDrop={drop} onDragEnter={e=>setDisplayDragElement(true)} >
                 <CanvasElement movingLocked={movingLocked} drawing={edit !== 0 && edit.type === "canvas" && brush.type !== ''} brush={brush}/>
                 {elements.map((x)=>{
                     if(x.type === "text")
@@ -138,6 +148,12 @@ function Board()
                     }
                     
                 })}
+
+                {displayDragElement && <div className={styles.dragElement} onDragLeave={e=>setDisplayDragElement(false)}>
+                    <DragDropIcon class={styles.dragDropIcon}/>
+                    <h2 className={styles.dropHeader}>Upuść plik</h2>
+                </div>}
+
             </div>
 
             <BottomMenu addTextItem={addTextItem} brushClicked={brushClicked} addImg={addImg} showAddingImgForm={showAddingImgForm} setShowAddingImgForm={setShowAddingImgForm} clearElementEdit={clearElementEdit} display={edit === 0}/>
