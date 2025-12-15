@@ -13,6 +13,7 @@ import DragDropIcon from '../../assets/svg/drag&dropIcon'
 import axios from 'axios'
 import ApiAddress from '../../ApiAddress'
 import Message from '../message/message'
+import ImgLoadingIcon from '../../assets/svg/imgLoadingIcon'
 
 function Board()
 {
@@ -24,11 +25,13 @@ function Board()
     const [showAddingImgForm,setShowAddingImgForm] = useState(false)
     const [brush,setBrush] = useState({type:'',width:20,color:'bgBlack1'})
     const [displayDragElement,setDisplayDragElement] = useState(false)
-    
-    const messages = useRef([])
     const [updater,setUpdater] = useState(false)
+    const [globalLoading,setGlobalLoading] = useState(false)
 
     const movingLocked = useRef(false)
+    const mouseMoveListener = useRef()
+    const mouseDownTimeStamp = useRef()
+    const messages = useRef([])
 
     const addTextItem = () =>
     {
@@ -90,19 +93,10 @@ function Board()
         window.scrollTo(boardRef.current.clientWidth/2 - window.innerWidth/2,boardRef.current.clientHeight/2 - window.innerHeight/2)
     }
 
-    const mouseMoveListener = useRef()
-    const mouseDownTimeStamp = useRef()
-
-    useEffect(()=>{
-        setTimeout(() => {
-            setPosition()
-        }, 50);
-    },[])
-
     const addMessage=(message,type)=>{
         const localMessages = [...messages.current]
         const id = Date.now()+Math.floor(Math.random()*100000)
-        localMessages.push({message,type,id})
+        localMessages.push({message,type,id:id})
         messages.current = localMessages
         setUpdater(!updater)
     }
@@ -119,10 +113,6 @@ function Board()
         }
 
     }
-
-    useEffect(()=>{
-        // console.log(messages.current)
-    },[messages.current])
 
     const boardMouseDown = (e) =>
     {
@@ -159,11 +149,14 @@ function Board()
         {
             const data = new FormData()
             data.append('img',file)
+            setGlobalLoading(true)
             const response = await axios.post(`${ApiAddress}/boardImg`,data)
+            setGlobalLoading(false)
             addImg(response.data)
         }
         catch(ex)
         {
+            setGlobalLoading(false)
             addMessage("Błąd przesyłania pliku","error")
         }
     }
@@ -192,10 +185,18 @@ function Board()
         setDisplayDragElement(false)
     }
 
+    useEffect(()=>{
+        setTimeout(() => {
+            setPosition()
+        }, 50);
+    },[])
+
     return(
         <>
             <div className={`${styles.board} board`} ref={boardRef} onMouseDown={boardMouseDown} onMouseUp={boardMouseUp} onDragOver={e=>e.preventDefault()} onDrop={drop} onDragEnter={e=>setDisplayDragElement(true)} >
+
                 <CanvasElement movingLocked={movingLocked} drawing={edit !== 0 && edit.type === "canvas" && brush.type !== ''} brush={brush}/>
+
                 {elements.map((x)=>{
                     if(x.type === "text")
                     {
@@ -215,8 +216,13 @@ function Board()
 
             </div>
 
-            {messages.current[0] && <div className={styles.messageContainer}>
-                {messages.current.map(x=><Message removeMessage={removeMessage} key={x.id} {...x} />)}    
+            {messages.current[0] && <div className={`${styles.messageContainer} ${globalLoading?styles.adjustBottom:''}`}>
+                {messages.current.map(x=><Message removeMessage={removeMessage} key={x.id} {...x} />
+                )}   
+            </div>}
+
+            {globalLoading && <div className={styles.globalLoading}>
+                <ImgLoadingIcon  class={styles.loadingSVG}/>
             </div>}
 
             <BottomMenu addTextItem={addTextItem} brushClicked={brushClicked} addImg={addImg} showAddingImgForm={showAddingImgForm} setShowAddingImgForm={setShowAddingImgForm} clearElementEdit={clearElementEdit} display={edit === 0}/>
