@@ -149,11 +149,17 @@ function Board()
                 {
                     if(scaleRef.current > minScale + 0.1)
                     {
-                        
-                        translateXRef.current = e.clientX - panStartX.current
-                        translateYRef.current = e.clientY - panStartY.current
-                        setBoardTransformation()
+                        console.log(e.clientY - panStartY.current - window.innerHeight)
+                        if(e.clientY - panStartY.current < 0 && e.clientY - panStartY.current - window.innerHeight > -5000*scaleRef.current)  
+                        {
+                            translateYRef.current = e.clientY - panStartY.current
+                        }  
+                        if(e.clientX - panStartX.current < 0 && e.clientX - panStartX.current - window.innerWidth > -5000*scaleRef.current)
+                        {
+                            translateXRef.current = e.clientX - panStartX.current
 
+                        }
+                        setBoardTransformation()
                     }
                 }
                 else

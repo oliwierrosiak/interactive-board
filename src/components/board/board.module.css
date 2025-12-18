@@ -14,8 +14,8 @@
     transform-origin: 0 0;
     width: 5000px;
     height: 5000px;
-    background:linear-gradient(0deg,blue,red);
-    /* transition: all .3s ease; */
+    background:linear-gradient(45deg,blue,red);
+    transition: transform .1s ease;
 }
 .dragElement
 {
