@@ -16,6 +16,10 @@
     gap:.8rem;
     color: white;
 }
+.container::selection
+{
+    background:none;
+}
 .display
 {
     transform: translate(0,0);

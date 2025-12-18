@@ -10,12 +10,6 @@ body
   width: 100vw;
   overflow: hidden;
 }
-/* #root
-{
-  width: 5000px;
-  height: 5000px;
-  background-color: green;
-} */
 html
 {
   font-size: 1vw;
@@ -25,6 +19,7 @@ img
 {
   -webkit-user-drag: none !important;
   user-drag:none !important;
+  user-select: none;
 }
 .editOn
 {

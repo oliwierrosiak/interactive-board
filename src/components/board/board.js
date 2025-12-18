@@ -1,4 +1,4 @@
-import { useEffect, useId, useRef, useState } from 'react'
+import { useEffect, useId, useLayoutEffect, useRef, useState } from 'react'
 import BottomMenu from '../bottomMenu/bottomMenu'
 import styles from './board.module.css'
 import TextElement from '../textElement.js/textElement'
@@ -233,7 +233,7 @@ function Board()
     }
 
     const zoom = (e) =>{
-        e.preventDefault()
+        // e.preventDefault()
 
         if(!e.target.classList.contains(`canvas`))
         {
@@ -269,19 +269,25 @@ function Board()
         }
     }
 
+    const blockDragging = (e) =>{
+        e.preventDefault()
+    }
+
+    useLayoutEffect(()=>{
+         translateXRef.current = (viewport.current.clientWidth - boardRef.current.clientWidth) / 2
+        translateYRef.current = (viewport.current.clientHeight - boardRef.current.clientHeight) / 2
+        setBoardTransformation()
+    },[])
 
     useEffect(()=>{
-        translateXRef.current = (viewport.current.clientWidth - boardRef.current.clientWidth) / 2
-        translateYRef.current = (viewport.current.clientHeight - boardRef.current.clientHeight) / 2
-        
-        setBoardTransformation()
-
+       
         window.addEventListener("resize",centerBoard)
-
+        window.addEventListener('dragstart',blockDragging)
 
 
         return()=>{
             window.removeEventListener("resize",centerBoard)
+            window.removeEventListener('dragstart',blockDragging)
         }
     },[])
 

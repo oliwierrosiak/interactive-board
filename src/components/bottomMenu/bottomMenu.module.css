@@ -11,6 +11,10 @@
     transition: all .5s ease;
     display: flex;
 }
+.menu::selection
+{
+    background: none;
+}
 .display
 {
     transform: translate(0,0);
