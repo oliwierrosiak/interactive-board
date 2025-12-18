@@ -46,6 +46,12 @@ function BottomMenu(props)
             <div className={styles.item} onClick={brushClicked}>
                 Pędzel
             </div>
+            <div className={styles.item} onClick={e=>props.zoomBtn(-100)}>
+                zoom+
+            </div>
+            <div className={styles.item} onClick={e=>props.zoomBtn(100)}>
+                zoom-
+            </div>
         </div>
     )
 }

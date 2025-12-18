@@ -273,6 +273,36 @@ function Board()
         }
     }
 
+    const zoomBtn = (value) =>{
+        const rect = viewport.current.getBoundingClientRect()
+
+        const centerX = viewport.current.clientWidth/2-rect.left
+        const centerY = viewport.current.clientHeight/2-rect.top
+
+        let localScale = scaleRef.current
+        localScale -= value * zoomSpeed
+        
+        const scaleRatio = localScale / scaleRef.current
+
+        console.log(scaleRatio)
+
+        const localTranslateX = centerX - scaleRatio * (centerX - translateXRef.current)
+        const localTranslateY =  centerY - scaleRatio * (centerY - translateYRef.current)
+
+        if(localScale > minScale+0.05 && localScale < maxScale)
+        {
+            translateXRef.current = localTranslateX
+            translateYRef.current = localTranslateY
+            scaleRef.current = localScale
+
+           setBoardTransformation()
+        }
+        if(localScale <= minScale + 0.05)
+        {
+            centerBoard()
+        }
+    }
+
     const projectNameInputFocused = (e) =>{
         if(e.target.value === 'Nowy projekt')
         {
@@ -291,6 +321,13 @@ function Board()
         e.preventDefault()
     }
 
+    const blockZooming = (e) =>{
+        if(e.ctrlKey)
+        {
+            e.preventDefault()
+        }
+    }
+
     useLayoutEffect(()=>{
          translateXRef.current = (viewport.current.clientWidth - boardRef.current.clientWidth) / 2
         translateYRef.current = (viewport.current.clientHeight - boardRef.current.clientHeight) / 2
@@ -299,13 +336,19 @@ function Board()
 
     useEffect(()=>{
        
+        if(viewport.current)
+        {
+            viewport.current.addEventListener("wheel",zoom,{passive:false})
+        }
         window.addEventListener("resize",centerBoard)
         window.addEventListener('dragstart',blockDragging)
-
+        window.addEventListener('wheel',blockZooming,{passive:false})
 
         return()=>{
             window.removeEventListener("resize",centerBoard)
             window.removeEventListener('dragstart',blockDragging)
+            window.removeEventListener('wheel',blockZooming)
+            viewport.current?.removeEventListener("wheel",zoom)
         }
     },[])
 
@@ -313,7 +356,7 @@ function Board()
         <MessageContext.Provider value={{addMessage,removeMessage}}>
         <GlobalLoadingContext.Provider value={{globalLoading,setGlobalLoading}}>
         <ClearElementEditContext.Provider value={clearElementEdit}>
-            <div className={`${styles.viewport} viewport`} onWheel={zoom} ref={viewport} onDragEnter={e=>setDisplayDragElement(true)} >
+            <div className={`${styles.viewport} viewport`} ref={viewport} onDragEnter={e=>setDisplayDragElement(true)} >
 
             <input type='text'className={styles.projectName} value={projectName} onChange={e=>setProjectName(e.target.value)} onFocus={projectNameInputFocused} onBlur={projectNameInputBlur} />
 
@@ -352,7 +395,7 @@ function Board()
                 <ImgLoadingIcon  class={styles.loadingSVG}/>
             </div>}
 
-            <BottomMenu addTextItem={addTextItem} brushClicked={brushClicked} addImg={addImg} showAddingImgForm={showAddingImgForm} setShowAddingImgForm={setShowAddingImgForm} display={edit === 0}/>
+            <BottomMenu zoomBtn={zoomBtn} addTextItem={addTextItem} brushClicked={brushClicked} addImg={addImg} showAddingImgForm={showAddingImgForm} setShowAddingImgForm={setShowAddingImgForm} display={edit === 0}/>
 
             
             <TextMenu display={edit!==0 && edit.type === "text"} element={edit} editUpdate={editUpdate} setEditUpdate={setEditUpdate} board={boardRef} deleteItem={deleteItem}/>

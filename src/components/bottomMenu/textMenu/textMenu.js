@@ -21,7 +21,7 @@ function TextMenu(props)
             if(font)
             {
                 const value = font.split("fontSize")[1]
-                return Number(value) || 18
+                return Number(value) || 14
 
             }
             else{

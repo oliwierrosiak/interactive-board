@@ -10,7 +10,9 @@
 {
     position: fixed;
     top:.5rem;
-    left:.5rem;
+    left:50%;
+    translate: -50% 0;
+    text-align: center;
     width: 15rem;
     padding: .3rem 0;
     background: none;
@@ -38,6 +40,7 @@
     height: 5000px;
     background:white;
     border-radius: 10rem;
+    background: linear-gradient(45deg,blue,red);
     /* transition: transform .1s ease; */
 }
 .dragElement
