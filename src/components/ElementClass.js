@@ -88,7 +88,7 @@ class ElementClass
         return this.class.join(' ')
     }
 
-    moveElement(e,mouseEvent,board,movingLocked)
+    moveElement(e,mouseEvent,board,movingLocked,ref)
     {
         if(!mouseEvent.buttons)
         {
@@ -97,16 +97,24 @@ class ElementClass
         const [translateX,translateY,scale] = this.getTranslate()
         const left = (mouseEvent.pageX-translateX)/scale/5000*100
         const top = (mouseEvent.pageY-translateY)/scale/5000*100
-        e.style.left = `${left}%`
-        e.style.top = `${top}%`
+        if(left > 0 + ref.clientWidth/1.9/5000*100 && left < 100-ref.clientWidth/1.9/5000*100)
+        {
+            e.style.left = `${left}%`
+        }
+        if(top > 0 + ref.clientHeight/1.9/5000*100 && top < 100-ref.clientHeight/1.9/5000*100)
+        {
+            e.style.top = `${top}%`
+
+        }
+        
         this.setPosition(left,top)
     }
 
-    changePosition(e,board,movingLocked)
+    changePosition(e,board,movingLocked,ref)
     {
         if(e.classList.contains(`editOn`))
         {
-            this.moveHandler = (ev) => this.moveElement(e,ev,board,movingLocked)
+            this.moveHandler = (ev) => this.moveElement(e,ev,board,movingLocked,ref)
             board.addEventListener('mousemove',this.moveHandler) 
             movingLocked.current = true
         }
@@ -133,8 +141,9 @@ class ElementClass
         {
             this.resizeMouseUp(board,movingLocked)
         }
-        const width = (e.pageX-containerRef.offsetLeft)*2
-        const height = (e.pageY-containerRef.offsetTop)*2
+        const [translateX,translateY,scale] = this.getTranslate()
+        const width = ((e.pageX-translateX)/scale-containerRef.offsetLeft)*2
+        const height = ((e.pageY-translateY)/scale-containerRef.offsetTop)*2
         containerRef.style.width = `${width}px`
         containerRef.style.height = `${height}px`
         this.setSizes(width,height)

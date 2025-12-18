@@ -32,11 +32,12 @@ class ImgElementClass extends ElementClass
         {
             this.resizeMouseUp(board,movingLocked)
         }
-        const width = (e.pageX-containerRef.offsetLeft)*2
+        const [translateX,translateY,scale] = this.getTranslate()
+        const width = ((e.pageX-translateX)/scale-containerRef.offsetLeft)*2
         const height = width * this.proportion
         containerRef.style.width = `${width}px`
-        containerRef.style.height = `${height*1.05}px`
-        this.setSizes(width,height*1.05)
+        containerRef.style.height = `${height*1.1}px`
+        this.setSizes(width,height*1.1)
     }
 
     setBrightness(value)

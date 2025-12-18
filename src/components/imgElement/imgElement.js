@@ -12,7 +12,7 @@ function ImgElement(props)
 
     const changePosition = (e) =>
     {
-        props.item.changePosition(e,props.board,props.movingLocked)
+        props.item.changePosition(e,props.board,props.movingLocked,containerRef.current)
     }
 
     const setSolidPosition = (e) =>{
