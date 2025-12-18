@@ -4,7 +4,29 @@
     height: 100vh;
     overflow: hidden;
     position: relative;
-    background-color: rgb(44, 44, 44);
+    background-color: rgb(66, 66, 66);
+}
+.projectName
+{
+    position: fixed;
+    top:.5rem;
+    left:.5rem;
+    width: 15rem;
+    padding: .3rem 0;
+    background: none;
+    z-index: 3;
+    outline: none;
+    border: 0;
+    font-size: 1.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 700;
+    cursor: pointer;
+}
+.projectName:focus
+{
+    cursor: text;
 }
 .board
 {

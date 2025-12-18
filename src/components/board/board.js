@@ -29,6 +29,8 @@ function Board()
     const [displayDragElement,setDisplayDragElement] = useState(false)
     const [updater,setUpdater] = useState(false)
     const [globalLoading,setGlobalLoading] = useState(false)
+    const [projectName,setProjectName] = useState('Nowy projekt')
+
 
     const movingLocked = useRef(false)
     const mouseMoveListener = useRef()
@@ -269,6 +271,20 @@ function Board()
         }
     }
 
+    const projectNameInputFocused = (e) =>{
+        if(e.target.value === 'Nowy projekt')
+        {
+            setProjectName('')
+        }
+    }
+
+    const projectNameInputBlur = (e) =>{
+        if(e.target.value.trim() === '')
+        {
+            setProjectName('Nowy projekt')
+        }
+    }
+
     const blockDragging = (e) =>{
         e.preventDefault()
     }
@@ -295,6 +311,9 @@ function Board()
         <>
 
             <div className={`${styles.viewport} viewport`} onWheel={zoom} ref={viewport} onDragEnter={e=>setDisplayDragElement(true)} >
+
+            <input type='text'className={styles.projectName} value={projectName} onChange={e=>setProjectName(e.target.value)} onFocus={projectNameInputFocused} onBlur={projectNameInputBlur} />
+
             <div className={`${styles.board} board`} ref={boardRef} onMouseDown={boardMouseDown} onMouseUp={boardMouseUp}>
 
                 <CanvasElement movingLocked={movingLocked} drawing={edit !== 0 && edit.type === "canvas" && brush.type !== ''} brush={brush}/>
