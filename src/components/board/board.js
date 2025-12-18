@@ -14,10 +14,12 @@ import axios from 'axios'
 import ApiAddress from '../../ApiAddress'
 import Message from '../message/message'
 import ImgLoadingIcon from '../../assets/svg/imgLoadingIcon'
+import react from 'react'
 
 function Board()
 {
     const boardRef = useRef()
+    const viewport = useRef()
 
     const [elements,setElements] = useState([{type:'canvas',id:`${new Date().getTime()}${Math.floor(Math.random()*100)}`}])
     const [edit,setEdit] = useState(0)
@@ -32,6 +34,16 @@ function Board()
     const mouseMoveListener = useRef()
     const mouseDownTimeStamp = useRef()
     const messages = useRef([])
+
+    const scaleRef = useRef(1)
+    const translateXRef = useRef(0)
+    const translateYRef = useRef(0)
+
+    const zoomSpeed = 0.001
+    const minScale = 0.1
+    const maxScale = 3
+
+
 
     const addTextItem = () =>
     {
@@ -90,7 +102,7 @@ function Board()
     }
 
     const setPosition = () =>{
-        window.scrollTo(boardRef.current.clientWidth/2 - window.innerWidth/2,boardRef.current.clientHeight/2 - window.innerHeight/2)
+        // window.scrollTo(boardRef.current.clientWidth/2 - window.innerWidth/2,boardRef.current.clientHeight/2 - window.innerHeight/2)
     }
 
     const addMessage=(message,type)=>{
@@ -116,32 +128,32 @@ function Board()
 
     const boardMouseDown = (e) =>
     {
-        mouseDownTimeStamp.current = e.timeStamp
-        mouseMoveListener.current = (e) =>{
-            if(!movingLocked.current)
-            {
-                if(e.buttons)
-                {
-                    window.scrollTo(window.scrollX+-e.movementX,window.scrollY+-e.movementY)
+        // mouseDownTimeStamp.current = e.timeStamp
+        // mouseMoveListener.current = (e) =>{
+        //     if(!movingLocked.current)
+        //     {
+        //         if(e.buttons)
+        //         {
+        //             window.scrollTo(window.scrollX+-e.movementX,window.scrollY+-e.movementY)
 
-                }
-                else
-                {
-                    boardRef.current.removeEventListener('mousemove',mouseMoveListener.current)
-                }
+        //         }
+        //         else
+        //         {
+        //             boardRef.current.removeEventListener('mousemove',mouseMoveListener.current)
+        //         }
                 
-            }
-        }
-        boardRef.current.addEventListener('mousemove',mouseMoveListener.current)
+        //     }
+        // }
+        // boardRef.current.addEventListener('mousemove',mouseMoveListener.current)
     }
 
     const boardMouseUp = (e) =>
     {
-        if(e.timeStamp-mouseDownTimeStamp.current < 100)
-        {
-            boardClicked(e)
-        }
-        boardRef.current.removeEventListener('mousemove',mouseMoveListener.current)
+        // if(e.timeStamp-mouseDownTimeStamp.current < 100)
+        // {
+        //     boardClicked(e)
+        // }
+        // boardRef.current.removeEventListener('mousemove',mouseMoveListener.current)
     }
 
     const sendFileToServer = async(file) =>{
@@ -185,15 +197,75 @@ function Board()
         setDisplayDragElement(false)
     }
 
+    const setBoardTransformation = () =>{
+        boardRef.current.style.transform = `translate(${translateXRef.current}px, ${translateYRef.current}px) scale(${scaleRef.current})`
+    }
+
+    const centerBoard = () =>{
+        translateXRef.current = (viewport.current.clientWidth - boardRef.current.clientWidth*scaleRef.current) / 2
+        translateYRef.current = (viewport.current.clientHeight - boardRef.current.clientHeight*scaleRef.current) /2
+        setBoardTransformation()
+    }
+
+    const zoom = (e) =>{
+        e.preventDefault()
+
+        if(!e.target.classList.contains(`canvas`))
+        {
+            return 
+        }
+
+        const rect = viewport.current.getBoundingClientRect()
+        const mouseX = e.clientX - rect.left
+        const mouseY = e.clientY - rect.top
+
+        let localScale = scaleRef.current
+
+        localScale -= e.deltaY * zoomSpeed
+
+        const scaleRatio = localScale / scaleRef.current
+
+        const localTranslateX = mouseX - scaleRatio * (mouseX - translateXRef.current)
+        const localTranslateY = mouseY - scaleRatio * (mouseY - translateYRef.current)
+
+        if(localScale > minScale && localScale < maxScale)
+        {
+            translateXRef.current = localTranslateX
+            translateYRef.current = localTranslateY
+            scaleRef.current = localScale
+
+           setBoardTransformation()
+        }
+        if(localScale <= minScale)
+        {
+            centerBoard()
+           
+        }
+    }
+
+
     useEffect(()=>{
+        translateXRef.current = (viewport.current.clientWidth - boardRef.current.clientWidth) / 2
+        translateYRef.current = (viewport.current.clientHeight - boardRef.current.clientHeight) / 2
+        
+        setBoardTransformation()
+        
+        window.addEventListener("resize",centerBoard)
+
         setTimeout(() => {
             setPosition()
         }, 50);
+
+        return()=>{
+            window.removeEventListener("resize",centerBoard)
+        }
     },[])
 
     return(
         <>
-            <div className={`${styles.board} board`} ref={boardRef} onMouseDown={boardMouseDown} onMouseUp={boardMouseUp} onDragOver={e=>e.preventDefault()} onDrop={drop} onDragEnter={e=>setDisplayDragElement(true)} >
+
+            <div className={styles.viewport} onWheel={zoom} ref={viewport} onDragEnter={e=>setDisplayDragElement(true)} >
+            <div className={`${styles.board} board`} ref={boardRef} onMouseDown={boardMouseDown} onMouseUp={boardMouseUp}>
 
                 <CanvasElement movingLocked={movingLocked} drawing={edit !== 0 && edit.type === "canvas" && brush.type !== ''} brush={brush}/>
 
@@ -209,12 +281,15 @@ function Board()
                     
                 })}
 
-                {displayDragElement && <div className={styles.dragElement} onDragLeave={e=>setDisplayDragElement(false)}>
-                    <DragDropIcon class={styles.dragDropIcon}/>
-                    <h2 className={styles.dropHeader}>Upuść plik</h2>
-                </div>}
+                
 
             </div>
+            </div>
+
+            {displayDragElement && <div className={styles.dragElement} onDragLeave={e=>setDisplayDragElement(false)} onDragOver={e=>e.preventDefault()} onDrop={drop}>
+                    <DragDropIcon class={styles.dragDropIcon}/>
+                    <h2 className={styles.dropHeader}>Upuść plik</h2>
+            </div>}
 
             {messages.current[0] && <div className={`${styles.messageContainer} ${globalLoading?styles.adjustBottom:''}`}>
                 {messages.current.map(x=><Message removeMessage={removeMessage} key={x.id} {...x} />
@@ -233,7 +308,7 @@ function Board()
             {edit.type === 'img' && <ImageMenu display={edit !== 0 && edit.type === "img"} element={edit} editUpdate={editUpdate} setEditUpdate={setEditUpdate} deleteItem={deleteItem}/>}
             
             {edit.type === "canvas" && <BrushMenu display={edit !==0 && edit.type === "canvas"} setBrush={setBrush} brush={brush} brushMenuClosed={brushMenuClosed} element={edit} editUpdate={editUpdate} setEditUpdate={setEditUpdate}/>}
-
+        
         </>
     )
 }

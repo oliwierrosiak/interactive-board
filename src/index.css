@@ -8,9 +8,7 @@ body
 {
   height: 100svh;
   width: 100vw;
-  background-color: white;
-  color: black;
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 /* #root
 {
