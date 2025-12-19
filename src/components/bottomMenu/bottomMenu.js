@@ -4,6 +4,10 @@ import { useContext, useEffect, useState } from 'react'
 import ClearElementEditContext from '../../context/clearEdit'
 import ZoomInIcon from '../../assets/svg/zoomInIcon'
 import ZoomOutIcon from '../../assets/svg/zoomOutIcon'
+import NoteIcon from '../../assets/svg/noteIcon'
+import BrushIcon from '../../assets/svg/lineBrushIcon'
+import ImageIcon from '../../assets/svg/imageIcon'
+import ShapesIcon from '../../assets/svg/shapesIcon'
 
 function BottomMenu(props)
 {
@@ -37,15 +41,20 @@ function BottomMenu(props)
             <AddingImgForm display={props.showAddingImgForm} setShowAddingImgForm={props.setShowAddingImgForm} addImg={props.addImg}/>
 
             <div className={styles.item} onClick={textClicked}>
-                Text
+                <NoteIcon class={styles.icon} />
             </div>
             <div className={styles.item} onClick={imgClicked}>
-                Foto
+                <ImageIcon class={styles.icon} />
             </div>
 
             <div className={styles.item} onClick={brushClicked}>
-                Pędzel
+                <BrushIcon class={styles.icon} />
             </div>
+            
+            <div className={styles.item}>
+                <ShapesIcon class={styles.icon} />
+            </div>
+
             <div className={styles.item} onClick={e=>props.zoomBtn(-100)}>
                 <ZoomInIcon class={styles.zoomIcon}/>
             </div>
