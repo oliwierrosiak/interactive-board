@@ -19,6 +19,8 @@ import GlobalLoadingContext from '../../context/globalLoadingContext'
 import ClearElementEditContext from '../../context/clearEdit'
 import ArrowIcon from '../../assets/svg/arrowIcon'
 import { useNavigate } from 'react-router-dom'
+import ShapeElementClass from '../shapeElement.js/shapeElementClass'
+import ShapeElement from '../shapeElement.js/shapeElement'
 
 function Board()
 {
@@ -108,7 +110,14 @@ function Board()
         setEdit(0)
     }
 
-
+    const addShape = (shape) =>
+    {
+        const localElements = [...elements]
+        const item = new ShapeElementClass(['bgBlack4'],shape)
+        localElements.push(item)
+        setEdit(item)
+        setElements(localElements)
+    }
 
 
     const addMessage=(message,type)=>{
@@ -237,7 +246,7 @@ function Board()
     }
 
     const zoom = (e) =>{
-        // e.preventDefault()
+        e.preventDefault()
 
         if(!e.target.classList.contains(`canvas`))
         {
@@ -283,8 +292,6 @@ function Board()
         localScale -= value * zoomSpeed
         
         const scaleRatio = localScale / scaleRef.current
-
-        console.log(scaleRatio)
 
         const localTranslateX = centerX - scaleRatio * (centerX - translateXRef.current)
         const localTranslateY =  centerY - scaleRatio * (centerY - translateYRef.current)
@@ -378,6 +385,10 @@ function Board()
                         {
                             return <ImgElement movingLocked={movingLocked} key={x.id} board={boardRef.current} setEdit={setEdit} item={x}/>
                         }
+                        else if(x.type === "shape")
+                        {
+                            return <ShapeElement key={x.id} movingLocked={movingLocked} board={boardRef.current} setEdit={setEdit} item={x} />
+                        }
                     
                     })}
                 </div>
@@ -397,7 +408,7 @@ function Board()
                 <ImgLoadingIcon  class={styles.loadingSVG}/>
             </div>}
 
-            <BottomMenu zoomBtn={zoomBtn} addTextItem={addTextItem} brushClicked={brushClicked} addImg={addImg} showAddingImgForm={showAddingImgForm} setShowAddingImgForm={setShowAddingImgForm} display={edit === 0}/>
+            <BottomMenu addShape={addShape} zoomBtn={zoomBtn} addTextItem={addTextItem} brushClicked={brushClicked} addImg={addImg} showAddingImgForm={showAddingImgForm} setShowAddingImgForm={setShowAddingImgForm} display={edit === 0}/>
 
             
             <TextMenu display={edit!==0 && edit.type === "text"} element={edit} editUpdate={editUpdate} setEditUpdate={setEditUpdate} board={boardRef} deleteItem={deleteItem}/>

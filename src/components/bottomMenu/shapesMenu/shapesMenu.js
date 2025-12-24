@@ -1,9 +1,76 @@
+import SquareIcon from '../../../assets/svg/shapes/square'
 import styles from './shapesMenu.module.css'
 
 function ShapesMenu(props)
 {
     return(
-        <div className={`${styles.container} ${props.display?styles.displayContainer:''}`}></div>
+        <div className={`${styles.container} ${props.display?styles.displayContainer:''}`}>
+            <div className={styles.item} onClick={e=>{props.addShape('square')}}>
+                <SquareIcon class={styles.svg}/>
+            </div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+            <div className={styles.item}></div>
+        </div>
     )
 }
 

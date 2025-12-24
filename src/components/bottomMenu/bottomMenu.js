@@ -81,7 +81,7 @@ function BottomMenu(props)
             
             <div className={`${styles.item} ${styles.shapesItem}`} onClick={e=>setShowShapesMenu(!showShapesMenu)}>
                 <ShapesIcon class={styles.icon} />
-                <ShapesMenu display={showShapesMenu} />
+                <ShapesMenu display={showShapesMenu} addShape={props.addShape}/>
             </div>
 
             <div className={styles.line}></div>
