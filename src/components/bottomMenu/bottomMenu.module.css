@@ -67,3 +67,18 @@
     height: 80%;
     fill: white;
 }
+.line
+{
+    width: .3rem;
+    height: 70%;
+    background-color: grey;
+    border-radius: 10px;
+}
+.shapesItem
+{
+    position: relative;
+}
+.item:hover
+{
+    background-color: rgb(146, 146, 146);
+}

@@ -8,9 +8,12 @@ import NoteIcon from '../../assets/svg/noteIcon'
 import BrushIcon from '../../assets/svg/lineBrushIcon'
 import ImageIcon from '../../assets/svg/imageIcon'
 import ShapesIcon from '../../assets/svg/shapesIcon'
+import ShapesMenu from './shapesMenu/shapesMenu'
 
 function BottomMenu(props)
 {
+    const [showShapesMenu,setShowShapesMenu] = useState(false)
+
     const clearElementEdit = useContext(ClearElementEditContext)
 
     const textClicked = () =>{
@@ -27,6 +30,7 @@ function BottomMenu(props)
 
     useEffect(()=>{
         props.setShowAddingImgForm(false)
+        setShowShapesMenu(false)
     },[props.display])
 
     const brushClicked = () =>{
@@ -34,6 +38,30 @@ function BottomMenu(props)
         props.setShowAddingImgForm(false)
         props.brushClicked()
     }
+
+    useEffect(()=>{
+        if(showShapesMenu)
+        {
+            props.setShowAddingImgForm(false)
+
+        }
+    },[showShapesMenu])
+
+    const windowClick = (e) =>{
+        const div = e.target.closest(`div`)
+        if(!div.classList.contains(styles.shapesItem) && !div.classList.contains('zoomItem'))
+        {
+            setShowShapesMenu(false)
+        }
+    }
+
+    useEffect(()=>{
+        window.addEventListener('click',windowClick)
+        return()=>{
+            window.removeEventListener("click",windowClick)
+            
+        }
+    },[])
 
     return(
         <div className={`${styles.menu} ${props.display?styles.display:''}`}>
@@ -51,14 +79,17 @@ function BottomMenu(props)
                 <BrushIcon class={styles.icon} />
             </div>
             
-            <div className={styles.item}>
+            <div className={`${styles.item} ${styles.shapesItem}`} onClick={e=>setShowShapesMenu(!showShapesMenu)}>
                 <ShapesIcon class={styles.icon} />
+                <ShapesMenu display={showShapesMenu} />
             </div>
 
-            <div className={styles.item} onClick={e=>props.zoomBtn(-100)}>
+            <div className={styles.line}></div>
+
+            <div className={`${styles.item} zoomItem`} onClick={e=>props.zoomBtn(-100)}>
                 <ZoomInIcon class={styles.zoomIcon}/>
             </div>
-            <div className={styles.item} onClick={e=>props.zoomBtn(100)}>
+            <div className={`${styles.item} zoomItem`} onClick={e=>props.zoomBtn(100)}>
                 <ZoomOutIcon class={styles.zoomIcon} />
             </div>
         </div>
