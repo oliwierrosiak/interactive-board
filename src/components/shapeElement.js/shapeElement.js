@@ -28,10 +28,14 @@ function ShapeElement(props)
         props.item.resizeElement(props.board,containerRef.current,props.movingLocked)
     }
 
+    useEffect(()=>{
+        console.log(props.item.getRotate())
+    },[props.shapeUpdater])
+
     return(
         <div className={`element editOn ${styles.element}`} style={props.item.getStyles()} onMouseDown={e=>changePosition(e.target.closest('div'))} onMouseUp={setSolidPosition} onClick={e=>checkEditMode(e.target)} ref={containerRef}>
 
-            {props.item.item === "square"?<SquareIcon class={`${styles.svg} ${props.item.getClass()}`}/>:''}
+            {props.item.item === "square"?<SquareIcon class={`${styles.svg} ${props.item.getClass()}`} stl={props.item.getRotate()}/>:''}
             
 
             <div className={styles.resize} onMouseDown={resizeElement}></div>

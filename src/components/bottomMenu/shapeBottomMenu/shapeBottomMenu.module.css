@@ -37,6 +37,10 @@
     transition: all .3s ease;
     position: relative;
 }
+.item:hover
+{
+    background-color: rgb(146, 146, 146);
+}
 .deleteSVG
 {
     fill: rgb(255, 0, 0);
@@ -61,4 +65,50 @@
 .colorItem
 {
     position: relative;
+}
+.itemRotate
+{
+    width: 5rem;
+    height: 2.5rem;
+    background-color: rgb(117, 117, 117);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: all .3s ease;
+    position: relative;
+    gap:.1rem;
+}
+.itemRotate:hover
+{
+    background-color: rgb(146, 146, 146);
+}
+.input
+{
+    width: 2.5rem;
+    height: 100%;
+    outline: none;
+    text-align: end;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    background: none;
+    border: 0;
+    cursor: pointer;
+}
+.input:focus
+{
+    cursor: text;
+}
+.input::-webkit-inner-spin-button
+{
+    display: none;
+}
+.degrees
+{
+    width: 1.2rem;
+    height: 100%;
+    font-size: 2rem;
+    font-weight: 700;
 }

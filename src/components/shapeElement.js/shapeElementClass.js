@@ -21,6 +21,19 @@ class ShapeElementClass extends ElementClass
         containerRef.style.height = `${width}px`
         this.setSizes(width,width)
     }
+
+    getRotate()
+    {
+        if(this.rotate)
+        {
+           return {rotate:`${this.rotate}deg`} 
+        }
+    }
+
+    setRotate(deg)
+    {
+        this.rotate = deg
+    }
 }
 
 

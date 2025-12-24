@@ -37,6 +37,7 @@ function Board()
     const [updater,setUpdater] = useState(false)
     const [globalLoading,setGlobalLoading] = useState(false)
     const [projectName,setProjectName] = useState('Nowy projekt')
+    const [shapeUpdater,setShapeUpdater] = useState(false)
 
     const movingLocked = useRef(false)
     const mouseMoveListener = useRef()
@@ -388,7 +389,7 @@ function Board()
                         }
                         else if(x.type === "shape")
                         {
-                            return <ShapeElement key={x.id} movingLocked={movingLocked} board={boardRef.current} setEdit={setEdit} item={x} />
+                            return <ShapeElement shapeUpdater={shapeUpdater} key={x.id} movingLocked={movingLocked} board={boardRef.current} setEdit={setEdit} item={x} />
                         }
                     
                     })}
@@ -418,7 +419,7 @@ function Board()
             
             <BrushMenu display={edit !==0 && edit.type === "canvas"} setBrush={setBrush} brush={brush} brushMenuClosed={brushMenuClosed} element={edit} editUpdate={editUpdate} setEditUpdate={setEditUpdate}/>
 
-            <ShapeBottomMenu display={edit !==0 && edit.type === "shape"} element={edit} editUpdate={editUpdate} setEditUpdate={setEditUpdate} deleteItem={deleteItem} />
+            <ShapeBottomMenu shapeUpdater={shapeUpdater} setShapeUpdater={setShapeUpdater} display={edit !==0 && edit.type === "shape"} element={edit} editUpdate={editUpdate} setEditUpdate={setEditUpdate} deleteItem={deleteItem} />
 
         </ClearElementEditContext.Provider>
         </GlobalLoadingContext.Provider>

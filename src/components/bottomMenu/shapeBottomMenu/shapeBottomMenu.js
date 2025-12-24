@@ -1,11 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import DeleteIcon from '../../../assets/svg/deleteIcon'
 import styles from './shapeBottomMenu.module.css'
 import BgColorMenu from '../textMenu/bgColorMenu'
 
 function ShapeBottomMenu(props)
 {
-    const [state,setState] = useState(false)
     const colorSetter = () =>{
         if(props.element.class)
         {
@@ -18,8 +17,23 @@ function ShapeBottomMenu(props)
         }
     }
 
+    const rotateSetter = () =>{
+        if(props.element.rotate)
+        {
+            return props.element.rotate
+        }
+        else
+        {
+            return 0
+        }
+    }
+
+    const [state,setState] = useState(false)
+    const [rotate,setRotate] = useState(rotateSetter())
     const [showColorMenu,setShowColorMenu] = useState(false)
     const [color,setColor] = useState(colorSetter())
+
+    const inputRef = useRef()
 
     const changeColor = (color) =>{
         setColor(color)
@@ -45,11 +59,57 @@ function ShapeBottomMenu(props)
         if(props.element)
         {
             setColor(colorSetter())
+            setRotate(rotateSetter())
         }
     },[props.element])
 
+    const setRotateValue = (e) =>
+    {
+        const nextValue = e.target.value;
+        const nextValueArray = e.target.value.split('')
+        if (/^\d{0,3}$/.test(nextValue)) {
+            for(let i = 0;i<nextValueArray.length;i++)
+            {
+                
+                if(nextValueArray[i] == "0" && nextValueArray.length > 1)
+                {
+                    nextValueArray.splice(i,1)
+                }
+                else
+                {
+                    break
+                }
+            }
+            if(nextValueArray.length)
+            {
+                props.element.setRotate(nextValueArray.join(''))
+                props.setShapeUpdater(!props.shapeUpdater)
+            }
+            else
+            {
+                props.element.setRotate(0)
+                props.setShapeUpdater(!props.shapeUpdater)
+            }
+            setRotate(nextValueArray.join(''));
+        }
+        
+    }
+
+    const checkValue = () =>{
+        if(rotate === '')
+        {
+            setRotate(0)
+        }
+    }
+
     return(
         <div className={`${styles.container} ${props.display?styles.containerDisplay:''}`}>
+
+            <div className={styles.itemRotate} onClick={e=>inputRef.current.focus()}>
+                <input ref={inputRef} type='text' inputMode='numeric' value={rotate} onChange={setRotateValue} className={styles.input} onBlur={checkValue}/>
+                <p className={styles.degrees}>&deg;</p>
+            </div>
+
             <div className={`${styles.item} ${styles.colorItem}`} onClick={e=>setShowColorMenu(!showColorMenu)}>
                 <div className={`${styles.bgColorPreview} ${color}`}></div>
                 {showColorMenu && <BgColorMenu withoutTransparent={true} item={props.element} changeBgColor={changeColor} color={color}/>}
