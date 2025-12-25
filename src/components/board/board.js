@@ -18,10 +18,12 @@ import MessageContext from '../../context/messageContext'
 import GlobalLoadingContext from '../../context/globalLoadingContext'
 import ClearElementEditContext from '../../context/clearEdit'
 import ArrowIcon from '../../assets/svg/arrowIcon'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import ShapeElementClass from '../shapeElement.js/shapeElementClass'
 import ShapeElement from '../shapeElement.js/shapeElement'
 import ShapeBottomMenu from '../bottomMenu/shapeBottomMenu/shapeBottomMenu'
+import LoadingIcon from '../../assets/svg/loadingIcon'
+import ErrorIcon from '../../assets/svg/errorIcon'
 
 function Board()
 {
@@ -38,6 +40,9 @@ function Board()
     const [globalLoading,setGlobalLoading] = useState(false)
     const [projectName,setProjectName] = useState('Nowy projekt')
     const [shapeUpdater,setShapeUpdater] = useState(false)
+    const [loading,setLoading] = useState(true)
+    const [displayLoading,setDisplayLoading] = useState(true)
+    const [loadingError,setLoadingError] = useState(false)
 
     const movingLocked = useRef(false)
     const mouseMoveListener = useRef()
@@ -55,6 +60,21 @@ function Board()
     const maxScale = 3
 
     const navigate = useNavigate()
+
+    const params = useParams()
+
+    const getData = async() =>{
+        try
+        {
+            const data = await axios.get(`${ApiAddress}/getBoardData/${params.id}`)
+            setLoading(false)
+            setProjectName(data.data.title)
+        }
+        catch(ex)
+        {
+            setLoadingError(true)
+        }
+    }
 
     const addTextItem = () =>
     {
@@ -345,6 +365,7 @@ function Board()
 
     useEffect(()=>{
        
+        getData()
         if(viewport.current)
         {
             viewport.current.addEventListener("wheel",zoom,{passive:false})
@@ -361,6 +382,16 @@ function Board()
         }
     },[])
 
+    useEffect(()=>{
+        if(!loading)
+        {
+            setTimeout(() => {
+                setDisplayLoading(false)
+                
+            }, 300);
+        }
+    },[loading])
+
     return(
         <MessageContext.Provider value={{addMessage,removeMessage}}>
         <GlobalLoadingContext.Provider value={{globalLoading,setGlobalLoading}}>
@@ -369,6 +400,14 @@ function Board()
             <div className={styles.back} onClick={e=>navigate('/')}>
                 <ArrowIcon class={styles.arrowSvg}/>
             </div>
+
+            {displayLoading && <div className={`${styles.loading} ${!loading?styles.loadingHide:''}`}>
+                {loadingError?<div className={styles.loadingError}>
+                    <ErrorIcon class={styles.errorLoadingIcon}/>
+                    <h2>Wystąpił błąd serwera</h2>
+                    <button onClick={e=>navigate('/')}>Wróc do strony głównej</button>
+                </div>:<LoadingIcon class={styles.pageLoadingIcon}/>}
+            </div>}
 
             <input type='text'className={styles.projectName} value={projectName} onChange={e=>setProjectName(e.target.value)} onFocus={projectNameInputFocused} onBlur={projectNameInputBlur} />
 
