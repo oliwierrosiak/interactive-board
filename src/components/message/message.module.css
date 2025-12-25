@@ -29,7 +29,8 @@
     justify-content: center;
     align-items: center;
     font-size: 1.2rem;
-    font-weight: 400;
+    font-weight: 700;
+    font-family: "Jost", sans-serif;
 }
 .icon
 {
@@ -47,11 +48,12 @@
 }
 .close>svg>path
 {
+    fill: rgb(174, 174, 174);
     transition: fill .3s ease;
 }
 .close:hover>svg>path
 {
-    fill: red;
+    fill: rgb(214, 214, 214);
 }
 .progress
 {
@@ -71,8 +73,8 @@
     left: 0;
     width: 0%;
     transition: width 3s linear .3s;
-     border-radius: 10px;
-     background-color: rgb(117, 117, 117);
+    border-radius: 10px;
+    background-color: rgb(144, 144, 144);
 }
 .progressFilled
 {

@@ -47,6 +47,7 @@
 .deleteSVG
 {
     fill: rgb(255, 0, 0);
+    margin-left: .1rem;
     width: 55%;
     height: 55%;
     transition: fill .3s ease;
@@ -54,10 +55,6 @@
 .deleteItem
 {
     border-radius: 50%;
-}
-.deleteItem:hover>.deleteSVG
-{
-    fill: red;
 }
 .colorPreview
 {
@@ -92,8 +89,10 @@
     justify-content: center;
     align-items: center;
     padding: 0 .5rem;
-    font-size: 1rem;
-    font-weight: 700;
+    font-size: 1.2rem;
+    letter-spacing: .05rem;
+    font-weight: 900;
+    font-family: "Jost", sans-serif;
 }
 .borderWidthOption:hover
 {

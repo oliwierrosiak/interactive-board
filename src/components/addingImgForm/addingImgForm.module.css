@@ -35,6 +35,7 @@
     color: white;
     cursor: pointer;
     border-radius: .8rem;
+    font-family: "Cause", cursive;
 }
 .input::placeholder
 {
@@ -67,6 +68,7 @@
     cursor: pointer;
     position: relative;
     text-wrap: nowrap;
+    font-family: "Cause", cursive;
 }
 .btn:hover
 {
@@ -80,7 +82,7 @@
     right: 0;
     bottom:0;
     opacity: 0;
-    cursor: pointer;
+    cursor: pointer !important;
 }
 .inputError
 {
