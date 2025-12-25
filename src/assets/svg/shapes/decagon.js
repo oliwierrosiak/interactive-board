@@ -1,0 +1,8 @@
+function Decagon(props)
+{
+    return(
+        <svg className={props.class} style={{...props.style}} viewBox="0 0 480 480"><path d="M314.2 11.8H165.8l-120 87.1L0 240l45.8 141.1 120 87.2h148.4l120-87.2L480 240 434.2 98.9l-120-87.1z"></path></svg>
+    )
+}
+
+export default Decagon

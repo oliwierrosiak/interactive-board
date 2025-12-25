@@ -1,0 +1,8 @@
+function Heart(props)
+{
+    return(
+        <svg className={props.class} style={{...props.style}} viewBox="0 0 480 438.82"><path d="M438.82 41.18c-54.9-54.9-143.92-54.9-198.82 0-54.9-54.9-143.92-54.9-198.82 0-54.9 54.9-54.9 143.92 0 198.82L240 438.82 438.82 240c54.9-54.9 54.9-143.92 0-198.82Z"></path></svg>
+    )
+}
+
+export default Heart

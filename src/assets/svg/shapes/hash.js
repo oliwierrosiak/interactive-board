@@ -1,0 +1,8 @@
+function Hash(props)
+{
+    return(
+        <svg className={props.class} style={{...props.style}} viewBox="0 0 480 480"><path d="M480 180V60h-60V0H300v60H180V0H60v60H0v120h60v120H0v120h60v60h120v-60h120v60h120v-60h60V300h-60V180h60ZM300 300H180V180h120v120Z"></path></svg>
+    )
+}
+
+export default Hash
