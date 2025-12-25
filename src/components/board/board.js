@@ -339,10 +339,18 @@ function Board()
         }
     }
 
-    const projectNameInputBlur = (e) =>{
+    const projectNameInputBlur = async(e) =>{
         if(e.target.value.trim() === '')
         {
             setProjectName('Nowy projekt')
+        }
+        try
+        {
+            await axios.post(`${ApiAddress}/updateBoard/${params.id}`,{title:projectName})
+        }
+        catch(ex)
+        {
+            addMessage('Nie udało się zmienić nazwy','error')
         }
     }
 
