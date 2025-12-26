@@ -2,28 +2,64 @@ import ElementClass from "../ElementClass"
 
 class ImgElementClass extends ElementClass
 {
-    constructor(classNames,link,mimetype)
+    constructor(config)
     {
-        super(classNames)
-        this.link = link
+        super(config)
+        this.link = config.link
         this.type = 'img'
-        this.proportion = 1
-        this.mimetype = mimetype
-        this.brightness = 1
-        this.contrast = 1
+        this.proportion = config.proportion || 1
+        this.mimetype = config.mimetype
+        this.brightness = config.brightness || 1
+        this.contrast = config.contrast || 1
+        this.minHeight = config.minHeight || 0
+        this.minWidth = config.minWidth || 0
     }
 
     setProportion(img)
     {
-        this.proportion = img.clientHeight/img.clientWidth
-        this.width = `200px`
-        const width = 200
-        const height = width * this.proportion
-        this.height = `${height*1.05}px`
-        img.closest('.element').style.height = this.height
-        img.closest('.element').style.minHeight = `${height/2}px`
-        img.closest('.element').style.minWidth = `${width/2}px`
+        if(!this.width)
+        {
+            this.proportion = img.clientHeight/img.clientWidth
+            this.width = '200px'
+            const width = 200
+            const height = width * this.proportion
+            this.height = `${height*1.05}px`
+            img.closest('.element').style.height = this.height
+            img.closest('.element').style.minHeight = `${height/2}px`
+            this.minHeight = `${height/2}px`
+            img.closest('.element').style.minWidth = `${width/2}px`
+            this.minWidth = `${width/2}px`
+        }
+    }
 
+    getStyles()
+    {
+        const object = {}
+        if(this.width)
+        {
+            object.width = this.width
+        }
+        if(this.height)
+        {
+            object.height = this.height
+        }
+        if(this.left)
+        {
+            object.left = this.left
+        }
+        if(this.top)
+        {
+            object.top = this.top
+        }
+        if(this.minHeight)
+        {
+            object.minHeight = this.minHeight
+        }
+        if(this.minWidth)
+        {
+            object.minWidth = this.minWidth
+        }
+        return object
     }
 
     resizeAction(e,containerRef,board,movingLocked)

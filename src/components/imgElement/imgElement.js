@@ -30,10 +30,18 @@ function ImgElement(props)
     }
 
     useEffect(()=>{
-        props.item.setPositionRelativeToScreen()
-        const {left,top} = props.item.getStyles()
-        containerRef.current.style.left = left
-        containerRef.current.style.top = top
+        if(!props.item.top && !props.item.left)
+        {
+            props.item.setPositionRelativeToScreen()
+            const {left,top} = props.item.getStyles()
+            containerRef.current.style.left = left
+            containerRef.current.style.top = top
+
+        }
+        else
+        {
+            clearElementEdit()
+        }
     },[])
 
     return(

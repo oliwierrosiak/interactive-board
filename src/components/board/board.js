@@ -63,11 +63,19 @@ function Board()
 
     const params = useParams()
 
-    const setTextElement = (array) =>{
-        const texts = array.filter(x=>x.type === "text")
+    const elementSetter= (array) =>{
         const localElements = [...elements]
-        texts.forEach(x=>{
-            localElements.push(new TextElementClass(x))
+        array.forEach(x=>{
+            console.log(x.type)
+            switch(x.type)
+            {
+                case 'text':
+                    localElements.push(new TextElementClass(x))
+                    break;
+                case 'img':
+                    localElements.push(new ImgElementClass(x))
+                    break;
+            }
         })
         setElements(localElements)
     }
@@ -80,7 +88,7 @@ function Board()
             const data = await axios.get(`${ApiAddress}/getBoardData/${params.id}`)
             setLoading(false)
             setProjectName(data.data.title)
-            setTextElement(data.data.content)
+            elementSetter(data.data.content)
         }
         catch(ex)
         {
@@ -125,7 +133,7 @@ function Board()
     const addImg = (data) =>{
         clearElementEdit()
         const localTextElement = [...elements]
-        const img = new ImgElementClass(['borderBgBlack6','borderWidth1','borderRadius1'],data.link,data.mimetype)
+        const img = new ImgElementClass({class:['borderBgBlack6','borderWidth1','borderRadius1'],link:data.link,mimetype:data.mimetype})
         localTextElement.push(img)
         setEdit(img)
         setElements(localTextElement)
