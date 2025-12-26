@@ -123,13 +123,19 @@ function Board()
         setElements(localTextElement)
     }
 
-    const deleteItem = (id) =>
+    const deleteItem = async(id) =>
     {
         const localElements = [...elements]
         const idx = localElements.findIndex(x=>x.id === id)
         localElements.splice(idx,1)
         setElements([...localElements])
         setEdit(0)
+        try
+        {
+            await axios.delete(`${ApiAddress}/deleteBoardItem/${params.id}/${id}`)
+        }
+        catch(ex)
+        {}
     }
 
     const addImg = (data) =>{
