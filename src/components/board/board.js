@@ -92,6 +92,10 @@ function Board()
         })
         if(edit.type !== "canvas" || !brush.type)
         {
+            if(edit)
+            {
+                edit.updater(params.id)
+            }
             setEdit(0)
         }
     }
@@ -346,7 +350,7 @@ function Board()
         }
         try
         {
-            await axios.post(`${ApiAddress}/updateBoard/${params.id}`,{title:projectName})
+            await axios.post(`${ApiAddress}/updateNoteTitle/${params.id}`,{title:projectName})
         }
         catch(ex)
         {
@@ -364,6 +368,21 @@ function Board()
             e.preventDefault()
         }
     }
+
+    const updateContent = async()=>{
+        try
+        {
+            await axios.post(`${ApiAddress}/updateNoteContent/${params.id}`,{content:elements})
+        }
+        catch(ex)
+        {
+
+        }
+    }
+
+    useEffect(()=>{
+        // updateContent()
+    },[elements])
 
     useLayoutEffect(()=>{
          translateXRef.current = (viewport.current.clientWidth - boardRef.current.clientWidth) / 2

@@ -1,3 +1,6 @@
+import axios from "axios"
+import ApiAddress from "../ApiAddress"
+
 class ElementClass
 {
     constructor(classNames)
@@ -8,6 +11,16 @@ class ElementClass
         this.moveHandler = ()=>{}
         this.resizeHandler = ()=>{}
     }   
+
+    async updater(boardId)
+    {
+        try
+        {
+            await axios.post(`${ApiAddress}/updateNoteContent/${boardId}`,this)
+        }
+        catch(ex){
+        }
+    }
 
     setPosition(left,top)
     {
@@ -117,6 +130,7 @@ class ElementClass
             this.moveHandler = (ev) => this.moveElement(e,ev,board,movingLocked,ref)
             board.addEventListener('mousemove',this.moveHandler) 
             movingLocked.current = true
+            
         }
     }  
     
@@ -129,7 +143,7 @@ class ElementClass
     {
         if(!e.classList.contains('editOn') && e.classList.contains('element'))
         {
-            clearElementEdit()
+            clearElementEdit(item)
             e.classList.add(`editOn`)
             setEdit(item)
         }
@@ -153,6 +167,7 @@ class ElementClass
     {
         board.removeEventListener('mousemove',this.resizeHandler)
         movingLocked.current = false
+
     }
 
     resizeElement(board,containerRef,movingLocked)
