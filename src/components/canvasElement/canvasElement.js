@@ -1,13 +1,16 @@
 import { Canvas, CircleBrush, PatternBrush, PencilBrush, SprayBrush, version } from 'fabric'
-import { useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import brushColors from './brushColors'
 import cursor from '../../assets/img/cursor.png'
 import EraserBrush from './eraser'
+import CanvasHistoryContext from '../../context/canvasHistory'
 
 function CanvasElement(props)
 {
     const canvasRef = useRef()
     const canvasObj = useRef()
+
+    const canvasHistory = useContext(CanvasHistoryContext)
 
     const getBrushWidth = () =>{
         return 0.2*props.brush.width
@@ -18,10 +21,18 @@ function CanvasElement(props)
         return brushColors[props.brush.color]
     }
 
+    
+
+    const saveChanges = () =>{
+        const json = canvasObj.current.toJSON()
+         canvasHistory.setUndoStack(json);
+    }
+
     const objectAddedToCanvas = (e) =>{
         const obj = e.target
         obj.selectable = false
         obj.evented = false
+        saveChanges()
     }
 
     const createCanvas = () =>
@@ -38,8 +49,8 @@ function CanvasElement(props)
         canvas.renderOnAddRemove = false;
         canvas.backgroundColor = "transparent"
         canvas.on('object:added',objectAddedToCanvas)
-        canvas.setWidth(3000)
-        canvas.setHeight(3000)
+        canvas.setWidth(2500)
+        canvas.setHeight(2500)
         canvasObj.current = canvas
         
     }
@@ -98,6 +109,17 @@ function CanvasElement(props)
            
         }
     },[props.brush])
+
+
+    useEffect(()=>{
+        if(canvasHistory.undoStack?.objects?.length>-1)
+        {
+            canvasObj.current.clear();
+            canvasObj.current.loadFromJSON(canvasHistory.undoStack)
+            canvasObj.current.requestRenderAll();
+        }
+
+    },[canvasHistory.update])
 
     return(
         <canvas ref={canvasRef} className={`canvas`}></canvas>

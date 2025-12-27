@@ -24,6 +24,7 @@ import ShapeElement from '../shapeElement.js/shapeElement'
 import ShapeBottomMenu from '../bottomMenu/shapeBottomMenu/shapeBottomMenu'
 import LoadingIcon from '../../assets/svg/loadingIcon'
 import ErrorIcon from '../../assets/svg/errorIcon'
+import CanvasHistoryContext from '../../context/canvasHistory'
 
 function Board()
 {
@@ -43,6 +44,9 @@ function Board()
     const [loading,setLoading] = useState(true)
     const [displayLoading,setDisplayLoading] = useState(true)
     const [loadingError,setLoadingError] = useState(false)
+    const [undoStack,setUndoStack] = useState([])
+    const [redoStack,setRedoStack] = useState([])
+    const [canvasHistoryUpdater,setCanvasHistoryUpdater] = useState(false)
 
     const movingLocked = useRef(false)
     const mouseMoveListener = useRef()
@@ -444,6 +448,7 @@ function Board()
         <MessageContext.Provider value={{addMessage,removeMessage}}>
         <GlobalLoadingContext.Provider value={{globalLoading,setGlobalLoading}}>
         <ClearElementEditContext.Provider value={clearElementEdit}>
+        <CanvasHistoryContext value={{undoStack,setUndoStack,redoStack,setRedoStack,update:canvasHistoryUpdater,setUpdate:setCanvasHistoryUpdater}}>
 
             <div className={styles.back} onClick={e=>navigate('/')}>
                 <ArrowIcon class={styles.arrowSvg}/>
@@ -508,6 +513,7 @@ function Board()
 
             <ShapeBottomMenu shapeUpdater={shapeUpdater} setShapeUpdater={setShapeUpdater} display={edit !==0 && edit.type === "shape"} element={edit} editUpdate={editUpdate} setEditUpdate={setEditUpdate} deleteItem={deleteItem} />
 
+        </CanvasHistoryContext>
         </ClearElementEditContext.Provider>
         </GlobalLoadingContext.Provider>
         </MessageContext.Provider>

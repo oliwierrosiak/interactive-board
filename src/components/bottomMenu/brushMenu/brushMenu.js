@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import styles from './brushMenu.module.css'
 import RangeSlider from '../imageMenu/rangeSlider/rangeSlider'
 import BgColorMenu from '../textMenu/bgColorMenu'
@@ -7,6 +7,7 @@ import SprayBrushIcon from '../../../assets/svg/sprayBrushIcon'
 import CircleBrushIcon from '../../../assets/svg/circleBrushIcon'
 import EraserIcon from '../../../assets/svg/eraserIcon'
 import ArrowIcon from '../../../assets/svg/arrowIcon'
+import CanvasHistoryContext from '../../../context/canvasHistory'
 
 function BrushMenu(props)
 {
@@ -16,7 +17,12 @@ function BrushMenu(props)
     const [lineWidth,setLineWidth] = useState(props.brush.width)
     const [showColorMenu,setShowColorMenu] = useState(false)
 
+    const [undoActive,setUndoActive] = useState(false)
+    const [redoActive,setRedoActive] = useState(false)
+
     const widthPreviewRef = useRef()
+
+    const canvasHistory = useContext(CanvasHistoryContext)
 
     useEffect(()=>{
         setTimeout(()=>{
@@ -74,6 +80,71 @@ function BrushMenu(props)
         }
     }
 
+    const undo = () =>{
+        
+        if(canvasHistory.undoStack.objects.length!=0)
+        {
+            const localUndo = {...canvasHistory.undoStack}
+            let localRedo = {...canvasHistory.redoStack}
+            const localUndoObjects = [...localUndo.objects]
+            if(!localRedo.objects)
+            {
+                localRedo = {...localUndo}
+                localRedo.objects = [localUndoObjects.at(-1)]
+            }
+            else
+            {
+                const localRedoObject = [...localRedo.objects]
+                localRedoObject.push(localUndoObjects.at(-1))
+                localRedo.objects = [...localRedoObject]
+            }
+            localUndoObjects.splice(localUndoObjects.length-1,1)
+            localUndo.objects = [...localUndoObjects]
+            canvasHistory.setUndoStack(localUndo)
+            canvasHistory.setRedoStack(localRedo)
+            canvasHistory.setUpdate(!canvasHistory.update)
+        }
+    }
+
+    const redo = () =>{
+        if(canvasHistory.redoStack.objects.length > 0)
+        {
+            const localRedo = {...canvasHistory.redoStack}
+            const localRedoObjects = [...localRedo.objects]
+            const localUndo = canvasHistory.undoStack
+            const localUndoObjects = [...localUndo.objects]
+            localUndoObjects.push(localRedoObjects.at(-1))
+            localRedoObjects.splice(localRedoObjects.length-1,1)
+            localRedo.objects = [...localRedoObjects]
+            localUndo.objects = [...localUndoObjects]
+            canvasHistory.setUndoStack(localUndo)
+            canvasHistory.setRedoStack(localRedo)
+            canvasHistory.setUpdate(!canvasHistory.update)
+        }
+    }
+
+    useEffect(()=>{
+        if(canvasHistory.undoStack?.objects?.length > 0)
+        {
+            setUndoActive(true)
+        }
+        else
+        {
+            setUndoActive(false)
+        }
+    },[canvasHistory.undoStack])
+
+    useEffect(()=>{
+        if(canvasHistory.redoStack?.objects?.length > 0)
+        {
+            setRedoActive(true)
+        }
+        else
+        {
+            setRedoActive(false)
+        }
+    },[canvasHistory.redoStack])
+
     return(
         <div className={`${styles.container} ${display?styles.containerDisplay:''}`} onClick={boardEvent}>
             <div className={`${styles.item} ${styles.brushItem} ${brush.type === "brush" ? styles.brushSelected:''}`} onClick={e=>pencilChanger(e,{type:'brush'})}>
@@ -103,11 +174,11 @@ function BrushMenu(props)
 
             <div className={styles.line}></div>
 
-            <div className={styles.item}>
-                <ArrowIcon class={styles.arrow}/>
+            <div className={`${styles.item} ${undoActive?"":styles.itemHoverDisabled}`} onClick={undo}>
+                <ArrowIcon class={`${styles.arrow} ${undoActive?"":styles.arrowDisabled}`}/>
             </div>
-            <div className={styles.item}>
-                <ArrowIcon class={styles.arrowRotated}/>
+            <div className={`${styles.item} ${redoActive?"":styles.itemHoverDisabled}`} onClick={redo}>
+                <ArrowIcon class={`${styles.arrowRotated} ${redoActive?"":styles.arrowDisabled}`}/>
             </div>
             <div className={styles.item} onClick={e=>{!brush.type && props.brushMenuClosed();changePencil({type:'',color:brush.color,width:brush.width})}}>
                 <div className={`${styles.closeElement} ${brush.type?styles.closeElementDisplay:''}`}>OK</div>
