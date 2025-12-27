@@ -35,6 +35,11 @@
     border-radius: 1rem;
     cursor: pointer;
     transition: all .3s ease;
+    position: relative;
+}
+.bgColor
+{
+    position: relative;
 }
 .errorSvg
 {
@@ -81,4 +86,11 @@
 .item:hover
 {
     background-color: rgb(146, 146, 146);
+}
+.colorPreview
+{
+    width: 1.6rem;
+    height: 1.6rem;
+    border-radius: 50%;
+    border: .25rem solid rgb(65, 65, 65);
 }

@@ -66,8 +66,9 @@
     transform-origin: 0 0;
     width: 5000px;
     height: 5000px;
-    background:#FAFAF9;
     border-radius: 10rem;
+    /* background-image: url('../../assets/img/line40.png'); */
+
     /* background: linear-gradient(45deg,blue,red); */
     /* transition: transform .1s ease; */
 }

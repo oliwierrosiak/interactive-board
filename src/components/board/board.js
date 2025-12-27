@@ -40,6 +40,7 @@ function Board()
     const [updater,setUpdater] = useState(false)
     const [globalLoading,setGlobalLoading] = useState(false)
     const [projectName,setProjectName] = useState('Nowy projekt')
+    const [boardColor,setBoardColor] = useState()
     const [shapeUpdater,setShapeUpdater] = useState(false)
     const [loading,setLoading] = useState(true)
     const [displayLoading,setDisplayLoading] = useState(true)
@@ -93,7 +94,8 @@ function Board()
         {
             const data = await axios.get(`${ApiAddress}/getBoardData/${params.id}`)
             setLoading(false)
-            setProjectName(data.data.title)
+            setProjectName(data.data.title || 'Nowy projekt')
+            setBoardColor(data.data.boardColor || 'bgBlack5')
             elementSetter(data.data.content)
         }
         catch(ex)
@@ -444,6 +446,25 @@ function Board()
         }
     },[loading])
 
+    const saveBoardColor = async()=>{
+        try
+        {
+            await axios.post(`${ApiAddress}/updateNoteColor/${params.id}`,{color:boardColor})
+        }
+        catch(ex)
+        {
+            addMessage('Nie zapisano koloru tła','errror')
+        }       
+    }
+
+    useEffect(()=>{
+        if(boardColor)
+        {
+            saveBoardColor()
+
+        }
+    },[boardColor])
+
     return(
         <MessageContext.Provider value={{addMessage,removeMessage}}>
         <GlobalLoadingContext.Provider value={{globalLoading,setGlobalLoading}}>
@@ -466,7 +487,7 @@ function Board()
 
             <div className={`${styles.viewport} viewport`} ref={viewport} onDragEnter={e=>setDisplayDragElement(true)} >
 
-                <div className={`${styles.board} board`} ref={boardRef} onMouseDown={boardMouseDown} onMouseUp={boardMouseUp}>
+                <div className={`${styles.board} board ${boardColor}`} ref={boardRef} onMouseDown={boardMouseDown} onMouseUp={boardMouseUp}>
 
                     <CanvasElement movingLocked={movingLocked} drawing={edit !== 0 && edit.type === "canvas" && brush.type !== ''} brush={brush}/>
 
@@ -502,7 +523,7 @@ function Board()
                 <ImgLoadingIcon  class={styles.loadingSVG}/>
             </div>}
 
-            <BottomMenu addShape={addShape} zoomBtn={zoomBtn} addTextItem={addTextItem} brushClicked={brushClicked} addImg={addImg} showAddingImgForm={showAddingImgForm} setShowAddingImgForm={setShowAddingImgForm} display={edit === 0}/>
+            <BottomMenu boardColor={boardColor} setBoardColor={setBoardColor} addShape={addShape} zoomBtn={zoomBtn} addTextItem={addTextItem} brushClicked={brushClicked} addImg={addImg} showAddingImgForm={showAddingImgForm} setShowAddingImgForm={setShowAddingImgForm} display={edit === 0}/>
 
             
             <TextMenu display={edit!==0 && edit.type === "text"} element={edit} editUpdate={editUpdate} setEditUpdate={setEditUpdate} board={boardRef} deleteItem={deleteItem}/>

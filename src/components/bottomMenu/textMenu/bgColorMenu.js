@@ -21,7 +21,10 @@ function BgColorMenu(props)
         {
             return props.changeBgColor({color})
         }
-
+        if(props.board)
+        {
+            return props.changeBgColor(color)
+        }
         const classes = props.item.class
         const filtered = classes.filter(x => x.includes('bg') || x.includes('borderBg') || x.includes('fill'))
         filtered.forEach(x => {

@@ -9,10 +9,12 @@ import BrushIcon from '../../assets/svg/lineBrushIcon'
 import ImageIcon from '../../assets/svg/imageIcon'
 import ShapesIcon from '../../assets/svg/shapesIcon'
 import ShapesMenu from './shapesMenu/shapesMenu'
+import BgColorMenu from './textMenu/bgColorMenu'
 
 function BottomMenu(props)
 {
     const [showShapesMenu,setShowShapesMenu] = useState(false)
+    const [showBoardColorMenu,setShowBoardColorMenu] = useState(false)
 
     const clearElementEdit = useContext(ClearElementEditContext)
 
@@ -49,7 +51,11 @@ function BottomMenu(props)
 
     const windowClick = (e) =>{
         const div = e.target.closest(`div`)
-        if(div && !div.classList.contains(styles.shapesItem) && !div.classList.contains('zoomItem'))
+        if(!div.classList.contains(styles.bgColor) && !div.classList.contains(styles.colorPreview))
+        {
+            setShowBoardColorMenu(false)
+        }
+        if(div && !div.classList.contains(styles.shapesItem))
         {
             setShowShapesMenu(false)
         }
@@ -82,6 +88,13 @@ function BottomMenu(props)
             <div className={`${styles.item} ${styles.shapesItem}`} onClick={e=>setShowShapesMenu(!showShapesMenu)}>
                 <ShapesIcon class={styles.icon} />
                 <ShapesMenu display={showShapesMenu} addShape={props.addShape}/>
+            </div>
+
+            <div className={styles.line}></div>
+
+            <div className={`${styles.item} ${styles.bgColor}`} onClick={e=>setShowBoardColorMenu(!showBoardColorMenu)}>
+                <div className={`${styles.colorPreview} ${props.boardColor}`}></div>
+                {showBoardColorMenu && <BgColorMenu board={true} changeBgColor={props.setBoardColor} color={props.boardColor}/>}
             </div>
 
             <div className={styles.line}></div>
