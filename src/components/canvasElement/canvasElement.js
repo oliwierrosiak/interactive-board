@@ -1,4 +1,4 @@
-import { Canvas, CircleBrush, PatternBrush, PencilBrush, SprayBrush, version, Path } from 'fabric'
+import { Canvas, PencilBrush, Path } from 'fabric'
 import { useContext, useEffect, useRef, useState } from 'react'
 import brushColors from './brushColors'
 import cursor from '../../assets/img/cursor.png'
@@ -9,6 +9,7 @@ function CanvasElement(props)
 {
     const canvasRef = useRef()
     const canvasObj = useRef()
+    const historyLoading = useRef(false)
 
     const canvasHistory = useContext(CanvasHistoryContext)
 
@@ -38,15 +39,18 @@ function CanvasElement(props)
     
 
     const objectAddedToCanvas = (e) =>{
+        if(historyLoading.current)
+        {
+            return
+        }
         const p = e.target
-
         const serialized = {
             points: pathToPoints(p.path),
             color: p.stroke,
             width: p.strokeWidth,
             type:p.globalCompositeOperation === 'destination-out'?'eraser':'draw'
         }
-
+        canvasHistory.setUndoStack((prev)=>[...prev,serialized])
         props.item.content.push(serialized)
     }
 
@@ -57,39 +61,15 @@ function CanvasElement(props)
         })
         canvas.freeDrawingCursor = `url(${cursor}) 16 16, auto`;
         canvas.backgroundColor = "transparent"
-
         canvas.setWidth(2500)
         canvas.setHeight(2500)
         canvasObj.current = canvas
-        canvas.renderOnAddRemove = false
         canvas.selection = false
         canvas.skipTargetFind = true
         canvas.preserveObjectStacking = true
-
-        props.item.content.forEach(data => {
-            const path = new Path(pointsToPath(data.points), {
-                stroke: data.color,
-                strokeWidth: data.width,
-                fill: null,
-                selectable: false,
-                evented: false
-            })
-
-            if (data.type === 'eraser')
-            {
-                path.globalCompositeOperation = 'destination-out'
-            }
-
-            canvas.add(path)
-        })
-
         canvas.on('object:added',objectAddedToCanvas)
-
         canvas.renderOnAddRemove = true
         canvas.renderAll()
-        
-
-        
     }
 
     useEffect(()=>{
@@ -149,12 +129,31 @@ function CanvasElement(props)
 
 
     useEffect(()=>{
-        if(canvasHistory.undoStack?.objects?.length>-1)
+
+        historyLoading.current = true
+        canvasObj.current.clear();
+        
+        canvasHistory.undoStack.forEach(data =>
         {
-            canvasObj.current.clear();
-            canvasObj.current.loadFromJSON(canvasHistory.undoStack)
-            canvasObj.current.requestRenderAll();
-        }
+            const path = new Path(pointsToPath(data.points), {
+                stroke: data.color,
+                strokeWidth: data.width,
+                fill: null,
+                selectable: false,
+                evented: false
+            })
+
+            if (data.type === 'eraser')
+            {
+                path.globalCompositeOperation = 'destination-out'
+            }
+
+            canvasObj.current.add(path)
+        })
+
+        canvasObj.current.renderAll()
+        props.item.content = canvasHistory.undoStack
+        historyLoading.current = false
 
     },[canvasHistory.update])
 

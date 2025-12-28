@@ -50,6 +50,7 @@ function Board()
     const [canvasHistoryUpdater,setCanvasHistoryUpdater] = useState(false)
     const [backgroundTemplate,setBackgroundTemplate] = useState()
 
+
     const movingLocked = useRef(false)
     const mouseMoveListener = useRef()
     const mouseDownTimeStamp = useRef()
@@ -80,6 +81,7 @@ function Board()
             {
                 case 'canvas':
                     localElements.push(x)
+                    setUndoStack(x.content||[])
                     break
                 case 'text':
                     localElements.push(new TextElementClass(x))
@@ -113,7 +115,7 @@ function Board()
 
     const saveCanvas = async()=>{
         const canvas = elements.find(x=>x.type==="canvas")
-        if(canvas && canvas.content.length > 0)
+        if(canvas)
         {
             try
             {

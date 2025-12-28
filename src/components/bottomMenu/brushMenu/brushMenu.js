@@ -77,25 +77,12 @@ function BrushMenu(props)
     }
 
     const undo = () =>{
-        
-        if(canvasHistory.undoStack.objects.length!=0)
+        if(canvasHistory.undoStack.length > 0)
         {
-            const localUndo = {...canvasHistory.undoStack}
-            let localRedo = {...canvasHistory.redoStack}
-            const localUndoObjects = [...localUndo.objects]
-            if(!localRedo.objects)
-            {
-                localRedo = {...localUndo}
-                localRedo.objects = [localUndoObjects.at(-1)]
-            }
-            else
-            {
-                const localRedoObject = [...localRedo.objects]
-                localRedoObject.push(localUndoObjects.at(-1))
-                localRedo.objects = [...localRedoObject]
-            }
-            localUndoObjects.splice(localUndoObjects.length-1,1)
-            localUndo.objects = [...localUndoObjects]
+            const localUndo = [...canvasHistory.undoStack]
+            const localRedo = [...canvasHistory.redoStack]
+            localRedo.push(localUndo.at(-1))
+            localUndo.splice(localUndo.length-1,1)
             canvasHistory.setUndoStack(localUndo)
             canvasHistory.setRedoStack(localRedo)
             canvasHistory.setUpdate(!canvasHistory.update)
@@ -103,24 +90,20 @@ function BrushMenu(props)
     }
 
     const redo = () =>{
-        if(canvasHistory.redoStack.objects.length > 0)
+        if(canvasHistory.redoStack.length > 0)
         {
-            const localRedo = {...canvasHistory.redoStack}
-            const localRedoObjects = [...localRedo.objects]
-            const localUndo = canvasHistory.undoStack
-            const localUndoObjects = [...localUndo.objects]
-            localUndoObjects.push(localRedoObjects.at(-1))
-            localRedoObjects.splice(localRedoObjects.length-1,1)
-            localRedo.objects = [...localRedoObjects]
-            localUndo.objects = [...localUndoObjects]
-            canvasHistory.setUndoStack(localUndo)
+            const localRedo = [...canvasHistory.redoStack]
+            const localUndo = [...canvasHistory.undoStack]
+            localUndo.push(localRedo.at(-1))
+            localRedo.splice(localRedo.length-1,1)
             canvasHistory.setRedoStack(localRedo)
+            canvasHistory.setUndoStack(localUndo)
             canvasHistory.setUpdate(!canvasHistory.update)
         }
     }
 
     useEffect(()=>{
-        if(canvasHistory.undoStack?.objects?.length > 0)
+        if(canvasHistory.undoStack?.length > 0)
         {
             setUndoActive(true)
         }
@@ -131,7 +114,7 @@ function BrushMenu(props)
     },[canvasHistory.undoStack])
 
     useEffect(()=>{
-        if(canvasHistory.redoStack?.objects?.length > 0)
+        if(canvasHistory.redoStack?.length > 0)
         {
             setRedoActive(true)
         }
