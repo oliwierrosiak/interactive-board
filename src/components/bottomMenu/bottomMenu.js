@@ -10,12 +10,15 @@ import ImageIcon from '../../assets/svg/imageIcon'
 import ShapesIcon from '../../assets/svg/shapesIcon'
 import ShapesMenu from './shapesMenu/shapesMenu'
 import BgColorMenu from './textMenu/bgColorMenu'
+import imgTemplatePreview from '../../assets/img/preview.png'
+import BackgroundTemplateMenu from './backgroundTemplateMenu'
 
 function BottomMenu(props)
 {
     const [showShapesMenu,setShowShapesMenu] = useState(false)
     const [showBoardColorMenu,setShowBoardColorMenu] = useState(false)
-
+    const [displayBackgroundTemplateMenu,setDisplayBackgroundTemplateMenu] = useState(false)
+    
     const clearElementEdit = useContext(ClearElementEditContext)
 
     const textClicked = () =>{
@@ -51,6 +54,10 @@ function BottomMenu(props)
 
     const windowClick = (e) =>{
         const div = e.target.closest(`div`)
+        if(!div.classList.contains(styles.bgColor) && !div.classList.contains(styles.templatePreview))
+        {
+            setDisplayBackgroundTemplateMenu(false)
+        }
         if(!div.classList.contains(styles.bgColor) && !div.classList.contains(styles.colorPreview))
         {
             setShowBoardColorMenu(false)
@@ -94,7 +101,14 @@ function BottomMenu(props)
 
             <div className={`${styles.item} ${styles.bgColor}`} onClick={e=>setShowBoardColorMenu(!showBoardColorMenu)}>
                 <div className={`${styles.colorPreview} ${props.boardColor}`}></div>
-                {showBoardColorMenu && <BgColorMenu board={true} changeBgColor={props.setBoardColor} color={props.boardColor}/>}
+                {showBoardColorMenu && <BgColorMenu withoutTransparent={true} board={true} changeBgColor={props.setBoardColor} color={props.boardColor}/>}
+            </div>
+
+            <div className={`${styles.item} ${styles.bgTemplate}`} onClick={e=>setDisplayBackgroundTemplateMenu(!displayBackgroundTemplateMenu)}>
+                <div className={`${styles.templatePreview}`}>
+                    <img src={imgTemplatePreview} className={styles.img}/>
+                </div>
+                {displayBackgroundTemplateMenu && <BackgroundTemplateMenu template={props.backgroundTemplate} setTemplate={props.setBackgroundTemplate}/>}
             </div>
 
             <div className={styles.line}></div>

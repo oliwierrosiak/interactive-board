@@ -48,6 +48,7 @@ function Board()
     const [undoStack,setUndoStack] = useState([])
     const [redoStack,setRedoStack] = useState([])
     const [canvasHistoryUpdater,setCanvasHistoryUpdater] = useState(false)
+    const [backgroundTemplate,setBackgroundTemplate] = useState('backgroundTemplate9')
 
     const movingLocked = useRef(false)
     const mouseMoveListener = useRef()
@@ -487,7 +488,7 @@ function Board()
 
             <div className={`${styles.viewport} viewport`} ref={viewport} onDragEnter={e=>setDisplayDragElement(true)} >
 
-                <div className={`${styles.board} board ${boardColor}`} ref={boardRef} onMouseDown={boardMouseDown} onMouseUp={boardMouseUp}>
+                <div className={`${styles.board} board ${boardColor} ${backgroundTemplate}`} ref={boardRef} onMouseDown={boardMouseDown} onMouseUp={boardMouseUp}>
 
                     <CanvasElement movingLocked={movingLocked} drawing={edit !== 0 && edit.type === "canvas" && brush.type !== ''} brush={brush}/>
 
@@ -523,7 +524,7 @@ function Board()
                 <ImgLoadingIcon  class={styles.loadingSVG}/>
             </div>}
 
-            <BottomMenu boardColor={boardColor} setBoardColor={setBoardColor} addShape={addShape} zoomBtn={zoomBtn} addTextItem={addTextItem} brushClicked={brushClicked} addImg={addImg} showAddingImgForm={showAddingImgForm} setShowAddingImgForm={setShowAddingImgForm} display={edit === 0}/>
+            <BottomMenu backgroundTemplate={backgroundTemplate} setBackgroundTemplate={setBackgroundTemplate} boardColor={boardColor} setBoardColor={setBoardColor} addShape={addShape} zoomBtn={zoomBtn} addTextItem={addTextItem} brushClicked={brushClicked} addImg={addImg} showAddingImgForm={showAddingImgForm} setShowAddingImgForm={setShowAddingImgForm} display={edit === 0}/>
 
             
             <TextMenu display={edit!==0 && edit.type === "text"} element={edit} editUpdate={editUpdate} setEditUpdate={setEditUpdate} board={boardRef} deleteItem={deleteItem}/>

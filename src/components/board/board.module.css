@@ -67,10 +67,6 @@
     width: 5000px;
     height: 5000px;
     border-radius: 10rem;
-    /* background-image: url('../../assets/img/line40.png'); */
-
-    /* background: linear-gradient(45deg,blue,red); */
-    /* transition: transform .1s ease; */
 }
 .dragElement
 {

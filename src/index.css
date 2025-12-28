@@ -820,3 +820,39 @@ img
 {
   fill: rgb(255, 255, 255);
 }
+.backgroundTemplate1
+{
+    background-image: url('./assets/img/dashed1.png');
+}
+.backgroundTemplate2
+{
+    background-image: url('./assets/img/dashed2.png');
+}
+.backgroundTemplate3
+{
+    background-image: url('./assets/img/dashed3.png');
+}
+.backgroundTemplate4
+{
+    background-image: url('./assets/img/dashed4.png');
+}
+.backgroundTemplate5
+{
+    background-image: url('./assets/img/line1.png');
+}
+.backgroundTemplate6
+{
+    background-image: url('./assets/img/line2.png');
+}
+.backgroundTemplate7
+{
+    background-image: url('./assets/img/line3.png');
+}
+.backgroundTemplate8
+{
+    background-image: url('./assets/img/line4.png');
+}
+.backgroundTemplate9
+{
+  background-image: none;
+}
