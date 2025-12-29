@@ -1,0 +1,87 @@
+.header
+{
+    background-image: url('../../assets/img/background.jpg');
+    background-position: center center;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border-radius: 2rem;
+    overflow: hidden;
+    box-shadow: 0 0 1rem .5rem #02735E;
+    border: .5rem solid #2A2F27;
+    /* border: .5rem solid #02735E; */
+}
+.overlay
+{
+    position: absolute;
+    top:0;
+    left:0;
+    right: 0;
+    bottom: 0;
+    background-color: #2a2f2793;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* backdrop-filter: blur(2px); */
+}
+.menu
+{
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:3rem;
+}
+.menuBtn
+{
+    font-size: 2rem;
+    padding: 1.2rem 1.5rem;
+    border: .6rem solid #03A678;
+    border-radius: 1.5rem;
+    outline: none;
+    font-weight: 400;
+    color: white;
+    background: #1c1f1ae1;
+    width: 28rem;
+    height: 6rem;
+    cursor: pointer;
+    transition: all .3s ease;
+    font-family: "Luckiest Guy", cursive;
+    position: relative;
+}
+.menuBtn>p
+{
+    position: absolute;
+    top: 50%;
+    left:50%;
+    translate: -50% -50%;
+    z-index: 2 !important;
+    width: 100%;
+}
+.buttonHover
+{
+    position: absolute;
+    top:0;
+    left:0;
+    right: 0;
+    bottom: 0;
+    background: #02735E;
+    background: radial-gradient(#02735E,#014040);
+    border-radius: 0.9rem;
+    z-index: 0;
+    transform: scale(0);
+    transform-origin: bottom;
+    transition: transform .3s ease;
+    will-change: transform;
+}
+.buttonHoverDisplay
+{
+    transform: scale(1);
+}
+.menuBtn:hover
+{
+    /* background: #02735E; */
+    transform: translate(0,-1rem);
+    box-shadow: 0 1rem .2rem 0rem #1c1f1ac6;
+}
