@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import Nav from '../nav/nav'
 import styles from './header.module.css'
+import LoginPage from '../login/loginPage'
 
 function Header(props)
 {
@@ -9,8 +10,6 @@ function Header(props)
 
     const btnHovered = (target) =>{
         target === "1"?btn1HoverRef.current.classList.add(styles.buttonHoverDisplay):btn2HoverRef.current.classList.add(styles.buttonHoverDisplay)
-        
-        
     }
 
     const btnUnHover = (e) =>{
@@ -22,6 +21,8 @@ function Header(props)
         <header className={styles.header}>
             
             <div className={styles.overlay}>
+
+                <LoginPage />
 
                 <Nav />
 

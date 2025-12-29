@@ -1,13 +1,20 @@
+import { useState } from 'react'
 import Header from '../header/header'
-import Nav from '../nav/nav'
 import styles from './home.module.css'
+import DisplayLoginContext from '../../context/displayLogin'
 
 function Home()
 {
+    const [displayLogin,setDisplayLogin] = useState('')
+
     return(
         <div className={styles.container}>
 
-            <Header />
+            <DisplayLoginContext.Provider value={{displayLogin,setDisplayLogin}}>
+
+                <Header />
+
+            </DisplayLoginContext.Provider>
 
         </div>
     )
