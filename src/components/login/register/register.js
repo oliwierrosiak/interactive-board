@@ -1,4 +1,4 @@
-import { useContext, useReducer, useState } from 'react'
+import { useContext, useEffect, useReducer, useState } from 'react'
 import styles from '../login-register.module.css'
 import PasswordEye from '../../../assets/svg/passwordEye'
 import PasswordEyeHidden from '../../../assets/svg/passwordEyeHidden'
@@ -67,13 +67,19 @@ function Register(props)
         }
     }
 
+    useEffect(()=>{
+        setTimeout(() => {
+            setShowPage2(false)
+        }, 1000);
+    },[props.display])
+
     return(
         <div className={`${styles.loginForm} ${props.display?styles.display:''}`}>
             <h1 className={styles.header}>Rejestracja</h1>
 
             <form className={styles.form} onSubmit={submit}>
 
-                <div className={styles.page1}>
+                <div className={`${styles.page1} ${showPage2?styles.pageHidden:''}`}>
 
                     <div className={styles.inputContainer} onClick={divClicked}>
                         <input value={values.email} onChange={e=>dispatch({action:'email',value:e.target.value})} type="text" onBlur={inputBlur} onFocus={inputFocused} className={`${styles.input}`}></input>

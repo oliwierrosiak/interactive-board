@@ -242,3 +242,7 @@
     border: .3rem solid #03A678;
     color: white;
 }
+.pageHidden
+{
+    opacity: 0;
+}
