@@ -1,28 +1,28 @@
-import { useContext, useEffect, useReducer, useState } from 'react'
+import { useContext, useEffect, useReducer, useRef, useState } from 'react'
 import styles from '../login-register.module.css'
 import PasswordEye from '../../../assets/svg/passwordEye'
 import PasswordEyeHidden from '../../../assets/svg/passwordEyeHidden'
 import DisplayLoginContext from '../../../context/displayLogin'
 import userImg from '../../../assets/img/userDefault.png'
+import CameraIcon from '../../../assets/svg/cameraIcon'
 
 function Register(props)
 {
     const [showPage2,setShowPage2] = useState(false)
+    const [userImageLink,setUserImageLink] = useState(userImg)
+    
+    const acceptableImageTypes = ['image/png','image/jpg','image/jpeg','image/pjp','image/jfif','image/jpe','image/pjpeg']
 
     const displayLoginContext = useContext(DisplayLoginContext)
+    
+    const fileInputRef = useRef() 
+    const nameInputRef = useRef()
 
-    const reducer = (state,action) =>{
-        switch(action.action)
-        {
-            case 'name':
-                return {name:action.value}
-            case 'email':
-                return {email:action.email}
-            case 'password':
-                return {password:action.password}
-            case 'passwordRepeat':
-                return {passwordRepeat:action.passwordRepeat}
-        }
+    const reducer = (state,action) => {
+
+        const newState = {...state}
+        newState[action.type] = action.value
+        return newState
     }
 
     const [showPassword,setShowPassword] = useState(false)
@@ -30,8 +30,16 @@ function Register(props)
         name:'',
         email:'',
         password:'',
-        passwordRepeat:''
+        passwordRepeat:'',
+        img:''
     }) 
+    const [errors,setErrors] = useState({
+        name:'',
+        email:'',
+        password:'',
+        passwordRepeat:'',
+    })
+
 
     const divClicked = (e) =>{
         const input = e.target.closest(`.${styles.inputContainer}`).children[0]
@@ -58,64 +66,208 @@ function Register(props)
 
     }
 
+    const sendData = async() =>
+    {
+
+    }
+
+    const emailRegex = (email) =>
+    {
+        const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
+        return regex.test(email)
+    }
+
+    const passwordRegex = (passwd) =>
+    {
+        const regex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
+        return regex.test(passwd)
+    }
+
+    const validatePage1 = () =>{
+
+        const localErrors = {
+        name:'',
+        email:'',
+        password:'',
+        passwordRepeat:''
+        }
+
+        if(values.email == '')
+        {
+            localErrors.email = `Podaj adres email`
+        }
+        else
+        {
+            if(!emailRegex(values.email))
+            {
+                localErrors.email = `Wprowadź prawidłowy adres email`
+            }
+        }
+
+        if(values.password === '')
+        {
+            localErrors.password = `Podaj hasło`
+        }
+        else
+        {
+            if(!passwordRegex(values.password))
+            {
+                localErrors.password = 'Hasło jest za słabe'
+            }
+        }
+
+        if(values.passwordRepeat == '')
+        {
+            localErrors.passwordRepeat = `Powtórz hasło`
+        }
+        else
+        {
+            if(values.passwordRepeat !== values.password)
+            {
+                localErrors.passwordRepeat = `Hasła nie są identyczne`
+            }
+        }
+
+        if(!localErrors.email && !localErrors.password && !localErrors.passwordRepeat)
+        {
+            if(!showPage2)
+            {
+                setShowPage2(true)
+            }
+        }
+
+        setErrors({...localErrors})
+    }
+
+    const validatePage2 = () =>{
+        
+        const localErrors = {
+        name:'',
+        email:'',
+        password:'',
+        passwordRepeat:'',
+        }
+        if(values.name === "")
+        {
+            localErrors.name = `Podaj nazwę`
+        }
+        else if(values.name.length < 4)
+        {
+            localErrors.name = `Nazwa jest za krótka`
+        }
+        setErrors({...localErrors})
+        if(!localErrors.name)
+        {
+            sendData()
+        }
+    }
+
     const submit = (e) =>
     {
         e.preventDefault()
         if(!showPage2)
         {
-            setShowPage2(true)
+            validatePage1()
+        }
+        else
+        {
+            validatePage2()
+        }
+        
+    }
+
+    const fileChosen = (e) =>
+    {
+        if(e.target.files[0])
+        {
+            if(acceptableImageTypes.includes(e.target.files[0].type))
+            {
+                const url = URL.createObjectURL(e.target.files[0])
+                setUserImageLink(url)
+                dispatch({type:'img',value:e.target.files[0]})
+            }
         }
     }
 
     useEffect(()=>{
         setTimeout(() => {
             setShowPage2(false)
+            setErrors({
+        name:'',
+        email:'',
+        password:'',
+        passwordRepeat:'',
+        img:''
+        })
         }, 1000);
     },[props.display])
+
+    useEffect(()=>{
+        if(showPage2)
+        {
+            nameInputRef.current.focus()
+            nameInputRef.current.blur()
+        }
+    },[showPage2])
 
     return(
         <div className={`${styles.loginForm} ${props.display?styles.display:''}`}>
             <h1 className={styles.header}>Rejestracja</h1>
 
-            <form className={styles.form} onSubmit={submit}>
+            <form className={`${styles.form} ${styles.registerForm}`} onSubmit={submit} noValidate>
 
                 <div className={`${styles.page1} ${showPage2?styles.pageHidden:''}`}>
 
                     <div className={styles.inputContainer} onClick={divClicked}>
-                        <input value={values.email} onChange={e=>dispatch({action:'email',value:e.target.value})} type="text" onBlur={inputBlur} onFocus={inputFocused} className={`${styles.input}`}></input>
+                        <input value={values.email} onChange={e=>dispatch({type:'email',value:e.target.value})} type="email" onBlur={inputBlur} onFocus={inputFocused} className={`${styles.input}`}></input>
                         <div className={styles.placeholder}>Podaj email</div>
                     </div>
 
+                    <div className={styles.error}>{errors.email}</div>
+
                     <div className={styles.inputContainer} onClick={divClicked}>
-                        <input value={values.password} onChange={e=>dispatch({action:'password',value:e.target.value})} type={showPassword?'text':'password'} onBlur={inputBlur} onFocus={inputFocused} className={`${styles.input} ${styles.passwordInput}`}></input>
+                        <input value={values.password} onChange={e=>dispatch({type:'password',value:e.target.value})} type={showPassword?'text':'password'} onBlur={inputBlur} onFocus={inputFocused} className={`${styles.input} ${styles.passwordInput}`}></input>
                         <div className={styles.placeholder}>Utwórz hasło</div>
                         <div className={styles.eye} onClick={e=>setShowPassword(!showPassword)}>
                         {showPassword?<PasswordEye />:<PasswordEyeHidden />}
                         </div>
                     </div>
 
+                    <div className={styles.error}>{errors.password}</div>
+
                     <div className={styles.inputContainer} onClick={divClicked}>
-                        <input value={values.passwordRepeat} onChange={e=>dispatch({action:'passwordRepeat',value:e.target.value})} type={showPassword?'text':'password'} onBlur={inputBlur} onFocus={inputFocused} className={`${styles.input} ${styles.passwordInput}`}></input>
+                        <input value={values.passwordRepeat} onChange={e=>dispatch({type:'passwordRepeat',value:e.target.value})} type={showPassword?'text':'password'} onBlur={inputBlur} onFocus={inputFocused} className={`${styles.input} ${styles.passwordInput}`}></input>
                         <div className={styles.placeholder}>Powtórz hasło</div>
                         <div className={styles.eye} onClick={e=>setShowPassword(!showPassword)}>
                             {showPassword?<PasswordEye />:<PasswordEyeHidden />}
                         </div>
                     </div>
 
+                    <div className={styles.error}>{errors.passwordRepeat}</div>
+
                 </div>
 
                 {showPage2 && <div className={styles.page2}>
 
-                    <div className={styles.userImg}>
-                        <img src={userImg} />
+                    <div className={styles.userImg} onClick={e=>fileInputRef.current.click()}>
+                        <img src={userImageLink} />
+                        <div className={styles.imgOverlay}>
+                            <CameraIcon />
+                        </div>
                     </div>
 
-                    <button className={styles.chooseImg} type='button'>Ustaw Zdjęcie</button>
+                    <button className={styles.chooseImg} type='button'>
+                        <input ref={fileInputRef} type='file' className={styles.fileInput} accept='image/png, image/jpg, image/jpeg' onChange={fileChosen}/>
+                        Ustaw Zdjęcie
+                    </button>
+
 
                     <div className={styles.inputContainer} onClick={divClicked}>
-                        <input value={values.name} onChange={e=>dispatch({action:"name",value:e.target.value})} type='text' onBlur={inputBlur} onFocus={inputFocused} className={styles.input}></input>
+                        <input ref={nameInputRef} value={values.name} onChange={e=>dispatch({type:"name",value:e.target.value})} type='text' onBlur={inputBlur} onFocus={inputFocused} className={styles.input}></input>
                         <div className={styles.placeholder}>Podaj Nazwę Użytkownika</div>
                     </div>
+
+                    <div className={styles.error}>{errors.name}</div>
 
                 </div>}
 

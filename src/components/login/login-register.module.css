@@ -82,9 +82,10 @@
     transition: all .3s ease ;
     background-color: #014040;
     padding: 0 1rem;
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     color: rgb(186, 186, 186);
     font-weight: 700;
+    font-family: "Jost", sans-serif;
 }
 .placeholderFocused
 {
@@ -123,6 +124,7 @@
     cursor: pointer;
     transition: all .3s ease;
     z-index: 3;
+    outline: none;
 }
 .loginBtn:hover
 {
@@ -190,14 +192,12 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap:2.5rem;
 }
 .page2
 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap:.9rem;
     position: absolute;
     top:0;
     left:0;
@@ -207,34 +207,63 @@
 }
 .userImg
 {
-    width: 6rem;
-    height: 6rem;
+    width: 6.5rem;
+    height: 6.5rem;
     border-radius: 50%;
     border:.4rem solid #02735E;
     overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    transition: all .3s ease;
+    cursor: pointer;
+}
+.userImg:hover
+{
+    border:.4rem solid #03A678;
 }
 .userImg>img
 {
     width: 100%;
+}
+.imgOverlay
+{
+    position: absolute;
+    top:0;
+    left:0;
+    bottom: 0;
+    right: 0;
+    opacity: 0;
+    background-color: rgba(0, 0, 0, 0.683);
+    backdrop-filter: blur(10px);
+    transition: opacity .3s ease;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.userImg:hover>.imgOverlay
+{
+    opacity: 1;
 }
 .chooseImg
 {
     width: 60%;
     font-weight: 900;
     font-size: 1.4rem;
-    padding: .4rem .5rem;
+    padding: .6rem .7rem;
     border-radius: 1rem;
     background: #02735E;
     outline: none;
     border:.3rem solid #02735E;
     color: rgb(212, 212, 212);
-    margin-bottom: 1.5rem;
+    margin-bottom: 2.5rem;
     cursor: pointer;
     transition: all .3s ease;
     font-family: "Cause", cursive;
+    position: relative;
+    margin-top: .8rem;
 }
 .chooseImg:hover
 {
@@ -245,4 +274,30 @@
 .pageHidden
 {
     opacity: 0;
+}
+.error
+{
+    width: 100%;
+    color: #fc3333;
+    font-weight: 700;
+    font-family: "Jost", sans-serif;
+    font-size: 1.2rem;
+    height: 1.8rem;
+    margin-bottom: .8rem;
+    margin-top: .5rem;
+    text-align: center;
+}
+.registerForm
+{
+    gap:0;
+}
+.fileInput
+{
+    position: absolute;
+    top:0;
+    left:0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    cursor: pointer;
 }
