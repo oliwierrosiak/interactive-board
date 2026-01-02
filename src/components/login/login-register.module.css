@@ -19,11 +19,19 @@
     transform-origin: center;
     gap:1.8rem;
 }
+.loginForm2
+{
+    gap:1rem;
+}
 .header
 {
     font-weight: 900;
     font-size: 2rem;
     text-shadow: -.15rem .15rem 0 #03A678;
+}
+.headerMargin
+{
+    margin-bottom: 1.2rem;
 }
 .display
 {
@@ -36,8 +44,24 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap:2.5rem;
     position: relative;
+}
+.passwordForgotten
+{
+    font-size: .9rem;
+    font-weight: 900;
+    margin:1.2rem 0;
+    cursor: pointer;
+    color: rgb(191, 191, 191);
+}
+.passwordForgotten:hover
+{
+    color: #03A678;
+    text-decoration: underline .1rem #03A678;
+}
+.emailInputContainer
+{
+    margin-bottom: 2rem;
 }
 .inputContainer
 {
@@ -300,4 +324,13 @@
     bottom: 0;
     opacity: 0;
     cursor: pointer;
+}
+.error2
+{
+    width: 100%;
+    color: #fc3333;
+    font-weight: 700;
+    font-family: "Jost", sans-serif;
+    font-size: 1.2rem;
+    text-align: center;
 }

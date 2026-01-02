@@ -7,6 +7,7 @@ import userImg from '../../../assets/img/userDefault.png'
 import CameraIcon from '../../../assets/svg/cameraIcon'
 import axios from 'axios'
 import ApiAddress from '../../../ApiAddress'
+import { divClicked,inputBlur,inputFocused } from '../inputActions'
 
 function Register(props)
 {
@@ -42,31 +43,6 @@ function Register(props)
         passwordRepeat:'',
     })
 
-
-    const divClicked = (e) =>{
-        const input = e.target.closest(`.${styles.inputContainer}`).children[0]
-        input.focus()
-    }
-
-    const inputFocused = (e) =>{
-        const div = e.target.closest(`.${styles.inputContainer}`)
-        div.classList.add(styles.containerFocused)
-        div.children[0].classList.add(styles.inputFocused)
-        div.children[1].classList.add(styles.placeholderFocused)
-        div.children[1].classList.add(styles.placeholderColorWhileFocused)
-    }
-
-    const inputBlur = (e) =>{
-        const div = e.target.closest(`.${styles.inputContainer}`)
-        div.classList.remove(styles.containerFocused)
-         div.children[0].classList.remove(styles.inputFocused)
-        div.children[1].classList.remove(styles.placeholderColorWhileFocused)
-        if(e.target.value.trim() === "")
-        {
-            div.children[1].classList.remove(styles.placeholderFocused)
-        }
-
-    }
 
     const sendData = async() =>
     {

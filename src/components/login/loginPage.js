@@ -6,6 +6,7 @@ import ImageBackground from '../../assets/svg/loginBackground'
 import logo from '../../assets/img/voxalogo1.png'
 import Login from './login/login'
 import Register from './register/register'
+import PasswordForgotten from './passwordForgotten/passwordForgotten'
 
 function LoginPage(props)
 {
@@ -25,6 +26,7 @@ function LoginPage(props)
 
             <Login display={displayLoginContext.displayLogin === "login"} />
             <Register display={displayLoginContext.displayLogin === "register"} />
+            <PasswordForgotten display={displayLoginContext.displayLogin === 'passwordForgotten'} />
 
         </div>
     )

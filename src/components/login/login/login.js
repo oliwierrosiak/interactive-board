@@ -4,6 +4,7 @@ import PasswordEye from '../../../assets/svg/passwordEye'
 import PasswordEyeHidden from '../../../assets/svg/passwordEyeHidden'
 import GoogleIcon from '../../../assets/svg/googleIcon'
 import DisplayLoginContext from '../../../context/displayLogin'
+import { divClicked,inputBlur,inputFocused } from '../inputActions'
 
 function Login(props)
 {
@@ -13,37 +14,12 @@ function Login(props)
 
     const displayLoginContext = useContext(DisplayLoginContext)
 
-    const divClicked = (e) =>{
-        const input = e.target.closest(`.${styles.inputContainer}`).children[0]
-        input.focus()
-    }
-
-    const inputFocused = (e) =>{
-        const div = e.target.closest(`.${styles.inputContainer}`)
-        div.classList.add(styles.containerFocused)
-        div.children[0].classList.add(styles.inputFocused)
-        div.children[1].classList.add(styles.placeholderFocused)
-        div.children[1].classList.add(styles.placeholderColorWhileFocused)
-    }
-
-    const inputBlur = (e) =>{
-        const div = e.target.closest(`.${styles.inputContainer}`)
-        div.classList.remove(styles.containerFocused)
-         div.children[0].classList.remove(styles.inputFocused)
-        div.children[1].classList.remove(styles.placeholderColorWhileFocused)
-        if(e.target.value.trim() === "")
-        {
-            div.children[1].classList.remove(styles.placeholderFocused)
-        }
-
-    }
-
     return(
         <div className={`${styles.loginForm} ${props.display?styles.display:''}`}>
             <h1 className={styles.header}>Logowanie</h1>
             <form className={styles.form}>
 
-                <div className={styles.inputContainer} onClick={divClicked}>
+                <div className={`${styles.inputContainer} ${styles.emailInputContainer}`} onClick={divClicked}>
                     <input value={loginValue} onChange={e=>setLoginValue(e.target.value)} type='text' onBlur={inputBlur} onFocus={inputFocused} className={styles.input}></input>
                     <div className={styles.placeholder}>Podaj email</div>
                 </div>
@@ -55,6 +31,8 @@ function Login(props)
                         {showPassword?<PasswordEye />:<PasswordEyeHidden />}
                     </div>
                 </div>
+
+                <div className={styles.passwordForgotten} onClick={e=>displayLoginContext.setDisplayLogin('passwordForgotten')}>Nie pamiętasz hasła?</div>
 
                 <button className={styles.loginBtn}>Zaloguj się</button>
 
