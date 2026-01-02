@@ -5,6 +5,8 @@ import PasswordEyeHidden from '../../../assets/svg/passwordEyeHidden'
 import DisplayLoginContext from '../../../context/displayLogin'
 import userImg from '../../../assets/img/userDefault.png'
 import CameraIcon from '../../../assets/svg/cameraIcon'
+import axios from 'axios'
+import ApiAddress from '../../../ApiAddress'
 
 function Register(props)
 {
@@ -68,7 +70,39 @@ function Register(props)
 
     const sendData = async() =>
     {
+        const formData = new FormData()
+        formData.append('email',values.email)
+        formData.append('password',values.password)
+        formData.append('name',values.name)
+        if(values.img)
+        {
+            formData.append('img',values.img)
+        }
 
+        try
+        {
+            const response = await axios.post(`${ApiAddress}/register`,formData)
+        }
+        catch(ex)
+        {
+            const localErrors = {...errors}
+            if(ex.response.data.errors.email || ex.response.data.errors.password || ex.response.data.errors.name)
+            {
+                localErrors.email = ex.response.data.errors.email
+                localErrors.password = ex.response.data.errors.password
+                localErrors.name = ex.response.data.errors.name
+                setErrors({...localErrors})
+                if(localErrors.email || localErrors.password)
+                {
+                    setShowPage2(false)
+                }
+            }
+            else
+            {
+                localErrors.name = `Wystąpił bład serwera`
+                setErrors({...localErrors})
+            }
+        }
     }
 
     const emailRegex = (email) =>
