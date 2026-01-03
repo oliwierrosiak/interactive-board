@@ -68,8 +68,9 @@ function Register(props)
         {
             const response = await axios.post(`${ApiAddress}/register`,formData,{withCredentials:true})
             accessTokenContext.setAccessToken(response.data.accessToken)
+            console.log(response.data.user)
             loginContext.setLoggedUser(response.data.user)
-            loginContext.setLogged(true)
+            
             displayLoginContext.setDisplayLogin('')
             props.setLoading(false)
             setShowPassword(false)
@@ -88,6 +89,7 @@ function Register(props)
                 passwordRepeatRef.current.blur()
             }, 50);
             setUserImageLink(userImg)
+            loginContext.setLogged(true)
         }
         catch(ex)
         {
@@ -102,6 +104,7 @@ function Register(props)
                 {
                     setShowPage2(false)
                 }
+                props.setLoading(false)
             }
             else
             {

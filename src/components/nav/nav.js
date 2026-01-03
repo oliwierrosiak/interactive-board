@@ -3,6 +3,7 @@ import styles from './nav.module.css'
 import DisplayLoginContext from '../../context/displayLogin'
 import LoginContext from '../../context/loginContext'
 import ImgLoadingIcon from '../../assets/svg/imgLoadingIcon'
+import LoggedMenu from './loggedMenu/loggedMenu'
 
 function Nav(props)
 {
@@ -17,7 +18,10 @@ function Nav(props)
                 {loginContext.loginLoading?
                 <ImgLoadingIcon class={styles.loginLoading}/>
                 :
-                loginContext.logged?<div className={styles.loggedMenu} onClick={loginContext.logout}>logged</div>:
+                loginContext.logged
+                ?
+                <LoggedMenu />
+                :
                 <>
                 <button className={`${styles.loginMenuBtn} ${styles.loginBtn}`} onClick={e=>displayLoginContext.setDisplayLogin("login")}>Logowanie</button>
                 <div className={styles.line}></div>
