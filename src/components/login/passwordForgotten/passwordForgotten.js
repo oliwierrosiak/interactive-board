@@ -2,14 +2,37 @@ import { useEffect, useState } from 'react'
 import styles from '../login-register.module.css'
 import {divClicked,inputBlur,inputFocused} from '../inputActions'
 import LoadingIcon from '../../../assets/svg/loadingIcon'
+import axios from 'axios'
+import ApiAddress from '../../../ApiAddress'
 
 function PasswordForgotten(props)
 {
     const [inputValue,setInputValue] = useState('')
     const [error,setError] = useState('')
 
+    const send = async() =>{
+        try
+        {
+            const response = await axios.post(`${ApiAddress}/resetPassword`,{email:inputValue})
+        }
+        catch(ex)
+        {
+            if(ex?.response?.data?.status === 404)
+            {
+                props.setLoading(false)
+                setError('Nie znaleziono adresu w bazie')
+            }
+            else
+            {
+                props.setLoading(false)
+                setError('Wystąpił błąd serwera')
+            }
+        }
+    }
+
     const validate = (e) =>{
-        console.log("validate")
+        e.preventDefault()
+        if(props.loading) return
         setError('')
         if(inputValue.trim() === '')
         {
@@ -18,6 +41,7 @@ function PasswordForgotten(props)
         else
         {
             props.setLoading(true)
+            send()
         }
     }
 
@@ -26,7 +50,7 @@ function PasswordForgotten(props)
     },[props.display])
 
     return(
-        <div className={`${styles.loginForm} ${styles.loginForm2} ${props.display?styles.display:''}`}>
+        <form className={`${styles.loginForm} ${styles.loginForm2} ${props.display?styles.display:''}`} onSubmit={validate}>
             <h1 className={`${styles.header} ${styles.headerMargin}`}>Odzyskiwanie konta</h1>
 
             <div className={`${styles.inputContainer} ${props.loading?styles.inputContainerWhileLoading:''}`} onClick={divClicked}>
@@ -36,9 +60,9 @@ function PasswordForgotten(props)
 
             <div className={styles.error2}>{error}</div>
 
-            <button className={`${styles.loginBtn} ${props.loading?styles.btnLoading:''}`} onClick={e=>!props.Loading && validate()}>{props.loading?<LoadingIcon class={styles.loading}/>:'Odzyskaj hasło'}</button>
+            <button className={`${styles.loginBtn} ${props.loading?styles.btnLoading:''}`}>{props.loading?<LoadingIcon class={styles.loading}/>:'Odzyskaj hasło'}</button>
 
-        </div>
+        </form>
     )
 }
 
