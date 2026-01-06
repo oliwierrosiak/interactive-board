@@ -2,21 +2,25 @@ import { useState } from 'react'
 import Header from '../header/header'
 import styles from './home.module.css'
 import DisplayLoginContext from '../../context/displayLogin'
+import JoinWithCode from '../joinWithCode/joinWithCode'
 
 function Home()
 {
     const [displayLogin,setDisplayLogin] = useState('')
+    const [displayJoinWithCode,setDisplayJoinWithCode] = useState(false)
 
     return(
-        <div className={styles.container}>
+        <DisplayLoginContext.Provider value={{displayLogin,setDisplayLogin}}>
+    
+            <div className={styles.container}>
 
-            <DisplayLoginContext.Provider value={{displayLogin,setDisplayLogin}}>
+                <Header setDisplayJoinWithCode={setDisplayJoinWithCode}/>
 
-                <Header />
+                {displayJoinWithCode && <JoinWithCode setDisplayJoinWithCode={setDisplayJoinWithCode}/>}
 
-            </DisplayLoginContext.Provider>
+            </div>
 
-        </div>
+        </DisplayLoginContext.Provider>
     )
 }
 export default Home
