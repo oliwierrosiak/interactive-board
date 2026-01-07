@@ -8,6 +8,7 @@ function Home()
 {
     const [displayLogin,setDisplayLogin] = useState('')
     const [displayJoinWithCode,setDisplayJoinWithCode] = useState(false)
+    const [displayRedirectPageAnimation,setDisplayRedirectPageAnimation] = useState(false)
 
     return(
         <DisplayLoginContext.Provider value={{displayLogin,setDisplayLogin}}>
@@ -16,7 +17,9 @@ function Home()
 
                 <Header setDisplayJoinWithCode={setDisplayJoinWithCode}/>
 
-                {displayJoinWithCode && <JoinWithCode setDisplayJoinWithCode={setDisplayJoinWithCode}/>}
+                {displayJoinWithCode && <JoinWithCode setDisplayJoinWithCode={setDisplayJoinWithCode} setDisplayRedirectPageAnimation={setDisplayRedirectPageAnimation}/>}
+
+                <div className={`${styles.redirectPage} ${displayRedirectPageAnimation?styles.redirectPageDisplay:''}`}></div>
 
             </div>
 

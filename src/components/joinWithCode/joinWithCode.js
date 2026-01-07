@@ -1,6 +1,10 @@
 import styles from './joinWithCode.module.css'
 import ArrowIcon from '../../assets/svg/arrowIcon'
 import { useEffect, useReducer, useState } from 'react'
+import LoadingIcon from '../../assets/svg/loadingIcon'
+import axios from 'axios'
+import ApiAddress from '../../ApiAddress'
+import { useNavigate } from 'react-router-dom'
 
 function JoinWithCode(props)
 {
@@ -41,8 +45,13 @@ function JoinWithCode(props)
     })
 
     const [joinBtnEnabled,setJoinBtnEnable] = useState(false)
+    const [loading,setLoading] = useState(false)
+    const [error,setError] = useState('')
+
+    const navigate = useNavigate()
 
     const overlayClicked = (e) =>{
+        if(loading) return;
         if(e.target.classList.contains(styles.overlay))
         {
             props.setDisplayJoinWithCode(false)
@@ -64,6 +73,7 @@ function JoinWithCode(props)
     }
 
     useEffect(()=>{
+        setError('')
         let buttonEnable = true
         for(const key in code)
         {
@@ -78,13 +88,49 @@ function JoinWithCode(props)
         }
     },[code])
 
+    const btnClicked = async(e) =>
+    {
+        setError('')
+        setLoading(true)
+        let fullCode = []
+        for(const key in code)
+        {
+            fullCode.push(code[key])
+        }
+        fullCode = fullCode.join('')
+        try
+        {
+            if(fullCode.length != 6)
+            {
+                throw new Error()
+            }
+            const response = await axios.get(`${ApiAddress}/joinWithCode/${fullCode}`)
+            props.setDisplayRedirectPageAnimation(true)
+            setTimeout(()=>{
+                navigate(`/note/${response.data.id}`)
+            },1000)
+        }
+        catch(ex)
+        {
+            if(ex?.response?.data?.status === 404)
+            {
+                setError("Nie znaleziono kodu notatki")
+                setLoading(false)
+            }
+            else
+            {
+                setError("Wystąpił błąd serwera")
+                setLoading(false)
+            }
+        }
+    }
 
     return(
         <div className={styles.overlay} onClick={overlayClicked}>
 
             <div className={styles.container}>
 
-                <div className={styles.back} onClick={e=>props.setDisplayJoinWithCode(false)}>
+                <div className={`${styles.back} ${loading?styles.backWhileLoading:''}`} onClick={e=>!loading && props.setDisplayJoinWithCode(false)}>
                     <ArrowIcon class={styles.backSVG}/>
                 </div>
 
@@ -94,23 +140,25 @@ function JoinWithCode(props)
 
                 <div className={styles.codeContainer}>
 
-                    <input type='text' maxLength="1" inputMode='numeric' className={styles.input} value={code.code1} onChange={e=>{dispatch({type:'code1',value:e.target.value});e.target.value !== "" && focusNextElement(1)}}/>
+                    <input type='text' maxLength="1" inputMode='numeric' disabled={loading} className={`${styles.input} ${loading?styles.inputWhileLoading:''}`} value={code.code1} onChange={e=>{dispatch({type:'code1',value:e.target.value});e.target.value !== "" && focusNextElement(1)}}/>
 
-                    <input type='text' maxLength="1" inputMode='numeric' className={styles.input} value={code.code2} onChange={e=>{dispatch({type:'code2',value:e.target.value});e.target.value !== "" && focusNextElement(2)}}/>
+                    <input type='text' disabled={loading} maxLength="1" inputMode='numeric' className={`${styles.input} ${loading?styles.inputWhileLoading:''}`} value={code.code2} onChange={e=>{dispatch({type:'code2',value:e.target.value});e.target.value !== "" && focusNextElement(2)}}/>
 
-                    <input type='text' maxLength="1" inputMode='numeric' className={styles.input} value={code.code3} onChange={e=>{dispatch({type:'code3',value:e.target.value});e.target.value !== "" && focusNextElement(3)}}/>
+                    <input type='text' disabled={loading} maxLength="1" inputMode='numeric' className={`${styles.input} ${loading?styles.inputWhileLoading:''}`} value={code.code3} onChange={e=>{dispatch({type:'code3',value:e.target.value});e.target.value !== "" && focusNextElement(3)}}/>
 
                     <div className={styles.dash}>-</div>
 
-                    <input type='text' maxLength="1" inputMode='numeric' className={styles.input} value={code.code4} onChange={e=>{dispatch({type:'code4',value:e.target.value});e.target.value !== "" && focusNextElement(4)}}/>
+                    <input type='text' disabled={loading} maxLength="1" inputMode='numeric' className={`${styles.input} ${loading?styles.inputWhileLoading:''}`} value={code.code4} onChange={e=>{dispatch({type:'code4',value:e.target.value});e.target.value !== "" && focusNextElement(4)}}/>
 
-                    <input type='text' maxLength="1" inputMode='numeric' className={styles.input} value={code.code5} onChange={e=>{dispatch({type:'code5',value:e.target.value});e.target.value !== "" && focusNextElement(5)}}/>
+                    <input type='text' disabled={loading} maxLength="1" inputMode='numeric' className={`${styles.input} ${loading?styles.inputWhileLoading:''}`} value={code.code5} onChange={e=>{dispatch({type:'code5',value:e.target.value});e.target.value !== "" && focusNextElement(5)}}/>
 
-                    <input type='text' maxLength="1" inputMode='numeric' className={styles.input} value={code.code6} onChange={e=>{dispatch({type:'code6',value:e.target.value});e.target.value !== "" && focusNextElement(6)}}/>
+                    <input type='text' disabled={loading} maxLength="1" inputMode='numeric' className={`${styles.input} ${loading?styles.inputWhileLoading:''}`} value={code.code6} onChange={e=>{dispatch({type:'code6',value:e.target.value});e.target.value !== "" && focusNextElement(6)}}/>
                 </div>
 
-                <button disabled={!joinBtnEnabled} className={`${styles.btn} ${joinBtnEnabled?styles.btnEnable:''}`}>
-                    Dołącz
+                {error && <div className={styles.error}>{error}</div>}
+
+                <button disabled={!joinBtnEnabled || loading} onClick={btnClicked} className={`${styles.btn} ${joinBtnEnabled?styles.btnEnable:''} ${loading?styles.btnWhileLoading:''}`}>
+                    {loading?<LoadingIcon class={styles.loadingIcon}/>:"Dołącz"}
                 </button>
             </div>
 
