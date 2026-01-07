@@ -109,7 +109,8 @@ function JoinWithCode(props)
             const response = await axios.get(`${ApiAddress}/joinWithCode/${fullCode}`)
             if(response.data.password)
             {
-                console.log("password required")
+                props.setDisplayNotePassword(true)
+                 props.setDisplayJoinWithCode(false)
             }
             else
             {
