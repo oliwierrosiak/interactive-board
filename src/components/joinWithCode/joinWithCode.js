@@ -1,6 +1,6 @@
 import styles from './joinWithCode.module.css'
 import ArrowIcon from '../../assets/svg/arrowIcon'
-import { useEffect, useReducer, useState } from 'react'
+import { useEffect, useReducer, useRef, useState } from 'react'
 import LoadingIcon from '../../assets/svg/loadingIcon'
 import axios from 'axios'
 import ApiAddress from '../../ApiAddress'
@@ -48,6 +48,8 @@ function JoinWithCode(props)
     const [loading,setLoading] = useState(false)
     const [error,setError] = useState('')
 
+    const btnRef = useRef()
+
     const navigate = useNavigate()
 
     const overlayClicked = (e) =>{
@@ -90,6 +92,7 @@ function JoinWithCode(props)
 
     const btnClicked = async(e) =>
     {
+        console.log('click')
         setError('')
         setLoading(true)
         let fullCode = []
@@ -125,6 +128,20 @@ function JoinWithCode(props)
         }
     }
 
+    const windowEvent = (e) =>{
+        if(e.key === "Enter")
+        {
+            btnRef.current.click()
+        }
+    }
+
+    useEffect(()=>{
+        window.addEventListener('keydown',windowEvent)
+        return()=>{
+            window.removeEventListener('keydown',windowEvent)
+        }
+    },[])
+
     return(
         <div className={styles.overlay} onClick={overlayClicked}>
 
@@ -157,7 +174,7 @@ function JoinWithCode(props)
 
                 {error && <div className={styles.error}>{error}</div>}
 
-                <button disabled={!joinBtnEnabled || loading} onClick={btnClicked} className={`${styles.btn} ${joinBtnEnabled?styles.btnEnable:''} ${loading?styles.btnWhileLoading:''}`}>
+                <button ref={btnRef} disabled={!joinBtnEnabled || loading} onClick={btnClicked} className={`${styles.btn} ${joinBtnEnabled?styles.btnEnable:''} ${loading?styles.btnWhileLoading:''}`}>
                     {loading?<LoadingIcon class={styles.loadingIcon}/>:"Dołącz"}
                 </button>
             </div>

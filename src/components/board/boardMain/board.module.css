@@ -4,7 +4,7 @@
     height: 100vh;
     overflow: hidden;
     position: relative;
-    background-color: #1C1F1A;
+    background-color: #014040;
 }
 .projectName
 {
@@ -136,12 +136,12 @@
     left:0;
     bottom: 0;
     right: 0;
-    background-color: #1C1F1A;;
+    background-color: #014040;
     z-index: 3;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: all .3s ease;
+    transition: all 1s ease-in;
     flex-direction: column;
 }
 .loadingHide
@@ -150,8 +150,8 @@
 }
 .pageLoadingIcon
 {
-    width: 6rem;
-    height: 6rem;
+    width: 10rem;
+    height: 10rem;
 }
 .loadingError
 {

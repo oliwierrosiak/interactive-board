@@ -475,7 +475,7 @@ function Board()
             setTimeout(() => {
                 setDisplayLoading(false)
                 
-            }, 300);
+            }, 1200);
         }
     },[loading])
 
@@ -537,7 +537,7 @@ function Board()
                     <ErrorIcon class={styles.errorLoadingIcon}/>
                     <h2>Wystąpił błąd serwera</h2>
                     <button onClick={e=>navigate('/')}>Wróc do strony głównej</button>
-                </div>:<LoadingIcon class={styles.pageLoadingIcon}/>}
+                </div>:<></>}
             </div>}
 
             <input type='text'className={styles.projectName} value={projectName} onChange={e=>setProjectName(e.target.value)} onFocus={projectNameInputFocused} onBlur={projectNameInputBlur} />
