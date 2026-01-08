@@ -10,7 +10,6 @@
     overflow: hidden;
     box-shadow: 0 0 1rem .5rem #02735E;
     border: .5rem solid #2A2F27;
-    /* border: .5rem solid #02735E; */
 }
 .overlay
 {
@@ -23,15 +22,26 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* backdrop-filter: blur(2px); */
 }
 .menu
 {
-    height: 5rem;
+    position: absolute;
+    top:50%;
+    left:50%;
+    translate: -50% -50%;
     display: flex;
     justify-content: center;
     align-items: center;
     gap:3rem;
+    transition: all .5s ease;
+}
+.menuWhileMenuIsDisplaying
+{
+    position: absolute;
+    top:3rem;
+    left:50%;
+    translate: -50% 0;
+    gap:1.5rem;
 }
 .menuBtn
 {
@@ -49,6 +59,14 @@
     transition: all .3s ease;
     font-family: "Luckiest Guy", cursive;
     position: relative;
+}
+.btnWhileMenuIsDisplaying
+{
+    font-size: 1.5rem;
+    width: 21rem;
+    height: 4.5rem;
+    border: .45rem solid #03A678;
+    border-radius: 1.125rem;
 }
 .menuBtn>p
 {
@@ -75,6 +93,10 @@
     transition: transform .3s ease;
     will-change: transform;
 }
+.buttonHoverWhileMenuIsDisplaying
+{
+        border-radius: 0.675rem;
+}
 .buttonHoverDisplay
 {
     transform: scale(1);
@@ -84,4 +106,9 @@
     /* background: #02735E; */
     transform: translate(0,-1rem);
     box-shadow: 0 1rem .2rem 0rem #1c1f1ac6;
+}
+.btnWhileMenuIsDisplaying:hover
+{
+    transform: translate(0,-.5rem);
+    box-shadow: 0 .5rem .2rem 0rem #1c1f1ac6;
 }

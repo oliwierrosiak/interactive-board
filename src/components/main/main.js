@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import Nav from '../nav/nav'
 import styles from './main.module.css'
 import LoginPage from '../login/loginPage'
@@ -14,7 +14,7 @@ function Header(props)
     const loginContext = useContext(LoginContext)
     const displayLoginContext = useContext(DisplayLoginContext)
 
-    const [displayNotesMenu,setDisplayNotesMenu] = useState(1)
+    const [displayNotesMenu,setDisplayNotesMenu] = useState(false)
 
     const btnHovered = (target) =>{
         target === "1"?btn1HoverRef.current.classList.add(styles.buttonHoverDisplay):btn2HoverRef.current.classList.add(styles.buttonHoverDisplay)
@@ -49,6 +49,19 @@ function Header(props)
         }
     }
 
+    useEffect(()=>{
+        if(loginContext.logged)
+        {
+            setDisplayNotesMenu(true)
+            
+        }
+        else
+        {
+            setDisplayNotesMenu(false)
+            
+        }
+    },[loginContext.logged])
+
     return(
         <div className={styles.header}>
             
@@ -56,22 +69,22 @@ function Header(props)
 
                 <LoginPage />
 
-                <Nav />
+                <Nav displayNotesMenu={displayNotesMenu}/>
 
-                <header className={styles.menu}>
-                <button className={styles.menuBtn} onMouseEnter={e=>btnHovered('1')} onMouseLeave={btnUnHover} onClick={codeClicked}>
-                    <div className={styles.buttonHover} ref={btn1HoverRef}></div>
+                <header className={`${styles.menu} ${displayNotesMenu?styles.menuWhileMenuIsDisplaying:''}`}>
+                <button className={`${styles.menuBtn} ${displayNotesMenu?styles.btnWhileMenuIsDisplaying:''}`} onMouseEnter={e=>btnHovered('1')} onMouseLeave={btnUnHover} onClick={codeClicked}>
+                    <div className={`${styles.buttonHover} ${displayNotesMenu?styles.buttonHoverWhileMenuIsDisplaying:''}`} ref={btn1HoverRef}></div>
                     <p>Dołącz za pomocą kodu</p>
                     
                 </button>
-                <button className={styles.menuBtn} onMouseEnter={e=>btnHovered('2')} onMouseLeave={btnUnHover} onClick={createClicked}>
-                    <div className={styles.buttonHover} ref={btn2HoverRef} ></div>
+                <button className={`${styles.menuBtn} ${displayNotesMenu?styles.btnWhileMenuIsDisplaying:''}`} onMouseEnter={e=>btnHovered('2')} onMouseLeave={btnUnHover} onClick={createClicked}>
+                    <div className={`${styles.buttonHover} ${displayNotesMenu?styles.buttonHoverWhileMenuIsDisplaying:''}`} ref={btn2HoverRef} ></div>
                     <p>Utwórz nową notatkę</p>
                     
                 </button>
             </header>
 
-            <NotesMenu display={displayNotesMenu} setDisplayNotesMenu={setDisplayNotesMenu}/>
+            {loginContext.logged && <NotesMenu display={displayNotesMenu} setDisplayNotesMenu={setDisplayNotesMenu}/>}
 
             </main>
 

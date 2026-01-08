@@ -12,8 +12,8 @@ function Nav(props)
     const loginContext = useContext(LoginContext)
 
     return(
-        <nav className={styles.nav}>
-            <div className={styles.logo}></div>
+        <nav className={`${styles.nav} ${props.displayNotesMenu?styles.navWhileMenuIsDisplaying:''}`}>
+            <div className={`${styles.logo} ${props.displayNotesMenu?styles.logoWhileMenuIsDisplaying:''}`}></div>
             <div className={styles.loginMenu}>
                 {loginContext.loginLoading?
                 <ImgLoadingIcon class={styles.loginLoading}/>
