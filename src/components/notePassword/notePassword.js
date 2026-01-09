@@ -1,12 +1,16 @@
 import styles from './notePassword.module.css'
 import ArrowIcon from '../../assets/svg/arrowIcon'
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useContext } from 'react'
 import PasswordEye from '../../assets/svg/passwordEye'
 import PasswordEyeHidden from '../../assets/svg/passwordEyeHidden'
 import LoadingIcon from '../../assets/svg/loadingIcon'
 import axios from 'axios'
 import ApiAddress from '../../ApiAddress'
 import { useNavigate } from 'react-router-dom'
+import LoginContext from '../../context/loginContext'
+import DisplayLoginContext from '../../context/displayLogin'
+import refreshToken from '../auth/refreshToken'
+import AccessTokenContext from '../../context/accessTokenContext'
 
 function NotePassword(props)
 {
@@ -18,6 +22,10 @@ function NotePassword(props)
     const input = useRef()
     const fill = useRef()
     const btn = useRef()
+
+    const loginContext = useContext(LoginContext)
+    const displayLoginContext = useContext(DisplayLoginContext)
+    const accessTokenContext = useContext(AccessTokenContext)
 
     const navigate = useNavigate()
 
@@ -58,7 +66,9 @@ function NotePassword(props)
             {
                 throw new Error()
             }
-            const response = await axios.post(`${ApiAddress}/compareNotePassword`,{noteId:props.noteIdMemory,password})
+            const token = await refreshToken()
+            const response = await axios.post(`${ApiAddress}/compareNotePassword`,{noteId:props.noteIdMemory,password},{headers:{"Authorization":`Bearer ${token}`}})
+            accessTokenContext.setAccessToken(token)
             props.setDisplayRedirectPageAnimation(true)
                 setTimeout(()=>{
                     navigate(`/note/${response.data.id}`)
@@ -66,7 +76,13 @@ function NotePassword(props)
         }
         catch(ex)
         {
-            if(ex?.status === 401)
+            if(ex.status === 401)
+            {
+                props.setDisplayNotePassword(false)
+                loginContext.logout()
+                displayLoginContext.setDisplayLogin('login')
+            }
+            if(ex?.status === 403)
             {
                 setError('Błędne hasło')
             }
