@@ -65,11 +65,16 @@
     width: 16rem;
     display: none;
     padding-top: 2.5rem;
-
+    display: block;
+    transform: scale(0);
+    opacity: 0;
+    transform-origin: 90% 0%;
+    transition: all .4s ease;
 }
 .container:hover>.menuContainer
 {
-    display: block;
+    transform: scale(1);
+    opacity: 1;
 }
 .menu
 {

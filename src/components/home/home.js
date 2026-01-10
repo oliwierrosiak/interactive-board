@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import Header from '../main/main'
 import styles from './home.module.css'
 import JoinWithCode from '../joinWithCode/joinWithCode'
 import NotePassword from '../notePassword/notePassword'
 import AddingNote from '../addingNote/addingNote'
+import Main from '../main/main'
 
 function Home()
 {
@@ -17,7 +17,7 @@ function Home()
     return(
         <div className={styles.container}>
 
-                <Header setDisplayJoinWithCode={setDisplayJoinWithCode} setDisplayAddingNote={setDisplayAddingNote}/>
+                <Main setDisplayJoinWithCode={setDisplayJoinWithCode} setDisplayAddingNote={setDisplayAddingNote}/>
 
                 {displayJoinWithCode && <JoinWithCode setDisplayJoinWithCode={setDisplayJoinWithCode} setDisplayRedirectPageAnimation={setDisplayRedirectPageAnimation} setDisplayNotePassword={setDisplayNotePassword} setNoteIdMemory={setNoteIdMemory}/>}
 

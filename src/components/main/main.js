@@ -6,7 +6,7 @@ import LoginContext from '../../context/loginContext'
 import DisplayLoginContext from '../../context/displayLogin'
 import NotesMenu from '../notesMenu/notesMenu'
 
-function Header(props)
+function Main(props)
 {
     const btn1HoverRef = useRef()
     const btn2HoverRef = useRef()
@@ -63,9 +63,9 @@ function Header(props)
     },[loginContext.logged])
 
     return(
-        <div className={styles.header}>
+        <main className={styles.main}>
             
-            <main className={styles.overlay}>
+            <div className={styles.overlay}>
 
                 <LoginPage />
 
@@ -86,11 +86,11 @@ function Header(props)
 
             {loginContext.logged && <NotesMenu display={displayNotesMenu} setDisplayNotesMenu={setDisplayNotesMenu}/>}
 
-            </main>
+            </div>
 
             
-        </div>
+        </main>
     )
 }
 
-export default Header
+export default Main
