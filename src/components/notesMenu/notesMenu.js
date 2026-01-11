@@ -81,7 +81,7 @@ function NotesMenu(props)
                     </div>
                     :
                     <ul className={styles.list}>
-                        {myNotes.map(x=><MyNotesItem setLoading={setLoading} getData={getData} setDisplayPageRedirectionAnimation={props.setDisplayPageRedirectionAnimation} {...x}/>)}
+                        {myNotes.map(x=><MyNotesItem setDisplayNoteEdit={props.setDisplayNoteEdit} setLoading={setLoading} getData={getData} setDisplayPageRedirectionAnimation={props.setDisplayPageRedirectionAnimation} {...x}/>)}
                     </ul>
                     }
                 </div>

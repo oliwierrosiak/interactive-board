@@ -80,7 +80,7 @@ function MyNotesItem(props)
             <div className={styles.code}>{transformCode(props.code)}</div>
             <div className={styles.status}>{transformStatus(props.visibility)}</div>
             <div className={styles.line}></div>
-            <div className={styles.edit}>
+            <div className={styles.edit} onClick={e=>props.setDisplayNoteEdit(props)}>
                 <EditIcon class={styles.editSVG}/>
             </div>
             <div className={styles.delete} onClick={e=>setShowDeleteConfirm(true)}>
