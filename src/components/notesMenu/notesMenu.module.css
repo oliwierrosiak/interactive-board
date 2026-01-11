@@ -5,17 +5,18 @@
     height: 60vh;
     left:0rem;
     right: 0rem;
-    background-color: #02735E;
+    background: #02735E;
     border-top-left-radius: 2rem;
     border-top-right-radius: 2rem;
     transform: translate(0,100%);
     transition: transform .5s ease;
     z-index: 2;
-    padding: 2rem 2rem;
+    padding: 2rem 1.5rem;
     display: flex;
-    gap:2rem;
+    gap:1.5rem;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 .display
 {
@@ -83,5 +84,78 @@
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: yellow;
+    padding:0 .5rem;
+}
+.notesContainer::-webkit-scrollbar
+{
+    width: .5rem;
+    height: 0;
+}
+.notesContainer::-webkit-scrollbar-thumb
+{
+    background-color: #03A678;
+    border-radius: 10px;
+}
+.loadingContainer
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.loading
+{
+    width: 10rem;
+    height: 10rem;
+}
+.errorContainer
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap:1rem;
+    align-items: center;
+    justify-content: center;
+}
+.errorIcon
+{
+    width: 8rem;
+    height:8rem;
+}
+.errorHeader
+{
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: white;
+    font-family: "Jost", sans-serif;
+}
+.noneNotesContainer
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap:1rem;
+}
+.noteIcon
+{
+    width: 5rem;
+    height: 5rem;
+}
+.noneNotesHeader
+{
+    font-size: 1.2rem;
+    color: white;
+    font-weight: 700;
+}
+.list
+{
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap:1rem;
 }

@@ -1,0 +1,159 @@
+.noteItem
+{
+    width: 100%;
+    color: white;
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr .3rem 1.5rem 1.5rem;
+    gap:.8rem;
+    background: #0f836d;
+    padding: .5rem .8rem;
+    border-radius: .8rem;
+    align-items: center;
+    transition: background .3s ease;
+    position: relative;
+}
+.noteItem:hover
+{
+    background: #25917d;
+}
+.title
+{
+    font-weight: 700;
+    align-items: center;
+    width: 100%;
+    font-size: 1.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+}
+.code
+{
+    font-size: 1.6rem;
+    font-weight: 900;
+    display: flex;
+    justify-content: center;
+     font-family: "Cause", cursive;
+    align-items: center;
+}
+.status
+{
+    background-color: #03A678;
+    padding: .3rem .5rem;
+    font-weight: 700;
+    border-radius: .8rem;
+    font-size: 1.4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.line
+{
+    height: 100%;
+    width: .3rem;
+    background-color: rgb(194, 194, 194);
+    border-radius: 10px;
+}
+.edit
+{
+    height: 1.5rem;
+    width: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.delete
+{
+    width: 1.5rem;
+    height: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.deleteConfirm
+{
+    position: absolute;
+    top:0;
+    right: 0;
+    width: 100%;
+    bottom: 0;
+    background-color: #014040;
+    border-radius: .8rem;
+    transform: scale(0);
+    transform-origin: 97% 50%;
+    transition: transform .3s ease;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    justify-content: space-between;
+}
+.btnContainer
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:.8rem;
+}
+.deleteBtn
+{
+    font-size: 1.1rem;
+    color: white;
+    outline: none;
+    font-weight: 900;
+    padding: .2rem .4rem;
+    border-radius: .7rem;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+.confirmBtn
+{
+    background: rgb(175, 44, 44);
+    border:.3rem solid rgb(254, 38, 38);
+}
+.confirmBtn:hover
+{
+    background: rgb(254, 38, 38);
+}
+.cancelBtn
+{
+    background: #02735E;
+    border:.3rem solid #03A678;
+}
+.cancelBtn:hover
+{
+    background: #03A678;
+}
+.deleteHeader
+{
+    font-size: 1.3rem;
+    font-weight: 700;
+    font-family: "Jost", sans-serif;
+}
+.deleteConfirmDisplay
+{
+    transform: scale(1);
+}
+.editSVG
+{
+    width: 90%;
+    height: 90%;
+    fill: white;
+    transition: fill .3s ease;
+}
+.deleteIcon
+{
+    width: 100%;
+    height: 100%;
+    fill: rgb(255, 255, 255);
+    transition: fill .3s ease;
+}
+.edit:hover>svg
+{
+    fill: #F27405;
+}
+.delete:hover>svg
+{
+    fill: rgb(255, 44, 44);
+}

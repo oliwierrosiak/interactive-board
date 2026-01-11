@@ -84,7 +84,7 @@ function Main(props)
                 </button>
             </header>
 
-            {loginContext.logged && <NotesMenu display={displayNotesMenu} setDisplayNotesMenu={setDisplayNotesMenu}/>}
+            {loginContext.logged && <NotesMenu setDisplayPageRedirectionAnimation={props.setDisplayRedirectPageAnimation} display={displayNotesMenu} setDisplayNotesMenu={setDisplayNotesMenu}/>}
 
             </div>
 
