@@ -9,6 +9,7 @@ import refreshToken from '../auth/refreshToken'
 import LoginContext from '../../context/loginContext'
 import NoteIcon from '../../assets/svg/noteIcon'
 import MyNotesItem from './myNotesItem/myNotesItem'
+import VisitedNotesItem from './visitedNotesItem/visitedNotesItem'
 
 function NotesMenu(props)
 {
@@ -41,10 +42,6 @@ function NotesMenu(props)
 
     useEffect(()=>{
         getData()
-    },[])
-
-    useEffect(()=>{
-        getData()
     },[props.notesUpdater])
 
     return(
@@ -70,7 +67,9 @@ function NotesMenu(props)
                         <h3 className={styles.noneNotesHeader}>Nie odwiedziłeś jeszcze żadnych notatek</h3>
                     </div>
                     :
-                    <>Masz odwiedzone</>}
+                    <ul className={styles.list}>
+                        {visited.map(x=><VisitedNotesItem key={x._id} setDisplayPageRedirectionAnimation={props.setDisplayPageRedirectionAnimation} {...x}/>)}
+                    </ul>}
                 </div>
             </section>
 
@@ -85,7 +84,7 @@ function NotesMenu(props)
                     </div>
                     :
                     <ul className={styles.list}>
-                        {myNotes.map(x=><MyNotesItem setDisplayNoteEdit={props.setDisplayNoteEdit} setLoading={setLoading} getData={getData} setDisplayPageRedirectionAnimation={props.setDisplayPageRedirectionAnimation} {...x}/>)}
+                        {myNotes.map(x=><MyNotesItem key={x._id} setDisplayNoteEdit={props.setDisplayNoteEdit} setLoading={setLoading} getData={getData} setDisplayPageRedirectionAnimation={props.setDisplayPageRedirectionAnimation} {...x}/>)}
                     </ul>
                     }
                 </div>

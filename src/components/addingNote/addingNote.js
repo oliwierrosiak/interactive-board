@@ -11,6 +11,7 @@ import axios from 'axios'
 import LoginContext from '../../context/loginContext'
 import CopyIcon from '../../assets/svg/copyIcon'
 import { useNavigate } from 'react-router-dom'
+import formatNoteCode from '../helpers/formatNoteCode'
 
 function AddingNote(props)
 {
@@ -86,19 +87,6 @@ function AddingNote(props)
                 setPasswordEnabled(!passwordEnabled)
             }
         }
-    }
-
-    const formatNoteCode = () =>{
-        const localCode = []
-        const currentCode = String(noteCode).split('')
-        currentCode.forEach((x,idx)=>{
-            if(idx === 3)
-            {
-                localCode.push('-')
-            }
-            localCode.push(x)
-        })
-        return localCode.join('')
     }
 
     const copyLink = (e) =>{
@@ -189,7 +177,7 @@ function AddingNote(props)
                 :
                 <>
                     <h1 className={styles.header}>Notatka utworzona!</h1>
-                    <h2 className={styles.code}>{formatNoteCode()}</h2>
+                    <h2 className={styles.code}>{formatNoteCode(noteCode)}</h2>
                     <h2 className={styles.link} onClick={copyLink}>
                         {noteLink}
                         <div className={styles.copyContainer}>

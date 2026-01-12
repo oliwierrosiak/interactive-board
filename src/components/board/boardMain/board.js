@@ -29,6 +29,7 @@ import LoginContext from '../../../context/loginContext'
 import DisplayLoginContext from '../../../context/displayLogin'
 import NotePassword from '../../notePassword/notePassword'
 import refreshToken from '../../auth/refreshToken'
+import formatNoteCode from '../../helpers/formatNoteCode'
 
 function Board()
 {
@@ -577,18 +578,6 @@ function Board()
         }
     },[edit])
 
-    const noteCodeFormatted=(code)=>{
-        const codeArray = String(code).split('')
-        const newCode = []
-        codeArray.forEach((x,idx)=>{
-            if(idx === 3)
-            {
-                newCode.push('-')
-            }
-            newCode.push(x)
-        })
-        return newCode.join('')
-    }
 
     return(
         <MessageContext.Provider value={{addMessage,removeMessage}}>
@@ -616,7 +605,7 @@ function Board()
 
             <input type='text'className={styles.projectName} value={projectName} onChange={e=>setProjectName(e.target.value)} onFocus={projectNameInputFocused} onBlur={projectNameInputBlur} />
 
-            <p className={styles.code}>{noteCodeFormatted(noteCode)}</p>
+            <p className={styles.code}>{formatNoteCode(noteCode)}</p>
 
             <div className={`${styles.viewport} viewport`} ref={viewport} onDragEnter={e=>setDisplayDragElement(true)} >
 

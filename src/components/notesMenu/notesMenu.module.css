@@ -16,7 +16,6 @@
     gap:1.5rem;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
 }
 .display
 {
@@ -57,7 +56,7 @@
 .section
 {
     height: 100%;
-    width: 100%;
+    width: calc(50% - 1.8rem);
     display: flex;
     gap:2rem;
     flex-direction: column;
@@ -66,7 +65,7 @@
 .line
 {
     height: 90%;
-    width: .8rem;
+    width: .3rem;
     background-color: rgb(160, 160, 160);
     border-radius: 10px;
 }
@@ -78,6 +77,12 @@
     width: 100%;
     text-align: center;
     font-family: "Cause", cursive;
+    cursor: default;
+    text-shadow: -.15rem .15rem 0 #03A678;
+}
+.section>h2::selection
+{
+    background: none;
 }
 .notesContainer
 {

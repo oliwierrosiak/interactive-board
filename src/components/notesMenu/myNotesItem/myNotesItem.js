@@ -8,6 +8,7 @@ import ApiAddress from '../../../ApiAddress'
 import refreshToken from '../../auth/refreshToken'
 import LoginContext from '../../../context/loginContext'
 import DisplayLoginContext from '../../../context/displayLogin'
+import formatNoteCode from '../../helpers/formatNoteCode'
 
 function MyNotesItem(props)
 {
@@ -20,19 +21,6 @@ function MyNotesItem(props)
 
     const transformStatus = (status) =>{
         return status === 'private'?"Prywatna":"Publiczna"
-    }
-
-    const transformCode = (code) =>{
-        const newCode = []
-        const localCode = String(code).split('')
-        localCode.forEach((x,idx)=>{
-            if(idx === 3)
-            {
-                newCode.push('-')
-            }
-            newCode.push(x)
-        })
-        return newCode.join('')
     }
 
     const liClicked = (e) =>{
@@ -77,7 +65,7 @@ function MyNotesItem(props)
                 </span>
             </div>
             <div className={styles.title}>{props.title}</div>
-            <div className={styles.code}>{transformCode(props.code)}</div>
+            <div className={styles.code}>{formatNoteCode(props.code)}</div>
             <div className={styles.status}>{transformStatus(props.visibility)}</div>
             <div className={styles.line}></div>
             <div className={styles.edit} onClick={e=>props.setDisplayNoteEdit(props)}>
