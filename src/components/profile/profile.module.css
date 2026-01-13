@@ -11,9 +11,6 @@
 }
 .main
 {
-    /* background-image: url('../../assets/img/background.jpg'); */
-    background-position: center center;
-    background-size: cover;
     width: 100%;
     height: 100%;
     position: relative;
@@ -28,21 +25,6 @@
     align-items: center;
     justify-items: center;
 }
-/* .overlay
-{
-    position: absolute;
-    top:0;
-    left:0;
-    right: 0;
-    bottom: 0; */
-    /* background-color: #2a2f2793; */
-    /* backdrop-filter: blur(5px);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 2fr 5fr;
-    align-items: center;
-    justify-items: center;
-} */
 .logo
 {
     width: 15rem;
@@ -60,7 +42,6 @@
     align-items: center;
     justify-content: center;
     padding: 2rem 3rem;
-    gap:3rem;
 }
 .photoContainer
 {
@@ -69,7 +50,6 @@
     width: 100%;
     justify-items: center;
     align-items: center;
-    gap:2rem;
 }
 .userImgContainer
 {
@@ -84,6 +64,7 @@
     align-items: center;
     transition: border .3s ease;
     cursor: pointer;
+    margin-bottom: 1rem;
 }
 .userImgContainer:hover
 {
@@ -139,6 +120,8 @@
 }
 .changePhoto
 {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
     font-size: 2rem;
     color: white;
     padding: .8rem 1.8rem;
@@ -166,25 +149,6 @@
 {
     background: #03a678;
 }
-.inputContainerDisabled
-{
-    border: .3rem solid rgb(126, 126, 126);
-    cursor: default;
-}
-.inputDisabled
-{
-    color: rgb(126, 126, 126);
-    cursor: default;
-}
-.placeholderDisabled
-{
-    color: rgb(126, 126, 126);
-    top:-.3rem;
-    left:2rem;
-    font-size: 1.2rem;
-    cursor: default;
-    background: #014040;
-}
 .nameContainer
 {
     width: 100%;
@@ -192,7 +156,8 @@
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap:.5rem
+    gap:1.5rem 0;
+    margin-bottom: 1rem;
 }
 .nameInputContainer
 {
@@ -238,6 +203,14 @@
 {
     background: #02735E;
     border: .4rem solid #03A678;
+}
+.resetBtn
+{
+    margin-top: 1rem;
+}
+.logoutBtn
+{
+    margin: 2rem 0;
 }
 .resetBtn:hover
 {
@@ -308,4 +281,60 @@
 }
 .confirmWhileLoading{
     cursor: default;
+}
+.back
+{
+    position: absolute;
+    top:1.2rem;
+    left:1.2rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.backSVG
+{
+    width: 100%;
+    height: 100%;
+    fill: rgb(143, 143, 143);
+    transition:fill .3s ease
+}
+.back:hover>.backSVG
+{
+    fill: #cdcdcd;
+}
+.backWhileLoading
+{
+    cursor: default;
+}
+.backWhileLoading>.backSVG
+{
+    fill: rgb(75, 75, 75) !important;
+}
+.email
+{
+    max-width: 40rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: rgb(189, 189, 189);
+  font-family: "Jost", sans-serif;
+}
+.messageContainer
+{
+    background-color: red;
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    width: 25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
 }

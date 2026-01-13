@@ -15,6 +15,8 @@ import ApiAddress from '../../ApiAddress'
 import LoadingIcon from '../../assets/svg/loadingIcon'
 import ErrorIcon from '../../assets/svg/errorIcon'
 import DisplayLoginContext from '../../context/displayLogin'
+import ArrowIcon from '../../assets/svg/arrowIcon'
+import Message from '../board/message/message'
 
 function Profile()
 {
@@ -23,14 +25,16 @@ function Profile()
 
     const navigate = useNavigate('')
 
-    const [userPhoto,setUserPhoto] = useState()
-    const [userPhotoLoaded,setUserPhotoLoaded] = useState()
+    const [userPhoto,setUserPhoto] = useState('')
+    const [userPhotoLoaded,setUserPhotoLoaded] = useState(false)
     const [name,setName] = useState('')
     const [loading,setLoading] = useState(true)
     const [error,setError] = useState(false)
     const [photoError,setPhotoError] = useState('')
     const [nameLoading,setNameLoading] = useState(false)
     const [nameError,setNameError] = useState('')
+    const [resetPasswordError,setResetPasswordError] = useState('bład')
+
 
     const fileInputRef = useRef()
     const nameInputRef = useRef()
@@ -147,7 +151,18 @@ function Profile()
 
     return(
         <div className={styles.container}>
+            <div className={styles.messageContainer}>
+            <Message />
+
+            </div>
             <main className={styles.main}>
+
+                
+
+                <div className={`${styles.back} ${nameLoading || !userPhotoLoaded?styles.backWhileLoading:''}`} onClick={e=>!nameLoading && userPhotoLoaded && navigate('/')}>
+                <ArrowIcon class={styles.backSVG}/>
+                </div>
+
                     <div className={styles.logo}></div>
                     {loading?<div className={styles.loadingContainer}>
                         {error?
@@ -182,9 +197,8 @@ function Profile()
                             
                         </div>
                         
-                        <div className={`${inputStyles.inputContainer} ${styles.inputContainerDisabled}`}>
-                            <input disabled={true} value={loginContext.loggedUser.email} type='text' className={`${inputStyles.input} ${styles.inputDisabled}`}></input>
-                            <div className={`${inputStyles.placeholder} ${styles.placeholderDisabled}`}>Adres Email</div>
+                        <div className={styles.email}>
+                            {loginContext.loggedUser.email}
                         </div>
 
                     </div>
