@@ -18,6 +18,7 @@ import DisplayLoginContext from '../../context/displayLogin'
 import ArrowIcon from '../../assets/svg/arrowIcon'
 import InfoIcon from '../../assets/svg/infoIcon'
 import CloseIcon from '../../assets/svg/closeIcon'
+import DeletingAccountConfirm from './deletingAccountConfirm.js/deletingAccountConfirm'
 
 function Profile()
 {
@@ -34,6 +35,8 @@ function Profile()
     const [photoError,setPhotoError] = useState('')
     const [nameLoading,setNameLoading] = useState(false)
     const [nameError,setNameError] = useState('')
+    const [resetPasswordLoading,setResetPasswordLoading] = useState(false)
+    const [displayDeletingAccount,setDisplayDeletingAccount] = useState(false)
 
     const [message,setMessage] = useState({type:'',text:''})
     const [displayMessage,setDisplayMessage] = useState(false)
@@ -172,15 +175,18 @@ function Profile()
     }
 
     const passwordReset = async() =>{
-        if(displayMessage) return
+        if(displayMessage || resetPasswordLoading) return
         try
         {
+            setResetPasswordLoading(true)
             const token = await refreshToken()
             const response = await axios.get(`${ApiAddress}/sendResetPasswordLink`,{headers:{"Authorization":`Bearer ${token}`}})
+            setResetPasswordLoading(false)
         }
         catch(ex)
         {
             addMessage('error','Nie udało się zresetować hasła')
+            setResetPasswordLoading(false)
         }
     }
 
@@ -206,8 +212,6 @@ function Profile()
             </div>
 
             <main className={styles.main}>
-
-                
 
                 <div className={`${styles.back} ${nameLoading || !userPhotoLoaded?styles.backWhileLoading:''}`} onClick={e=>!nameLoading && userPhotoLoaded && navigate('/')}>
                 <ArrowIcon class={styles.backSVG}/>
@@ -271,18 +275,21 @@ function Profile()
 
                         
 
-                        <button onClick={passwordReset} className={`${styles.btn} ${styles.resetBtn}`}>Resetuj Hasło</button>
+                        <button onClick={passwordReset} className={`${styles.btn} ${styles.resetBtn} ${resetPasswordLoading?styles.btnWhileLoading:''}`}>{resetPasswordLoading?<LoadingIcon class={styles.resetPasswordLoading}/>:"Resetuj Hasło"}</button>
 
                         <button className={`${styles.btn} ${styles.logoutBtn}`} onClick={logout}>
                             <LogoutIcon class={styles.logoutIcon}/>
                             Wyloguj Się
                         </button>
 
-                        <button className={`${styles.btn} ${styles.deleteBtn}`}>Usuń Konto</button>
+                        <button className={`${styles.btn} ${styles.deleteBtn}`} onClick={e=>setDisplayDeletingAccount(true)}>Usuń Konto</button>
 
                     </div>
 
                     </>}
+
+                {displayDeletingAccount && <DeletingAccountConfirm setDisplay={setDisplayDeletingAccount}/>}
+
             </main>
 
         </div>

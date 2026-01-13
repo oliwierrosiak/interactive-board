@@ -1,0 +1,154 @@
+.overlay
+{
+    position: absolute;
+    top:0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.316);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+}
+.container
+{
+    width: 40rem;
+    padding: 2rem 2.5rem 2.5rem 2.5rem;
+    background-color: red;
+    background-color: #014040;
+    border:.6rem solid #03A678;
+    border-radius: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap:2rem;
+}
+.header
+{
+    width: 100%;
+    color: white;
+    font-size: 2.5rem;
+    font-family: "Cause", cursive;
+    font-weight: 900;
+    text-align: center;
+    cursor: default;
+}
+.header::selection
+{
+    background: none;
+}
+.description
+{
+    font-size: 1.2rem;
+    color: white;
+    width: 100%;
+    text-align: center;
+    cursor: default;
+}
+.mark
+{
+    color: rgb(255, 73, 73);
+    text-decoration: underline .2rem rgb(255, 73, 73);
+    background: none;
+    font-weight: 900;
+}
+.btnContainer
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:1rem;
+}
+.btn
+{
+    width: 100%;
+    font-size: 1.8rem;
+    color: white;
+    outline: none;
+    cursor: pointer;
+    font-weight: 900;
+    border-radius: 1.2rem;
+    transition: all .3s ease;
+    padding: .3rem .5rem;
+}
+.cancel
+{
+    background: #02735E;
+    border:.4rem solid #03A678;
+}
+.cancel:hover
+{
+    background: #03A678;
+}
+.delete
+{
+    background: rgb(158, 35, 35);
+    border: .4rem solid rgb(203, 1, 1);
+}
+.delete:hover
+{
+    background: red;
+     border: .4rem solid red;
+}
+.inputContainer
+{
+    width: 80%;
+    position: relative;
+    height: 3.5rem;
+    margin: .5rem 0 1rem 0;
+    cursor: pointer;
+}
+.input
+{
+    position: absolute;
+    top:0;
+    left:0;
+    right: 0;
+    bottom: .4rem;
+    text-align: center;
+    background:none;
+    outline: none;
+    font-size: 1.8rem;
+    border: 0;
+    color: white;
+    cursor: pointer;
+}
+.input:focus
+{
+    cursor: text;
+}
+.input::placeholder
+{
+    font-weight: 700;
+}
+.border
+{
+    position: absolute;
+    bottom: 0;
+    height: .4rem;
+    left: 0;
+    right: 0;
+    border-radius: 10px;
+    background-color: grey;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.borderFill
+{
+    width: 100%;
+    background-color: #03A678;
+    height: 100%;
+    border-radius: 10px;
+    transform: scaleX(0);
+    transition: transform .3s ease;
+}
+.borderFilled
+{
+    transform: scaleX(1);
+}
