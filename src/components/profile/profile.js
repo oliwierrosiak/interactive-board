@@ -29,6 +29,8 @@ function Profile()
     const [loading,setLoading] = useState(true)
     const [error,setError] = useState(false)
     const [photoError,setPhotoError] = useState('')
+    const [nameLoading,setNameLoading] = useState(false)
+    const [nameError,setNameError] = useState('')
 
     const fileInputRef = useRef()
     const nameInputRef = useRef()
@@ -96,6 +98,44 @@ function Profile()
         
     }
 
+    const updateName = async()=>{
+        try
+        {
+            setNameLoading(true)
+            const token = await refreshToken()
+            const response = await axios.put(`${ApiAddress}/updateUserName`,{name:name},{headers:{"Authorization":`Bearer ${token}`}})
+            setLoading(true)
+            getData()
+            setNameLoading(false)
+        }
+        catch(ex)
+        {
+            if(ex.status === 400 && ex.response?.data?.errors?.name)
+            {
+                setNameError(ex.response.data.errors.name)
+            }
+            else
+            {
+                setNameError("Błąd aktualizacji nazwy")
+
+            }
+            setNameLoading(false)
+        }
+    }
+
+    const validName = () =>
+    {
+        setNameError('')
+        if(name === '')
+        {
+            setNameError("Podaj nazwę")
+        }
+        else
+        {
+            updateName()
+        }
+    }
+
     const logout = (e) =>{
         navigate('/')
         loginContext.logout()
@@ -153,15 +193,16 @@ function Profile()
 
 
                         <div className={styles.nameContainer}>
-                            <div className={`${inputStyles.inputContainer} ${styles.nameInputContainer}`} onClick={divClicked}>
-                                <input value={name} onChange={e=>setName(e.target.value)} type='text' onBlur={inputBlur} onFocus={inputFocused} ref={nameInputRef} className={inputStyles.input}></input>
+                            <div className={`${inputStyles.inputContainer} ${styles.nameInputContainer} ${nameLoading?inputStyles.inputContainerWhileLoading:''}`} onClick={divClicked}>
+                                <input disabled={nameLoading} value={name} onChange={e=>setName(e.target.value)} type='text' onBlur={inputBlur} onFocus={inputFocused} ref={nameInputRef} className={inputStyles.input}></input>
                                 <div className={inputStyles.placeholder}>Zmień Nazwę</div>
                             </div>
-                            <div className={styles.confirm}>
-                                <CheckMarkIcon class={styles.checkMarkIcon} />
+                            <div onClick={e=>!nameLoading && validName()} className={`${styles.confirm} ${nameLoading?styles.confirmWhileLoading:''}`}>
+                                {nameLoading?<ImgLoadingIcon class={styles.checkMarkLoading}/>:
+                                <CheckMarkIcon class={styles.checkMarkIcon} />}
                             </div>
 
-                            {/* <div className={styles.error}>Podaj nazwę</div> */}
+                            {nameError && <div className={styles.error}>{nameError}</div>}
                         </div>
 
                         
