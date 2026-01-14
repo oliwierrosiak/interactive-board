@@ -11,6 +11,7 @@
     justify-content: center;
     align-items: center;
     z-index: 3;
+    
 }
 .container
 {
@@ -24,7 +25,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap:2rem;
+    position: relative;
 }
 .header
 {
@@ -35,6 +36,7 @@
     font-weight: 900;
     text-align: center;
     cursor: default;
+    margin-bottom: 2rem;
 }
 .header::selection
 {
@@ -47,6 +49,7 @@
     width: 100%;
     text-align: center;
     cursor: default;
+    margin-bottom: 1.8rem;
 }
 .mark
 {
@@ -57,6 +60,7 @@
 }
 .btnContainer
 {
+    margin-top: 1.5rem;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -99,7 +103,7 @@
     width: 80%;
     position: relative;
     height: 3.5rem;
-    margin: .5rem 0 1rem 0;
+    margin: .5rem 0 1.5rem 0;
     cursor: pointer;
 }
 .input
@@ -151,4 +155,62 @@
 .borderFilled
 {
     transform: scaleX(1);
+}
+.back
+{
+    position: absolute;
+    top:1.2rem;
+    left:1.2rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.backSVG
+{
+    width: 100%;
+    height: 100%;
+    fill: rgb(143, 143, 143);
+    transition:fill .3s ease
+}
+.back:hover>.backSVG
+{
+    fill: #cdcdcd;
+}
+.backWhileLoading
+{
+    cursor: default;
+}
+.backWhileLoading>.backSVG
+{
+    fill: rgb(75, 75, 75) !important;
+}
+.loadingContainer
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    height: 3.5rem;
+    margin: .5rem 0 1rem 0;
+}
+.loading
+{
+    transform: scale(1.5);
+}
+.btnLoading
+{
+    background: rgb(61, 61, 61) !important;
+    border: .4rem solid rgb(80, 80, 80) !important;
+    cursor: default;
+}
+.error
+{
+    width: 100%;
+    color: #fc3333;
+    font-weight: 700;
+    font-family: "Jost", sans-serif;
+    font-size: 1.5rem;
+    text-align: center;
 }
