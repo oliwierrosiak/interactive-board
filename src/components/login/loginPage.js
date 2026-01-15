@@ -1,18 +1,23 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import styles from './loginPage.module.css'
 import DisplayLoginContext from '../../context/displayLogin'
 import ArrowIcon from '../../assets/svg/arrowIcon'
-import ImageBackground from '../../assets/svg/loginBackground'
 import logo from '../../assets/img/notely.png'
 import Login from './login/login'
 import Register from './register/register'
 import PasswordForgotten from './passwordForgotten/passwordForgotten'
+import ImageBackground2 from '../../assets/svg/ImageBackground2'
+import ImageBackground3 from '../../assets/svg/imageBackground3'
 
 function LoginPage(props)
 {
     const displayLoginContext = useContext(DisplayLoginContext)
 
     const [loading,setLoading] = useState(false)
+
+    useEffect(()=>{
+        console.log(displayLoginContext)
+    },[displayLoginContext])
 
     return(
         <article className={`${styles.container} ${displayLoginContext.displayLogin?styles.displayContainer:''}`}>
@@ -22,10 +27,9 @@ function LoginPage(props)
 
             <img src={logo} className={styles.logo}/>
 
-            <div className={styles.image}>
-                <ImageBackground class={styles.backgroundSVG}/>
-            </div>
-
+            <ImageBackground3 class={`${styles.backgroundSVG} ${displayLoginContext.displayLogin === 'register'?styles.svgDisplay:''}`}/>
+            <ImageBackground2 class={`${styles.backgroundSVG} ${displayLoginContext.displayLogin === 'passwordForgotten' || displayLoginContext.displayLogin === "login"?styles.svgDisplay:''}`}/>
+                
             <Login loading={loading} setLoading={setLoading} display={displayLoginContext.displayLogin === "login"} />
             <Register loading={loading} setLoading={setLoading} display={displayLoginContext.displayLogin === "register"} />
             <PasswordForgotten loading={loading} setLoading={setLoading} display={displayLoginContext.displayLogin === 'passwordForgotten'} />

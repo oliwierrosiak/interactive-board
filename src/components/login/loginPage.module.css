@@ -51,29 +51,25 @@
 {
     fill: rgb(75, 75, 75) !important;
 }
-.image
-{
-    position: absolute;
-    height: 100%;
-    width: 60%;
-    top:0;
-    bottom: 0;
-    right: 0;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    padding: 3rem;
-}
 .backgroundSVG
 {
-    width: 100%;
-    transform: scale(1.1);
+    position: absolute;
+    height: 80%;
+    width: 50%;
+    bottom: 0;
+    right: 1rem;
+    padding: 3rem;
+    opacity: 0;
+    transition: opacity 1s ease;
 }
 .logo
 {
     position: absolute;
     top:5%;
     right:7%;
-    width: 35rem;
-    /* background-color: red; */
+    height: 9rem;
+}
+.svgDisplay
+{
+    opacity: 1;
 }
