@@ -2,7 +2,7 @@ import styles from './resetPassword.module.css'
 import logo from '../../assets/img/notely.png'
 import ResetPasswordIcon from '../../assets/svg/resetPasswordIcon'
 import inputStyles from '../login/login-register.module.css'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { divClicked,inputBlur,inputFocused } from '../login/inputActions'
 import PasswordEye from '../../assets/svg/passwordEye'
 import PasswordEyeHidden from '../../assets/svg/passwordEyeHidden'
@@ -12,6 +12,7 @@ import ApiAddress from '../../ApiAddress'
 import { useNavigate, useParams } from 'react-router-dom'
 import ImgLoadingIcon from '../../assets/svg/imgLoadingIcon'
 import ErrorIcon from '../../assets/svg/errorIcon'
+import DisplayLoginContext from '../../context/displayLogin'
 
 function ResetPassword()
 {
@@ -25,6 +26,8 @@ function ResetPassword()
 
     const params = useParams()
     const navigate = useNavigate()
+
+    const displayLogin = useContext(DisplayLoginContext)
 
     const checkPasswordResetTokenValidity = async()=>{
         try
@@ -51,13 +54,24 @@ function ResetPassword()
         try
         {
             setLoading(true)
-            const id = 1
-            const response = await axios.put(`${ApiAddress}/resetPassword/${id}`,{newPassword:password})
-            console.log(response.data)
+            const response = await axios.put(`${ApiAddress}/resetUserPassword/${params.id}`,{newPassword:password})
+            navigate('/')
+            displayLogin.setDisplayLogin('login')
         }
         catch(ex)
         {
-            setError('Błąd resetowania hasła')
+            if(ex.status === 401)
+            {
+                setError(ex.response.data)
+            }
+            else if(ex.status === 403)
+            {
+                setError('Token resetowania hasła wygasł')
+            }
+            else
+            {
+                setError('Błąd resetowania hasła')
+            }
             setLoading(false)
         }
     }
@@ -70,7 +84,9 @@ function ResetPassword()
 
     const validate = (e) =>
     {
+        send()
         e.preventDefault()
+        return
         setError('')
         if(password === '')
         {
@@ -140,7 +156,7 @@ function ResetPassword()
 
                         {error && <div className={styles.error}>{error}</div>}
 
-                        <button className={`${inputStyles.loginBtn} ${loading?inputStyles.btnLoading:''} ${styles.btn}`}>{loading?<LoadingIcon class={inputStyles.loading}/>:"Resetuj Hasło"}</button>
+                        <button className={`${inputStyles.loginBtn} ${inputStyles.loginBtnMargin} ${loading?inputStyles.btnLoading:''}`}>{loading?<LoadingIcon class={inputStyles.loading}/>:"Resetuj Hasło"}</button>
 
                     </form>
 
