@@ -88,17 +88,20 @@ function Login(props)
             setLoginValue('')
             setPasswordValue('')
             props.setLoading(false)
+            sessionStorage.removeItem("redirectToLogin")
             setTimeout(() => {
                 emailRef.current.focus()
                 emailRef.current.blur()
                 passwordRef.current.focus()
                 passwordRef.current.blur()
             }, 50);
+            
         }
         catch(ex)
         {
             setError('Błąd logowania Google')
             props.setLoading(false)
+            sessionStorage.removeItem("redirectToLogin")
         }
     }
 
