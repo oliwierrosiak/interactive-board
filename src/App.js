@@ -10,6 +10,7 @@ import DisplayLoginContext from "./context/displayLogin";
 import refreshToken from "./components/auth/refreshToken";
 import Profile from "./components/profile/profile";
 import ResetPassword from "./components/resetPassword/resetPassword";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 function App() {
 
@@ -38,6 +39,12 @@ function App() {
 
   useEffect(()=>{
     getUserData()
+    const redirectToLogin = sessionStorage.getItem('redirectToLogin')
+    if(redirectToLogin)
+    {
+      setDisplayLogin('login')
+      sessionStorage.removeItem('redirectToLogin')
+    }
   },[])
 
   const logout = async() =>{
@@ -61,7 +68,7 @@ function App() {
   }
 
   return (
-
+    <GoogleOAuthProvider clientId="913719262265-5glbp82il0vpm8mvpqkg7q6nul20v1a0.apps.googleusercontent.com">
     <AccessTokenContext.Provider value={{accessToken,setAccessToken}}>
     <LoginContext.Provider value={{logged,setLogged,loggedUser,setLoggedUser,loginLoading,logout}}>
     <DisplayLoginContext.Provider value={{displayLogin,setDisplayLogin}}>
@@ -78,6 +85,7 @@ function App() {
     </DisplayLoginContext.Provider>
     </LoginContext.Provider>
    </AccessTokenContext.Provider>
+   </GoogleOAuthProvider>
   );
 }
 

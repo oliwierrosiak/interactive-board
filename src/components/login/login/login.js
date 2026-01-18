@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import styles from '../login-register.module.css'
 import PasswordEye from '../../../assets/svg/passwordEye'
 import PasswordEyeHidden from '../../../assets/svg/passwordEyeHidden'
@@ -10,6 +10,7 @@ import axios from 'axios'
 import ApiAddress from '../../../ApiAddress'
 import AccessTokenContext from '../../../context/accessTokenContext'
 import LoginContext from '../../../context/loginContext'
+import { useGoogleLogin } from '@react-oauth/google'
 
 function Login(props)
 {
@@ -75,10 +76,64 @@ function Login(props)
         }
     }
 
-    const googleLogin = (e) =>
-    {
-        console.log('googleLogin')
+    const sendGoogleUserData = async(token)=>{
+        try
+        {
+            const response = await axios.post(`${ApiAddress}/googleLogin`,{token})
+            sessionStorage.setItem("refreshToken",response.data.refreshToken)
+            accessTokenContext.setAccessToken(response.data.accessToken)
+            loginContext.setLoggedUser(response.data.user)
+            loginContext.setLogged(true)
+            displayLoginContext.setDisplayLogin('')
+            setLoginValue('')
+            setPasswordValue('')
+            props.setLoading(false)
+            setTimeout(() => {
+                emailRef.current.focus()
+                emailRef.current.blur()
+                passwordRef.current.focus()
+                passwordRef.current.blur()
+            }, 50);
+        }
+        catch(ex)
+        {
+            setError('Błąd logowania Google')
+            props.setLoading(false)
+        }
     }
+
+    const googleLogin = useGoogleLogin({
+        onSuccess:(res)=>{
+            sendGoogleUserData(res.access_token)
+        },
+        onError:(err)=>{
+            props.setLoading(false)
+            setError("Błąd logowania Google")
+        },
+        onNonOAuthError:(err=>{
+            if(err.message === "Failed to open popup window")
+            {
+                props.setLoading(false)
+                setError("Brak uprawnień")
+            }
+            else
+            {
+                props.setLoading(false)
+                setError("Błąd logowania Google")
+            }
+        })
+    })
+
+    const googleLoginClicked = (e) =>{
+        sessionStorage.setItem("redirectToLogin",true)
+        setError('')
+        props.setLoading(true)
+        googleLogin()
+    }
+
+    useEffect(()=>{
+        setError('')
+    },[props.display])
 
     return(
         <section className={`${styles.loginForm} ${props.display?styles.display:''}`}>
@@ -110,7 +165,7 @@ function Login(props)
 
             <div className={styles.line}></div>
 
-            <button className={`${styles.googleLogin} ${props.loading?styles.googleLoginWhileLoading:''}`} onClick={e=>!props.loading && googleLogin()}>
+            <button className={`${styles.googleLogin} ${props.loading?styles.googleLoginWhileLoading:''}`} onClick={e=>!props.loading && googleLoginClicked()}>
                 <GoogleIcon class={styles.googleSVG}/>
                 Zaloguj się przez Google
             </button>
