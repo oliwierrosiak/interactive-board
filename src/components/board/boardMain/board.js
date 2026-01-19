@@ -183,7 +183,7 @@ function Board()
             if(edit)
             {
                 socket.emit('elementUpdate',{noteId:params.id,element:edit})
-                // edit.updater(params.id)
+                edit.updater(params.id)
             }
             setEdit(0)
         }
@@ -226,7 +226,7 @@ function Board()
         try
         {
             socket.emit('elementDelete',{noteId:params.id,id})
-            // await axios.delete(`${ApiAddress}/deleteBoardItem/${params.id}/${id}`)
+            await axios.delete(`${ApiAddress}/deleteBoardItem/${params.id}/${id}`)
         }
         catch(ex)
         {}
