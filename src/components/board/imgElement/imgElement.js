@@ -52,7 +52,7 @@ function ImgElement(props)
     },[error])
 
     return(
-       <div className={`element editOn ${styles.element} ${props.item.getClass()} ${error?styles.errorContainerSizes:''}`} style={props.item.getStyles()} onMouseDown={e=>changePosition(e.target)} onMouseUp={setSolidPosition} onClick={e=>checkEditMode(e.target)} ref={containerRef}>
+       <div className={`element ${props.edit.id === props.item.id?'editOn':''} ${styles.element} ${props.item.getClass()} ${error?styles.errorContainerSizes:''}`} style={props.item.getStyles()} onMouseDown={e=>changePosition(e.target)} onMouseUp={setSolidPosition} onClick={e=>checkEditMode(e.target)} ref={containerRef}>
 
             {props.item.mimetype.includes('image/')?
             <img style={props.item.getBrightnessAndContrast()} src={props.item.link} onLoad={e=>{setPhotoLoaded(true);props.item.setProportion(e.target)}} onError={e=>{setError(true);setPhotoLoaded(true)}} onDragStart={e=>e.preventDefault()} className={styles.img} onClick={e=>checkEditMode(e.target.closest('div'))} onMouseDown={e=>changePosition(e.target.closest('div'))} onMouseUp={setSolidPosition}/>

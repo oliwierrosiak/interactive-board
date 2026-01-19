@@ -172,14 +172,6 @@ function Board()
         }
     }
 
-    const sendSocket = (element) =>{
-        switch(element.type){
-            case 'text':
-                socket.emit('elementUpdate',{noteId:params.id,element:element})
-                break
-        }
-    }
-
     const clearElementEdit = () =>{
         setBrush({type:'',width:brush.width,color:brush.color})
         const elements = [...document.querySelectorAll('.element')]
@@ -190,7 +182,7 @@ function Board()
         {
             if(edit)
             {
-                sendSocket(edit)
+                socket.emit('elementUpdate',{noteId:params.id,element:edit})
                 // edit.updater(params.id)
             }
             setEdit(0)
@@ -514,6 +506,10 @@ function Board()
         {
             case 'text':
                 return new TextElementClass(el)
+            case 'img':
+                return new ImgElementClass(el)
+            case 'shape':
+                return new ShapeElementClass(el)
         }
     }
 
@@ -705,11 +701,11 @@ function Board()
                         }
                         else if(x.type === "img")
                         {
-                            return <ImgElement movingLocked={movingLocked} key={x.id} board={boardRef.current} setEdit={setEdit} item={x}/>
+                            return <ImgElement movingLocked={movingLocked} key={x.id} board={boardRef.current} setEdit={setEdit} edit={edit} item={x}/>
                         }
                         else if(x.type === "shape")
                         {
-                            return <ShapeElement shapeUpdater={shapeUpdater} key={x.id} movingLocked={movingLocked} board={boardRef.current} setEdit={setEdit} item={x} />
+                            return <ShapeElement shapeUpdater={shapeUpdater} key={x.id} movingLocked={movingLocked} board={boardRef.current} setEdit={setEdit} edit={edit} item={x} />
                         }
                     
                     })}
