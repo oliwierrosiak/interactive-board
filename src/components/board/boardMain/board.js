@@ -540,12 +540,26 @@ function Board()
 
     const elementsDelete = (id) =>
     {
+        let deletingElement
+
         setElements(prev=>{
             const index = prev.findIndex(x=>x.id === id)
+            deletingElement = prev[index]
             if(index !== -1)
             {
                 prev.splice(index,1)
                 return [...prev]
+            }
+        })
+
+        setEdit(prev=>{
+            if(deletingElement.id === prev.id)
+            {
+                return 0
+            }
+            else
+            {
+                return prev
             }
         })
     }
@@ -559,9 +573,6 @@ function Board()
                 socket.emit('login',{user:loginContext.loggedUser,noteId:params.id})
                 socket.on('usersUpdate',(userList)=>{
                     setNoteUsers(userList)
-                })
-                socket.on('textAdded',()=>{
-                    console.log("dodaono text")
                 })
                 socket.on('titleUpdated',(title)=>{
                     setProjectName(title)
