@@ -65,7 +65,7 @@ function TextElement(props)
     }
 
     return(
-        <div className={`element editOn ${styles.element} ${props.item.getClass()}`} style={props.item.getStyles()} onMouseDown={e=>changePosition(e.target)} onMouseUp={setSolidPosition} onClick={e=>checkEditMode(e.target)} ref={containerRef}>
+        <div className={`element ${props.edit.id === props.id?'editOn':''} ${styles.element} ${props.item.getClass()}`} style={props.item.getStyles()} onMouseDown={e=>changePosition(e.target)} onMouseUp={setSolidPosition} onClick={e=>checkEditMode(e.target)} ref={containerRef}>
             <textarea onDragStart={e=>e.preventDefault()} placeholder="Wprowadź tekst..." onChange={e=>setTextValue(e.target.value)} value={textValue} className={styles.textArea} onFocus={textAreaFocused} onBlur={textAreaBlur}></textarea>
 
             <div className={styles.resize} onMouseDown={resizeElement}></div>

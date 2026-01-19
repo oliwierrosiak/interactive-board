@@ -520,7 +520,6 @@ function Board()
     const elementsHandler = (newElement) =>
     {
         const element = getNewElement(newElement)
-        console.log(element)
 
         setElements((prev)=>{
             const index = prev.findIndex(x=>x.id === element.id)
@@ -653,7 +652,6 @@ function Board()
             setBrush({type:'',color:brush.color,width:brush.width})
         }
     },[edit])
-
 
     return(
         <MessageContext.Provider value={{addMessage,removeMessage}}>
