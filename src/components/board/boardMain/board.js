@@ -164,7 +164,8 @@ function Board()
         {
             try
             {
-                await axios.post(`${ApiAddress}/updateNoteCanvas/${params.id}`,{canvas})
+                socket.emit('canvasUpdate',{canvas,noteId:params.id})
+                // await axios.post(`${ApiAddress}/updateNoteCanvas/${params.id}`,{canvas})
             }   
             catch(ex)
             {
@@ -560,6 +561,21 @@ function Board()
         })
     }
 
+    const canvasHandler = (canvas) =>
+    {
+        
+            setElements(prev=>{
+                if(prev[0].type === 'canvas')
+                {
+
+                    prev.splice(0,1,canvas)
+                    // setUndoStack(prev[0].content||[])
+                }
+                setCanvasHistoryUpdater(prev=>!prev)
+                return [...prev]
+            })
+    }
+
     useEffect(()=>{
         if(!loginContext.loginLoading)
         {
@@ -578,6 +594,9 @@ function Board()
                 })
                 socket.on('elementDeleted',(id)=>{
                     elementsDelete(id)
+                })
+                socket.on('canvasUpdated',(canvas)=>{
+                    canvasHandler(canvas)
                 })
             }
             else

@@ -129,7 +129,7 @@ function CanvasElement(props)
 
 
     useEffect(()=>{
-
+        return
         historyLoading.current = true
         canvasObj.current.clear();
         
@@ -156,6 +156,30 @@ function CanvasElement(props)
         historyLoading.current = false
 
     },[canvasHistory.update])
+
+    useEffect(()=>{
+        console.log(props.item.content)
+        canvasObj.current.clear();
+        props.item?.content.forEach(data =>
+        {
+            const path = new Path(pointsToPath(data.points), {
+                stroke: data.color,
+                strokeWidth: data.width,
+                fill: null,
+                selectable: false,
+                evented: false
+            })
+
+            if (data.type === 'eraser')
+            {
+                path.globalCompositeOperation = 'destination-out'
+            }
+
+            canvasObj.current.add(path)
+        })
+
+        canvasObj.current.renderAll()
+    },[props.item])
 
     return(
         <canvas ref={canvasRef} className={`canvas`}></canvas>
