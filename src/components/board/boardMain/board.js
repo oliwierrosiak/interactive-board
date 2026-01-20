@@ -164,8 +164,8 @@ function Board()
         {
             try
             {
-                socket.emit('canvasUpdate',{canvas,noteId:params.id})
-                // await axios.post(`${ApiAddress}/updateNoteCanvas/${params.id}`,{canvas})
+                socket.emit('canvasUpdate',{canvas:elements[0],noteId:params.id})
+                await axios.post(`${ApiAddress}/updateNoteCanvas/${params.id}`,{canvas})
             }   
             catch(ex)
             {
@@ -563,17 +563,16 @@ function Board()
 
     const canvasHandler = (canvas) =>
     {
-        
-            setElements(prev=>{
-                if(prev[0].type === 'canvas')
-                {
-
-                    prev.splice(0,1,canvas)
-                    // setUndoStack(prev[0].content||[])
-                }
-                setCanvasHistoryUpdater(prev=>!prev)
-                return [...prev]
-            })
+        setElements(prev=>{
+            if(prev[0].type === 'canvas')
+            {
+                prev[0].content = canvas.content
+                setUndoStack(canvas.content||[])
+                setRedoStack([])
+            }
+            setCanvasHistoryUpdater(prev=>!prev)
+            return [...prev]
+        })
     }
 
     useEffect(()=>{
