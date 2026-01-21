@@ -219,9 +219,11 @@ function Board()
     const deletePhotoFromAWS = async (link) =>{
         try
         {
-            await axios.post(`${ApiAddress}/deleteAWSMedia`,{link})
+            const token = await refreshToken()
+            await axios.post(`${ApiAddress}/deleteAWSMedia`,{link},{headers:{"Authorization":`Bearer ${token}`}})
         }
-        catch(ex){}
+        catch(ex){
+        }
     }
 
     const deleteItem = async(id) =>
@@ -238,11 +240,17 @@ function Board()
         }
         try
         {
+            const token = await refreshToken()
+            await axios.delete(`${ApiAddress}/deleteBoardItem/${params.id}/${id}`,{headers:{"Authorization":`Bearer ${token}`}})
             socket.emit('elementDelete',{noteId:params.id,id})
-            await axios.delete(`${ApiAddress}/deleteBoardItem/${params.id}/${id}`)
         }
         catch(ex)
-        {}
+        {
+            if(ex.status === 401)
+            {
+                authorizationError()
+            }
+        }
     }
 
     const addImg = (data) =>{
