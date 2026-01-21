@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Board from "./components/board/boardMain/board";
 import Home from "./components/home/home";
 import { useEffect, useState } from "react";

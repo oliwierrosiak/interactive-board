@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import styles from './loggedMenu.module.css'
 import ImgLoadingIcon from '../../../assets/svg/imgLoadingIcon'
 import LoginContext from '../../../context/loginContext'

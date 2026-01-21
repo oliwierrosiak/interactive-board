@@ -25,7 +25,6 @@ import ErrorIcon from '../../../assets/svg/errorIcon'
 import CanvasHistoryContext from '../../../context/canvasHistory'
 import LoggedMenu from '../../nav/loggedMenu/loggedMenu'
 import LoginContext from '../../../context/loginContext'
-import DisplayLoginContext from '../../../context/displayLogin'
 import NotePassword from '../../notePassword/notePassword'
 import refreshToken from '../../auth/refreshToken'
 import formatNoteCode from '../../helpers/formatNoteCode'
@@ -36,9 +35,6 @@ import UnauthorizedActionContext from '../../../context/unauthorizedActionContex
 
 function Board()
 {
-    const boardRef = useRef()
-    const viewport = useRef()
-
     const [elements,setElements] = useState([])
     const [edit,setEdit] = useState(0)
     const [editUpdate,setEditUpdate] = useState(true)
@@ -66,27 +62,24 @@ function Board()
     const mouseMoveListener = useRef()
     const mouseDownTimeStamp = useRef()
     const messages = useRef([])
-
     const scaleRef = useRef(1)
     const translateXRef = useRef(0)
     const translateYRef = useRef(0)
     const panStartX = useRef(0)
     const panStartY = useRef(0)
-
-    const zoomSpeed = 0.001
-    const minScale = window.innerWidth / window.innerHeight / 100
-    const maxScale = 3
+    const boardRef = useRef()
+    const viewport = useRef()
 
     const loginContext = useContext(LoginContext)
-    const displayLoginContext = useContext(DisplayLoginContext)
     const authorizationError = useContext(UnauthorizedActionContext)
-
 
     const navigate = useNavigate()
 
     const params = useParams()
 
-   
+    const zoomSpeed = 0.001
+    const minScale = window.innerWidth / window.innerHeight / 100
+    const maxScale = 3
 
     const elementSetter= (array) =>{
         const localElements = [...elements]

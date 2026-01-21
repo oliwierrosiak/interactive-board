@@ -7,8 +7,6 @@ import axios from 'axios'
 import ApiAddress from '../../../ApiAddress'
 import { useNavigate } from 'react-router-dom'
 import LoginContext from '../../../context/loginContext'
-import DisplayLoginContext from '../../../context/displayLogin'
-import UnauthorizedActionContext from '../../../context/unauthorizedActionContext'
 
 function DeletingAccountConfirm(props)
 {
@@ -22,7 +20,6 @@ function DeletingAccountConfirm(props)
 
     const navigate = useNavigate()
     const loginContext = useContext(LoginContext)
-    const unauthorizedActionContext = useContext(UnauthorizedActionContext)
 
 
     const overlayClicked = (e) =>{

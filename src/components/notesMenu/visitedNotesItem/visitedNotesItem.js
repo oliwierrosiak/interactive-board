@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import styles from './visitedNotesItem.module.css'
 import formatNoteCode from '../../helpers/formatNoteCode'
 import { useNavigate } from 'react-router-dom'

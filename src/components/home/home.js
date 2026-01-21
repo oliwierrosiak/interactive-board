@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import styles from './home.module.css'
 import JoinWithCode from '../joinWithCode/joinWithCode'
 import NotePassword from '../notePassword/notePassword'

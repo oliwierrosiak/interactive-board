@@ -9,8 +9,6 @@ import LoadingIcon from '../../assets/svg/loadingIcon'
 import axios from 'axios'
 import ApiAddress from '../../ApiAddress'
 import refreshToken from '../auth/refreshToken'
-import LoginContext from '../../context/loginContext'
-import DisplayLoginContext from '../../context/displayLogin'
 import formatNoteCode from '../helpers/formatNoteCode'
 import UnauthorizedActionContext from '../../context/unauthorizedActionContext'
 
@@ -46,7 +44,6 @@ function EditNote(props)
         window.addEventListener("keydown",windowEvent)
         inputRef.current.focus()
         inputRef.current.blur()
-        console.log()
         return()=>{
             window.removeEventListener("keydown",windowEvent)
         }

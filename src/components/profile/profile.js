@@ -1,7 +1,7 @@
 import { useContext, useEffect, useRef, useState } from 'react'
 import styles from './profile.module.css'
 import LoginContext from '../../context/loginContext'
-import { Form, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import inputStyles from '../login/login-register.module.css'
 import userDefaultImg from '../../assets/img/userDefault.png'
 import ImgLoadingIcon from '../../assets/svg/imgLoadingIcon'
@@ -14,7 +14,6 @@ import axios from 'axios'
 import ApiAddress from '../../ApiAddress'
 import LoadingIcon from '../../assets/svg/loadingIcon'
 import ErrorIcon from '../../assets/svg/errorIcon'
-import DisplayLoginContext from '../../context/displayLogin'
 import ArrowIcon from '../../assets/svg/arrowIcon'
 import InfoIcon from '../../assets/svg/infoIcon'
 import CloseIcon from '../../assets/svg/closeIcon'
@@ -194,7 +193,6 @@ function Profile()
             setResetPasswordLoading(true)
             const token = await refreshToken()
             const response = await axios.post(`${ApiAddress}/resetPassword`,{email:loginContext.loggedUser.email})
-            console.log(response)
             setResetPasswordLoading(false)
             addMessage('info','Wysłano wiadomość email. Sprawdź swoją skrzynkę')
         }

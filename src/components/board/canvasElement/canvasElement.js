@@ -1,5 +1,5 @@
 import { Canvas, PencilBrush, Path } from 'fabric'
-import { useContext, useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useRef } from 'react'
 import brushColors from './brushColors'
 import cursor from '../../../assets/img/cursor.png'
 import EraserBrush from './eraser'

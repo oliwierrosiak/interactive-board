@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import styles from './loginPage.module.css'
 import DisplayLoginContext from '../../context/displayLogin'
 import ArrowIcon from '../../assets/svg/arrowIcon'
@@ -15,10 +15,6 @@ function LoginPage(props)
     const displayLoginContext = useContext(DisplayLoginContext)
 
     const [loading,setLoading] = useState(false)
-
-    useEffect(()=>{
-        console.log(displayLoginContext)
-    },[displayLoginContext])
 
     return(
         <article className={`${styles.container} ${displayLoginContext.displayLogin?styles.displayContainer:''}`}>

@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import styles from './textMenu.module.css'
 
 function ColorMenu(props)

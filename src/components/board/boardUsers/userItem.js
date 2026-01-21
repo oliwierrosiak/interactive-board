@@ -1,6 +1,6 @@
 import styles from './boardUsers.module.css'
 import userDefaultImg from '../../../assets/img/userDefault.png'
-import React,{ useEffect, useState } from 'react'
+import React,{ useState } from 'react'
 import ImgLoadingIcon from '../../../assets/svg/imgLoadingIcon'
 
 function UserItem(props)
