@@ -172,11 +172,16 @@ function Board()
         {
             try
             {
+                const token = await refreshToken()
+                await axios.post(`${ApiAddress}/updateNoteCanvas/${params.id}`,{canvas},{headers:{"Authorization":`Bearer ${token}`}})
                 socket.emit('canvasUpdate',{canvas:elements[0],noteId:params.id})
-                await axios.post(`${ApiAddress}/updateNoteCanvas/${params.id}`,{canvas})
             }   
             catch(ex)
             {
+                if(ex.status === 401)
+                {
+                    authorizationError()
+                }
             }
         }
     }
