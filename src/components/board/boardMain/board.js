@@ -684,11 +684,16 @@ function Board()
     const saveBoardColor = async()=>{
         try
         {
+            const token = await refreshToken()
+            await axios.post(`${ApiAddress}/updateNoteColor/${params.id}`,{color:boardColor},{headers:{"Authorization":`Bearer ${token}`}})
             socket.emit('boardColorUpdate',{noteId:params.id,color:boardColor})
-            await axios.post(`${ApiAddress}/updateNoteColor/${params.id}`,{color:boardColor})
         }
         catch(ex)
         {
+            if(ex.status === 401)
+            {
+                authorizationError()
+            }
             addMessage('Nie zapisano koloru tła','error')
         }       
     }
@@ -703,11 +708,16 @@ function Board()
     const saveBackgroundTemplate = async() =>{
         try
         {
+            const token = await refreshToken()
+            await axios.post(`${ApiAddress}/updateNoteTemplate/${params.id}`,{template:backgroundTemplate},{headers:{"Authorization":`Bearer ${token}`}})
             socket.emit('boardTemplateUpdate',{noteId:params.id,template:backgroundTemplate})
-            await axios.post(`${ApiAddress}/updateNoteTemplate/${params.id}`,{template:backgroundTemplate})
         }
         catch(ex)
         {
+            if(ex.status === 401)
+            {
+                authorizationError()
+            }
             addMessage('Nie zapisano wzoru tła','error')
         }    
     }
