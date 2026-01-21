@@ -8,6 +8,7 @@ import ApiAddress from '../../../ApiAddress'
 import { useNavigate } from 'react-router-dom'
 import LoginContext from '../../../context/loginContext'
 import DisplayLoginContext from '../../../context/displayLogin'
+import UnauthorizedActionContext from '../../../context/unauthorizedActionContext'
 
 function DeletingAccountConfirm(props)
 {
@@ -21,7 +22,8 @@ function DeletingAccountConfirm(props)
 
     const navigate = useNavigate()
     const loginContext = useContext(LoginContext)
-    const displayLoginContext = useContext(DisplayLoginContext)
+    const unauthorizedActionContext = useContext(UnauthorizedActionContext)
+
 
     const overlayClicked = (e) =>{
         if(e.target.classList.contains(styles.overlay) && !loading)
@@ -65,13 +67,7 @@ function DeletingAccountConfirm(props)
         }
         catch(ex)
         {
-            if(ex.status === 401)
-            {
-                loginContext.logout()
-                navigate('/')
-                displayLoginContext.setDisplayLogin('login')
-            }
-            else if(ex.status === 403)
+            if(ex.status === 403)
             {
                 setError("Błędne hasło")
                 setLoading(false)

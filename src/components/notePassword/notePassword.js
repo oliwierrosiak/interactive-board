@@ -11,6 +11,7 @@ import LoginContext from '../../context/loginContext'
 import DisplayLoginContext from '../../context/displayLogin'
 import refreshToken from '../auth/refreshToken'
 import AccessTokenContext from '../../context/accessTokenContext'
+import UnauthorizedActionContext from '../../context/unauthorizedActionContext'
 
 function NotePassword(props)
 {
@@ -23,9 +24,8 @@ function NotePassword(props)
     const fill = useRef()
     const btn = useRef()
 
-    const loginContext = useContext(LoginContext)
-    const displayLoginContext = useContext(DisplayLoginContext)
     const accessTokenContext = useContext(AccessTokenContext)
+    const unauthorizedActionContext = useContext(UnauthorizedActionContext)
 
     const navigate = useNavigate()
 
@@ -87,17 +87,14 @@ function NotePassword(props)
         }
         catch(ex)
         {
-            console.log(ex)
             if(ex.status === 401)
             {
-                
                 props.setDisplayNotePassword(false)
                 if(props.boardPassword)
                 {
                     navigate('/')   
                 }
-                loginContext.logout()
-                displayLoginContext.setDisplayLogin('login')
+                unauthorizedActionContext()
             }
             if(ex?.status === 403)
             {

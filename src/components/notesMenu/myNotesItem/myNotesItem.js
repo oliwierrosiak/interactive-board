@@ -9,6 +9,7 @@ import refreshToken from '../../auth/refreshToken'
 import LoginContext from '../../../context/loginContext'
 import DisplayLoginContext from '../../../context/displayLogin'
 import formatNoteCode from '../../helpers/formatNoteCode'
+import UnauthorizedActionContext from '../../../context/unauthorizedActionContext'
 
 function MyNotesItem(props)
 {
@@ -16,8 +17,7 @@ function MyNotesItem(props)
 
     const navigate = useNavigate()
 
-    const loginContext = useContext(LoginContext)
-    const displayLogin = useContext(DisplayLoginContext)
+    const unauthorizedActionContext = useContext(UnauthorizedActionContext)
 
     const transformStatus = (status) =>{
         return status === 'private'?"Prywatna":"Publiczna"
@@ -45,8 +45,7 @@ function MyNotesItem(props)
         {
             if(ex.status == 401)
             {
-                loginContext.logout()
-                displayLogin.setDisplayLogin('login')
+                unauthorizedActionContext()
             }
             else
             {

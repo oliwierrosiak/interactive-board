@@ -20,11 +20,11 @@ import InfoIcon from '../../assets/svg/infoIcon'
 import CloseIcon from '../../assets/svg/closeIcon'
 import DeletingAccountConfirm from './deletingAccountConfirm.js/deletingAccountConfirm'
 import logo from '../../assets/img/notely.png'
+import UnauthorizedActionContext from '../../context/unauthorizedActionContext'
 
 function Profile()
 {
     const loginContext = useContext(LoginContext)
-    const displayLogin = useContext(DisplayLoginContext)
 
     const navigate = useNavigate('')
 
@@ -47,6 +47,8 @@ function Profile()
 
     const acceptableImageTypes = ['image/png','image/jpg','image/jpeg','image/pjp','image/jfif','image/jpe','image/pjpeg']
 
+    const unauthorizedActionContext = useContext(UnauthorizedActionContext)
+
     const getData = async()=>{
         try
         {
@@ -65,7 +67,7 @@ function Profile()
             if(ex.status === 401)
             {
                 navigate('/')
-                displayLogin.setDisplayLogin('login')
+                unauthorizedActionContext()
             }
             else
             {
@@ -86,6 +88,11 @@ function Profile()
         }
         catch(ex)
         {
+            if(ex.status === 401)
+            {
+                navigate('/')
+                unauthorizedActionContext()
+            }
             setUserPhotoLoaded(true)
             setPhotoError("Błąd aktualizacji zdjęcia")
         }
@@ -123,6 +130,11 @@ function Profile()
             if(ex.status === 400 && ex.response?.data?.errors?.name)
             {
                 setNameError(ex.response.data.errors.name)
+            }
+            else if(ex.status === 401)
+            {
+                navigate('/')
+                unauthorizedActionContext()
             }
             else
             {

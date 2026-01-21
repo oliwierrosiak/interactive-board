@@ -12,6 +12,7 @@ import refreshToken from '../auth/refreshToken'
 import LoginContext from '../../context/loginContext'
 import DisplayLoginContext from '../../context/displayLogin'
 import formatNoteCode from '../helpers/formatNoteCode'
+import UnauthorizedActionContext from '../../context/unauthorizedActionContext'
 
 function EditNote(props)
 {
@@ -22,8 +23,7 @@ function EditNote(props)
     const [showPassword,setShowPassword] = useState(false)
     const [error,setError] = useState('')
 
-    const loginContext = useContext(LoginContext)
-    const displayLoginContext = useContext(DisplayLoginContext)
+    const unauthorizedActionContext = useContext(UnauthorizedActionContext)
 
     const inputRef = useRef()
     const btnRef = useRef()
@@ -66,16 +66,15 @@ function EditNote(props)
             props.setNotesUpdater(Math.random())
             props.setDisplayNoteEdit(false)
             const authorizedNotes = JSON.parse(sessionStorage.getItem('authorizedNotes')) || []
-            authorizedNotes.push(props.note._id)
+            passwordExist && password && authorizedNotes.push(props.note._id)
             sessionStorage.setItem('authorizedNotes',JSON.stringify(authorizedNotes))
         }
         catch(ex)
         {
             if(ex.status === 401)
             {
-                loginContext.logout()
-                displayLoginContext.setDisplayLogin('login')
                 props.setDisplayNoteEdit(false)
+                unauthorizedActionContext()
             }
             else
             {

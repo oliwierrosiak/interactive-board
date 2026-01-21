@@ -10,6 +10,7 @@ import refreshToken from '../auth/refreshToken'
 import LoginContext from '../../context/loginContext'
 import DisplayLoginContext from '../../context/displayLogin'
 import logo from '../../assets/img/notely.png'
+import UnauthorizedActionContext from '../../context/unauthorizedActionContext'
 
 function JoinWithCode(props)
 {
@@ -53,8 +54,7 @@ function JoinWithCode(props)
     const [loading,setLoading] = useState(false)
     const [error,setError] = useState('')
     const accessTokenContext = useContext(AccessTokenContext)
-    const loginContext = useContext(LoginContext)
-    const displayLoginContext = useContext(DisplayLoginContext)
+    const unauthorizedActionContext = useContext(UnauthorizedActionContext)
 
     const btnRef = useRef()
 
@@ -139,8 +139,7 @@ function JoinWithCode(props)
             if(ex.status === 401)
             {
                 props.setDisplayJoinWithCode(false)
-                loginContext.logout()
-                displayLoginContext.setDisplayLogin('login')
+                unauthorizedActionContext()
             }
             if(ex?.response?.data?.status === 404)
             {

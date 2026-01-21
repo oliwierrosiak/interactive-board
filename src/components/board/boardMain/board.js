@@ -148,8 +148,7 @@ function Board()
             if(ex.status === 401)
             {
                 navigate('/')
-                loginContext.logout()
-                displayLoginContext.setDisplayLogin('login')
+                authorizationError()
             }
             else if(ex.status === 403)
             {
@@ -332,12 +331,18 @@ function Board()
             const data = new FormData()
             data.append('img',file)
             setGlobalLoading(true)
-            const response = await axios.post(`${ApiAddress}/boardImg`,data)
+            const token = await refreshToken()
+            const response = await axios.post(`${ApiAddress}/boardImg`,data,{headers:{"Authorization":`Bearer ${token}`}})
             setGlobalLoading(false)
             addImg(response.data)
         }
         catch(ex)
         {
+            if(ex.status === 401)
+            {
+                navigate('/')
+                authorizationError()
+            }
             setGlobalLoading(false)
             addMessage("Błąd przesyłania pliku","error")
         }

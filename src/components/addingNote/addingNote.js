@@ -80,7 +80,7 @@ function AddingNote(props)
         {
             if(ex.status === 401)
             {
-                 props.setDisplayAddingNote(false)
+                props.setDisplayAddingNote(false)
                 navigate('/')
                 unauthorizedActionContext()
             }
