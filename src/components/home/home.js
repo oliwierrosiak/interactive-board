@@ -18,7 +18,7 @@ function Home()
     const [notesUpdater,setNotesUpdater] = useState(0)
 
     return(
-        <div className={styles.container}>
+        <>
 
                 <Main setDisplayJoinWithCode={setDisplayJoinWithCode} setDisplayAddingNote={setDisplayAddingNote} setDisplayRedirectPageAnimation={setDisplayRedirectPageAnimation} setDisplayNoteEdit={setDisplayNoteEdit} notesUpdater={notesUpdater}/>
 
@@ -32,7 +32,7 @@ function Home()
 
                 <div className={`${styles.redirectPage} ${displayRedirectPageAnimation?styles.redirectPageDisplay:''}`}></div>
 
-        </div>
+        </>
     )
 }
 export default Home

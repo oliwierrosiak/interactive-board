@@ -203,9 +203,15 @@ function Profile()
         }
     }
 
+    // useEffect(()=>{
+    //     addMessage("error","jakis bład testowy elo elo")
+    // },[])
+
     return(
-        <div className={styles.container}>
-            <div className={styles.messageContainer}>
+            
+            <main className={styles.main}>
+
+                <div className={styles.messageContainer}>
                 <div className={`${styles.message} ${displayMessage?styles.displayMessage:''}`}>
                     <div className={styles.icon}>
                         {message.type === "info" && <InfoIcon />}
@@ -223,8 +229,6 @@ function Profile()
                 </div>
 
             </div>
-
-            <main className={styles.main}>
 
                 <div className={`${styles.back} ${nameLoading || !userPhotoLoaded?styles.backWhileLoading:''}`} onClick={e=>!nameLoading && userPhotoLoaded && navigate('/')}>
                 <ArrowIcon class={styles.backSVG}/>
@@ -304,8 +308,6 @@ function Profile()
                 {displayDeletingAccount && <DeletingAccountConfirm setDisplay={setDisplayDeletingAccount}/>}
 
             </main>
-
-        </div>
         
     )
 }

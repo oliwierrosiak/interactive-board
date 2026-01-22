@@ -113,8 +113,6 @@ function ResetPassword()
     },[])
 
     return(
-        <div className={styles.container}>
-           
             <main className={styles.main}>
 
                 <img src={logo} className={styles.logo}/>
@@ -160,7 +158,6 @@ function ResetPassword()
 
                 </div>
             </main>
-        </div>
     )
 }
 
