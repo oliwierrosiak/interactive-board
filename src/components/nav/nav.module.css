@@ -8,6 +8,10 @@
     padding: .8rem 0;
     transition: all .5s ease;
 }
+.nav::selection
+{
+    background:none;
+}
 .navWhileMenuIsDisplaying
 {
     height: 8rem;

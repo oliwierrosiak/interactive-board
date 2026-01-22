@@ -72,10 +72,6 @@
     font-family: "Cause", cursive;
     font-size: 3rem;
 }
-.header::selection
-{
-    background: none;
-}
 .privateNoteButton
 {
     color: white;
@@ -87,10 +83,6 @@
     font-family: "Jost", sans-serif;
     cursor: default;
     margin-top: .5rem;
-}
-.privateNoteButton::selection
-{
-    background: none;
 }
 .code
 {
@@ -131,10 +123,6 @@
     font-family: "Jost", sans-serif;
     cursor: pointer;
 }
-.checkboxDescription::selection
-{
-    background: none;
-}
 .passwordDisabled
 {
     cursor: default;
@@ -161,6 +149,7 @@
     font-family: "Jost", sans-serif;
     font-size: 1.5rem;
     text-align: center;
+    cursor: default;
 }
 .edit
 {
@@ -196,4 +185,12 @@
 .deleteBottomMargin
 {
     margin-bottom: 1rem;
+}
+.error::selection,
+.edit::selection,
+.header::selection,
+.privateNoteButton::selection,
+.checkboxDescription::selection
+{
+    background: none;
 }

@@ -109,10 +109,6 @@
     transition: background .3s ease;
     font-family: "Cause", cursive;
 }
-.input::selection
-{
-    background: none;
-}
 .input:focus
 {
      border: .5rem solid #03A678;
@@ -139,10 +135,6 @@
     align-items: center;
     font-weight: 900;
 }
-.dash::selection
-{
-    background: none;
-}
 .loadingIcon
 {
     width: 2.8rem;
@@ -165,4 +157,10 @@
 .backWhileLoading>.backSVG
 {
     fill: rgb(90, 90, 90) !important;
+}
+.input::selection,
+.dash::selection,
+.btn::selection
+{
+    background:none;
 }

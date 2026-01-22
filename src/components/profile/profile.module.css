@@ -228,6 +228,7 @@
     font-family: "Jost", sans-serif;
     font-size: 1.5rem;
     text-align: center;
+    cursor: default;
 }
 .loadingContainer
 {
@@ -306,7 +307,8 @@
     font-size: 2rem;
     font-weight: 900;
     color: rgb(189, 189, 189);
-  font-family: "Jost", sans-serif;
+    font-family: "Jost", sans-serif;
+    cursor: default;
 }
 .messageContainer
 {
@@ -416,4 +418,11 @@
     background: rgb(53, 53, 53);
     cursor: default;
     border:.4rem solid rgb(53, 53, 53);
+}
+.error::selection,
+.btn::selection,
+.email::selection,
+.changePhoto::selection
+{
+    background: none;
 }

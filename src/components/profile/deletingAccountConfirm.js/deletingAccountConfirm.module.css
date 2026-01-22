@@ -38,10 +38,7 @@
     cursor: default;
     margin-bottom: 2rem;
 }
-.header::selection
-{
-    background: none;
-}
+
 .description
 {
     font-size: 1.2rem;
@@ -50,6 +47,7 @@
     text-align: center;
     cursor: default;
     margin-bottom: 1.8rem;
+    cursor: default;
 }
 .mark
 {
@@ -213,4 +211,12 @@
     font-family: "Jost", sans-serif;
     font-size: 1.5rem;
     text-align: center;
+    cursor: default;
+}
+.btn::selection,
+.error::selection,
+.description::selection,
+.header::selection
+{
+    background: none;
 }

@@ -29,6 +29,7 @@
     font-size: 2.5rem;
     text-shadow: -.15rem .15rem 0 #03A678;
     font-family: "Cause", cursive;
+    cursor: default;
 }
 .headerMargin
 {
@@ -355,6 +356,7 @@
     margin-bottom: .8rem;
     margin-top: .5rem;
     text-align: center;
+    cursor: default;
 }
 .registerForm
 {
@@ -378,6 +380,7 @@
     font-family: "Jost", sans-serif;
     font-size: 1.2rem;
     text-align: center;
+    cursor: default;
 }
 .error3
 {
@@ -388,6 +391,7 @@
     font-size: 1.2rem;
     text-align: center;
     margin-top: .5rem;
+    cursor: default;
 }
 .loading
 {
@@ -414,6 +418,7 @@
     height: 2rem;
     margin-top: .5rem;
     text-align: center;
+    cursor: default;
 }
 .loginBtnMargin
 {
@@ -432,6 +437,20 @@
     color: rgb(205, 205, 205);
 }
 .passwordResetInfo::selection
+{
+    background: none;
+}
+.chooseImg::selection,
+.error::selection,
+.error2::selection,
+.error3::selection,
+.error4::selection,
+.bottomLink::selection,
+.loginBtn::selection,
+.googleLogin::selection,
+.placeholder::selection,
+.passwordForgotten::selection,
+.header::selection
 {
     background: none;
 }

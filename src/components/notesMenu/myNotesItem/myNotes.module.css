@@ -29,10 +29,6 @@
     white-space: nowrap;
     min-width: 0;
 }
-.title::selection
-{
-    background:none;
-}
 .code
 {
     font-size: 1.4rem;
@@ -54,10 +50,6 @@
     justify-content: center;
     align-items: center;
     font-family: "Cause", cursive;
-}
-.status::selection
-{
-    background: none;
 }
 .line
 {
@@ -100,6 +92,7 @@
     align-items: center;
     padding: 0 1rem;
     justify-content: space-between;
+    cursor: default;
 }
 .btnContainer
 {
@@ -142,6 +135,7 @@
     font-size: 1.3rem;
     font-weight: 700;
     font-family: "Jost", sans-serif;
+    cursor: default;
 }
 .deleteConfirmDisplay
 {
@@ -172,4 +166,12 @@
 .privateStatus
 {
     background: #014040;
+}
+.deleteBtn::selection,
+.deleteHeader::selection,
+.code::selection,
+.status::selection,
+.title::selection
+{
+    background: none;
 }

@@ -69,10 +69,7 @@
     font-size: 3rem;
     cursor: default;
 }
-.header::selection
-{
-    background: none;
-}
+
 .inputContainer{
     margin: 0;
 }
@@ -97,6 +94,7 @@
     justify-content: center;
     align-items: center;
     gap:.4rem;
+    cursor: default;
 }
 .info
 {
@@ -117,10 +115,6 @@
     cursor: default;
     z-index: 2;
 }
-.info::selection
-{
-    background: none;
-}
 .explanationContainer
 {
     position: absolute;
@@ -140,13 +134,11 @@
     background: #02735E;
     font-size: .9rem;
     font-weight: 400;
-   
 }
 .info:hover>.explanationContainer
 {
     display: flex;
 }
-
 .visibilityBtn
 {
     font-size: 1.8rem;
@@ -206,10 +198,6 @@
     font-family: "Jost", sans-serif;
     cursor: pointer;
 }
-.checkboxDescription::selection
-{
-    background: none;
-}
 .create
 {
     width: 100%;
@@ -263,6 +251,7 @@
     font-family: "Jost", sans-serif;
     font-size: 1.5rem;
     text-align: center;
+    cursor: default;
 }
 .code
 {
@@ -316,10 +305,6 @@
     transition: opacity .3s ease;
     cursor: default;
 }
-.copySuccessInfo::selection
-{
-    background: none;
-}
 .triangle
 {
     position: absolute;
@@ -344,10 +329,6 @@
     color: rgb(208, 208, 208);
     cursor: default;
 }
-.codeDescription::selection
-{
-    background: none;
-}
 .joinBtn
 {
     width: 50%;
@@ -368,4 +349,17 @@
 {
     background: #F27405;
     border: .4rem solid #F27405;
+}
+.error::selection,
+.joinBtn::selection,
+.create::selection,
+.visibilityBtn::selection,
+.visibilityHeader::selection,
+.info::selection,
+.copySuccessInfo::selection,
+.checkboxDescription::selection,
+.codeDescription::selection,
+.header::selection
+{
+    background: none;
 }

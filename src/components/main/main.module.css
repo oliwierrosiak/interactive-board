@@ -90,7 +90,7 @@
 }
 .buttonHoverWhileMenuIsDisplaying
 {
-        border-radius: 0.675rem;
+    border-radius: 0.675rem;
 }
 .buttonHoverDisplay
 {
@@ -98,7 +98,6 @@
 }
 .menuBtn:hover
 {
-    /* background: #02735E; */
     transform: translate(0,-1rem);
     box-shadow: 0 1rem .2rem 0rem #1c1f1ac6;
 }
@@ -106,4 +105,8 @@
 {
     transform: translate(0,-.5rem);
     box-shadow: 0 .5rem .2rem 0rem #1c1f1ac6;
+}
+.menu::selection
+{
+    background: none;
 }

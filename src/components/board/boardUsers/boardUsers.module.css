@@ -37,6 +37,11 @@
     width: 8rem;
     overflow: hidden;
     color: rgb(130, 130, 130);
+    cursor: default;
+}
+.username::selection
+{
+    background: none;
 }
 .imgContainer
 {
