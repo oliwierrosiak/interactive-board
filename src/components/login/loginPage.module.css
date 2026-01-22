@@ -37,7 +37,7 @@
     width: 100%;
     height: 100%;
     fill: rgb(143, 143, 143);
-    transition:fill .3s ease
+    transition:fill .3s ease;
 }
 .back:hover>.backSVG
 {
@@ -54,10 +54,10 @@
 .backgroundSVG
 {
     position: absolute;
-    height: 80%;
-    width: 50%;
-    bottom: 0;
-    right: 1rem;
+    width: 45rem;
+    top:60vh;
+    translate: 0 -50%;
+    right: 2.5%;
     padding: 3rem;
     opacity: 0;
     transition: opacity 1s ease;
@@ -65,11 +65,19 @@
 .logo
 {
     position: absolute;
-    top:5%;
-    right:7%;
+    top:50vh;
+    right: 25%;
+    translate: 50% -250%;
     width: 35rem;
 }
 .svgDisplay
 {
     opacity: 1;
+}
+@media (max-width:1200px) {
+    .back
+    {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
 }

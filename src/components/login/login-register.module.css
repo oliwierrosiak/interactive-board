@@ -2,8 +2,8 @@
 {
     position: absolute;
     top:50%;
-    translate: 0 -50%;
-    left:8%;
+    translate: -50% -50%;
+    left:25%;
     width: 32rem;
     background-color: #014040;
     border-radius: 2rem;
@@ -391,7 +391,8 @@
     font-size: 1.2rem;
     text-align: center;
     margin-top: .5rem;
-    cursor: default;
+    cursor: default; 
+    
 }
 .loading
 {
@@ -419,6 +420,7 @@
     margin-top: .5rem;
     text-align: center;
     cursor: default;
+
 }
 .loginBtnMargin
 {
@@ -453,4 +455,129 @@
 .header::selection
 {
     background: none;
+}
+@media (max-width:1200px) {
+    .loginForm
+    {
+        width: 34rem;
+        border-radius: 2.5rem;
+        /* gap:2rem; */
+    }
+    .header
+    {
+        font-size: 3rem;
+    }
+    .passwordForgotten
+    {
+        font-size: 1.1rem;
+        margin-top: 1.2rem;
+    }
+    .inputContainer
+    {
+         border:.35rem solid #02735E;
+         border-radius: 1.2rem;
+    }
+    .containerFocused
+    {
+        border:.35rem solid #03A678;
+    }
+    .input
+    {
+        font-size: 2.1rem;
+    }
+    .placeholder{
+        left: .2rem;
+        font-size: 1.7rem;
+    }
+    .placeholderFocused
+    {
+        font-size: 1.4rem;
+            left:2rem;
+    }
+    .eye
+    {
+        width: 2.2rem;
+        height: 2.2rem;
+        right: .6rem;
+    }
+    .passwordInput
+    {
+        padding-right: 3rem;
+    }
+    .loginBtn
+    {
+        border: .4rem solid #03A678;
+    }
+    .loginBtn:hover
+    {
+        border: .4rem solid #F27405;
+    }
+    .loginBtnMargin
+    {
+        margin-top: 1.2rem;
+    }
+    .googleLogin
+    {
+        border: .4rem solid #707070;
+        font-size: 1.4rem;
+    }
+    .googleSVG
+    {
+        width: 1.9rem;
+        height: 1.9rem;
+    }
+    .line
+    {
+        height: .4rem;
+    }
+    .bottomLink
+    {
+        font-size: 1.3rem;
+    }
+    .error4
+    {
+        font-size: 1.6rem;
+        height: 2.2rem;
+    }
+    .error
+    {
+        font-size: 1.4rem;
+        height: 2rem;
+    }
+    .userImg
+    {
+         width: 7.5rem;
+        height: 7.5rem;
+        border:.5rem solid #02735E;
+    }
+    .chooseImg
+    {
+        width: 70%;
+        font-size: 1.8rem;
+        border-radius: 1.2rem;
+        border:.4rem solid #02735E;
+        margin-bottom: 2.6rem;
+        margin-top: 1rem;
+    }
+    .chooseImg:hover
+    {
+        border: .4rem solid #03A678;
+    }
+    .chooseImgWhileLoading:hover
+    {
+        border:.4rem solid #02735E;
+    }
+    .error3
+    {
+        font-size: 1.4rem;
+        margin-top: .6rem;
+    }
+    .error2
+    {   
+        font-size: 1.4rem;
+    }
+    .btnLoading
+    {
+        border: .4rem solid rgb(48, 48, 48) !important;
+    }
 }
