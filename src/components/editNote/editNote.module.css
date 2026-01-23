@@ -6,7 +6,7 @@
     bottom: 0;
     right: 0;
     background-color: #32323252;
-    backdrop-filter: blur(10px);
+     backdrop-filter: blur(12px);
     z-index: 4;
     display: flex;
     justify-content: center;
@@ -15,7 +15,6 @@
 .container
 {
     background-color: #014040;
-    backdrop-filter: blur(10px);
     padding: 2rem 3rem 3rem 3rem;
     display: flex;
     flex-direction: column;
@@ -193,4 +192,59 @@
 .checkboxDescription::selection
 {
     background: none;
+}
+@media (max-width:1200px)
+{
+    .container
+    {
+        width: 42rem;
+    }
+    .h1
+    {
+        font-size: 3.2rem;
+    }
+    .back
+    {
+        top:2.5rem;
+        left:1.5rem;
+    }
+    .code
+    {
+        font-size: 1.7rem;
+    }
+    .privateNoteButton
+    {
+        font-size: 1.4rem;
+    }
+    .checkbox
+    {
+        width: 2.2rem;
+        height: 2.2rem;
+        border: .35rem solid rgb(105, 105, 105);
+        border-radius: .8rem;
+    }
+    .checkboxDescription
+    {
+        font-size: 1.7rem;
+    }
+    .inputContainerDisabled
+    {
+         border:.35rem solid rgb(103, 103, 103);
+    }
+    .error
+    {
+        font-size: 1.7rem;
+    }
+    .checkboxChecked
+    {
+        border: .35rem solid #03A678;
+    }
+    .edit{
+        font-size: 2rem;
+        border: .35rem solid #03A678;
+    }
+    .edit:hover
+    {
+        border: .35rem solid #F27405;
+    }
 }

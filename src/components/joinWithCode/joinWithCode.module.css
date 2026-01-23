@@ -6,7 +6,7 @@
     bottom: 0;
     right: 0;
     background-color: #32323252;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(12px);
     z-index: 4;
     display: flex;
     justify-content: center;
@@ -23,14 +23,13 @@
     justify-content: center;
     border:.6rem solid #03A678;
     border-radius: 2.5rem;
-    gap:2rem;
     position: relative;
 }
 .back
 {
     position: absolute;
-    top:1.5rem;
-    left:1rem;
+    top:3.5rem;
+    left:2rem;
     width: 3rem;
     height: 3rem;
     cursor: pointer;
@@ -48,40 +47,41 @@
 }
 .logo
 {
-    width: 30rem;
+    width: 24rem;
+    margin-bottom: 1.4rem;
 }
 .codeContainer
 {
     width: 100%;
     display: flex;
     align-items: center;
-    gap:.8rem;
-    margin-bottom: .5rem;
+    gap:.5rem;
+    margin-bottom: 1.2rem;
 }
 .btn
 {
     font-size: 2rem;
     font-weight: 900;
-    color: white;
+    color: rgb(193, 193, 193);
     outline: none;
     background: none;
-    padding: .8rem 1.5rem;
-    border-radius: 1rem;
+    padding: .6rem 1.5rem;
+    border-radius: 1.2rem;
     border:0;
     background: rgb(92, 92, 92);
     width: 100%;
-    transition: background .3s ease;
+    transition: all .3s ease;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: rgb(255, 255, 255);
     font-family: "Jost", sans-serif;
-    margin-top: .5rem;
+    margin-top: 1.2rem;
 }
 .btnEnable
 {
     cursor: pointer;
     background: #02735E;
+    color: rgb(255, 255, 255);
 }
 .btnEnable:hover
 {
@@ -94,16 +94,16 @@
 }
 .input
 {
-    font-size: 6rem;
+    font-size: 4rem;
     text-align: center;
-    width: 6rem;
-    padding: .8rem .5rem;
+    width: 4.6rem;
+    padding: .8rem .3rem;
     font-weight: 900;
     outline: none;
     background: rgb(52, 52, 52);
-    border: .5rem solid rgb(92, 92, 92);
+    border: .4rem solid rgb(92, 92, 92);
     color: white;
-    border-radius: 2rem;
+    border-radius: 1.6rem;
     cursor: pointer;
     caret-color: transparent;
     transition: background .3s ease;
@@ -111,7 +111,7 @@
 }
 .input:focus
 {
-     border: .5rem solid #03A678;
+     border: .4rem solid #03A678;
 }
 .input:hover
 {
@@ -128,9 +128,9 @@
 }
 .dash
 {
-    font-size: 5rem;
+    font-size: 4rem;
     height: 100%;
-    color: rgb(114, 114, 114);
+    color: rgb(252, 252, 252);
     display: flex;
     align-items: center;
     font-weight: 900;
@@ -147,7 +147,7 @@
     color: #fc3333;
     font-weight: 700;
     font-family: "Jost", sans-serif;
-    font-size: 2rem;
+    font-size: 1.6rem;
     text-align: center;
 }
 .backWhileLoading
@@ -163,4 +163,47 @@
 .btn::selection
 {
     background:none;
+}
+@media (max-width:1200px)
+{
+    .logo
+    {
+        width: 26rem;
+        margin-bottom: 1.7rem;
+    }
+    .back
+    {
+        top:3.7rem;
+        width: 3.5rem;
+        height: 3.5rem;
+    }
+    .codeContainer
+    {
+        gap:.7rem;
+        margin-bottom: 1.4rem;
+    }
+    .input
+    {
+        font-size: 4.2rem;
+        width: 5.1rem;
+        padding: .8rem .4rem;
+        border: .45rem solid rgb(92, 92, 92);
+    }
+    .input:focus
+    {
+         border: .45rem solid #03A678;
+    }
+    .dash
+    {
+        font-size: 4.2rem;
+    }
+    .btn
+    {
+        font-size: 2.2rem;
+        margin-top: 1.4rem;
+    }
+    .error
+    {
+        font-size: 1.8rem;
+    }
 }

@@ -6,7 +6,7 @@
     bottom: 0;
     right: 0;
     background-color: #32323252;
-    backdrop-filter: blur(10px);
+     backdrop-filter: blur(12px);
     z-index: 4;
     display: flex;
     justify-content: center;
@@ -15,7 +15,6 @@
 .container
 {
     background-color: #014040;
-    backdrop-filter: blur(10px);
     padding: 2rem 3rem 3rem 3rem;
     display: flex;
     flex-direction: column;
@@ -23,13 +22,11 @@
     justify-content: center;
     border:.6rem solid #03A678;
     border-radius: 2.5rem;
-    gap:1.8rem;
     position: relative;
     width: 40rem;
 }
 .containerWidth{
-    width: 65rem;
-    gap:1.5rem;
+    width: 60rem;
 }
 .back
 {
@@ -68,8 +65,8 @@
     font-family: "Cause", cursive;
     font-size: 3rem;
     cursor: default;
+    margin-bottom: 1.5rem;
 }
-
 .inputContainer{
     margin: 0;
 }
@@ -81,6 +78,7 @@
     justify-content: center;
     align-items: center;
     gap:1rem;
+    margin: 1.5rem 0 1.8rem 0;
 }
 .visibilityHeader
 {
@@ -90,7 +88,7 @@
     font-size: 2rem;
     text-align: center;
     font-family: "Cause", cursive;
-        display: flex;
+    display: flex;
     justify-content: center;
     align-items: center;
     gap:.4rem;
@@ -171,10 +169,9 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap:1.8rem .8rem;
+    gap:1.5rem .8rem;
     width: 100%;
-    margin-top: .8rem;
-    margin-bottom: .2rem;
+    margin-bottom: 1rem;
 }
 .checkbox
 {
@@ -209,10 +206,10 @@
     border: .3rem solid #03A678;
     padding: .5rem .8rem .6rem .8rem;
     cursor: pointer;
-    transition: background .3s ease, border .3s ease;
+    transition: all .3s ease, border .3s ease;
     z-index: 3;
     outline: none;
-    margin-top: .2rem;
+    margin-top: 1rem;
 }
 .create:hover
 {
@@ -261,18 +258,19 @@
     font-weight: 900;
     letter-spacing: .1rem;
     font-family: "Cause", cursive;
+    margin-bottom: .8rem;
 }
 .link
 {
     color: white;
     font-weight: 700;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     cursor: pointer;
     display: flex;
     gap:.6rem;
     align-items: center;
     font-family: "Cause", cursive;
-    text-shadow: 0rem 0rem .3rem #000000;
+    text-shadow: .1rem .1rem 0rem #F27405;
 }
 .copyContainer
 {
@@ -321,14 +319,6 @@
 {
     opacity: 1;
 }
-.codeDescription
-{
-    margin: .8rem 0 1.2rem 0;
-    font-size: 1.5rem;
-    text-align: center;
-    color: rgb(208, 208, 208);
-    cursor: default;
-}
 .joinBtn
 {
     width: 50%;
@@ -343,7 +333,7 @@
     transition: background .3s ease, border .3s ease;
     z-index: 3;
     outline: none;
-    margin-top: .2rem;
+    margin-top: 2.5rem;
 }
 .joinBtn:hover
 {
@@ -362,4 +352,116 @@
 .header::selection
 {
     background: none;
+}
+@media (max-width:1200px)
+{
+    .container
+    {
+        width: 42rem;
+    }
+    .header
+    {
+        font-size: 3.2rem;
+        margin-bottom: 2rem;
+    }
+    .back
+    {
+        top:2.5rem;
+    }
+    .visibilityContainer
+    {
+        margin: 1.8rem 0 2rem 0;
+    }
+    .visibilityHeader
+    {
+        font-size: 2.2rem;
+        gap:.5rem;
+    }
+    .info
+    {
+        width: 1.8rem;
+        height: 1.8rem;
+        font-size: 1.2rem;
+    }
+    .infoContainer
+    {
+        padding: .4rem;
+        font-size: .95rem;
+    }
+    .visibilityBtn
+    {
+        font-size: 2rem;
+        padding: .6rem 1rem;
+        border-radius: 1.2rem;
+    }
+    .passwordContainer
+    {
+        gap:2rem .8rem;
+        margin-bottom: 1.5rem;
+    }
+    .checkbox
+    {
+        width: 2.2rem;
+        height: 2.2rem;
+        border-radius: .8rem;
+        border: .35rem solid rgb(105, 105, 105);
+    }
+    .checkboxChecked
+    {
+        border: .35rem solid #03A678;
+    }
+    .checkboxDescription
+    {
+        font-size: 1.7rem;
+    }
+    .create
+    {
+        font-size: 2rem;
+        border: .35rem solid #03A678;
+        margin-top: 1.5rem;
+    }
+    .create:hover
+    {
+        background: #F27405;
+        border: .35rem solid #F27405;
+    }
+    .error
+    {
+        font-size: 1.7rem;
+    }
+    .containerWidth{
+        width: 65rem;
+    }
+    .code
+    {
+        font-size: 4.7rem;
+        text-shadow: .3rem .25rem 0rem #F27405;
+        letter-spacing: .2rem;
+        margin-bottom: 1rem;
+    }
+    .link
+    {
+        font-size: 1.7rem;
+        gap:.7rem;
+        text-shadow: .12rem .12rem 0rem #F27405;
+    }
+    .copyContainer
+    {
+        width: 1.7rem;
+        height: 1.7rem;
+    }
+    .joinBtn
+    {
+        font-size: 2rem;
+        border-radius: 1.2rem;
+        margin-top: 3rem;
+    }
+    .inputContainerDisabled
+    {
+        border:.35rem solid rgb(103, 103, 103) !important;
+    }
+    .btnLoading
+    {
+        border: .4rem solid rgb(48, 48, 48) !important;
+    }
 }

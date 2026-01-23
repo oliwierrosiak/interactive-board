@@ -44,3 +44,20 @@
 {
     background: none;
 }
+@media (max-width:1200px)
+{
+    .container
+    {
+        padding: .5rem 1rem;
+        height: 3.7rem;
+        border-radius: 1.2rem;
+    }
+    .title
+    {
+        font-size: 1.5rem;
+    }
+    .code
+    {
+         font-size: 1.5rem;
+    }
+}

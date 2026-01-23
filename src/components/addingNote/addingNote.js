@@ -26,7 +26,7 @@ function AddingNote(props)
     const [error,setError] = useState('')
     const [showNoteCode,setShowNoteCode] = useState(false)
     const [noteCode,setNoteCode] = useState()
-    const [noteLink,setNoteLink] = useState('')
+    const [noteLink,setNoteLink] = useState()
     const [showCopyInfo,setShowCopyInfo] = useState(false)
     const [noteId,setNoteId] = useState('')
 
@@ -198,8 +198,6 @@ function AddingNote(props)
                             </div>
                         </div>
                     </h2>
-
-                    <p className={styles.codeDescription}>Oto twój kod i link poprzez, który znajomi mogą dołączyć do twojej notatki. Skopiuj go, roześlij i twórz razem coś kreatywnego!</p>
 
                     <button ref={btn2Ref} className={styles.joinBtn} onClick={join}>Dołącz do Notatki</button>
                 </>}

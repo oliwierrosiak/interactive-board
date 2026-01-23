@@ -49,7 +49,7 @@ function JoinWithCode(props)
     })
 
     const [joinBtnEnabled,setJoinBtnEnable] = useState(false)
-    const [loading,setLoading] = useState(false)
+    const [loading,setLoading] = useState(0)
     const [error,setError] = useState('')
     const accessTokenContext = useContext(AccessTokenContext)
     const unauthorizedActionContext = useContext(UnauthorizedActionContext)

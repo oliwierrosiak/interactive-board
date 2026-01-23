@@ -175,3 +175,57 @@
 {
     background: none;
 }
+@media (max-width:1200px)
+{
+    .noteItem
+    {
+        padding: .5rem 1rem;
+        height: 3.7rem;
+        border-radius: 1.2rem;
+        grid-template-columns: 3fr 1fr 1fr .3rem 1.6rem 1.6rem;
+    }
+    .title
+    {
+        font-size: 1.5rem;
+    }
+    .code
+    {
+        font-size: 1.5rem;
+    }
+    .status
+    {
+        font-size: 1.2rem;
+    }
+    .edit
+    {
+        height: 1.6rem;
+        width: 1.6rem;
+    }
+    .delete
+    {
+        width: 1.6rem;
+        height: 1.6rem;
+    }
+    .line
+    {
+        height: 80%;
+    }
+    .deleteConfirm
+    {
+        border-radius: 1.2rem;
+    }
+    .deleteHeader
+    {
+        font-size: 1.4rem;
+    }
+    .btnContainer
+    {
+        gap:1rem;
+    }
+    .deleteBtn
+    {
+        font-size: 1.2rem;
+        border-radius: .8rem;
+        padding: .2rem .6rem;
+    }
+}
