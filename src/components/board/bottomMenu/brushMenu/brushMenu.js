@@ -25,6 +25,11 @@ function BrushMenu(props)
         setTimeout(()=>{
             setDisplay(props.display)
         },10)
+        if(!props.display)
+        {
+            setDisplayWidth(false)
+            setShowColorMenu(false)
+        }
     },[props.display])
 
     const changePencil = (params) =>{

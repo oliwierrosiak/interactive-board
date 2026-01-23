@@ -67,11 +67,20 @@ function ImageMenu(props)
     const [brightness,setBrightness] = useState(brightnessSetter())
     const [displayContrastMenu,setDisplayContrastMenu] = useState(false)
     const [contrast,setContrast] = useState(contrastSetter())
+    const [photoError,setPhotoError] = useState(false)
 
    useEffect(()=>{
         setTimeout(()=>{
             setDisplay(props.display)
         },10)
+        if(!props.display)
+        {
+            setDisplayColorMenu(false)
+            setDisplayBorderWidthMenu(false)
+            setDisplayCornerMenu(false)
+            setDisplayBrightnessMenu(false)
+            setDisplayContrastMenu(false)
+        }
     },[props.display])
 
     useEffect(()=>{
@@ -161,6 +170,14 @@ function ImageMenu(props)
     useEffect(()=>{
         if(props.element)
         {
+            if(props.element.loadingError)
+            {   
+                setPhotoError(true)
+            }
+            else
+            {
+                setPhotoError(false)
+            }
             setBorderColor(borderColorSetter())
             setBorderWidth(borderWidthSetter())
             setBorderRadius(borderRadiusSetter())
@@ -176,12 +193,18 @@ function ImageMenu(props)
         }
     },[])
 
+
+
     return (
         <div className={`${styles.container} ${display?styles.display:''}`}>
+
+            {!photoError && <>
+
             <div className={`${styles.item} ${styles.borderColor}`} onClick={e=>setDisplayColorMenu(!displayColorMenu)}>
                 <div className={`${styles.colorPreview} ${borderColors[borderColor]}`}></div>
                 {displayColorMenu && <BgColorMenu changeBgColor={setBorderColorFunc} border={true} color={colorSetter()} item={props.element}/>}
             </div>
+            
             <div className={`${styles.item} ${styles.borderWidth}`} onClick={e=>setDisplayBorderWidthMenu(!displayBorderWidthMenu)}>
                 <div className={styles.borderWidthPreview}></div>
                 {displayBorderWidthMenu && <ul className={styles.widthMenu}>
@@ -226,9 +249,13 @@ function ImageMenu(props)
 
             <div className={styles.line}></div>
 
+            </>}
             <div className={`${styles.item} ${styles.deleteItem}`} onClick={e=>props.deleteItem(props.element.id)}>
                 <DeleteIcon class={styles.deleteSVG}/>
             </div>
+
+
+            
             
         </div>
     )

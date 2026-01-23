@@ -80,7 +80,7 @@ function Board()
     const zoomSpeed = 0.001
     const minScale = window.innerWidth / window.innerHeight / 100
     const maxScale = 3
-
+    
     const elementSetter= (array) =>{
         const localElements = [...elements]
         if(array.findIndex(x=>x.type === "canvas") == -1)

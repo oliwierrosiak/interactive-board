@@ -114,6 +114,12 @@ function ShapeBottomMenu(props)
         }
     }
 
+    useEffect(()=>{
+        if(!props.display)
+        {
+            setShowColorMenu(false)
+        }
+    },[props.display])
     
 
     return(

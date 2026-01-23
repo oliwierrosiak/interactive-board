@@ -113,3 +113,30 @@
     width: 100%;
     height: 100%;
 }
+@media(max-width:1200px)
+{
+    .menu
+    {
+        height: 4rem;
+        border-radius: 1.2rem;
+        padding: .5rem .8rem;
+    }
+    .item
+    {
+        width: 2.7rem;
+        height: 2.7rem;
+        border-radius: 1.1rem;
+    }
+    .colorPreview
+    {
+        width: 1.8rem;
+        height: 1.8rem;
+        border: .3rem solid rgb(65, 65, 65);
+    }
+    .templatePreview
+    {
+        width: 1.8rem;
+        height: 1.8rem;
+        border: .3rem solid rgb(65, 65, 65);
+    }
+}

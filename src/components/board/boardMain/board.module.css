@@ -13,7 +13,7 @@
     left:50%;
     translate: -50% 0;
     text-align: center;
-    width: 18rem;
+    width: 25rem;
     padding: .6rem 1rem 1rem 1rem;
     background: none;
     z-index: 2;
@@ -50,7 +50,6 @@
     z-index: 2;
     cursor: pointer;
     z-index: 3;
-    border-radius: 0 2rem 2rem 0; 
     transition: transform .3s ease;  
 }
 .logo:hover
@@ -74,18 +73,18 @@
 .dragElement
 {
     position: fixed;
-    top:.2rem;
-    left:.2rem;
-    bottom: .2rem;
-    right: .2rem;
+    top:.5rem;
+    left:.5rem;
+    bottom: .5rem;
+    right: .5rem;
     border-radius: 2rem;
-    background-color: #2a2f2771;
     backdrop-filter: blur(10px);
     z-index: 10;
     display: flex;
     justify-content: center;
     align-items: center;
     gap:1rem;
+    background-color: #2a2f2771;
     border:.5rem dashed #2A2F27;
     color: white;
     font-family: "Cause", cursive;
@@ -114,15 +113,15 @@
 }
 .adjustBottom
 {
-    bottom: 4rem;
+    bottom: 6rem;
 }
 .globalLoading
 {
     position: fixed;
-    bottom: 1rem;
-    right: 1rem;
-    width: 2rem;
-    height: 2rem;
+    bottom: 2rem;
+    right: 2rem;
+    width: 3rem;
+    height: 3rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -150,11 +149,6 @@
 .loadingHide
 {
     opacity: 0;
-}
-.pageLoadingIcon
-{
-    width: 10rem;
-    height: 10rem;
 }
 .loadingError
 {
@@ -185,7 +179,7 @@
     border:.4rem solid rgb(112, 112, 112);
     color: white;
     padding: .5rem 1.2rem;
-    border-radius: 1.5rem;
+    border-radius: 1.2rem;
     cursor: pointer;
     font-weight: 700;
     transition: background .3s ease;
@@ -208,4 +202,59 @@
 .loggedMenu::selection
 {
     background: none;
+}
+@media (max-width:1200px)
+{
+    .loadingError
+    {
+        gap:1.5rem;
+    }
+    .errorLoadingIcon
+    {
+        width: 9rem;
+        height: 9rem;
+    }
+    .loadingError>h2
+    {
+        font-size: 2.7rem;
+    }
+    .loadingError>button
+    {
+        font-size: 2.2rem;
+        padding: .7rem 1.5rem;
+        border-radius: 1.4rem;
+    }
+    .loggedMenu
+    {
+        width: 3.8rem;
+        height: 3.8rem;
+    }
+    .projectName
+    {  
+        font-size: 2rem;
+    }
+    .code
+    {
+        top:4rem;
+        font-size: 1.4rem;
+    }
+    .logo
+    {
+        width: 14rem;
+    }
+    .dragElement
+    {
+        position: fixed;
+        border-radius: 3rem;
+        border:.7rem dashed #2A2F27;
+    }
+    .dragDropIcon
+    {
+        width: 7rem;
+        height: 7rem;
+    }
+    .dropHeader
+    {
+        font-size: 3.5rem;
+    }
 }

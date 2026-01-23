@@ -256,6 +256,14 @@ function TextMenu(props)
         setTimeout(()=>{
             setDisplay(props.display)
         },10)
+        if(!props.display)
+        {
+            setShowFontMenu(false)
+            setShowAlignMenu(false)
+            setShowColorMenu(false)
+            setShowBgColorMenu(false)
+            setShowFontFamilyMenu(false)
+        }
     },[props.display])
 
     return(

@@ -107,7 +107,10 @@ class ImgElementClass extends ElementClass
         this.contrast = value
     }
 
-
+    setLoadingLocalStateError()
+    {
+        this.loadingError = true
+    }
 
 }
 

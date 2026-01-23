@@ -69,7 +69,6 @@
     background-color: rgb(76, 76, 76);
     display: flex;
     flex-direction: column;
-    padding: .3rem 0;
     border-radius: .5rem;
     color: white;
     overflow: hidden;
@@ -267,7 +266,6 @@
     right: 0;
     display: flex;
     flex-direction: column;
-    padding: .3rem 0;
     border-radius: .5rem;
     color: white;
     overflow: hidden;
@@ -280,11 +278,109 @@
 }
 .fontFamilyMenuItem
 {
-    padding: .2rem 0;
+    padding: .3rem 0;
     width: 100%;
     text-align: center;
 }
 .fontFamilyMenuItem:hover
 {
     background-color: rgb(117, 117, 117);
+}
+@media (max-width:1200px) {
+     .container
+    {
+        height: 4rem;
+        border-radius: 1.2rem;
+        padding: .5rem .8rem;
+    }
+    .menuItem
+    {
+        width: 2.7rem;
+        height: 2.7rem;
+        border-radius: 1.1rem;
+    }
+    .boldItem
+    {
+        font-size: 1.6rem;
+    }
+    .fontSizeItem
+    {
+        font-size: 1.6rem;
+    }
+    .fontSizeMenu
+    {
+        bottom: 3.6rem;
+        border-radius: .6rem;
+    }
+    .option
+    {
+        padding: .3rem 0;
+        font-size: 1.3rem;
+    }
+    .italic
+    {
+        font-size: 1.6rem;
+    }
+    .alignMenu
+    {
+        bottom: 3.6rem;
+        border-radius: .6rem;
+    }
+    .colorContainer
+    {
+        bottom: 3.6rem;
+        left:-6.2rem;
+        height: 2.2rem;
+        border-radius: .6rem;
+    }
+    .colorItem
+    {
+        width: 2.2rem;
+        height: 2.2rem;
+    }
+    .colorPreview
+    {
+        width: 1.7rem;
+        height: 1.7rem;
+        border: .3rem solid rgb(65, 65, 65);
+    }
+    .bgColorContainer
+    {
+        bottom: 3.6rem;
+        border-radius: .6rem;
+        padding: .3rem;
+    }
+    .bgColorMenuItem
+    {
+        width: 2rem;
+        height: 2rem;
+        border-radius: .6rem;
+    }
+    .transparentImg
+    {
+        border-radius: .6rem;
+    }
+    .deleteSVG
+    {
+        width: 60%;
+        height: 60%;
+        margin-left: 0rem;
+    }
+    .fontFamilyItem
+    {
+        width: 14rem;
+    }
+    .fontFamilyMenuContainer
+    {
+        bottom: 3.6rem;
+        border-radius: .6rem;
+    }
+    .fontFamilyHeader
+    {
+        font-size: 1.2rem;
+    }
+    .fontFamilyMenuItem
+    {
+        padding: .35rem 0;
+    }
 }
