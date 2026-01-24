@@ -30,7 +30,7 @@ function BottomMenu(props)
     const imgClicked = () =>{
 
         clearElementEdit()
-        props.setShowAddingImgForm(true)
+        props.setShowAddingImgForm(!props.showAddingImgForm)
     }
 
     useEffect(()=>{

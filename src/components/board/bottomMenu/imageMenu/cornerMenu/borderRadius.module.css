@@ -24,3 +24,12 @@
 {
     border-top-right-radius: 2rem;
 }
+@media (max-width:1200px){
+    .borderRadius
+    {
+        bottom: .6rem;
+        left: .6rem;
+        border-top:.5rem solid rgb(255, 255, 255);
+        border-right: .5rem solid rgb(255, 255, 255);
+    }
+}

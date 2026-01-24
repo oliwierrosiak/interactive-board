@@ -45,3 +45,20 @@
     fill: rgb(178, 178, 178);
     transition: fill .3s ease;
 }
+@media(max-width:1200px)
+{
+    .container
+    {
+        height: 18rem;
+        bottom: 3.8rem;
+        gap:.7rem;
+        padding: .8rem 1rem;
+        border-radius: 1.2rem;
+    }
+    .item
+    {
+        width: 3rem;
+        height: 3rem;
+        cursor: pointer;
+    }
+}

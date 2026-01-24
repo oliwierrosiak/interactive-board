@@ -88,3 +88,41 @@
 {
     border: .2rem solid rgb(255, 0, 0) !important;
 }
+@media (max-width:1200px)
+{
+    .container
+    {
+        padding: .7rem .9rem;
+        border-radius: 1.3rem;
+        gap:.5rem;
+        bottom: 0;
+    }
+    .display
+    {
+        bottom: 4.5rem;
+    }
+    .input
+    {
+        font-size: 1.1rem;
+        padding: .3rem .5rem;
+        border: .25rem solid rgb(117, 117, 117);
+    }
+    .input:focus
+    {
+        border: .25rem solid rgb(146, 146, 146);
+    }
+    .line
+    {
+        margin:0 .1rem;
+    }
+    .btn
+    {
+        font-size: 1.1rem;
+        font-weight: 700;
+        padding: .5rem 1rem;
+    }
+    .inputError
+    {
+        border: .25rem solid rgb(255, 0, 0) !important;
+    }
+}

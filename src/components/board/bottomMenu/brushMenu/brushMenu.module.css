@@ -51,7 +51,7 @@
 }
 .filterMenu
 {
- position: absolute;
+    position: absolute;
     bottom: 3.3rem;
     height: 3rem;
     background-color: rgb(76, 76, 76);
@@ -153,4 +153,35 @@
 .width
 {
     position: relative;
+}
+@media(max-width:1200px)
+{
+    .container
+    {
+        height: 4rem;
+        border-radius: 1.2rem;
+        padding: .5rem .8rem;
+    }
+    .item
+    {
+        width: 2.7rem;
+        height: 2.7rem;
+        border-radius: 1.1rem;
+    }
+    .filterMenu
+    {
+        bottom: 3.6rem;
+        border-radius: .6rem;
+    }
+    .bgColorPreview
+    {
+        width: 1.8rem;
+        height: 1.8rem;
+        border: .3rem solid rgb(65, 65, 65);
+    }
+    .brushSvg
+    {   
+        width: 2.9rem;
+        height: 2.9rem;
+    }
 }

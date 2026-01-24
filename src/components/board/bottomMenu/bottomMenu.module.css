@@ -139,4 +139,16 @@
         height: 1.8rem;
         border: .3rem solid rgb(65, 65, 65);
     }
+    .colorPreview
+    {
+        width: 1.8rem;
+        height: 1.8rem;
+        border: .3rem solid rgb(65, 65, 65);
+    }
+    .templatePreview
+    {
+        width: 1.8rem;
+        height: 1.8rem;
+        border: .3rem solid rgb(65, 65, 65);
+    }
 }

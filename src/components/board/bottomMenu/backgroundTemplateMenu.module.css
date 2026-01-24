@@ -25,3 +25,19 @@
 {
     border:.25rem solid rgb(243, 243, 243) !important;
 }
+@media (max-width:1200px) {
+    .container
+    {
+        bottom: 3.6rem;
+        border-radius: .6rem;
+        padding: .6rem;
+        gap:.4rem;
+    }
+    .item
+    {
+        width: 3.2rem;
+        height: 3.2rem;
+        border-radius: .6rem;
+        border:.25rem solid rgb(0, 0, 0);
+    }
+}

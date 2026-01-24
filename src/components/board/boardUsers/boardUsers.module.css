@@ -83,3 +83,24 @@
     width: 80%;
     height: 80%;
 }
+@media(max-width:1200px)
+{
+    .container
+    {
+        width: 14rem;
+        top:5.5rem;
+        gap:.8rem;
+        max-height: 20rem;
+    }
+    .username
+    {
+        font-size: 1.7rem;
+        width: 10rem;
+    }
+    .imgContainer
+    {
+        width: 2.7rem;
+        height: 2.7rem;
+        border: .35rem solid #03A678;
+    }
+}
