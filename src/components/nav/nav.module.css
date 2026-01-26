@@ -15,7 +15,6 @@
 .navWhileMenuIsDisplaying
 {
     height: 16vh;
-    /* background-color: red; */
 }
 .logo
 {
@@ -123,5 +122,47 @@
     .logoWhileMenuIsDisplaying
     {
         width: 16rem;
+    }
+}
+@media (max-width:768px)
+{
+    .logo
+    {
+        width: 55rem;
+    }
+    .nav
+    {
+        height: 32vh;
+    }
+    .loginMenu
+    {
+        top:2rem;
+        right: 2rem;
+        gap:1.4rem;
+    }
+    .line
+    {
+        width: .45rem;
+        height: 4rem;
+    }
+    .loginMenuBtn
+    {
+        font-size: 2.2rem;
+        padding: .8rem 1.2rem;
+        border-radius: 1.8rem;
+        padding-bottom: 1.2rem;
+    }
+    .loginBtn
+    {
+        border:.55rem solid #02735E;
+    }
+    .registerBtn
+    {
+        border:.55rem solid #02735E;
+    }
+    .loginLoading
+    {
+        width: 4rem;
+        height: 4rem;
     }
 }

@@ -151,17 +151,30 @@
 }
 @media (max-width:768px)
 {
-    .main
+    .menu
     {
-        background-image: none;
-        background-color: blue;
+        flex-direction: column;
+        gap:5rem;
+    }
+    .menuBtn
+    {
+        font-size: 3.3rem;
+        width: 50rem;
+        padding: 4rem;
+        border: 1rem solid #03A678;
+        border-radius: 2.5rem;
+    }
+    .overlay
+    {
+        background-color: #2a2f27a9;
     }
 }
-@media(max-width:425px)
+@media(max-width:450px)
 {
     .main
     {
          background-image: none;
         background-color: green;
     }
+
 }

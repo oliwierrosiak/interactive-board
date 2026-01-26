@@ -81,3 +81,30 @@
         height: 2.5rem;
     }
 }
+@media (max-width:768px)
+{
+    .container
+    {
+         background: linear-gradient(-35deg,#02735E 1%,#014040 60%);
+    }
+    .backgroundSVG
+    {
+        display: none;
+    }
+    .logo
+    {
+        left:50%;
+        right: auto;
+        translate: -50% 0;
+        top:3rem;
+        width: auto;
+        height: 13rem;
+    }
+    .back
+    {
+        width: 5rem;
+        height: 5rem;
+        top:7rem;
+        left: 3rem;
+    }
+}

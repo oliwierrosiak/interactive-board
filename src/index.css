@@ -856,3 +856,10 @@ img
 {
   background-image: none;
 }
+@media (max-width:768px)
+{
+    html
+    {
+      font-size: calc(0.65vw + 0.4vh);
+    }
+}
