@@ -82,12 +82,7 @@
     border:.3rem solid #02735E;
     background: #1c1f1a94;
 }
-.registerBtn:hover,
-.loginBtn:hover
-{
-    color: white;
-    background: #02735E;
-}
+
 .loginLoading
 {
     width: 2rem;
@@ -164,5 +159,14 @@
     {
         width: 4rem;
         height: 4rem;
+    }
+}
+@media (hover:hover) and (pointer:fine)
+{
+    .registerBtn:hover,
+    .loginBtn:hover
+    {
+        color: white;
+        background: #02735E;
     }
 }

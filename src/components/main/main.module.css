@@ -96,16 +96,7 @@
 {
     transform: scale(1);
 }
-.menuBtn:hover
-{
-    transform: translate(0,-1rem);
-    box-shadow: 0 1rem .2rem 0rem #1c1f1ac6;
-}
-.btnWhileMenuIsDisplaying:hover
-{
-    transform: translate(0,-.5rem);
-    box-shadow: 0 .5rem .2rem 0rem #1c1f1ac6;
-}
+
 .menu::selection
 {
     background: none;
@@ -143,11 +134,6 @@
     {
         border-radius: .8rem;
     }
-    .menuBtn:hover
-    {
-        transform: translate(0,-1.1rem);
-        box-shadow: 0 1.1rem .2rem 0rem #1c1f1ac6;
-    }
 }
 @media (max-width:768px)
 {
@@ -177,4 +163,25 @@
         background-color: green;
     }
 
+}
+@media (hover:hover) and (pointer:fine)
+{
+    .menuBtn:hover
+    {
+        transform: translate(0,-1rem);
+        box-shadow: 0 1rem .2rem 0rem #1c1f1ac6;
+    }
+    .btnWhileMenuIsDisplaying:hover
+    {
+        transform: translate(0,-.5rem);
+        box-shadow: 0 .5rem .2rem 0rem #1c1f1ac6;
+    }
+    @media(max-width:1200px)
+    {
+        .menuBtn:hover
+        {
+            transform: translate(0,-1.1rem);
+            box-shadow: 0 1.1rem .2rem 0rem #1c1f1ac6;
+        }
+    }
 }

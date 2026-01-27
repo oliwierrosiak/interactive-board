@@ -17,7 +17,7 @@ function PasswordForgotten(props)
     const send = async() =>{
         try
         {
-            // const response = await axios.post(`${ApiAddress}/resetPassword`,{email:inputValue})
+            const response = await axios.post(`${ApiAddress}/resetPassword`,{email:inputValue})
             setSent(true)
             props.setLoading(false)
         }
