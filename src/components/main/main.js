@@ -11,6 +11,8 @@ function Main(props)
     const btn1HoverRef = useRef()
     const btn2HoverRef = useRef()
 
+    let touchStartPosition = 0
+
     const loginContext = useContext(LoginContext)
     const displayLoginContext = useContext(DisplayLoginContext)
 
@@ -62,10 +64,24 @@ function Main(props)
         }
     },[loginContext.logged])
 
+    const touchStart = (e) =>
+    {
+        touchStartPosition = e.touches[0].clientY
+    }
+
+    const touchEnd = (e) =>
+    {
+        const end = e.changedTouches[0].clientY
+        if(e.target.closest('article')?.classList.contains('notesMenu') || loginContext.logged === false) return
+        if(Math.abs(end - touchStartPosition) < window.innerHeight*0.3) return
+
+        setDisplayNotesMenu(end-touchStartPosition < 0)
+    }
+
     return(
         <main className={styles.main}>
             
-            <div className={styles.overlay}>
+            <div className={styles.overlay} onTouchStart={touchStart} onTouchEnd={touchEnd}>
 
                 <LoginPage />
 

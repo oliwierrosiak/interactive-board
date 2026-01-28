@@ -16,8 +16,24 @@ function LoginPage(props)
 
     const [loading,setLoading] = useState(false)
 
+    let touchStart = 0
+
+    const touchStartFunc = (e) =>
+    {
+        touchStart = e.touches[0].clientY
+    }
+
+    const touchEnd = (e) =>
+    {
+        const end = e.changedTouches[0].clientY
+        if(Math.abs(end - touchStart) > window.innerHeight*0.4 && (end-touchStart) < 0)
+        {
+            displayLoginContext.setDisplayLogin('')
+        }
+    }
+
     return(
-        <article className={`${styles.container} ${displayLoginContext.displayLogin?styles.displayContainer:''}`}>
+        <article onTouchStart={touchStartFunc} onTouchEnd={touchEnd} className={`${styles.container} ${displayLoginContext.displayLogin?styles.displayContainer:''}`}>
             <div className={`${styles.back} ${loading?styles.backWhileLoading:''}`} onClick={e=>!loading && displayLoginContext.setDisplayLogin('')}>
                 <ArrowIcon class={styles.backSVG}/>
             </div>

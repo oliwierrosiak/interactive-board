@@ -71,7 +71,7 @@ function NotesMenu(props)
         const touchEnd = e.changedTouches[0].clientX
         if(Math.abs(touchEnd - touchStart) > window.innerWidth * 0.4)
         {
-            if(touchEnd - touchStart > 0)
+            if(touchEnd - touchStart < 0)
             {
                 setResponsiveDisplay('latestVisited')
             }
@@ -83,7 +83,7 @@ function NotesMenu(props)
     }
 
     return(
-        <article onTouchStart={touchStartFunc} onTouchEnd={touchEndFunc} className={`${styles.container} ${props.display?styles.display:''}`}>
+        <article onTouchStart={touchStartFunc} onTouchEnd={touchEndFunc} className={`${styles.container} ${props.display?styles.display:''} notesMenu`}>
             <div className={styles.arrowContainer} onClick={e=>props.setDisplayNotesMenu(!props.display)}>
                 <ArrowIcon class={`${styles.arrow} ${props.display?styles.arrowRotated:''}`}/>
             </div>
@@ -98,8 +98,8 @@ function NotesMenu(props)
             :<>
             
             {smallDevice && <nav className={styles.responsiveNav}>
-                <h2 className={`${styles.smallDeviceHeader} ${responsiveDisplay === "latestVisited" ? styles.headerFocused:''}`} onClick={e=>setResponsiveDisplay('latestVisited')}>Ostatnio Odwiedzone</h2>
                 <h2 className={`${styles.smallDeviceHeader} ${responsiveDisplay === "myNotes" ? styles.headerFocused:''}`} onClick={e=>setResponsiveDisplay('myNotes')}>Twoje Notatki</h2>
+                <h2 className={`${styles.smallDeviceHeader} ${responsiveDisplay === "latestVisited" ? styles.headerFocused:''}`} onClick={e=>setResponsiveDisplay('latestVisited')}>Ostatnio Odwiedzone</h2>
             </nav>}
 
             <section className={`${styles.section} ${styles.latestVisitedSection} ${responsiveDisplay === 'latestVisited'?styles.displayNotesSection:''}`}>
