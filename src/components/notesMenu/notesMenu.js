@@ -10,6 +10,7 @@ import LoginContext from '../../context/loginContext'
 import NoteIcon from '../../assets/svg/noteIcon'
 import MyNotesItem from './myNotesItem/myNotesItem'
 import VisitedNotesItem from './visitedNotesItem/visitedNotesItem'
+import MobileDisplayContext from '../../context/mobileDisplayContext'
 
 function NotesMenu(props)
 {
@@ -19,8 +20,8 @@ function NotesMenu(props)
     const [myNotes,setMyNotes] = useState()
 
     const [responsiveDisplay,setResponsiveDisplay] = useState('myNotes')
-    const [smallDevice,setSmallDevice] = useState(window.innerWidth <= 768)
 
+    const mobileDisplayContext = useContext(MobileDisplayContext)
     const loginContext = useContext(LoginContext)
 
     let touchStart = 0
@@ -45,20 +46,8 @@ function NotesMenu(props)
         }
     }
 
-    const smallDeviceSetter = (e) =>
-    {
-        const smallDevice = window.innerWidth <= 768
-        setSmallDevice(prev=>prev!=smallDevice?smallDevice:prev)
-    }
-
     useEffect(()=>{
         getData()
-        window.addEventListener('resize',smallDeviceSetter)
-        return ()=>
-        {
-            window.removeEventListener('resize',smallDeviceSetter)
-
-        }
     },[props.notesUpdater])
 
     const touchStartFunc = (e) =>
@@ -97,13 +86,13 @@ function NotesMenu(props)
             </div>
             :<>
             
-            {smallDevice && <nav className={styles.responsiveNav}>
+            {mobileDisplayContext.mobileDisplay && <nav className={styles.responsiveNav}>
                 <h2 className={`${styles.smallDeviceHeader} ${responsiveDisplay === "myNotes" ? styles.headerFocused:''}`} onClick={e=>setResponsiveDisplay('myNotes')}>Twoje Notatki</h2>
                 <h2 className={`${styles.smallDeviceHeader} ${responsiveDisplay === "latestVisited" ? styles.headerFocused:''}`} onClick={e=>setResponsiveDisplay('latestVisited')}>Ostatnio Odwiedzone</h2>
             </nav>}
 
             <section className={`${styles.section} ${styles.latestVisitedSection} ${responsiveDisplay === 'latestVisited'?styles.displayNotesSection:''}`}>
-                {!smallDevice && <h2>Ostatnio Odwiedzone</h2>}
+                {!mobileDisplayContext.mobileDisplay && <h2>Ostatnio Odwiedzone</h2>}
                 <div className={styles.notesContainer}>
                     {visited === 404?<div className={styles.noneNotesContainer}>
                         <NoteIcon class={styles.noteIcon}/>
@@ -119,7 +108,7 @@ function NotesMenu(props)
             <div className={styles.line}></div>
 
             <section className={`${styles.section} ${styles.myNotesSection} ${responsiveDisplay === 'myNotes'?styles.displayNotesSection:''}`}>
-                {!smallDevice && <h2 onClick={e=>setResponsiveDisplay('myNotes')}>Twoje Notatki</h2>}
+                {!mobileDisplayContext.mobileDisplay && <h2 onClick={e=>setResponsiveDisplay('myNotes')}>Twoje Notatki</h2>}
                 <div className={styles.notesContainer}>
                     {myNotes === 404?<div className={styles.noneNotesContainer}>
                         <NoteIcon class={styles.noteIcon}/>

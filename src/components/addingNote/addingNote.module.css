@@ -44,10 +44,6 @@
     fill: rgb(108, 108, 108);
     transition:fill .3s ease
 }
-.back:hover>.backSVG
-{
-    fill: #cdcdcd;
-}
 .backWhileLoading
 {
     cursor: default;
@@ -113,6 +109,10 @@
     cursor: default;
     z-index: 2;
 }
+.info:hover>.explanationContainer
+{
+    display: flex;
+}
 .explanationContainer
 {
     position: absolute;
@@ -126,16 +126,11 @@
 {
     width: 12rem;
     padding: .3rem;
-    background-color: red;
     border-radius: 1rem;
     border:.3rem solid #03A678;
     background: #02735E;
     font-size: .9rem;
     font-weight: 400;
-}
-.info:hover>.explanationContainer
-{
-    display: flex;
 }
 .visibilityBtn
 {
@@ -151,15 +146,7 @@
     cursor: pointer;
     transition: background .3s ease;
 }
-.visibilityBtn:hover
-{
-    background:rgb(105, 105, 105);
-}
 .selectedBtn
-{
-    background: #02735E;
-}
-.selectedBtn:hover
 {
     background: #02735E;
 }
@@ -210,11 +197,6 @@
     z-index: 3;
     outline: none;
     margin-top: 1rem;
-}
-.create:hover
-{
-    background: #F27405;
-    border: .3rem solid #F27405;
 }
 .passwordDisabled
 {
@@ -285,10 +267,6 @@
     height: 100%;
     transition: fill .3s ease;
 }
-.copyContainer:hover>.copyIcon
-{
-    fill: #F27405;
-}
 .copySuccessInfo
 {
     position: absolute;
@@ -334,11 +312,6 @@
     z-index: 3;
     outline: none;
     margin-top: 2.5rem;
-}
-.joinBtn:hover
-{
-    background: #F27405;
-    border: .4rem solid #F27405;
 }
 .error::selection,
 .joinBtn::selection,
@@ -420,11 +393,7 @@
         border: .35rem solid #03A678;
         margin-top: 1.5rem;
     }
-    .create:hover
-    {
-        background: #F27405;
-        border: .35rem solid #F27405;
-    }
+    
     .error
     {
         font-size: 1.7rem;
@@ -463,5 +432,204 @@
     .btnLoading
     {
         border: .4rem solid rgb(48, 48, 48) !important;
+    }
+}
+@media(max-width:768px)
+{
+    .overlay
+    {
+        background-color: #3232328a;
+    }
+    .container
+    {
+        padding: 3rem 5rem 5rem 5rem;
+        border:1rem solid #03A678;
+        border-radius: 3.5rem;
+        width: 75rem;
+    }
+    .containerWidth{
+        width: 75rem;
+    }
+    .back
+    {
+        top:3.5rem;
+        left:3rem;
+        width: 5rem;
+        height: 5rem;
+    }
+    .header
+    {
+        font-size: 5rem;
+        margin-bottom: 3.5rem;
+    }
+    .inputContainer{
+        margin: 0;
+    }
+    .visibilityContainer
+    {
+        gap:1.5rem 2rem;
+        margin: 3rem 0 4rem 0;
+    }
+    .visibilityHeader
+    {
+        font-size: 3.8rem;
+        gap:.8rem;
+    }
+    .info
+    {
+        width: 2.8rem;
+        height: 2.8rem;
+        font-size: 2rem;
+        border:.4rem solid white;
+    }
+    .explanationContainer
+    {
+        left:-43rem;
+        top:5rem;
+        width: 60rem;
+        justify-content: flex-end;
+    }
+    .infoContainer
+    {
+        width: 52rem;
+        padding: 1.2rem;
+        border-radius: 2rem;
+        border:.6rem solid #03A678;
+        font-size: 2.5rem;
+        box-shadow: 0 0 2rem 1rem rgba(0, 0, 0, 0.597);
+    }
+    .visibilityBtn
+    {
+        font-size: 3.5rem;
+        padding: .7rem 1.5rem .9rem 1.5rem;
+        border-radius: 2rem;
+    }
+    .passwordContainer
+    {
+        gap:3rem 1.5rem;
+        width: 100%;
+        margin-bottom: 2.5rem;
+    }
+    .checkbox
+    {
+        width: 3.5rem;
+        height: 3.5rem;
+        border-radius: 1.2rem;
+        border: .6rem solid rgb(105, 105, 105);
+    }
+    .checkboxChecked
+    {
+        border: .6rem solid #03A678;
+    }
+    .checkboxDescription
+    {
+        font-size: 2.8rem;
+    }
+    .create
+    {
+        font-size: 3.5rem;
+        border-radius: 2.5rem;
+        border: .7rem solid #03A678;
+        padding: 1rem .8rem 1.3rem .8rem;
+        margin-top: 2.5rem;
+    }
+    .inputContainerDisabled
+    {
+        border:.7rem solid rgb(103, 103, 103) !important;
+    }
+    .btnLoading
+    {
+        border: .7rem solid rgb(48, 48, 48) !important;
+    }
+    .error
+    {
+        font-size: 3rem;
+    }
+    .loading
+    {
+        transform: scale(2) !important;
+    }
+
+    .code
+    {
+        font-size: 8rem;
+        text-shadow: .4rem .35rem 0rem #F27405;
+        letter-spacing: .2rem;
+        margin-bottom: 3rem;
+    }
+    .copyLinkBtn
+    {
+        width: 60%;
+        font-size: 3.5rem;
+        color: white;
+        background: #d06305;
+        border-radius: 2rem;
+        font-weight: 900;
+        padding: .7rem 4rem .8rem 4rem;
+        border: 0;
+        outline: none;
+        position: relative;
+
+    }
+    .copySuccessInfo
+    {
+        top:-7rem;
+        font-size: 2.8rem;
+        padding: .5rem 2rem;
+        border-radius: 1.5rem;
+        box-shadow: 0 0 2rem 1rem rgba(0, 0, 0, 0.523);
+    }
+    .triangle
+    {
+        bottom:-1.2rem;
+        border-right: 1.5rem solid transparent;
+        border-left: 1.5rem solid transparent; 
+        border-top:1.5rem solid #F27405; 
+    }
+    .joinBtn
+    {
+        width: 80%;
+        font-size: 3.5rem;
+        border-radius: 2.5rem;
+        border: .7rem solid #03A678;
+        padding: 1rem .8rem 1.3rem .8rem;
+        margin-top: 6rem;
+    }
+}
+@media (hover:hover) and (pointer:fine)
+{
+    .back:hover>.backSVG
+    {
+        fill: #cdcdcd;
+    }
+    .visibilityBtn:hover
+    {
+        background:rgb(105, 105, 105);
+    }
+    .selectedBtn:hover
+    {
+        background: #02735E;
+    }
+    .create:hover
+    {
+        background: #F27405;
+        border: .3rem solid #F27405;
+    }
+    .copyContainer:hover>.copyIcon
+    {
+        fill: #F27405;
+    }
+    .joinBtn:hover
+    {
+        background: #F27405;
+        border: .4rem solid #F27405;
+    }
+    @media (max-width:1200px)
+    {
+        .create:hover
+        {
+            background: #F27405;
+            border: .35rem solid #F27405;
+        }
     }
 }

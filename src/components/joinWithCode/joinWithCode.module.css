@@ -200,7 +200,7 @@
     }
     .container
     {
-        padding: 3.5rem 5rem 4rem 5rem;
+        padding: 3.5rem 5rem 4.5rem 5rem;
         border:1rem solid #03A678;
         border-radius: 3.5rem;
     }
@@ -219,7 +219,7 @@
     .codeContainer
     {
         gap:1rem;
-        margin-bottom: 3rem;
+        margin-bottom: 2.5rem;
     }
     .btn
     {

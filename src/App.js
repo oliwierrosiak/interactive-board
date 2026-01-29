@@ -12,6 +12,7 @@ import Profile from "./components/profile/profile";
 import ResetPassword from "./components/resetPassword/resetPassword";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import UnauthorizedActionContext from "./context/unauthorizedActionContext";
+import MobileDisplayContext from "./context/mobileDisplayContext";
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
   const [loggedUser,setLoggedUser] = useState({})
   const [loginLoading,setLoginLoading] = useState(true)
   const [displayLogin,setDisplayLogin] = useState('')
+  const [mobileDisplay,setMobileDisplay] = useState(window.innerWidth <= 768)
 
   const getUserData = async() =>{
     try
@@ -38,13 +40,21 @@ function App() {
     }
   }
 
+  const mobileDisplaySetter = () =>
+  {
+      const mobileDisplay = window.innerWidth <= 768
+      setMobileDisplay(prev=>prev!=mobileDisplay?mobileDisplay:prev)
+  }
+
   useEffect(()=>{
     getUserData()
     const redirectToLogin = sessionStorage.getItem('redirectToLogin')
+    window.addEventListener('resize',mobileDisplaySetter)
     if(redirectToLogin)
     {
       setDisplayLogin('login')
       sessionStorage.removeItem('redirectToLogin')
+       window.removeEventListener('resize',mobileDisplaySetter)
     }
   },[])
 
@@ -80,6 +90,7 @@ function App() {
     <AccessTokenContext.Provider value={{accessToken,setAccessToken}}>
     <LoginContext.Provider value={{logged,setLogged,loggedUser,setLoggedUser,loginLoading,logout}}>
     <DisplayLoginContext.Provider value={{displayLogin,setDisplayLogin}}>
+    <MobileDisplayContext.Provider value={{mobileDisplay,setMobileDisplay}}>
 
     <Router>
       <Routes>
@@ -90,6 +101,7 @@ function App() {
       </Routes>
    </Router>
 
+    </MobileDisplayContext.Provider>
     </DisplayLoginContext.Provider>
     </LoginContext.Provider>
    </AccessTokenContext.Provider>

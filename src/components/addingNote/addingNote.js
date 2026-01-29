@@ -14,6 +14,7 @@ import { useNavigate } from 'react-router-dom'
 import formatNoteCode from '../helpers/formatNoteCode'
 import refreshToken from '../auth/refreshToken'
 import UnauthorizedActionContext from '../../context/unauthorizedActionContext'
+import MobileDisplayContext from '../../context/mobileDisplayContext'
 
 function AddingNote(props)
 {
@@ -32,6 +33,7 @@ function AddingNote(props)
 
     const loginContext = useContext(LoginContext)
     const unauthorizedActionContext = useContext(UnauthorizedActionContext)
+    const mobileDisplayContext = useContext(MobileDisplayContext)
 
     const showInfoTimeoutRef = useRef()
     const btnRef = useRef()
@@ -55,6 +57,7 @@ function AddingNote(props)
     },[visibility])
 
     const sendData = async()=>{
+        if(loading) return
         setError('')
         try
         {
@@ -100,7 +103,8 @@ function AddingNote(props)
     }
 
     const copyLink = (e) =>{
-        navigator.clipboard.writeText(noteLink)
+
+        navigator.clipboard?.writeText(noteLink)
         setShowCopyInfo(true)
         showInfoTimeoutRef.current = setTimeout(()=>{
             setShowCopyInfo(false)
@@ -181,13 +185,22 @@ function AddingNote(props)
 
                 {error && <div className={styles.error}>{error}</div>}
 
-                <button ref={btnRef} className={`${styles.create} ${loading?styles.btnLoading:''}`} onClick={sendData}>{loading?<LoadingIcon class={inputStyles.loading} />:"Utwórz Notatkę"}</button>
+                <button ref={btnRef} className={`${styles.create} ${loading?styles.btnLoading:''}`} onClick={sendData}>{loading?<LoadingIcon class={`${inputStyles.loading} ${styles.loading}`} />:"Utwórz Notatkę"}</button>
 
                 </>
                 :
                 <>
                     <h1 className={styles.header}>Notatka utworzona!</h1>
                     <h2 className={styles.code}>{formatNoteCode(noteCode)}</h2>
+                    {mobileDisplayContext.mobileDisplay?
+                    <button className={styles.copyLinkBtn} onClick={copyLink}>
+                        Kopiuj Link
+                        <div className={`${styles.copySuccessInfo} ${showCopyInfo?styles.showCopyInfo:''}`}>
+                                <div className={styles.triangle}></div>
+                                Skopiowano
+                            </div>
+                    </button>
+                    :
                     <h2 className={styles.link} onClick={copyLink}>
                         {noteLink}
                         <div className={styles.copyContainer}>
@@ -197,7 +210,7 @@ function AddingNote(props)
                                 Skopiowano
                             </div>
                         </div>
-                    </h2>
+                    </h2>}
 
                     <button ref={btn2Ref} className={styles.joinBtn} onClick={join}>Dołącz do Notatki</button>
                 </>}
