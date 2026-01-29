@@ -41,10 +41,7 @@
     fill: rgb(108, 108, 108);
     transition:fill .3s ease
 }
-.back:hover>.backSVG
-{
-    fill: #cdcdcd;
-}
+
 .backWhileLoading
 {
     cursor: default;
@@ -166,11 +163,7 @@
     outline: none;
     margin-top: 1.3rem;
 }
-.edit:hover
-{
-    background: #F27405;
-    border: .3rem solid #F27405;
-}
+
 .btnLoading
 {
     background-color: rgb(48, 48, 48) !important;
@@ -243,8 +236,114 @@
         font-size: 2rem;
         border: .35rem solid #03A678;
     }
+}
+@media (max-width:768px)
+{
+    .overlay
+    {
+        background-color: #3232328a;
+    }
+    .container
+    {
+        padding: 3rem 5rem 5rem 5rem;
+        border:1rem solid #03A678;
+        border-radius: 3.5rem;
+        width: 70rem;
+    }
+    .back
+    {
+        top:3.5rem;
+        left:2rem;
+        width: 5rem;
+        height: 5rem;
+    }
+    .header
+    {
+        gap:1.5rem;
+    }
+    .h1
+    {
+        font-size: 5rem;
+    }
+    .privateNoteButton
+    {
+
+        font-size: 2.7rem;
+        padding: .8rem 1.5rem;
+        border-radius: 1.5rem;
+        margin-top: 1rem;
+    }
+    .code
+    {
+        font-size: 3.5rem;
+        color: rgb(206, 206, 206);
+    }
+    .passwordContainer
+    {
+        gap:3.5rem 1.5rem;
+        margin-bottom: 3rem;
+    }
+    .checkbox
+    {
+        width: 3.5rem;
+        height: 3.5rem;
+        border-radius: 1.2rem;
+        border: .6rem solid rgb(105, 105, 105);
+    }
+    .checkboxChecked
+    {
+        border: .6rem solid #03A678;
+    }
+    .checkboxDescription
+    {
+        font-size: 2.8rem;
+    }
+    .inputContainerDisabled
+    {
+        border:.7rem solid rgb(103, 103, 103);
+    }
+    .inputContainer
+    {
+        margin: 4rem;
+    }
+    .error
+    {
+        font-size: 3rem;
+    }
+    .edit
+    {
+        font-size: 3.5rem;
+        border-radius: 2.5rem;
+        border: .7rem solid #03A678;
+        padding: 1rem .8rem 1.3rem .8rem;
+        margin-top: 3rem;
+    }
+
+    .btnLoading
+    {
+        border: .7rem solid rgb(48, 48, 48) !important;
+    }
+    .deleteBottomMargin
+    {
+        margin-bottom: 1rem;
+    }
+}
+@media (hover:hover) and (pointer:fine)
+{
+    .back:hover>.backSVG
+    {
+        fill: #cdcdcd;
+    }
     .edit:hover
     {
-        border: .35rem solid #F27405;
+        background: #F27405;
+        border: .3rem solid #F27405;
+    }
+    @media (max-width:1200px)
+    {
+        .edit:hover
+        {
+            border: .35rem solid #F27405;
+        }
     }
 }
