@@ -17,10 +17,7 @@
     border:.25rem solid rgb(0, 0, 0);
     transition: all .3s ease;
 }
-.item:hover
-{
-    border:.25rem solid rgb(43, 43, 43);
-}
+
 .selected
 {
     border:.25rem solid rgb(243, 243, 243) !important;
@@ -39,5 +36,36 @@
         height: 3.2rem;
         border-radius: .6rem;
         border:.25rem solid rgb(0, 0, 0);
+    }
+}
+@media(max-width:768px)
+{
+    .container
+    {
+        bottom: 6rem;
+        display:grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        background-color: rgb(76, 76, 76);
+        padding:.8rem;
+        gap:.6rem;
+        border-radius: 1.2rem;
+    }
+    .item
+    {
+        width: 5rem;
+        height: 5rem;
+        border-radius: 1rem;
+        border:.4rem solid rgb(0, 0, 0);
+    }
+    .selected
+    {
+        border:.4rem solid rgb(243, 243, 243) !important;
+    }
+}
+@media(hover: hover) and (pointer: fine)
+{
+    .item:hover
+    {
+        border:.25rem solid rgb(133, 133, 133);
     }
 }

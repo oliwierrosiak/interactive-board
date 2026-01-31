@@ -36,10 +36,6 @@
     cursor: pointer;
     transition: all .3s ease;
 }
-.menuItem:hover
-{
-    background-color: rgb(146, 146, 146);
-}
 .boldItem
 {
     font-size: 1.4rem;
@@ -49,10 +45,6 @@
 {
     background-color: #2A2F27;
 
-}
-.marked:hover
-{
-    background-color: #2A2F27;
 }
 .fontSizeItem
 {
@@ -82,10 +74,6 @@
     cursor: pointer;
     padding: .2rem 0;
     font-size: 1.2rem;
-}
-.option:hover
-{
-    background-color: rgb(117, 117, 117);
 }
 .italic
 {
@@ -117,10 +105,6 @@
     justify-content: center;
     align-items: center;
     color: white;
-}
-.alignItem:hover
-{
-    background-color: rgb(117, 117, 117);
 }
 .selected
 {
@@ -155,10 +139,6 @@
     align-items: center;
     font-weight: 700;
     font-size: 1.6rem;
-}
-.colorItem:hover
-{
-    background-color: rgb(117, 117, 117);
 }
 .white
 {
@@ -217,10 +197,6 @@
     height: 1.8rem;
     border: .3rem solid rgb(76, 76, 76);
     border-radius: .5rem;
-}
-.bgColorMenuItem:hover
-{
-    border: .3rem solid rgb(117, 117, 117);
 }
 .transparentImg
 {
@@ -281,10 +257,6 @@
     padding: .3rem 0;
     width: 100%;
     text-align: center;
-}
-.fontFamilyMenuItem:hover
-{
-    background-color: rgb(117, 117, 117);
 }
 @media (max-width:1200px) {
      .container
@@ -382,5 +354,156 @@
     .fontFamilyMenuItem
     {
         padding: .35rem 0;
+    }
+}
+@media(max-width:768px)
+{
+    .container
+    {
+        height: 6rem;
+        padding: .5rem 1rem;
+        border-radius: 1.8rem;
+        gap:1rem;
+    }
+    .menuItem
+    {
+        width: 4.5rem;
+        height: 4.5rem;
+        border-radius: 1.8rem;
+    }
+    .boldItem
+    {
+        font-size: 2.8rem;
+    }
+    .fontSizeItem
+    {
+        font-size: 2.8rem;
+    }
+    .fontSizeMenu
+    {
+        bottom: 6rem;
+        border-radius: 1rem;
+    }
+    .option
+    {
+        padding: .4rem 0;
+        font-size: 2.2rem;
+    }
+    .italic
+    {
+        font-size: 2.8rem;
+    }
+    .align
+    {
+        position: relative;
+    }
+    .alignMenu
+    {
+        bottom: 6rem;
+        border-radius: 1rem;
+    }
+    .alignItem
+    {
+        width: 5rem;
+        height: 5rem;
+    }
+    .color
+    {
+        font-size: 2.8rem;
+    }
+    .colorContainer
+    {
+        bottom: 6rem;
+        left:-14rem;
+        height: 4rem;
+        border-radius: 1rem;
+    }
+    .colorItem
+    {
+        width: 4rem;
+        height: 4rem;
+        font-size: 2.8rem;
+    }
+    .colorPreview
+    {
+        width: 3rem;
+        height: 3rem;
+        border: .4rem solid rgb(65, 65, 65);
+    }
+    .bgColorContainer
+    {
+        bottom: 6rem;
+        border-radius: 1.2rem;
+        padding: .8rem;
+    }
+    .bgColorMenuItem
+    {
+        width: 4rem;
+        height: 4rem;
+        border: .55rem solid rgb(76, 76, 76);
+        border-radius: 1.2rem;
+    }
+    .selectedBgColorItem
+    {
+        border: .6rem solid rgb(217, 217, 217) !important;
+    }
+    .deleteSVG
+    {
+        width: 60%;
+        height: 60%;
+    }
+    .line
+    {
+        width: .5rem;
+        height: 80%;
+    }
+    .fontFamilyItem
+    {
+        width: 25rem;
+    }
+    .fontFamilyMenuContainer
+    {
+        bottom: 6rem;
+        border-radius: 1.2rem;
+    }
+    .fontFamilyHeader
+    {
+        font-size: 2.2rem;
+    }
+    .fontFamilyMenuItem
+    {
+        padding: .5rem 0;
+        font-size: 2rem;
+    }
+}
+@media(hover: hover) and (pointer: fine)
+{
+    .fontFamilyMenuItem:hover
+    {
+        background-color: rgb(117, 117, 117);
+    }
+    .bgColorMenuItem:hover
+    {
+        border: .3rem solid rgb(117, 117, 117);
+    }
+    .colorItem:hover
+    {
+        background-color: rgb(117, 117, 117);
+    }
+    .alignItem:hover
+    {
+        background-color: rgb(117, 117, 117);
+    }
+    .option:hover
+    {
+        background-color: rgb(117, 117, 117);
+    }
+    .marked:hover
+    {
+        background-color: #2A2F27;
+    }
+    .menuItem:hover
+    {
+        background-color: rgb(146, 146, 146);
     }
 }

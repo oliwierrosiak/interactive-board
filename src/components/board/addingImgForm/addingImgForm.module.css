@@ -70,10 +70,7 @@
     text-wrap: nowrap;
     font-family: "Cause", cursive;
 }
-.btn:hover
-{
-    background-color: rgb(146, 146, 146);
-}
+
 .inputFile
 {
     position: absolute;
@@ -124,5 +121,48 @@
     .inputError
     {
         border: .25rem solid rgb(255, 0, 0) !important;
+    }
+}
+@media(max-width:768px)
+{
+    .container
+    {
+    padding: .8rem 1.2rem;
+    border-radius: 1.8rem;
+    gap:1rem;
+    }
+    .display
+    {
+        bottom: 7rem;
+    }
+    .input
+    {
+        font-size: 2rem;
+        padding: .5rem 1rem;
+        border: .4rem solid rgb(117, 117, 117);
+        border-radius: 1.5rem;
+    }
+    .line
+    {
+        width:.5rem;
+        margin:0 .2rem;
+        height: 3rem;
+    }
+    .btn
+    {
+        font-size: 2.2rem;
+        padding: .5rem 1rem;
+        border-radius: 1.2rem;
+    }
+    .inputError
+    {
+        border: .4rem solid rgb(255, 0, 0) !important;
+    }
+}
+@media(hover: hover) and (pointer: fine)
+{
+    .btn:hover
+    {
+        background-color: rgb(146, 146, 146);
     }
 }

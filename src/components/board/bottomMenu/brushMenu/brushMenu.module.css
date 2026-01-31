@@ -41,14 +41,6 @@
 {
     background-color: rgb(76, 76, 76) !important;
 }
-.item:hover
-{
-    background-color: rgb(146, 146, 146);
-}
-.itemHoverDisabled:hover
-{
-    background-color: rgb(117, 117, 117);
-}
 .filterMenu
 {
     position: absolute;
@@ -86,10 +78,6 @@
     transition: fill .3s ease;
     margin-top: .2rem;
     margin-left: .2rem;
-}
-.brushItem:hover>.brushSvg
-{
-    fill: rgb(161, 161, 161);
 }
 .brushSelected>.brushSvg
 {
@@ -183,5 +171,85 @@
     {   
         width: 2.9rem;
         height: 2.9rem;
+    }
+}
+@media(max-width:768px)
+{
+    .container
+    {
+        height:6rem;
+        padding: .5rem 1rem;
+        border-radius: 1.8rem;
+        gap:1rem;
+    }
+    .item
+    {
+        width: 4.5rem;
+        height: 4.5rem;
+        border-radius: 1.8rem;
+    }
+    .filterMenu
+    {
+        bottom: 6rem;
+        height: 4rem;
+        border-radius: 1rem;
+        gap:.5rem;
+    }
+    .bgColorPreview
+    {
+        width: 3rem;
+        height: 3em;
+        border: .4rem solid rgb(65, 65, 65);
+    }
+    .widthPreview
+    {
+        width: .94rem;
+        height: .94rem;
+    }
+    .brushSvg
+    {   
+        width: 4.5rem;
+        height: 4.5rem;
+        margin-top: 0;
+        margin-left: 0;
+    }
+    .line
+    {
+        width: .5rem;
+        margin: 0 .5rem;
+    }
+    .arrow
+    {
+        width: 3rem;
+        height: 3rem;
+    }
+    .arrowRotated
+    {
+        width: 3rem;
+        height: 3rem;
+    }
+    .bottomArrow
+    {
+        width: 3rem;
+        height: 3rem;
+    }
+    .closeElementDisplay
+    {
+        transform: scale(1);
+    }
+}
+@media(hover: hover) and (pointer: fine)
+{
+    .item:hover
+    {
+        background-color: rgb(146, 146, 146);
+    }
+    .itemHoverDisabled:hover
+    {
+        background-color: rgb(117, 117, 117);
+    }
+    .brushItem:hover>.brushSvg
+    {
+        fill: rgb(161, 161, 161);
     }
 }

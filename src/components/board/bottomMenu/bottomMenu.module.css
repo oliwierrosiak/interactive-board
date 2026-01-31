@@ -87,10 +87,6 @@
 {
     position: relative;
 }
-.item:hover
-{
-    background-color: rgb(146, 146, 146);
-}
 .colorPreview
 {
     width: 1.6rem;
@@ -150,5 +146,48 @@
         width: 1.8rem;
         height: 1.8rem;
         border: .3rem solid rgb(65, 65, 65);
+    }
+}
+@media(max-width:768px)
+{
+    .menu
+    {
+        position: fixed;
+        bottom: 2rem;
+        height: 6rem;
+        background-color: rgb(76, 76, 76);
+        border-radius: 1.8rem;
+        gap:1rem;
+        padding: .5rem 1rem;
+    }
+    .item
+    {
+        width: 4.5rem;
+        height: 4.5rem;
+        border-radius: 1.8rem;
+    }
+    .line
+    {
+        width: .5rem;
+        height: 80%;
+    }
+    .colorPreview
+    {
+        width: 3rem;
+        height: 3rem;
+        border: .4rem solid rgb(65, 65, 65);
+    }
+    .templatePreview
+    {
+        width: 3rem;
+        height: 3rem;
+        border: .4rem solid rgb(65, 65, 65);
+    }
+}
+@media(hover:hover) and (pointer: fine)
+{
+    .item:hover
+    {
+        background-color: rgb(146, 146, 146);
     }
 }

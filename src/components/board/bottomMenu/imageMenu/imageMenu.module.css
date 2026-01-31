@@ -33,10 +33,7 @@
     transition: all .3s ease;
     position: relative;
 }
-.item:hover
-{
-    background-color: rgb(146, 146, 146);
-}
+
 .line
 {
     width: .3rem;
@@ -94,10 +91,7 @@
     font-weight: 900;
     font-family: "Jost", sans-serif;
 }
-.borderWidthOption:hover
-{
-    background-color: rgb(117, 117, 117);
-}
+
 .width6
 {
     width: 100%;
@@ -166,10 +160,7 @@
     align-items: center;
     position: relative;
 }
-.cornerMenuItem:hover
-{
-    background-color: rgb(117, 117, 117);
-}
+
 .filterMenu
 {
     position: absolute;
@@ -240,5 +231,109 @@
         bottom: 3.6rem;
         height: 3rem;
         border-radius: .6rem;
+    }
+}
+@media(max-width:768px)
+{
+    .container
+    {
+        height: 6rem;
+        padding: .5rem 1rem;
+        border-radius: 1.8rem;
+        gap:1rem;
+    }
+    .item
+    {
+        width: 4.5rem;
+        height: 4.5rem;
+        border-radius: 1.8rem;
+    }
+    .line
+    {
+        width: .5rem;
+    }
+    .deleteSVG
+    {
+        margin-left: 0;
+        width: 60%;
+        height: 60%;
+    }
+    .colorPreview
+    {
+        width: 3rem;
+        height: 3rem;
+        border-radius: .8rem;
+        border-width: .4rem;
+    }
+    .widthMenu
+    {
+        width: 10rem;
+        bottom: 6rem;
+        border-radius: 1rem;
+    }
+    .borderWidthPreview
+    {
+        height: .8rem;
+    }
+    .borderWidthOption
+    {
+        height: 3.5rem;
+        padding: 0 .8rem;
+        font-size: 2rem;
+        letter-spacing: .2rem;
+    }
+    .width6
+    {
+        height: 1.6rem;
+    }
+    .width5
+    {
+        height: 1.2rem;
+    }
+    .width4
+    {
+        height: 1rem;
+    }
+    .width3
+    {
+        height: .6rem;
+    }
+    .width2
+    {
+        height: .5rem;
+    }
+    .cornerMenu
+    {
+        bottom: 6rem;
+        border-radius: 1rem;
+    }
+    .cornerMenuItem
+    {
+        width: 5rem;
+        height: 5rem;
+    }
+    
+    .filterMenu
+    {
+        bottom: 6rem;
+        height: 4rem;
+        border-radius: 1rem;
+        padding: 1.5rem;
+        gap:.5rem;
+    }
+}
+@media(hover: hover) and (pointer: fine)
+{
+    .cornerMenuItem:hover
+    {
+        background-color: rgb(117, 117, 117);
+    }
+    .borderWidthOption:hover
+    {
+        background-color: rgb(117, 117, 117);
+    }
+    .item:hover
+    {
+        background-color: rgb(146, 146, 146);
     }
 }
