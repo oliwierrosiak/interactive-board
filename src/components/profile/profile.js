@@ -207,7 +207,7 @@ function Profile()
             
             <main className={styles.main}>
 
-                <div className={styles.messageContainer}>
+            <div className={styles.messageContainer}>
                 <div className={`${styles.message} ${displayMessage?styles.displayMessage:''}`}>
                     <div className={styles.icon}>
                         {message.type === "info" && <InfoIcon />}

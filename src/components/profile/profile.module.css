@@ -50,10 +50,6 @@
     cursor: pointer;
     margin-bottom: 1.2rem;
 }
-.userImgContainer:hover
-{
-    border: .6rem solid #03A678;
-}
 .userImgContainer>img
 {
     width: 100%;
@@ -74,10 +70,7 @@
     opacity: 0;
     transition: all .3s ease;
 }
-.userImgContainer:hover>.imageOverlay
-{
-    opacity: 1;
-}
+
 .imageLoading
 {
     position: absolute;
@@ -128,10 +121,6 @@
     opacity: 0;
     cursor: pointer;
 }
-.changePhoto:hover
-{
-    background: #03a678;
-}
 .nameContainer
 {
     width: 100%;
@@ -158,10 +147,7 @@
     fill: rgb(196, 196, 196);
     transition: fill .3s ease;
 }
-.confirm:hover>svg
-{
-    fill: #F27405;
-}
+
 .btn
 {
     width: 100%;
@@ -194,24 +180,9 @@
 {
     margin: 3rem 0;
 }
-.resetBtn:hover
-{
-    background: #03A678;
-    border: .4rem solid #03A678;
-}
-.logoutBtn:hover
-{
-    background: #f7841f;
-    border: .4rem solid #f7841f;
-}
 .deleteBtn
 {
     background: rgb(175, 45, 45);
-    border: .4rem solid rgb(255, 0, 0);
-}
-.deleteBtn:hover
-{
-    background: rgb(255, 0, 0);
     border: .4rem solid rgb(255, 0, 0);
 }
 .logoutIcon
@@ -283,10 +254,6 @@
     height: 100%;
     fill: rgb(143, 143, 143);
     transition:fill .3s ease
-}
-.back:hover>.backSVG
-{
-    fill: #cdcdcd;
 }
 .backWhileLoading
 {
@@ -373,10 +340,6 @@
     fill: rgb(174, 174, 174);
     transition: fill .3s ease;
 }
-.close:hover>svg>path
-{
-    fill: rgb(214, 214, 214);
-}
 .progress
 {
     position: absolute;
@@ -408,19 +371,19 @@
     height: 2.9rem;
     transform: scale(1.5);
 }
-.btnWhileLoading,
-.btnWhileLoading:hover
-{
-    background: rgb(53, 53, 53);
-    cursor: default;
-    border:.4rem solid rgb(53, 53, 53);
-}
 .error::selection,
 .btn::selection,
 .email::selection,
 .changePhoto::selection
 {
     background: none;
+}
+.btnWhileLoading,
+.btnWhileLoading:hover
+{
+    background: rgb(53, 53, 53);
+    cursor: default;
+    border:.4rem solid rgb(53, 53, 53);
 }
 @media(max-width:1200px)
 {
@@ -440,10 +403,6 @@
         height: 16rem;
         border: .9rem solid #02735E;
         margin-bottom: 1.4rem;
-    }
-    .userImgContainer:hover
-    {
-        border: .7rem solid #03A678;
     }
     .changePhoto
     {
@@ -507,5 +466,242 @@
     .errorHeader
     {
         font-size: 2.2rem;
+    }
+}
+@media(max-width:768px)
+{
+    .main
+    {
+        grid-template-columns: 1fr;
+        grid-template-rows: 12rem auto auto;
+        gap:3rem;
+        padding: 2rem 3rem 5rem 3rem;
+        min-height: 100svh;
+        height: 100%;
+    }
+    .logo
+    {
+        height: 10rem;
+        grid-column: 1/2;
+    }
+    .section
+    {
+        padding: 0;
+        height: auto;
+    }
+    .userImgContainer
+    {
+        width: 20rem;
+        height: 20rem;
+        border: 1rem solid #02735E;
+        margin-bottom: 1.5rem;
+    }
+    .changePhoto
+    {
+        margin-top: 1.5rem;
+        margin-bottom: 2.5rem;
+        font-size: 3.5rem;
+        padding: 1.5rem 3rem;
+        border-radius: 2rem;
+    }
+    .nameContainer
+    {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap:1rem 0;
+    }
+    .nameInputContainer
+    {
+        width: 88%;
+    }
+    .confirm
+    {
+        width: 6rem;
+        height: 6rem;
+    }
+    .btn
+    {
+        font-size: 3rem;
+        padding: 2rem;
+        border-radius: 2.5rem;
+        gap:1rem;
+    }
+    .logoutBtn,
+    .resetBtn
+    {
+        background: #02735E;
+        border: .8rem solid #03A678;
+    }
+    .resetBtn
+    {
+        margin-top: 2.8rem;
+    }
+    .logoutBtn
+    {
+        margin: 2.8rem 0;
+    }
+    .deleteBtn
+    {
+        border: .8rem solid rgb(255, 0, 0);
+    }
+    .logoutIcon
+    {
+        width: 4rem;
+        height: 4rem;
+    }
+    .error
+    {
+        font-size: 3rem;
+    }
+    .loadingContainer
+    {
+        grid-row: 2/4;
+        grid-column: 1/2;
+        gap:3rem;
+    }
+    .pageLoading
+    {
+        width: 18rem;
+        height: 18rem;
+    }
+    .errorIcon
+    {
+        width: 16rem;
+        height: 16rem;
+    }
+    .errorHeader
+    {
+        font-size: 3rem;
+    }
+    .back
+    {
+        position: fixed;
+        top:5.5rem;
+        left:3rem;
+        width: 5rem;
+        height: 5rem;
+    }
+    .email
+    {
+        width: 100%;
+        max-width: 100%;
+        font-size: 3.5rem;
+    }
+    .btnWhileLoading,
+    .btnWhileLoading:hover
+    {
+        background: rgb(53, 53, 53);
+        border:.8rem solid rgb(53, 53, 53);
+    }
+    .resetPasswordLoading
+    {
+        width: 4rem;
+        height: 4rem;
+        transform: scale(2.5);
+    }
+    .messageContainer
+    {
+        position: fixed;
+        right: 0rem;
+        left: 0;
+        bottom: 0rem;
+        width:100%;
+    }
+    .message
+    {
+        transform: translate(0,100%);
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        max-width: 100%;
+        padding: 1.5rem 3rem 2.2rem 3rem;
+        border-radius: 0;
+        gap:1em;
+    }
+    .displayMessage
+    {
+        transform: translate(0,0);
+    }
+    .text
+    {
+        font-size: 2.5rem;
+        max-width: 85%;
+    }
+    .icon
+    {
+        width: 4rem;
+        height: 4rem;
+        margin-right: 0;
+    }
+    .close
+    {
+        width: 5rem;
+        height: 5rem;
+        position: absolute;
+        top:calc(50% - .3rem);
+        right: 1rem;
+        translate: 0 -50%;
+    }
+    .close>svg>path
+    {
+        fill: rgb(248, 76, 76);
+    }
+    .progress
+    {
+        height: .7rem;
+        border-radius: 0;
+    }
+}
+
+@media (hover:hover) and (pointer:fine)
+{
+    .userImgContainer:hover
+    {
+        border: .6rem solid #03A678;
+    }
+    .userImgContainer:hover>.imageOverlay
+    {
+        opacity: 1;
+    }
+    .changePhoto:hover
+    {
+        background: #03a678;
+    }
+    .confirm:hover>svg
+    {
+        fill: #F27405;
+    }
+    .resetBtn:hover
+    {
+        background: #03A678;
+        border: .4rem solid #03A678;
+    }
+    .logoutBtn:hover
+    {
+        background: #f7841f;
+        border: .4rem solid #f7841f;
+    }
+    .deleteBtn:hover
+    {
+        background: rgb(255, 0, 0);
+        border: .4rem solid rgb(255, 0, 0);
+    }
+    .back:hover>.backSVG
+    {
+        fill: #cdcdcd;
+    }
+    .close:hover>svg>path
+    {
+        fill: rgb(214, 214, 214);
+    }
+    @media(max-width:1200px)
+    {
+        .userImgContainer:hover
+        {
+            border: .7rem solid #03A678;
+        }
     }
 }
