@@ -104,3 +104,34 @@
         border: .35rem solid #03A678;
     }
 }
+@media (max-width:768px)
+{
+       .container
+    {
+        width: 18rem;
+        top:8rem;
+        left:1.2rem;
+        gap:1rem;
+        max-height: 25rem;
+    }
+    .container::-webkit-scrollbar
+    {
+        width: .8rem;
+        height: 0;
+    }
+    .item
+    {
+        gap:.8rem;
+    }
+    .username
+    {
+        font-size: 2.8rem;
+        width: 13rem;
+    }
+    .imgContainer
+    {
+        width: 4rem;
+        height: 4rem;
+        border: .5rem solid #03A678;
+    }
+}
