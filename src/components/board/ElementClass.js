@@ -14,6 +14,7 @@ class ElementClass
         this.width = config.width?config.width:""
         this.height = config.height?config.height:""
         this.moveHandler = ()=>{}
+        this.touchMoveHandler = ()=>{}
         this.resizeHandler = ()=>{}
     }   
 
@@ -110,7 +111,7 @@ class ElementClass
         return this.class.join(' ')
     }
 
-    moveElement(e,mouseEvent,board,movingLocked,ref)
+    moveElement(mouseEvent,board,movingLocked,ref)
     {
         if(!mouseEvent.buttons)
         {
@@ -121,12 +122,31 @@ class ElementClass
         const top = (mouseEvent.pageY-translateY)/scale/5000*100
         if(left > 0 + ref.clientWidth/5000*100 && left < 100-ref.clientWidth/5000*100)
         {
-            e.style.left = `${left}%`
+            ref.style.left = `${left}%`
             this.left = `${left}%`
         }
         if(top > 0 + ref.clientHeight/5000*100 && top < 100-ref.clientHeight/5000*100)
         {
-            e.style.top = `${top}%`
+            ref.style.top = `${top}%`
+            this.top = `${top}%`
+        }
+
+    }
+
+    touchMoveElement(mouseEvent,ref)
+    {
+        const event = mouseEvent.changedTouches[0]
+        const [translateX,translateY,scale] = this.getTranslate()
+        const left = (event.pageX-translateX)/scale/5000*100
+        const top = (event.pageY-translateY)/scale/5000*100
+        if(left > 0 + ref.clientWidth/5000*100 && left < 100-ref.clientWidth/5000*100)
+        {
+            ref.style.left = `${left}%`
+            this.left = `${left}%`
+        }
+        if(top > 0 + ref.clientHeight/5000*100 && top < 100-ref.clientHeight/5000*100)
+        {
+            ref.style.top = `${top}%`
             this.top = `${top}%`
         }
 
@@ -136,8 +156,10 @@ class ElementClass
     {
         if(e.classList.contains(`editOn`))
         {
-            this.moveHandler = (ev) => this.moveElement(e,ev,board,movingLocked,ref)
+            this.moveHandler = (ev) => this.moveElement(ev,board,movingLocked,ref)
+            this.touchMoveHandler = (ev) => this.touchMoveElement(ev,ref)
             board.addEventListener('mousemove',this.moveHandler) 
+            board.addEventListener('touchmove',this.touchMoveHandler) 
             movingLocked.current = true
             
         }
@@ -145,6 +167,7 @@ class ElementClass
     
     setSolidPosition(board,movingLocked){
         board.removeEventListener('mousemove',this.moveHandler)
+        board.removeEventListener('touchmove',this.touchMoveHandler)
         movingLocked.current = false
     }
 

@@ -87,7 +87,7 @@ function ShapeElement(props)
     },[])
 
     return(
-        <div className={`element ${props.edit.id === props.item.id?'editOn':''} ${styles.element}`} style={props.item.getStyles()} onMouseDown={e=>changePosition(e.target.closest('div'))} onMouseUp={setSolidPosition} onClick={e=>checkEditMode(e.target)} ref={containerRef}>
+        <div className={`element ${props.edit.id === props.item.id?'editOn':''} ${styles.element}`} style={props.item.getStyles()} onMouseDown={e=>changePosition(e.target.closest('div'))} onTouchStart={e=>changePosition(e.target.closest('div'))} onMouseUp={setSolidPosition} onTouchEnd={setSolidPosition} onClick={e=>checkEditMode(e.target)} ref={containerRef}>
 
             {props.item.item === "square" && <SquareIcon class={`${styles.svg} ${props.item.getClass()}`} style={props.item.getRotate()}/>}
             {props.item.item === "square2" && <Square2 class={`${styles.svg} ${props.item.getClass()}`} style={props.item.getRotate()}/>}

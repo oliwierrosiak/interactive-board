@@ -60,6 +60,7 @@ function Board()
 
     const movingLocked = useRef(false)
     const mouseMoveListener = useRef()
+    const touchMoveListener = useRef()
     const mouseDownTimeStamp = useRef()
     const messages = useRef([])
     const scaleRef = useRef(1)
@@ -403,7 +404,30 @@ function Board()
                 
             }
         }
+
+        touchMoveListener.current = (e) =>{
+            const event = e.changedTouches[0]
+            if(!movingLocked.current)
+                {
+                    if(scaleRef.current > minScale + 0.1)
+                    {
+                        if(event.clientY - panStartY.current < 0 && event.clientY - panStartY.current - window.innerHeight > -5000*scaleRef.current)  
+                        {
+                            translateYRef.current = event.clientY - panStartY.current
+                        }  
+                        if(event.clientX - panStartX.current < 0 && event.clientX - panStartX.current - window.innerWidth > -5000*scaleRef.current)
+                        {
+                            translateXRef.current = event.clientX - panStartX.current
+
+                        }
+                        setBoardTransformation()
+                    }
+                
+            }
+        }
+
         boardRef.current.addEventListener('mousemove',mouseMoveListener.current)
+        boardRef.current.addEventListener('touchmove',touchMoveListener.current)
     }
 
     const boardMouseUp = (e) =>
@@ -413,6 +437,7 @@ function Board()
             boardClicked(e)
         }
         boardRef.current.removeEventListener('mousemove',mouseMoveListener.current)
+        boardRef.current.removeEventListener('touchmove',touchMoveListener.current)
     }
 
     const centerBoard = () =>{
@@ -783,7 +808,7 @@ function Board()
 
             <div className={`${styles.viewport} viewport`} ref={viewport} onDragEnter={e=>setDisplayDragElement(true)} >
 
-                <div className={`${styles.board} board ${boardColor} ${backgroundTemplate}`} ref={boardRef} onMouseDown={boardMouseDown} onMouseUp={boardMouseUp}>
+                <div className={`${styles.board} board ${boardColor} ${backgroundTemplate}`}  ref={boardRef} onTouchStart={e=>boardMouseDown(e.changedTouches[0])} onMouseDown={boardMouseDown} onMouseUp={boardMouseUp}>
 
                     {elements.find(x=>x.type === "canvas") != -1 && elements.find(x=>x.type === "canvas")?.content && <CanvasElement item={elements.find(x=>x.type==="canvas")} movingLocked={movingLocked} drawing={edit !== 0 && edit.type === "canvas" && brush.type !== ''} brush={brush}/>}
 

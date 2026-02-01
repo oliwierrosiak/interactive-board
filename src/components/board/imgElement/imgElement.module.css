@@ -93,3 +93,36 @@
     width: 40%;
     height: 40%;
 }
+@media(max-width:768px)
+{
+    .error
+    {
+        background-color: rgb(229, 229, 229);
+        border-radius: 13px;
+        padding: 25px;
+        gap:20px;
+    }
+    .errorContainerSizes
+    {
+        width: 25rem !important;
+        height: 25rem !important;
+    }
+    .error>h2
+    {
+        font-size: 2.5rem;
+    }
+    .errorSVG
+    {
+        width: 60%;
+        height: 60%;
+    }
+    .resize
+    {
+        width: 20px;
+        height: 20px;
+        bottom:-9px;
+        right: -9px;
+        cursor: nw-resize;
+
+    }
+}

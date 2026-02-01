@@ -48,3 +48,15 @@
     left:50%;
     translate: -50% -50%;
 }
+@media(max-width:768px)
+{
+    .resize
+    {
+        width: 20px;
+        height: 20px;
+        bottom:-9px;
+        right: -9px;
+        cursor: nw-resize;
+
+    }
+}
