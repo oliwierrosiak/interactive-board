@@ -73,6 +73,7 @@ function Board()
     const startDistance = useRef(null)
     const startScale = useRef(1)
     const mode = useRef(null)
+    const projectNameRef = useRef()
 
     const loginContext = useContext(LoginContext)
     const authorizationError = useContext(UnauthorizedActionContext)
@@ -532,6 +533,7 @@ function Board()
     }
 
     const onTouchZoomStart = (e) => {
+        projectNameRef.current.blur()
         if (e.touches.length === 2) {
             const [t1, t2] = e.touches
             startDistance.current = Math.hypot(
@@ -867,13 +869,13 @@ function Board()
                 </div>:<></>}
             </div>}
 
-            <input type='text'className={styles.projectName} value={projectName} onChange={e=>setProjectName(e.target.value)} onFocus={projectNameInputFocused} onBlur={projectNameInputBlur} />
+            <input ref={projectNameRef} type='text'className={styles.projectName} value={projectName} onChange={e=>setProjectName(e.target.value)} onFocus={projectNameInputFocused} onBlur={projectNameInputBlur} />
 
             <p className={styles.code}>{Number(noteCode) ? formatNoteCode(noteCode):noteCode}</p>
 
             <div className={`${styles.viewport} viewport`} ref={viewport} onDragEnter={e=>setDisplayDragElement(true)} >
 
-                <div className={`${styles.board} board ${boardColor} ${backgroundTemplate}`}  ref={boardRef} onTouchStart={onTouchZoomStart} onMouseDown={boardMouseDown} onMouseUp={boardMouseUp} onTouchEnd={boardMouseUp}>
+                <div className={`${styles.board} board ${boardColor} ${backgroundTemplate}`} ref={boardRef} onTouchStart={onTouchZoomStart} onMouseDown={boardMouseDown} onMouseUp={boardMouseUp} onTouchEnd={boardMouseUp}>
 
                     {elements.find(x=>x.type === "canvas") != -1 && elements.find(x=>x.type === "canvas")?.content && <CanvasElement item={elements.find(x=>x.type==="canvas")} movingLocked={movingLocked} drawing={edit !== 0 && edit.type === "canvas" && brush.type !== ''} brush={brush}/>}
 
