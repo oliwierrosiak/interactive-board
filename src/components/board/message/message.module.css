@@ -50,10 +50,6 @@
     fill: rgb(174, 174, 174);
     transition: fill .3s ease;
 }
-.close:hover>svg>path
-{
-    fill: rgb(214, 214, 214);
-}
 .progress
 {
     position: absolute;
@@ -91,5 +87,43 @@
     .text
     {
         font-size: 1.4rem;
+    }
+}
+@media(max-width:768px)
+{
+    .message
+    {
+        grid-template-columns: 4rem auto 5rem;
+        max-width: 45rem;
+        padding: .6rem 1rem 1.2rem 1rem;
+        border-radius: 1.5rem;
+        gap:.8rem;
+    }
+    .text
+    {
+        font-size: 2.5rem;
+    }
+    .icon
+    {
+        margin-right: 0rem;
+        height: 4rem;
+        width: 4rem;
+    }
+    .close
+    {
+        width: 5rem;
+        height: 5rem;
+    }
+    .progress
+    {
+        height: .8rem;
+
+    }
+}
+@media(hover: hover) and (pointer: fine)
+{
+    .close:hover>svg>path
+    {
+        fill: rgb(214, 214, 214);
     }
 }

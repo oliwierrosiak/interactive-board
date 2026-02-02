@@ -289,8 +289,10 @@
     }
     .globalLoading
     {
-        width: 4rem;
-        height: 4rem;
+        width: 5rem;
+        height: 5rem;
+        bottom: 2.5rem;
+        right: 1rem;
     }
     .loadingError
     {
@@ -318,20 +320,16 @@
         width: 6rem;
         height: 6rem;
     }
-
-
-.messageContainer
-{
-    gap:.8rem;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    transition: bottom .2s ease;
-}
-.adjustBottom
-{
-    bottom: 6rem;
-}
+    .messageContainer
+    {
+        bottom: 10rem;
+        right: 1rem;
+        gap:1.2rem;
+    }
+    .adjustBottom
+    {
+        bottom: 10rem;
+    }
 
     
 }
