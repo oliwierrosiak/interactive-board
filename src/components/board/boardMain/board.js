@@ -70,6 +70,9 @@ function Board()
     const panStartY = useRef(0)
     const boardRef = useRef()
     const viewport = useRef()
+    const startDistance = useRef(null)
+    const startScale = useRef(1)
+    const mode = useRef(null)
 
     const loginContext = useContext(LoginContext)
     const authorizationError = useContext(UnauthorizedActionContext)
@@ -372,6 +375,43 @@ function Board()
         boardRef.current.style.transform = `translate(${translateXRef.current}px, ${translateYRef.current}px) scale(${scaleRef.current})`
     }
 
+    const touchZoom = (e) => {
+        if (e.touches.length !== 2) return
+        
+        e.preventDefault()
+
+        const [t1, t2] = e.touches
+
+        const distance = Math.hypot(
+            t1.clientX - t2.clientX,
+            t1.clientY - t2.clientY
+        )
+
+        if (!startDistance.current) return
+
+        const newScale = startScale.current * (distance / startDistance.current)
+
+        if(newScale <= minScale + 0.05)
+        {
+            centerBoard()
+            return
+        }
+        if(newScale > maxScale) return
+
+        const rect = viewport.current.getBoundingClientRect()
+        const centerX = (t1.clientX + t2.clientX) / 2 - rect.left
+        const centerY = (t1.clientY + t2.clientY) / 2 - rect.top
+
+        const scaleRatio = newScale / scaleRef.current
+
+        translateXRef.current = centerX - scaleRatio * (centerX - translateXRef.current)
+
+        translateYRef.current = centerY - scaleRatio * (centerY - translateYRef.current)
+
+        scaleRef.current = newScale
+        setBoardTransformation()
+    }
+
     const boardMouseDown = (e) =>
     {
         const event = e.changedTouches?e.changedTouches[0]:e
@@ -407,9 +447,14 @@ function Board()
         }
 
         touchMoveListener.current = (e) =>{
+           
             const event = e.changedTouches[0]
             if(!movingLocked.current)
                 {
+                    if(!mode.current || mode.current === 'pinch')
+                    {
+                        return touchZoom(e)
+                    }
                     if(scaleRef.current > minScale + 0.1)
                     {
                         if(event.clientY - panStartY.current < 0 && event.clientY - panStartY.current - window.innerHeight > -5000*scaleRef.current)  
@@ -428,11 +473,12 @@ function Board()
         }
 
         boardRef.current.addEventListener('mousemove',mouseMoveListener.current)
-        boardRef.current.addEventListener('touchmove',touchMoveListener.current)
+        boardRef.current.addEventListener('touchmove',touchMoveListener.current,{passive:false})
     }
 
     const boardMouseUp = (e) =>
     {
+        startDistance.current = null
         const timeStamp = e.changedTouches?e.timeStamp:e.timeStamp
         if(timeStamp-mouseDownTimeStamp.current < 100)
         {
@@ -451,9 +497,9 @@ function Board()
     const zoom = (e) =>{
         e.preventDefault()
 
-        if(!e.target.classList.contains(`canvas`))
+        if(!e.target.closest(`.${styles.board}`))
         {
-            return 
+            return
         }
 
         const rect = viewport.current.getBoundingClientRect()
@@ -483,6 +529,23 @@ function Board()
             centerBoard()
            
         }
+    }
+
+    const onTouchZoomStart = (e) => {
+        if (e.touches.length === 2) {
+            const [t1, t2] = e.touches
+            startDistance.current = Math.hypot(
+                t1.clientX - t2.clientX,
+                t1.clientY - t2.clientY
+            )
+            mode.current = 'pinch'
+            startScale.current = scaleRef.current
+        }
+        if (e.touches.length === 1)
+        {
+            mode.current = 'pan'
+        }
+        boardMouseDown(e)
     }
 
     const zoomBtn = (value) =>{
@@ -690,8 +753,8 @@ function Board()
         
         if(viewport.current)
         {
-            viewport.current.addEventListener("wheel",zoom,{passive:false})
         }
+        window.addEventListener("wheel",zoom,{passive:false})
         window.addEventListener("resize",centerBoard)
         window.addEventListener('dragstart',blockDragging)
         window.addEventListener('wheel',blockZooming,{passive:false})
@@ -700,7 +763,7 @@ function Board()
             window.removeEventListener("resize",centerBoard)
             window.removeEventListener('dragstart',blockDragging)
             window.removeEventListener('wheel',blockZooming)
-            viewport.current?.removeEventListener("wheel",zoom)
+            window.removeEventListener("wheel",zoom)
             socket.emit("logout", { noteId: params.id })
         }
     },[])
@@ -810,7 +873,7 @@ function Board()
 
             <div className={`${styles.viewport} viewport`} ref={viewport} onDragEnter={e=>setDisplayDragElement(true)} >
 
-                <div className={`${styles.board} board ${boardColor} ${backgroundTemplate}`}  ref={boardRef} onTouchStart={boardMouseDown} onMouseDown={boardMouseDown} onMouseUp={boardMouseUp} onTouchEnd={boardMouseUp}>
+                <div className={`${styles.board} board ${boardColor} ${backgroundTemplate}`}  ref={boardRef} onTouchStart={onTouchZoomStart} onMouseDown={boardMouseDown} onMouseUp={boardMouseUp} onTouchEnd={boardMouseUp}>
 
                     {elements.find(x=>x.type === "canvas") != -1 && elements.find(x=>x.type === "canvas")?.content && <CanvasElement item={elements.find(x=>x.type==="canvas")} movingLocked={movingLocked} drawing={edit !== 0 && edit.type === "canvas" && brush.type !== ''} brush={brush}/>}
 

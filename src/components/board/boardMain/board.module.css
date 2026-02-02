@@ -65,6 +65,7 @@
     width: 5000px;
     height: 5000px;
     border-radius: 10rem;
+    touch-action: none;
 }
 .dragElement
 {
