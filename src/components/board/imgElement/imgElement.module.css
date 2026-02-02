@@ -100,7 +100,7 @@
         background-color: rgb(229, 229, 229);
         border-radius: 13px;
         padding: 25px;
-        gap:20px;
+        gap:.2rem;
     }
     .errorContainerSizes
     {
@@ -113,8 +113,8 @@
     }
     .errorSVG
     {
-        width: 60%;
-        height: 60%;
+        width: 80%;
+        height: 80%;
     }
     .resize
     {

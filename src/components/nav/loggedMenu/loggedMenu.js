@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import styles from './loggedMenu.module.css'
 import ImgLoadingIcon from '../../../assets/svg/imgLoadingIcon'
 import LoginContext from '../../../context/loginContext'
@@ -15,14 +15,37 @@ function LoggedMenu(props)
     const loginContext = useContext(LoginContext)
 
     const [img,setImg] = useState(loginContext.loggedUser.img||defaultImg)
+    const [displayMenu,setDisplayMenu] = useState(false)
 
     const navigate = useNavigate()
 
+    const windowResize = (e) =>
+    {
+        setDisplayMenu(false)
+    }
+
+    const windowTouchStart = (e) =>
+    {
+        if(!e.target.closest(`.${styles.container}`))
+        {
+            setDisplayMenu(false)
+        }
+    }
+
+    useEffect(()=>{
+        window.addEventListener("resize",windowResize)
+        window.addEventListener('touchstart',windowTouchStart)
+        return()=>
+        {
+            window.removeEventListener("resize",windowResize)
+            window.removeEventListener('touchstart',windowTouchStart)
+        }
+    },[])
 
     return(
-        <div className={styles.container}>
+        <div className={styles.container} onTouchStart={e=>setDisplayMenu(!displayMenu)}>
 
-            <div className={styles.menuContainer}>
+            <div className={`${styles.menuContainer} ${displayMenu?styles.displayMenu:''}`}>
                 <div className={styles.menu}>
 
                 <div className={`${styles.imgContainer} ${styles.imgContainer2}`}>

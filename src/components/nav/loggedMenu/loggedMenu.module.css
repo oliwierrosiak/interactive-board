@@ -68,7 +68,7 @@
     transform-origin: 90% 0%;
     transition: all .4s ease;
 }
-.container:hover>.menuContainer
+.displayMenu
 {
     transform: scale(1);
     opacity: 1;
@@ -271,6 +271,11 @@
 }
 @media (hover:hover) and (pointer:fine)
 {
+    .container:hover>.menuContainer
+    {
+        transform: scale(1);
+        opacity: 1;
+    }
     .container:hover>.imgContainer
     {
         border:.3rem solid #03A678;
@@ -288,6 +293,17 @@
         .logoutBtn:hover
         {
             border: .35rem solid #F27405;
+        }
+    }
+    @media(max-width:768px)
+    {
+        .container:hover>.imgContainer
+        {
+            border:.6rem solid #03A678;
+        }
+        .logoutBtn:hover
+        {
+            border: .6rem solid #F27405;
         }
     }
 }
