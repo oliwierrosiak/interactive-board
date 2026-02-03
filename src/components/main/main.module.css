@@ -186,12 +186,12 @@
     }
     .menuBtn
     {
-        font-size: 5rem;
+        font-size: 4.5rem;
         border: 1.4rem solid #03A678;
         border-radius: 4rem;
         width: 80vw;
         height: auto;
-        padding: 3rem 2rem 2rem 2rem;
+        padding: 3rem 3rem 2rem 3rem;
     }
     .menuBtn>p
     {

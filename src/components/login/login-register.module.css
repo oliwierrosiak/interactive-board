@@ -679,6 +679,277 @@
         margin: 0;
     }
 }
+@media(max-width:450px)
+{
+    .loginForm
+    {
+        top:52.5%;
+        translate: 0% -50%;
+        left:0;
+        right: 0;
+        width: 100%;
+        background: none;
+        border:0;
+        box-shadow: none;
+        gap:4rem;
+        padding: 0 4rem;
+        transition: transform 1.5s ease;
+    }
+.loginForm2
+{
+    gap:1rem;
+}
+    .header
+    {
+        font-size: 8rem;
+        text-shadow: -.6rem .4rem 0 #03A678;
+    }
+.headerMargin
+{
+    margin-bottom: 1.2rem;
+}
+    .passwordForgotten
+    {
+        font-size: 3rem;
+        margin-top:3.5rem;
+    }
+    .emailInputContainer
+    {
+        margin-bottom: 6rem;
+        margin-top: 2rem;
+    }
+    .inputContainer
+    {
+        border:.9rem solid #02735E;
+        border-radius: 3rem;
+    }
+    .containerFocused
+    {
+        border:.9rem solid #03A678;
+    }
+    .input
+    {
+        padding: 1.5rem 2rem;
+        font-size: 4.5rem;
+    }
+    .placeholder
+    {
+        padding: 0 2rem;
+        font-size: 3.8rem;
+    }
+    .placeholderFocused
+    {
+        top:-.3rem;
+        left:4rem;
+        font-size: 3rem;
+    }
+    .eye
+    {
+        right: 1.5rem;
+        width: 4.5rem;
+        height: 4.5rem;
+    }
+    .passwordInput
+    {
+        padding-right: 7rem;
+    }
+    .loginBtn
+    {
+        font-size: 4rem;
+        border-radius: 3rem;
+        border: 1rem solid #03A678;
+        padding: 2rem 2.2rem 2.2rem 2.2rem;
+    }
+    .error4
+    {
+        font-size: 4rem;
+        height: 5rem;
+        margin-top: 2rem;
+    }
+    .loginBtnMargin
+    {
+        margin-top: 3.5rem;
+    }
+    .line
+    {
+        width: 95%;
+        height: 1rem;
+        background-color: #707070;
+    }
+    .googleLogin
+    {
+        font-size: 3.2rem;
+        border-radius: 3rem;
+        border: 1rem solid #707070;
+        padding: 2.2rem 2.4rem 2.4rem 2.4rem;
+        gap:1rem;
+    }
+    .googleSVG
+    {
+        width: 3.8rem;
+        height: 3.8rem;
+        padding-bottom: .1rem;
+    }
+    .bottomLink
+    {
+        font-size: 3rem;
+    }
+    .link
+    {
+        text-decoration: underline .3rem #03A678;
+    }
+    .linkWhileLoading
+    {
+        text-decoration: underline .3rem #03A678 !important;
+    }
+
+.page1
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.page2
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top:0;
+    left:0;
+    bottom: 0;
+    right: 0;
+    background-color: #014040;
+}
+.userImg
+{
+    width: 6.5rem;
+    height: 6.5rem;
+    border-radius: 50%;
+    border:.4rem solid #02735E;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: all .3s ease;
+    cursor: pointer;
+}
+.userImg>img
+{
+    width: 100%;
+}
+.imgOverlay
+{
+    position: absolute;
+    top:0;
+    left:0;
+    bottom: 0;
+    right: 0;
+    opacity: 0;
+    background-color: rgba(0, 0, 0, 0.683);
+    backdrop-filter: blur(10px);
+    transition: opacity .3s ease;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.chooseImg
+{
+    width: 60%;
+    font-weight: 900;
+    font-size: 1.4rem;
+    padding: .6rem .7rem;
+    border-radius: 1rem;
+    background: #02735E;
+    outline: none;
+    border:.3rem solid #02735E;
+    color: rgb(212, 212, 212);
+    margin-bottom: 2.8rem;
+    cursor: pointer;
+    transition: all .3s ease;
+    font-family: "Cause", cursive;
+    position: relative;
+    margin-top: .8rem;
+}
+.pageHidden
+{
+    opacity: 0;
+}
+.error
+{
+    width: 100%;
+    color: #fc3333;
+    font-weight: 700;
+    font-family: "Jost", sans-serif;
+    font-size: 1.2rem;
+    height: 1.8rem;
+    margin-bottom: .8rem;
+    margin-top: .5rem;
+    text-align: center;
+    cursor: default;
+}
+.registerForm
+{
+    gap:0;
+}
+.fileInput
+{
+    position: absolute;
+    top:0;
+    left:0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+.error2
+{
+    width: 100%;
+    color: #fc3333;
+    font-weight: 700;
+    font-family: "Jost", sans-serif;
+    font-size: 1.2rem;
+    text-align: center;
+    cursor: default;
+}
+.error3
+{
+    width: 100%;
+    color: #fc3333;
+    font-weight: 700;
+    font-family: "Jost", sans-serif;
+    font-size: 1.2rem;
+    text-align: center;
+    margin-top: .5rem;
+    cursor: default; 
+}
+    .loading
+    {
+        width: 5.5rem;
+        height: 5.5rem;
+        transform: scale(2);
+    }
+    .btnLoading
+    {
+        border: .8rem solid rgb(48, 48, 48) !important;
+    }
+.passwordResetInfo
+{
+    width: 100%;
+    text-align: center;
+    font-size: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap:1.5rem;
+    margin-bottom: 1rem;
+    cursor: default;
+    color: rgb(205, 205, 205);
+}
+}
 @media (hover:hover) and (pointer:fine)
 {
     .loginBtn:hover
