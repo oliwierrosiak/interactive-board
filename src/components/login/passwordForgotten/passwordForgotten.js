@@ -60,7 +60,7 @@ function PasswordForgotten(props)
     },[props.display])
 
     return(
-        <form className={`${styles.loginForm} ${styles.loginForm2} ${props.display?styles.display:''}`} onSubmit={validate}>
+        <form className={`${styles.loginForm} ${styles.loginForm2} ${props.display?styles.display:''}`} onSubmit={validate} noValidate>
             <h1 className={`${styles.header} ${styles.headerMargin}`}>Odzyskiwanie konta</h1>
 
             {sent?<div className={styles.passwordResetInfo}>
@@ -68,7 +68,7 @@ function PasswordForgotten(props)
             </div>
             :
             <div className={`${styles.inputContainer} ${props.loading?styles.inputContainerWhileLoading:''}`} onClick={divClicked}>
-                    <input disabled={props.loading} value={inputValue} onChange={e=>setInputValue(e.target.value)} type='text' onBlur={inputBlur} onFocus={inputFocused} className={styles.input}></input>
+                    <input disabled={props.loading} value={inputValue} onChange={e=>setInputValue(e.target.value)} type='email' onBlur={inputBlur} onFocus={inputFocused} className={styles.input}></input>
                     <div className={styles.placeholder}>Podaj swój adres email</div>
             </div>}
 

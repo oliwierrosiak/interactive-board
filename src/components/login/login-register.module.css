@@ -696,20 +696,21 @@
         transition: transform 1.5s ease;
         
     }
-.loginForm2
-{
-    gap:1rem;
-}
+    .loginForm2
+    {
+        gap:3rem;
+    }
     .header
     {
         font-size: 8rem;
         text-shadow: -.6rem .4rem 0 #03A678;
         padding-bottom: 2rem;
+
     }
-.headerMargin
-{
-    margin-bottom: 1.2rem;
-}
+    .headerMargin
+    {
+        margin-bottom: 0rem;
+    }
     .passwordForgotten
     {
         font-size: 3rem;
@@ -819,23 +820,18 @@
         margin-bottom: 5rem;
         margin-top: 2.5rem;
     }
-.error
-{
-    font-size: 3rem;
-    height: 4rem;
-    margin-bottom: 2rem;
-    margin-top: 1.5rem;
-}
-.error2
-{
-    width: 100%;
-    color: #fc3333;
-    font-weight: 700;
-    font-family: "Jost", sans-serif;
-    font-size: 1.2rem;
-    text-align: center;
-    cursor: default;
-}
+    .error
+    {
+        font-size: 3rem;
+        height: 4rem;
+        margin-bottom: 2rem;
+        margin-top: 1.5rem;
+
+    }
+    .error2
+    {
+        font-size: 3.5rem;
+    }
     .error3
     {
         font-size: 3.5rem;
@@ -851,18 +847,12 @@
     {
         border: .8rem solid rgb(48, 48, 48) !important;
     }
-.passwordResetInfo
-{
-    width: 100%;
-    text-align: center;
-    font-size: 1.2rem;
-    display: flex;
-    flex-direction: column;
-    gap:1.5rem;
-    margin-bottom: 1rem;
-    cursor: default;
-    color: rgb(205, 205, 205);
-}
+    .passwordResetInfo
+    {
+        font-size: 3rem;
+        gap:5rem;
+        margin-bottom: 2rem;
+    }
 }
 @media (hover:hover) and (pointer:fine)
 {
@@ -989,6 +979,10 @@
         .link:hover
         {
             text-decoration: underline .4rem #F27405;
+        }
+        .chooseImg:hover
+        {
+            border: 1rem solid #03A678;
         }
     }
 }
