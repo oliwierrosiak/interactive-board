@@ -184,6 +184,10 @@
         gap:5rem;
         top:55%;
     }
+    .menuWhileMenuIsDisplaying
+    {
+        flex-direction: column;
+    }
     .menuBtn
     {
         font-size: 4.5rem;

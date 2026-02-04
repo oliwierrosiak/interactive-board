@@ -307,5 +307,8 @@
 }
 @media(max-width:450px)
 {
-   
+    .arrowContainer
+    {
+        display: none;
+    }
 }

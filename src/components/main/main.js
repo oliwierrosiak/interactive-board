@@ -11,7 +11,8 @@ function Main(props)
     const btn1HoverRef = useRef()
     const btn2HoverRef = useRef()
 
-    let touchStartPosition = 0
+    let touchStartPositionY = 0
+    let touchStartPositionX = 0
 
     const loginContext = useContext(LoginContext)
     const displayLoginContext = useContext(DisplayLoginContext)
@@ -52,7 +53,7 @@ function Main(props)
     }
 
     useEffect(()=>{
-        if(loginContext.logged)
+        if(loginContext.logged && window.innerWidth > 450)
         {
             setDisplayNotesMenu(true)
             
@@ -66,16 +67,33 @@ function Main(props)
 
     const touchStart = (e) =>
     {
-        touchStartPosition = e.touches[0].clientY
+        touchStartPositionY = e.touches[0].clientY
+        touchStartPositionX = e.touches[0].clientX
     }
 
     const touchEnd = (e) =>
     {
-        const end = e.changedTouches[0].clientY
-        if(e.target.closest('article')?.classList.contains('notesMenu') || loginContext.logged === false) return
-        if(Math.abs(end - touchStartPosition) < window.innerHeight*0.3) return
+        if(window.innerWidth > 450)
+        {
+            const end = e.changedTouches[0].clientY
+            if(e.target.closest('article')?.classList.contains('notesMenu') || loginContext.logged === false) return
+            if(Math.abs(end - touchStartPositionY) < window.innerHeight*0.3) return
 
-        setDisplayNotesMenu(end-touchStartPosition < 0)
+            setDisplayNotesMenu(end-touchStartPositionY < 0)
+        }
+        else
+        {
+            const end = e.changedTouches[0].clientX
+            if(e.target.closest('article')?.classList.contains('notesMenu') || loginContext.logged === false) return
+            if(Math.abs(end - touchStartPositionX) < window.innerWidth*0.6) return
+
+            if(end-touchStartPositionX > 0)
+            {
+                setDisplayNotesMenu(true)
+
+            }
+        }
+       
     }
 
     return(
@@ -85,7 +103,7 @@ function Main(props)
 
                 <LoginPage />
 
-                <Nav displayNotesMenu={displayNotesMenu}/>
+                <Nav displayNotesMenu={displayNotesMenu} setDisplayNotesMenu={setDisplayNotesMenu}/>
 
                 <header className={`${styles.menu} ${displayNotesMenu?styles.menuWhileMenuIsDisplaying:''}`}>
                 <button className={`${styles.menuBtn} ${displayNotesMenu?styles.btnWhileMenuIsDisplaying:''}`} onMouseEnter={e=>btnHovered('1')} onMouseLeave={btnUnHover} onClick={codeClicked}>

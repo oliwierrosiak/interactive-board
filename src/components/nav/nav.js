@@ -1,10 +1,11 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import styles from './nav.module.css'
 import DisplayLoginContext from '../../context/displayLogin'
 import LoginContext from '../../context/loginContext'
 import ImgLoadingIcon from '../../assets/svg/imgLoadingIcon'
 import LoggedMenu from './loggedMenu/loggedMenu'
 import logo from '../../assets/img/notely.png'
+import MenuIcon from '../../assets/svg/menuIcon'
 
 function Nav(props)
 {
@@ -14,6 +15,9 @@ function Nav(props)
 
     return(
         <nav className={`${styles.nav} ${props.displayNotesMenu?styles.navWhileMenuIsDisplaying:''}`}>
+
+            {loginContext.logged && <div className={styles.menu} onClick={e=>props.setDisplayNotesMenu(true)}><MenuIcon /></div>}
+
             <img src={logo} className={`${styles.logo} ${props.displayNotesMenu?styles.logoWhileMenuIsDisplaying:''}`}/>
 
             <div className={styles.loginMenu}>
