@@ -11,11 +11,12 @@ import NoteIcon from '../../assets/svg/noteIcon'
 import MyNotesItem from './myNotesItem/myNotesItem'
 import VisitedNotesItem from './visitedNotesItem/visitedNotesItem'
 import MobileDisplayContext from '../../context/mobileDisplayContext'
+import logo from '../../assets/img/notely.png'
 
 function NotesMenu(props)
 {
     const [loading,setLoading] = useState(true)
-    const [error,setError] = useState(false)
+    const [error,setError] = useState(1)
     const [visited,setVisited] = useState()
     const [myNotes,setMyNotes] = useState()
 
@@ -77,6 +78,13 @@ function NotesMenu(props)
                 <ArrowIcon class={`${styles.arrow} ${props.display?styles.arrowRotated:''}`}/>
             </div>
 
+            <header className={styles.header} onClick={e=>props.setDisplayNotesMenu(false)}>
+                <img src={logo} className={styles.logo}></img>
+                <div className={styles.back} >
+                    <ArrowIcon class={styles.backArrow}/>
+                </div>
+            </header>
+
             {loading?<div className={styles.loadingContainer}><LoadingIcon class={styles.loading}/></div>
             :
             (error?
@@ -85,10 +93,10 @@ function NotesMenu(props)
                 <h2 className={styles.errorHeader}>Wystąpił błąd serwera</h2>
             </div>
             :<>
-            
+
             {mobileDisplayContext.mobileDisplay && <nav className={styles.responsiveNav}>
-                <h2 className={`${styles.smallDeviceHeader} ${responsiveDisplay === "myNotes" ? styles.headerFocused:''}`} onClick={e=>setResponsiveDisplay('myNotes')}>Twoje Notatki</h2>
-                <h2 className={`${styles.smallDeviceHeader} ${responsiveDisplay === "latestVisited" ? styles.headerFocused:''}`} onClick={e=>setResponsiveDisplay('latestVisited')}>Ostatnio Odwiedzone</h2>
+                <h2 className={`${styles.smallDeviceHeader} ${responsiveDisplay === "myNotes" ? styles.headerFocused:''}`} onClick={e=>setResponsiveDisplay('myNotes')}>Twoje <br className={styles.br}></br> Notatki</h2>
+                <h2 className={`${styles.smallDeviceHeader} ${responsiveDisplay === "latestVisited" ? styles.headerFocused:''}`} onClick={e=>setResponsiveDisplay('latestVisited')}>Ostatnio <br className={styles.br}></br> Odwiedzone</h2>
             </nav>}
 
             <section className={`${styles.section} ${styles.latestVisitedSection} ${responsiveDisplay === 'latestVisited'?styles.displayNotesSection:''}`}>
