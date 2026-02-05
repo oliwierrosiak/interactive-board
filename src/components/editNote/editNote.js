@@ -113,7 +113,7 @@ function EditNote(props)
                     {props.note.visibility === 'private' && <div className={styles.privateNoteButton}>Notatka Prywatna</div>}
                 </header>
 
-                <div className={`${inputStyles.inputContainer} ${styles.inputContainer} ${inputStyles.emailInputContainer} ${loading?inputStyles.inputContainerWhileLoading:''} ${props.note.visibility === "private"?styles.deleteBottomMargin:''}`} onClick={divClicked}>
+                <div className={`${inputStyles.inputContainer} ${styles.inputContainer} ${inputStyles.emailInputContainer} ${loading?inputStyles.inputContainerWhileLoading:''} ${props.note.visibility === "private"?styles.privateNoteMargin:''}`} onClick={divClicked}>
                     <input ref={inputRef} disabled={loading} value={title} onChange={e=>setTitle(e.target.value)} type='text' onBlur={inputBlur} onFocus={inputFocused} className={inputStyles.input}></input>
                     <div className={inputStyles.placeholder}>Edytuj nazwę</div>
                 </div>
