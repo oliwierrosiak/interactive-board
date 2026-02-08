@@ -13,7 +13,7 @@ import UnauthorizedActionContext from '../../context/unauthorizedActionContext'
 
 function NotePassword(props)
 {
-    const [loading,setLoading] = useState(0)
+    const [loading,setLoading] = useState(false)
     const [showPassword,setShowPassword] = useState(false)
     const [password,setPassword] = useState('')
     const [error,setError] = useState('')
