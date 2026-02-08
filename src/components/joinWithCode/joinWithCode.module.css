@@ -254,6 +254,62 @@
         margin-bottom: 1rem;
     }
 }
+@media(max-width:450px)
+{
+    .overlay
+    {
+        background-color: #252525a9;
+    }
+    .container
+    {
+        padding: 3.5rem 5rem 4.5rem 5rem;
+        border:1rem solid #03A678;
+        border-radius: 5rem;
+        width: 92vw;
+    }
+    .back
+    {
+        top:6rem;
+        left:2rem;
+        width: 6rem;
+        height: 6rem;
+    }
+    .logo
+    {
+        width: 60vw;
+        margin-bottom: 4.5rem;
+    }
+    .codeContainer
+    {
+        margin-bottom: 3rem;
+    }
+    .btn
+    {
+        font-size: 4.2rem;
+        padding: 1.3rem .8rem 1.8rem .8rem;
+        border-radius: 3rem;
+        margin-top: 3rem;
+    }
+    .input
+    {
+        font-size: 6.5rem;
+        width: 7rem;
+        border-radius: 2.2rem;
+    }
+    .dash
+    {
+        font-size: 6rem;
+    }
+    .loadingIcon
+    {
+        width: 6.2rem;
+        height: 6.2rem;
+    }
+    .error
+    {
+        margin-bottom: 0;
+    }
+}
 @media (hover:hover) and (pointer:fine)
 {
     .back:hover>.backSVG
