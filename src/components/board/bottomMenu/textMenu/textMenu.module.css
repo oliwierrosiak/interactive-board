@@ -476,6 +476,126 @@
         font-size: 2rem;
     }
 }
+@media(max-width:450px)
+{
+.container
+{
+    height: 6rem;
+    padding: .5rem 1rem;
+    border-radius: 1.8rem;
+    gap:1rem;
+}
+.menuItem
+{
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 1.8rem;
+}
+.boldItem
+{
+    font-size: 2.8rem;
+}
+.fontSizeItem
+{
+    font-size: 2.8rem;
+}
+.fontSizeMenu
+{
+    bottom: 6rem;
+    border-radius: 1rem;
+}
+.option
+{
+    padding: .4rem 0;
+    font-size: 2.2rem;
+}
+.italic
+{
+    font-size: 2.8rem;
+}
+.align
+{
+    position: relative;
+}
+.alignMenu
+{
+    bottom: 6rem;
+    border-radius: 1rem;
+}
+.alignItem
+{
+    width: 5rem;
+    height: 5rem;
+}
+.color
+{
+    font-size: 2.8rem;
+}
+.colorContainer
+{
+    bottom: 6rem;
+    left:-14rem;
+    height: 4rem;
+    border-radius: 1rem;
+}
+.colorItem
+{
+    width: 4rem;
+    height: 4rem;
+    font-size: 2.8rem;
+}
+.colorPreview
+{
+    width: 3rem;
+    height: 3rem;
+    border: .4rem solid rgb(65, 65, 65);
+}
+    .bgColorContainer
+    {
+        bottom: 9.5rem;
+        border-radius: 2rem;
+        padding: 1rem;
+    }
+    .bgColorMenuItem
+    {
+        width: 6rem;
+        height: 6rem;
+        border: .8rem solid rgb(76, 76, 76);
+        border-radius: 1.8rem;
+    }
+    .selectedBgColorItem
+    {
+        border: .8rem solid rgb(217, 217, 217) !important;
+    }
+.deleteSVG
+{
+    width: 60%;
+    height: 60%;
+}
+.line
+{
+    width: .5rem;
+    height: 80%;
+}
+.fontFamilyItem
+{
+    width: 25rem;
+}
+.fontFamilyMenuContainer
+{
+    bottom: 6rem;
+    border-radius: 1.2rem;
+}
+.fontFamilyHeader
+{
+    font-size: 2.2rem;
+}
+.fontFamilyMenuItem
+{
+    padding: .5rem 0;
+    font-size: 2rem;
+}
+}
 @media(hover: hover) and (pointer: fine)
 {
     .fontFamilyMenuItem:hover

@@ -337,7 +337,7 @@
     {
         left:1.5rem;
         translate: 0 0;
-        top:10.5rem;
+        top:10rem;
         width: 30rem;
         padding: 0;
         font-size: 4.2rem;
@@ -403,6 +403,7 @@
         top:1.5rem;
         width: 8rem;
         height: 8rem;
+        z-index: 3;
     }
 
 
