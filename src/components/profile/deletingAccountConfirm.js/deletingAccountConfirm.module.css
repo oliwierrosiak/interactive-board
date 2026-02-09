@@ -347,6 +347,88 @@
         font-size: 3rem;
     }
 }
+@media(max-width:450px)
+{
+    .overlay
+    {
+        background-color: #252525a9;
+    }
+    .container
+    {
+        width: 92vw;
+        padding: 4rem;
+        border-radius: 5rem;
+        padding: 4rem 3rem 4rem 3rem;
+    }
+    .header
+    {
+        font-size: 6rem;
+        margin-bottom: 4rem;
+    }
+    .description
+    {
+        font-size: 3rem;
+        margin-bottom: 4.5rem;
+    }
+    .mark
+    {
+        text-decoration: underline .5rem rgb(255, 73, 73);
+    }
+    .btnContainer
+    {
+        margin-top: 3rem;
+        gap:2rem;
+    }
+    .btn
+    {
+        width: 100%;
+        font-size: 3rem;
+        border-radius: 2.5rem;
+        padding: 1rem 2rem;
+    }
+    .cancel
+    {
+        border:.9rem solid #03A678;
+    }
+    .delete
+    {
+        border: .9rem solid rgb(203, 1, 1);
+    }
+    .inputContainer
+    {
+        width: 90%;
+        height: 9rem;
+        margin: 0rem 0 3rem 0;
+    }
+    .input
+    {
+        bottom: 1rem;
+        font-size: 3.5rem;
+    }
+    .border
+    {
+        height: 1rem;
+    }
+    .back
+    {
+        top:5.5rem;
+        left:2rem;
+    }
+
+    .loadingContainer
+    {
+        height: 9rem;
+         margin: 1rem 0 2rem 0;
+    }
+    .btnLoading
+    {
+        border: .9rem solid rgb(80, 80, 80) !important;
+    }
+    .error
+    {
+        font-size: 3.5rem;
+    }
+}
 @media (hover:hover) and (pointer:fine)
 {
     .back:hover>.backSVG
@@ -361,5 +443,19 @@
     .cancel:hover
     {
         background: #03A678;
+    }
+    @media(max-width:768px)
+    {
+        .delete:hover
+        {
+            border: .8rem solid red;
+        }
+    }
+    @media(max-width:450px)
+    {
+        .delete:hover
+        {
+            border: .9rem solid red;
+        }
     }
 }

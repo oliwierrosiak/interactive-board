@@ -192,7 +192,7 @@ function Profile()
         {
             setResetPasswordLoading(true)
             const token = await refreshToken()
-            // const response = await axios.post(`${ApiAddress}/resetPassword`,{email:loginContext.loggedUser.email})
+            const response = await axios.post(`${ApiAddress}/resetPassword`,{email:loginContext.loggedUser.email})
             setResetPasswordLoading(false)
             addMessage('info','Wysłano wiadomość email. Sprawdź swoją skrzynkę')
         }
