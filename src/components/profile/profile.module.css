@@ -655,7 +655,139 @@
         border-radius: 0;
     }
 }
-
+@media(max-width:450px)
+{
+    .main
+    {
+        grid-template-columns: 1fr;
+        grid-template-rows: 12rem auto auto;
+        gap:5rem;
+        padding: 2rem 3rem 5rem 3rem;
+        min-height: 100svh;
+        height: 100%;
+    }
+    .logo
+    {
+        height: 12rem;
+    }
+    .section
+    {
+        padding: 0;
+        height: auto;
+    }
+    .userImgContainer
+    {
+        width: 25rem;
+        height: 25rem;
+        border: 1.5rem solid #02735E;
+    }
+    .changePhoto
+    {
+        margin-top: 2.5rem;
+        margin-bottom: 4rem;
+        font-size: 4.5rem;
+        padding: 1.5rem 4rem 1.8rem 4rem;
+        border-radius: 2.5rem;
+    }
+    .email
+    {
+        font-size: 4rem;
+    }
+    .nameContainer
+    {
+        gap:3.5rem 0;
+    }
+    .nameInputContainer
+    {
+        width: 86%;
+    }
+    .btn
+    {
+        font-size: 4rem;
+        padding: 2rem;
+        border-radius: 3rem;
+        gap:1rem;
+    }
+    .logoutBtn,
+    .resetBtn
+    {
+        border: 1rem solid #03A678;
+    }
+    .resetBtn
+    {
+        margin-top: 4rem;
+    }
+    .logoutBtn
+    {
+        margin: 4rem 0;
+    }
+    .deleteBtn
+    {
+        border: 1rem solid rgb(255, 0, 0);
+    }
+    .logoutIcon
+    {
+        width: 5rem;
+        height: 5rem;
+    }
+    .error
+    {
+        font-size: 3.5rem;
+    }
+    .pageLoading
+    {
+        width: 20rem;
+        height: 20rem;
+    }
+    .errorIcon
+    {
+        width: 20rem;
+        height: 20rem;
+    }
+    .errorHeader
+    {
+        font-size: 4rem;
+    }
+    .back
+    {
+        left:2.5rem;
+    }
+    .btnWhileLoading,
+    .btnWhileLoading:hover
+    {
+        border:1rem solid rgb(53, 53, 53);
+    }
+    .resetPasswordLoading
+    {
+        width: 5rem;
+        height: 5rem;
+    }
+    .message
+    {
+        padding: 2rem 2rem 3rem 2rem;
+        gap:2rem;
+    }
+    .text
+    {
+        font-size: 2.5rem;
+        max-width: 85%;
+        margin-right: 5rem;
+    }
+    .close
+    {
+        width: 6rem;
+        height: 6rem;
+    }
+    .icon
+    {
+        width: 6rem;
+        height: 6rem;
+    }
+    .progress
+    {
+        height: 1rem;
+    }
+}
 @media (hover:hover) and (pointer:fine)
 {
     .userImgContainer:hover

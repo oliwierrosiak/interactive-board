@@ -192,7 +192,7 @@ function Profile()
         {
             setResetPasswordLoading(true)
             const token = await refreshToken()
-            const response = await axios.post(`${ApiAddress}/resetPassword`,{email:loginContext.loggedUser.email})
+            // const response = await axios.post(`${ApiAddress}/resetPassword`,{email:loginContext.loggedUser.email})
             setResetPasswordLoading(false)
             addMessage('info','Wysłano wiadomość email. Sprawdź swoją skrzynkę')
         }
@@ -226,7 +226,7 @@ function Profile()
 
             </div>
 
-                <div className={`${styles.back} ${nameLoading || !userPhotoLoaded?styles.backWhileLoading:''}`} onClick={e=>!nameLoading && userPhotoLoaded && navigate('/')}>
+                <div className={`${styles.back}`} onClick={e=>navigate('/')}>
                 <ArrowIcon class={styles.backSVG}/>
                 </div>
 
