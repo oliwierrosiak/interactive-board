@@ -127,9 +127,9 @@
 {
     .container
     {
-    padding: .8rem 1.2rem;
-    border-radius: 1.8rem;
-    gap:1rem;
+        padding: .8rem 1.2rem;
+        border-radius: 1.8rem;
+        gap:1rem;
     }
     .display
     {
@@ -141,6 +141,10 @@
         padding: .5rem 1rem;
         border: .4rem solid rgb(117, 117, 117);
         border-radius: 1.5rem;
+    }
+    .input:focus
+    {
+        border: .4rem solid rgb(146, 146, 146);
     }
     .line
     {
@@ -157,6 +161,46 @@
     .inputError
     {
         border: .4rem solid rgb(255, 0, 0) !important;
+    }
+}
+@media(max-width:450px)
+{
+    .container
+    {
+        padding: 1rem 1.5rem;
+        border-radius: 2rem;
+        gap:1rem;
+    }
+    .display
+    {
+        bottom: 11rem;
+    }
+    .input
+    {
+        font-size: 1.8rem;
+        padding: .5rem .5rem .8rem .5rem;
+        border: .5rem solid rgb(117, 117, 117);
+        border-radius: 1.5rem;
+    }
+    .input:focus
+    {
+        border: .5rem solid rgb(146, 146, 146);
+    }
+    .line
+    {
+        width:.6rem;
+        margin:0;
+        height: 3rem;
+    }
+    .btn
+    {
+        font-size: 2.2rem;
+        padding: .8rem 1.2rem;
+        border-radius: 1.5rem;
+    }
+    .inputError
+    {
+        border: .5rem solid rgb(255, 0, 0) !important;
     }
 }
 @media(hover: hover) and (pointer: fine)
