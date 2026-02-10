@@ -21,7 +21,7 @@ function App() {
   const [loggedUser,setLoggedUser] = useState({})
   const [loginLoading,setLoginLoading] = useState(true)
   const [displayLogin,setDisplayLogin] = useState('')
-  const [mobileDisplay,setMobileDisplay] = useState(window.innerWidth <= 768)
+  const [mobileDisplay,setMobileDisplay] = useState(window.innerWidth > 768?false:window.innerWidth <= 450?'phone':'tablet')
 
   const getUserData = async() =>{
     try
@@ -42,8 +42,8 @@ function App() {
 
   const mobileDisplaySetter = () =>
   {
-      const mobileDisplay = window.innerWidth <= 768
-      setMobileDisplay(prev=>prev!=mobileDisplay?mobileDisplay:prev)
+      const mobileDisplay = window.innerWidth > 768?false:window.innerWidth <= 450?'phone':'tablet'
+      setMobileDisplay(mobileDisplay)
   }
 
   useEffect(()=>{

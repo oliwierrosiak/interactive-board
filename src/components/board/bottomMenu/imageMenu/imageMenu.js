@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import styles from './imageMenu.module.css'
 import DeleteIcon from '../../../../assets/svg/deleteIcon'
 import BgColorMenu from '../textMenu/bgColorMenu'
@@ -8,9 +8,11 @@ import BorderRadius from './cornerMenu/borderRadius'
 import RangeSlider from './rangeSlider/rangeSlider'
 import BrightnessIcon from '../../../../assets/svg/brightnessIcon'
 import ContrastIcon from '../../../../assets/svg/contrastIcon'
+import MobileDisplayContext from '../../../../context/mobileDisplayContext'
 
 function ImageMenu(props)
 {
+    const mobileDisplayContext = useContext(MobileDisplayContext)
 
     const borderColorSetter = ()=>{
         if(props.element.class)
@@ -186,6 +188,7 @@ function ImageMenu(props)
         }
     },[props.element])
 
+
     useEffect(()=>{
         window.addEventListener('click',boardEvent)
         return () =>{
@@ -202,7 +205,7 @@ function ImageMenu(props)
 
             <div className={`${styles.item} ${styles.borderColor}`} onClick={e=>setDisplayColorMenu(!displayColorMenu)}>
                 <div className={`${styles.colorPreview} ${borderColors[borderColor]}`}></div>
-                {displayColorMenu && <BgColorMenu changeBgColor={setBorderColorFunc} border={true} color={colorSetter()} item={props.element}/>}
+                {displayColorMenu && <BgColorMenu imageCenter={mobileDisplayContext.mobileDisplay === 'phone'} changeBgColor={setBorderColorFunc} border={true} color={colorSetter()} item={props.element}/>}
             </div>
             
             <div className={`${styles.item} ${styles.borderWidth}`} onClick={e=>setDisplayBorderWidthMenu(!displayBorderWidthMenu)}>

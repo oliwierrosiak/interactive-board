@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import styles from './textMenu.module.css'
 import ColorMenu from './colorMenu'
 import BgColorMenu from './bgColorMenu'
@@ -9,13 +9,14 @@ import AlignJustifyIcon from '../../../../assets/svg/alignJustifyIcon'
 import AlignLeftIcon from '../../../../assets/svg/alignLeftIcon'
 import AlignRightIcon from '../../../../assets/svg/alignRightIcon'
 import FontFamilyIcon from '../../../../assets/svg/fontFamilyIcon'
+import MobileDisplayContext from '../../../../context/mobileDisplayContext'
 
 function TextMenu(props)
 {
 
     const availableFontFamily = [{class:'fontArial',text:'Arial'},{class:'fontCentury',text:"Century Gothic"},{class:'fontCourier',text:'Courier New'},{class:'fontGothic',text:'Gothic Light'},{class:'fontGeorgia',text:'Georgia'},{class:'fontImpact',text:'Impact'},{class:'fontLucida',text:'Lucida Console'},{class:'fontLucidaSans',text:'Lucida Sans Unicode'},{class:'fontPalatino',text:'Palatino Linotype'},{class:'fontTahoma',text:'Tahoma'},{class:'fontRoman',text:'Times New Roman'},{class:'fontMS',text:'Trebuchet MS'},{class:'fontVerdana',text:'Verdana'}]
 
-    const [displayFontIcon,setDisplayFontIcon] = useState(window.innerWidth <= 450)
+    const mobileDisplayContext = useContext(MobileDisplayContext)
 
     const fontSizeSetter = () =>{
         if(props.element.class)
@@ -269,24 +270,12 @@ function TextMenu(props)
         }
     },[props.display])
 
-    const windowResize = (e) =>
-    {
-        setDisplayFontIcon(window.innerWidth <= 450)
-    }
-
-    useEffect(()=>{
-        window.addEventListener("resize",windowResize)
-        return()=>
-        {
-            window.removeEventListener("resize",windowResize)
-        }
-    },[])
 
     return(
         <div className={`${styles.container} ${display?styles.display:''}`}>
 
             <div className={`${styles.menuItem} ${styles.fontFamilyItem}`} onClick={e=>setShowFontFamilyMenu(!showFontFamilyMenu)}>
-                {displayFontIcon?<FontFamilyIcon class={styles.fontFamilyIcon}/>:
+                {mobileDisplayContext.mobileDisplay === 'phone'?<FontFamilyIcon class={styles.fontFamilyIcon}/>:
                 <p className={`${styles.fontFamilyHeader} ${fontFamily.class}`}>{fontFamily.text}</p>}
                 {showFontFamilyMenu &&
                 <FontFamilyMenu fonts={availableFontFamily} changeFontFamily={changeFontFamily} fontFamily={fontFamily}/>}
@@ -343,7 +332,7 @@ function TextMenu(props)
                 <div className={`${styles.colorPreview} ${bgColor}`} onClick={e=>setShowBgColorMenu(!showBgColorMenu)}></div>
 
                 {showBgColorMenu &&
-                <BgColorMenu item={props.element} changeBgColor={changeBgColor} color={bgColor} center={displayFontIcon}/>}
+                <BgColorMenu item={props.element} changeBgColor={changeBgColor} color={bgColor} center={mobileDisplayContext.mobileDisplay === 'phone'}/>}
             </div>
 
             <div className={styles.line}></div>

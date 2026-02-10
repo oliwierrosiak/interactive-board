@@ -8,11 +8,12 @@ import ApiAddress from '../../../ApiAddress'
 import refreshToken from '../../auth/refreshToken'
 import formatNoteCode from '../../helpers/formatNoteCode'
 import UnauthorizedActionContext from '../../../context/unauthorizedActionContext'
+import MobileDisplayContext from '../../../context/mobileDisplayContext'
 
 function MyNotesItem(props)
 {
     const [showDeleteConfirm,setShowDeleteConfirm] = useState(false)
-    const [phoneDisplay,setPhoneDisplay] = useState(window.innerWidth<=450)
+    const mobileDisplayContext = useContext(MobileDisplayContext)
 
     const navigate = useNavigate()
 
@@ -53,19 +54,6 @@ function MyNotesItem(props)
         }
     }
 
-    const windowResize = (e) =>
-    {
-        setPhoneDisplay(window.innerWidth <= 450)
-    }
-
-    useEffect(()=>{
-        window.addEventListener('resize',windowResize)
-        return()=>
-        {
-            window.removeEventListener('resize',windowResize)
-        }
-    },[])
-
     return(
         <li className={styles.noteItem} onClick={liClicked}>
             <div className={`${styles.deleteConfirm} ${showDeleteConfirm?styles.deleteConfirmDisplay:''}`}>
@@ -76,13 +64,13 @@ function MyNotesItem(props)
                 </span>
             </div>
             <div className={styles.title}>{props.title}</div>
-            {phoneDisplay?
+            {mobileDisplayContext.mobileDisplay === 'phone'?
             (props.visibility === "private"?null:<div className={styles.code}>{formatNoteCode(props.code)}</div>)
             :
             <div className={styles.code}>{formatNoteCode(props.code)}</div>
             }
             
-            {phoneDisplay?
+            {mobileDisplayContext.mobileDisplay === 'phone'?
             (props.visibility === "private"?<div className={`${styles.status} ${props.visibility === "private"?styles.privateStatus:''}`}>{transformStatus(props.visibility)}</div>:null)
             :
             <div className={`${styles.status} ${props.visibility === "private"?styles.privateStatus:''}`}>{transformStatus(props.visibility)}</div>

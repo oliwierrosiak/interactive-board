@@ -305,6 +305,10 @@
         height: 16rem;
         border:.8rem solid #03A678;
     }
+    .boardContainer>.menuContainer
+    {
+        top:11rem;
+    }
     .menuContainer
     {
         top:13rem;
