@@ -290,6 +290,10 @@ function Board()
     const boardClicked = (e) =>{
         if(e.target.classList.contains('canvas'))
         {
+            const inputs = [...document.querySelectorAll('input')]
+            inputs.forEach(x=>{
+                x.blur()
+            })
             if(!brush.type)
             {
                 clearElementEdit()
