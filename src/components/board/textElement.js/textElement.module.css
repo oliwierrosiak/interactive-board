@@ -35,6 +35,7 @@
     border: 0;
     background: none;
     overflow: hidden;
+    line-height: 1.6;
 }
 .textArea::-webkit-scrollbar
 {
@@ -43,10 +44,8 @@
 }
 .textArea::placeholder
 {
-    top:50%;
-    position: absolute;
-    left:50%;
-    translate: -50% -50%;
+    padding-top: 5px;
+    text-align: center;
 }
 @media(max-width:768px)
 {
