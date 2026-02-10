@@ -214,7 +214,7 @@ function Board()
     const addTextItem = () =>
     {
         const localTextElement = [...elements]
-        const item = new TextElementClass({class:['fontSize14','alignLeft','colorBlack','bgYellow6','fontArial']})
+        const item = new TextElementClass({class:['fontSize14','alignLeft','colorBlack','bgYellow6','fontRubik']})
         localTextElement.push(item)
         setEdit(item)
         setElements(localTextElement)

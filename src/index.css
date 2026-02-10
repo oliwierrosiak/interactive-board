@@ -300,83 +300,83 @@ img
 {
   background-color: rgba(0, 0, 0, 0);
 }
-.fontArial>textarea,
-.fontArial>textarea::placeholder,
-.fontArial
+.fontGoogleSans>textarea,
+.fontGoogleSans>textarea::placeholder,
+.fontGoogleSans
 {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Google Sans", sans-serif;
 }
-.fontCentury>textarea,
-.fontCentury>textarea::placeholder,
-.fontCentury
+.fontRoboto>textarea,
+.fontRoboto>textarea::placeholder,
+.fontRoboto
 {
-  font-family: 'Century Gothic';
+   font-family: "Roboto", sans-serif;
 }
-.fontCourier>textarea,
-.fontCourier>textarea::placeholder,
-.fontCourier
+.fontNPRo>textarea,
+.fontNPRo>textarea::placeholder,
+.fontNPRo
 {
-  font-family: "Courier New";
+  font-family: "SN Pro", sans-serif;
 }
-.fontGothic>textarea,
-.fontGothic>textarea::placeholder,
-.fontGothic
+.fontNZ>textarea,
+.fontNZ>textarea::placeholder,
+.fontNZ
 {
-  font-family: "Copperplate Gothic Light";
+  font-family: "Playwrite NZ Basic", cursive;
 }
-.fontGeorgia>textarea,
-.fontGeorgia>textarea::placeholder,
-.fontGeorgia
+.fontOpenSans>textarea,
+.fontOpenSans>textarea::placeholder,
+.fontOpenSans
 {
-  font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family: "Open Sans", sans-serif;
 }
-.fontImpact>textarea,
-.fontImpact>textarea::placeholder,
-.fontImpact
+.fontKanit>textarea,
+.fontKanit>textarea::placeholder,
+.fontKanit
 {
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-family: "Kanit", sans-serif;
 }
-.fontLucida>textarea,
-.fontLucida>textarea::placeholder,
-.fontLucida
+.fontInter>textarea,
+.fontInter>textarea::placeholder,
+.fontInter
 {
-  font-family: Lucida Console;
+   font-family: "Inter", sans-serif;
 }
-.fontLucidaSans>textarea,
-.fontLucidaSans>textarea::placeholder,
-.fontLucidaSans
+.fontMontserrat>textarea,
+.fontMontserrat>textarea::placeholder,
+.fontMontserrat
 {
-  font-family: 'Lucida Sans Unicode';
+   font-family: "Montserrat", sans-serif;
 }
-.fontPalatino>textarea,
-.fontPalatino>textarea::placeholder,
-.fontPalatino
+.fontPoppins>textarea,
+.fontPoppins>textarea::placeholder,
+.fontPoppins
 {
-  font-family: 'Palatino Linotype';
+    font-family: "Poppins", sans-serif;
 }
-.fontTahoma>textarea,
-.fontTahoma>textarea::placeholder,
-.fontTahoma
+.fontLato>textarea,
+.fontLato>textarea::placeholder,
+.fontLato
 {
-  font-family: Tahoma;
+    font-family: "Lato", sans-serif;
 }
-.fontRoman>textarea,
-.fontRoman>textarea::placeholder,
-.fontRoman
+.fontLXGW>textarea,
+.fontLXGW>textarea::placeholder,
+.fontLXGW
 {
-  font-family: 'Times New Roman';
+  font-family: "LXGW WenKai Mono TC", monospace;
 }
-.fontMS>textarea,
-.fontMS>textarea::placeholder,
-.fontMS
+.fontOswald>textarea,
+.fontOswald>textarea::placeholder,
+.fontOswald
 {
-  font-family: 'Trebuchet MS';
+  font-family: "Oswald", sans-serif;
 }
-.fontVerdana>textarea,
-.fontVerdana>textarea::placeholder,
-.fontVerdana
+.fontRubik>textarea,
+.fontRubik>textarea::placeholder,
+.fontRubik
 {
-  font-family: Verdana;
+  font-family: "Rubik", sans-serif;
 }
 .borderBgRed1>video,
 .borderBgRed1>img

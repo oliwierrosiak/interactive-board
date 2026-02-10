@@ -14,7 +14,7 @@ import MobileDisplayContext from '../../../../context/mobileDisplayContext'
 function TextMenu(props)
 {
 
-    const availableFontFamily = [{class:'fontArial',text:'Arial'},{class:'fontCentury',text:"Century Gothic"},{class:'fontCourier',text:'Courier New'},{class:'fontGothic',text:'Gothic Light'},{class:'fontGeorgia',text:'Georgia'},{class:'fontImpact',text:'Impact'},{class:'fontLucida',text:'Lucida Console'},{class:'fontLucidaSans',text:'Lucida Sans Unicode'},{class:'fontPalatino',text:'Palatino Linotype'},{class:'fontTahoma',text:'Tahoma'},{class:'fontRoman',text:'Times New Roman'},{class:'fontMS',text:'Trebuchet MS'},{class:'fontVerdana',text:'Verdana'}]
+    const availableFontFamily = [{class:'fontRubik',text:'Rubik'},{class:'fontGoogleSans',text:'Google Sans'},{class:'fontRoboto',text:"Roboto"},{class:'fontPoppins',text:'Poppins'},{class:'fontNPRo',text:'SN Pro'},{class:'fontOpenSans',text:'Open Sans'},{class:'fontKanit',text:'Kanit'},{class:'fontInter',text:'Inter'},{class:'fontMontserrat',text:'Montserrat'},{class:'fontLato',text:'Lato'},{class:'fontNZ',text:'Playwrite NZ'},{class:'fontLXGW',text:'LXGW WenKai'},{class:'fontOswald',text:'Oswald'}]
 
     const mobileDisplayContext = useContext(MobileDisplayContext)
 
@@ -82,11 +82,12 @@ function TextMenu(props)
         {
             const cl = props.element.class.find(x=>x.includes('font') && !x.includes('fontS'))
             const obj = availableFontFamily.find(x=>x.class === cl)
-            return obj || {class:'fontArial',text:'Arial'}
+
+            return obj || {class:'fontRubik',text:'Rubik'}
         }
         else
         {
-            return {class:'fontArial',text:'Arial'}
+            return {class:'fontRubik',text:'Rubik'}
         }
     }
 
