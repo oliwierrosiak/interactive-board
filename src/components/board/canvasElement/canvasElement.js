@@ -106,6 +106,7 @@ function CanvasElement(props)
             if(props.brush.type === "eraser")
             {
                 canvasObj.current.freeDrawingBrush.width = getBrushWidth()
+                canvasObj.current.freeDrawingBrush.color = 'rgb(252, 81, 81)'
             }
             else
             {
