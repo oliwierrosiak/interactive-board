@@ -8,6 +8,8 @@
     justify-content: center;
     align-items: center;
     gap:3rem;
+    background: radial-gradient(#02735E,#014040 70%);
+    padding: 3rem 0;
 }
 .header
 {
@@ -18,7 +20,7 @@
 }
 .icon
 {
-   height: 48vh;
+   width: 30rem;
 }
 .btn
 {
@@ -34,12 +36,61 @@
     transition: background .3s ease;
     font-family: "Jost", sans-serif;
 }
-.btn:hover
-{
-    background: #03A678;
-}
 .header::selection,
 .btn::selection
 {
     background:none;
+}
+@media(max-width:768px)
+{
+    .container
+    {
+        gap:6rem;
+        padding: 3rem 0;
+    }
+    .header
+    {
+        font-size: 8rem;
+    }
+    .icon
+    {
+       width: 40rem;
+    }
+    .btn
+    {
+        font-size: 3rem;
+        border:.8rem solid #03A678;
+        padding: 1rem 2rem;
+        border-radius: 2.5rem;
+    }
+}
+@media(max-width:450px)
+{
+    .container
+    {
+        gap:8rem;
+        padding: 3rem 0;
+    }
+    .header
+    {
+        font-size: 10rem;
+    }
+    .icon
+    {
+       width: 60vw;
+    }
+    .btn
+    {
+        font-size: 3.5rem;
+        border:1rem solid #03A678;
+        padding: 1.5rem 3rem;
+        border-radius: 3.5rem;
+    }
+}
+@media(hover: hover) and (pointer: fine)
+{
+    .btn:hover
+    {
+        background: #03A678;
+    }
 }
