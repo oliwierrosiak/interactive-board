@@ -214,7 +214,7 @@ function Board()
     const addTextItem = () =>
     {
         const localTextElement = [...elements]
-        const item = new TextElementClass({class:['fontSize14','alignLeft','colorBlack','bgYellow6','fontRubik']})
+        const item = new TextElementClass({class:['fontSize14','alignLeft','colorBlack','bgYellow6','fontRubik','imgRotate0']})
         localTextElement.push(item)
         setEdit(item)
         setElements(localTextElement)
@@ -499,12 +499,14 @@ function Board()
     }
 
     const zoom = (e) =>{
-        e.preventDefault()
+        
 
         if(!e.target.closest(`.${styles.board}`))
         {
             return
         }
+
+        e.preventDefault()
 
         const rect = viewport.current.getBoundingClientRect()
         const mouseX = e.clientX - rect.left
