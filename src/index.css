@@ -857,6 +857,26 @@ img
 {
   background-image: none;
 }
+.imgRotate0>img,
+.imgRotate0>video
+{
+  transform: rotate(0deg);
+}
+.imgRotate90>img,
+.imgRotate90>video
+{
+  transform: rotate(90deg);
+}
+.imgRotate180>img,
+.imgRotate180>video
+{
+  transform: rotate(180deg);
+}
+.imgRotate270>img,
+.imgRotate270>video
+{
+  transform: rotate(270deg);
+}
 @media (max-width:768px)
 {
     html

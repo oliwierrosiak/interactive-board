@@ -9,6 +9,7 @@ import RangeSlider from './rangeSlider/rangeSlider'
 import BrightnessIcon from '../../../../assets/svg/brightnessIcon'
 import ContrastIcon from '../../../../assets/svg/contrastIcon'
 import MobileDisplayContext from '../../../../context/mobileDisplayContext'
+import RotateIcon from '../../../../assets/svg/rotateIcon'
 
 function ImageMenu(props)
 {
@@ -196,7 +197,24 @@ function ImageMenu(props)
         }
     },[])
 
-
+    const rotateImage = (e) =>
+    {
+        const classes = props.element.class
+        const rotate = classes.find(x => x.includes('imgRotate'))
+        let newClass
+        if(rotate)
+        {
+            props.element.removeClass(rotate)
+            const degrees = Number(rotate.split('imgRotate')[1])
+            newClass = `imgRotate${degrees+90 >= 360?0:degrees+90}`
+        }
+        else
+        {
+            newClass = `imgRotate90`
+        }
+        props.element.addClass(newClass)
+        props.setEditUpdate(!props.editUpdate)
+    }
 
     return (
         <div className={`${styles.container} ${display?styles.display:''}`}>
@@ -248,6 +266,10 @@ function ImageMenu(props)
                 {displayContrastMenu && <div className={`${styles.filterMenu} range`}>
                     <RangeSlider property={contrast} setProperty={setContrast}/>
                 </div>}
+            </div>
+
+            <div className={`${styles.item} ${styles.rotateItem}`} onClick={rotateImage}>
+                <RotateIcon />
             </div>
 
             <div className={styles.line}></div>
