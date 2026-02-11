@@ -120,6 +120,21 @@
 
     }
 }
+@media(max-width:450px)
+{
+    .message
+    {
+        max-width: 80vw;
+        padding: .6rem 1rem 1.2rem 1.5rem;
+        border-radius: 2rem;
+        gap:1rem;
+    }
+    .progress
+    {
+        height: .8rem;
+
+    }
+}
 @media(hover: hover) and (pointer: fine)
 {
     .close:hover>svg>path

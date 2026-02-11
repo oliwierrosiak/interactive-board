@@ -326,7 +326,6 @@ function Board()
 
     }
 
-
     const sendFileToServer = async(file) =>{
         try
         {

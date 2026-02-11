@@ -365,17 +365,13 @@
         width: 12rem;
         height: 12rem;
     }
-
-
     .globalLoading
     {
-        width: 5rem;
-        height: 5rem;
-        bottom: 2.5rem;
-        right: 1rem;
+        width: 8rem;
+        height: 8rem;
+        bottom: 14rem;
+        right: 2.5rem;
     }
-
-
     .loadingError
     {
         gap:2rem;
@@ -405,17 +401,15 @@
         height: 8rem;
         z-index: 3;
     }
-
-
     .messageContainer
     {
-        bottom: 10rem;
-        right: 1rem;
+        bottom: 14rem;
+        right: 2rem;
         gap:1.2rem;
     }
     .adjustBottom
     {
-        bottom: 10rem;
+        bottom: 24rem;
     }
 }
 @media(hover:hover) and (pointer: fine)
