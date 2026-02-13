@@ -107,7 +107,8 @@ function NotePassword(props)
         }
     }
 
-    const validate = () =>{
+    const validate = (e) =>{
+        e.preventDefault();
         if(loading) return;
         if(password === "")
         {
@@ -155,7 +156,7 @@ function NotePassword(props)
 
     return(
         <div className={styles.overlay} onClick={overlayClicked}>
-            <div className={styles.container}>
+            <form className={styles.container} onSubmit={validate}>
 
                 <div className={`${styles.back} ${loading?styles.backWhileLoading:''}`} onClick={backClicked}>
                     <ArrowIcon class={styles.backSVG}/>
@@ -164,7 +165,7 @@ function NotePassword(props)
                 <h2 className={styles.header}>Aby dołączyć do tej notatki wymagane jest hasło</h2>
 
                 <div className={`${styles.inputContainer} ${loading?styles.inputContainerWhileLoading:''}`} onClick={containerClicked}>
-                    <input disabled={loading} value={password} onChange={e=>setPassword(e.target.value)} ref={input} onFocus={inputFocused} onBlur={inputBlurred} type={showPassword?'text':'password'} placeholder='Podaj hasło...' className={`${styles.input} ${loading?styles.inputWhileLoading:''}`}/>
+                    <input autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" disabled={loading} value={password} onChange={e=>setPassword(e.target.value)} ref={input} onFocus={inputFocused} onBlur={inputBlurred} type={showPassword?'text':'password'} placeholder='Podaj hasło...' className={`${styles.input} ${loading?styles.inputWhileLoading:''}`}/>
                     <div className={styles.inputBorder}>
                         <div ref={fill} className={styles.inputBorderFill}></div>
                     </div>
@@ -177,11 +178,11 @@ function NotePassword(props)
 
                 {error && <div className={styles.error}>{error}</div>}
 
-                <button ref={btn} className={`${styles.btn} ${loading?styles.btnWhileLoading:''}`} onClick={validate}>
+                <button ref={btn} className={`${styles.btn} ${loading?styles.btnWhileLoading:''}`}>
                     {loading?<LoadingIcon class={styles.loadingIcon}/>:"Dołącz"}
                 </button>
 
-            </div>
+            </form>
         </div>
     )
 }

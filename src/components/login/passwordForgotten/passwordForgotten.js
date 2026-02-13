@@ -68,7 +68,7 @@ function PasswordForgotten(props)
             </div>
             :
             <div className={`${styles.inputContainer} ${props.loading?styles.inputContainerWhileLoading:''}`} onClick={divClicked}>
-                    <input disabled={props.loading} value={inputValue} onChange={e=>setInputValue(e.target.value)} type='email' onBlur={inputBlur} onFocus={inputFocused} className={styles.input}></input>
+                    <input autoComplete='username' disabled={props.loading} value={inputValue} onChange={e=>setInputValue(e.target.value)} type='email' onBlur={inputBlur} onFocus={inputFocused} className={styles.input}></input>
                     <div className={styles.placeholder}>Podaj swój adres email</div>
             </div>}
 

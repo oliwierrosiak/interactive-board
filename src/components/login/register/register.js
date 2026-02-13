@@ -267,14 +267,14 @@ function Register(props)
                 <div className={`${styles.page1} ${showPage2?styles.pageHidden:''}`}>
 
                     <div className={`${styles.inputContainer} ${props.loading?styles.inputContainerWhileLoading:''}`} onClick={divClicked}>
-                        <input ref={emailInputRef} disabled={props.loading} value={values.email} onChange={e=>dispatch({type:'email',value:e.target.value})} type="email" onBlur={inputBlur} onFocus={inputFocused} className={`${styles.input}`}></input>
+                        <input autoComplete='email' ref={emailInputRef} disabled={props.loading} value={values.email} onChange={e=>dispatch({type:'email',value:e.target.value})} type="email" onBlur={inputBlur} onFocus={inputFocused} className={`${styles.input}`}></input>
                         <div className={styles.placeholder}>Podaj email</div>
                     </div>
 
                     <div className={styles.error}>{errors.email}</div>
 
                     <div className={`${styles.inputContainer} ${props.loading?styles.inputContainerWhileLoading:''}`} onClick={divClicked}>
-                        <input ref={passwordInputRef} disabled={props.loading} value={values.password} onChange={e=>dispatch({type:'password',value:e.target.value})} type={showPassword?'text':'password'} onBlur={inputBlur} onFocus={inputFocused} className={`${styles.input} ${styles.passwordInput}`}></input>
+                        <input autoComplete='new-password' ref={passwordInputRef} disabled={props.loading} value={values.password} onChange={e=>dispatch({type:'password',value:e.target.value})} type={showPassword?'text':'password'} onBlur={inputBlur} onFocus={inputFocused} className={`${styles.input} ${styles.passwordInput}`}></input>
                         <div className={styles.placeholder}>Utwórz hasło</div>
                         <div className={styles.eye} onClick={e=>setShowPassword(!showPassword)}>
                         {showPassword?<PasswordEye />:<PasswordEyeHidden />}
@@ -284,7 +284,7 @@ function Register(props)
                     <div className={styles.error}>{errors.password}</div>
 
                     <div className={`${styles.inputContainer} ${props.loading?styles.inputContainerWhileLoading:''}`} onClick={divClicked}>
-                        <input ref={passwordRepeatRef} disabled={props.loading} value={values.passwordRepeat} onChange={e=>dispatch({type:'passwordRepeat',value:e.target.value})} type={showPassword?'text':'password'} onBlur={inputBlur} onFocus={inputFocused} className={`${styles.input} ${styles.passwordInput}`}></input>
+                        <input autoComplete='new-password' ref={passwordRepeatRef} disabled={props.loading} value={values.passwordRepeat} onChange={e=>dispatch({type:'passwordRepeat',value:e.target.value})} type={showPassword?'text':'password'} onBlur={inputBlur} onFocus={inputFocused} className={`${styles.input} ${styles.passwordInput}`}></input>
                         <div className={styles.placeholder}>Powtórz hasło</div>
                         <div className={styles.eye} onClick={e=>setShowPassword(!showPassword)}>
                             {showPassword?<PasswordEye />:<PasswordEyeHidden />}
@@ -305,13 +305,13 @@ function Register(props)
                     </div>
 
                     <button className={`${styles.chooseImg} ${props.loading?styles.chooseImgWhileLoading:''}`} type='button'>
-                        <input disabled={props.loading} ref={fileInputRef} type='file' className={styles.fileInput} accept='image/png, image/jpg, image/jpeg' onChange={fileChosen}/>
+                        <input autoComplete='photo' disabled={props.loading} ref={fileInputRef} type='file' className={styles.fileInput} accept='image/png, image/jpg, image/jpeg' onChange={fileChosen}/>
                         Ustaw Zdjęcie
                     </button>
 
 
                     <div className={`${styles.inputContainer} ${props.loading?styles.inputContainerWhileLoading:''}`} onClick={divClicked}>
-                        <input disabled={props.loading} ref={nameInputRef} value={values.name} onChange={e=>dispatch({type:"name",value:e.target.value})} type='text' onBlur={inputBlur} onFocus={inputFocused} className={styles.input}></input>
+                        <input autoComplete='given-name' disabled={props.loading} ref={nameInputRef} value={values.name} onChange={e=>dispatch({type:"name",value:e.target.value})} type='text' onBlur={inputBlur} onFocus={inputFocused} className={styles.input}></input>
                         <div className={styles.placeholder}>Podaj Nazwę Użytkownika</div>
                     </div>
 

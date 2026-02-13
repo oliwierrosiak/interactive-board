@@ -135,7 +135,7 @@ function ResetPassword()
 
                     <form className={styles.form} onSubmit={validate}>
                         <div className={`${inputStyles.inputContainer} ${loading?inputStyles.inputContainerWhileLoading:''} ${styles.passwordContainer}`} onClick={divClicked}>
-                            <input disabled={loading} value={password} onChange={e=>setPassword(e.target.value)} type={showPassword?'text':'password'} onBlur={inputBlur} onFocus={inputFocused} className={`${inputStyles.input} ${inputStyles.passwordInput}`}></input>
+                            <input autoComplete='new-password' disabled={loading} value={password} onChange={e=>setPassword(e.target.value)} type={showPassword?'text':'password'} onBlur={inputBlur} onFocus={inputFocused} className={`${inputStyles.input} ${inputStyles.passwordInput}`}></input>
                             <div className={inputStyles.placeholder}>Utwórz nowe hasło</div>
                             <div className={inputStyles.eye} onClick={e=>!loading && setShowPassword(!showPassword)}>
                                 {showPassword?<PasswordEye />:<PasswordEyeHidden />}
@@ -143,7 +143,7 @@ function ResetPassword()
                         </div>
 
                         <div className={`${inputStyles.inputContainer} ${loading?inputStyles.inputContainerWhileLoading:''} ${styles.resetPassword}`} onClick={divClicked}>
-                            <input disabled={loading} value={repeatPassword} onChange={e=>setRepeatPassword(e.target.value)} type={showPassword?'text':'password'} onBlur={inputBlur} onFocus={inputFocused} className={`${inputStyles.input} ${inputStyles.passwordInput}`}></input>
+                            <input autoComplete='new-password' disabled={loading} value={repeatPassword} onChange={e=>setRepeatPassword(e.target.value)} type={showPassword?'text':'password'} onBlur={inputBlur} onFocus={inputFocused} className={`${inputStyles.input} ${inputStyles.passwordInput}`}></input>
                             <div className={inputStyles.placeholder}>Powtórz hasło</div>
                             <div className={inputStyles.eye} onClick={e=>!loading && setShowPassword(!showPassword)}>
                                 {showPassword?<PasswordEye />:<PasswordEyeHidden />}

@@ -150,8 +150,8 @@ function Login(props)
                     <div className={styles.placeholder}>Podaj email</div>
                 </div>
 
-                <div className={`${styles.inputContainer} ${props.loading?styles.inputContainerWhileLoading:''}`} onClick={divClicked}>
-                    <input ref={passwordRef} disabled={props.loading} value={passwordValue} onChange={e=>setPasswordValue(e.target.value)} type={showPassword?'text':'password'} onBlur={inputBlur} onFocus={inputFocused} className={`${styles.input} ${styles.passwordInput}`}></input>
+                <div autoComplete="current-password" className={`${styles.inputContainer} ${props.loading?styles.inputContainerWhileLoading:''}`} onClick={divClicked}>
+                    <input autoComplete='username' ref={passwordRef} disabled={props.loading} value={passwordValue} onChange={e=>setPasswordValue(e.target.value)} type={showPassword?'text':'password'} onBlur={inputBlur} onFocus={inputFocused} className={`${styles.input} ${styles.passwordInput}`}></input>
                     <div className={styles.placeholder}>Podaj hasło</div>
                     <div className={styles.eye} onClick={e=>!props.loading && setShowPassword(!showPassword)}>
                         {showPassword?<PasswordEye />:<PasswordEyeHidden />}

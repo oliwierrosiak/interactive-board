@@ -56,7 +56,8 @@ function AddingNote(props)
         }
     },[visibility])
 
-    const sendData = async()=>{
+    const sendData = async(e)=>{
+        e.preventDefault()
         if(loading) return
         setError('')
         try
@@ -139,7 +140,7 @@ function AddingNote(props)
     return(
         <article className={styles.overlay} onClick={overlayClicked}>
 
-            <div className={`${styles.container} ${showNoteCode?styles.containerWidth:''}`}>
+            <form className={`${styles.container} ${showNoteCode?styles.containerWidth:''}`} onSubmit={sendData}>
                 <div className={`${styles.back} ${loading?styles.backWhileLoading:''}`} onClick={e=>!loading && props.setDisplayAddingNote(false)}>
                     <ArrowIcon class={styles.backSVG}/>
                 </div>
@@ -165,8 +166,8 @@ function AddingNote(props)
                             </div>
                         </div>
                     </h2>
-                    <button disabled={loading} className={`${styles.visibilityBtn} ${visibility === "public"?styles.selectedBtn:''}`} onClick={e=>setVisibility('public')}>Publiczna</button>
-                    <button disabled={loading} className={`${styles.visibilityBtn} ${visibility === "private"?styles.selectedBtn:''}`} onClick={e=>setVisibility("private")}>Prywatna</button>
+                    <button type='button' disabled={loading} className={`${styles.visibilityBtn} ${visibility === "public"?styles.selectedBtn:''}`} onClick={e=>setVisibility('public')}>Publiczna</button>
+                    <button type='button' disabled={loading} className={`${styles.visibilityBtn} ${visibility === "private"?styles.selectedBtn:''}`} onClick={e=>setVisibility("private")}>Prywatna</button>
                 </div>
 
                 <div className={styles.passwordContainer}>
@@ -175,7 +176,7 @@ function AddingNote(props)
 
 
                     <div className={`${inputStyles.inputContainer} ${loading?inputStyles.inputContainerWhileLoading:''} ${passwordEnabled?"":styles.inputContainerDisabled}`} onClick={divClicked}>
-                        <input disabled={loading || !passwordEnabled} value={password} onChange={e=>setPassword(e.target.value)} type={showPassword?'text':'password'} onBlur={inputBlur} onFocus={inputFocused} className={`${inputStyles.input} ${inputStyles.passwordInput} ${!passwordEnabled?styles.passwordDisabled:''}`}></input>
+                        <input autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" disabled={loading || !passwordEnabled} value={password} onChange={e=>setPassword(e.target.value)} type={showPassword?'text':'password'} onBlur={inputBlur} onFocus={inputFocused} className={`${inputStyles.input} ${inputStyles.passwordInput} ${!passwordEnabled?styles.passwordDisabled:''}`}></input>
                         <div style={passwordEnabled?{}:{cursor:'default',color:'grey'}} className={`${inputStyles.placeholder} `}>Utwórz hasło</div>
                         <div className={`${inputStyles.eye} ${!passwordEnabled?styles.eyeDisabled:''}`} onClick={e=>!loading && passwordEnabled && setShowPassword(!showPassword)}>
                         {showPassword?<PasswordEye />:<PasswordEyeHidden />}
@@ -185,7 +186,7 @@ function AddingNote(props)
 
                 {error && <div className={styles.error}>{error}</div>}
 
-                <button ref={btnRef} className={`${styles.create} ${loading?styles.btnLoading:''}`} onClick={sendData}>{loading?<LoadingIcon class={`${inputStyles.loading} ${styles.loading}`} />:"Utwórz Notatkę"}</button>
+                <button ref={btnRef} className={`${styles.create} ${loading?styles.btnLoading:''}`}>{loading?<LoadingIcon class={`${inputStyles.loading} ${styles.loading}`} />:"Utwórz Notatkę"}</button>
 
                 </>
                 :
@@ -193,7 +194,7 @@ function AddingNote(props)
                     <h1 className={styles.header}>Notatka utworzona!</h1>
                     <h2 className={styles.code}>{formatNoteCode(noteCode)}</h2>
                     {mobileDisplayContext.mobileDisplay?
-                    <button className={styles.copyLinkBtn} onClick={copyLink}>
+                    <button type='button' className={styles.copyLinkBtn} onClick={copyLink}>
                         Kopiuj Link
                         <div className={`${styles.copySuccessInfo} ${showCopyInfo?styles.showCopyInfo:''}`}>
                                 <div className={styles.triangle}></div>
@@ -212,10 +213,10 @@ function AddingNote(props)
                         </div>
                     </h2>}
 
-                    <button ref={btn2Ref} className={styles.joinBtn} onClick={join}>Dołącz do Notatki</button>
+                    <button type='button' ref={btn2Ref} className={styles.joinBtn} onClick={join}>Dołącz do Notatki</button>
                 </>}
 
-            </div>
+            </form>
 
         </article>
     )
