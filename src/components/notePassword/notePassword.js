@@ -165,7 +165,7 @@ function NotePassword(props)
                 <h2 className={styles.header}>Aby dołączyć do tej notatki wymagane jest hasło</h2>
 
                 <div className={`${styles.inputContainer} ${loading?styles.inputContainerWhileLoading:''}`} onClick={containerClicked}>
-                    <input autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" disabled={loading} value={password} onChange={e=>setPassword(e.target.value)} ref={input} onFocus={inputFocused} onBlur={inputBlurred} type={showPassword?'text':'password'} placeholder='Podaj hasło...' className={`${styles.input} ${loading?styles.inputWhileLoading:''}`}/>
+                    <input autoComplete="off" autoCapitalize="off" autoCorrect="off" spellCheck="false" disabled={loading} value={password} onChange={e=>setPassword(e.target.value)} ref={input} onFocus={inputFocused} onBlur={inputBlurred} type={showPassword?'text':'password'} placeholder='Podaj hasło...' className={`${styles.input} ${loading?styles.inputWhileLoading:''}`}/>
                     <div className={styles.inputBorder}>
                         <div ref={fill} className={styles.inputBorderFill}></div>
                     </div>
