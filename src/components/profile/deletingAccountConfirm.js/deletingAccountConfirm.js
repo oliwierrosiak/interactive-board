@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import styles from './deletingAccountConfirm.module.css'
 import ArrowIcon from '../../../assets/svg/arrowIcon'
 import LoadingIcon from '../../../assets/svg/loadingIcon'

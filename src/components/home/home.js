@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from './home.module.css'
 import JoinWithCode from '../joinWithCode/joinWithCode'
 import NotePassword from '../notePassword/notePassword'
@@ -16,6 +16,22 @@ function Home()
     const [displayAddingNote,setDisplayAddingNote] = useState(false)
     const [displayNoteEdit,setDisplayNoteEdit] = useState(false)
     const [notesUpdater,setNotesUpdater] = useState(0)
+
+    useEffect(()=>{
+        document.title = `Strona Główna`
+    },[])
+
+    useEffect(()=>{
+        document.title = displayJoinWithCode?'Dołącz za pomocą kodu':`Strona Główna`
+    },[displayJoinWithCode])
+
+    useEffect(()=>{
+        document.title = displayAddingNote?'Tworzenie notatki':`Strona Główna`
+    },[displayAddingNote])
+
+    useEffect(()=>{
+        document.title = displayNotePassword?"Hasło notatki":"Strona Główna"
+    },[displayNotePassword])
 
     return(
         <>

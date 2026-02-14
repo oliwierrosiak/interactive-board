@@ -143,6 +143,10 @@ function Board()
         }
         catch(ex)
         {
+            setTimeout(() => {
+                document.title = 'Błąd Notatki'
+                
+            }, 100);
             if(ex.status === 401)
             {
                 navigate('/')
@@ -758,9 +762,8 @@ function Board()
 
     useEffect(()=>{
         
-        if(viewport.current)
-        {
-        }
+        const body = document.querySelector('body')
+        body.style.overflowY = 'hidden'
         window.addEventListener("wheel",zoom,{passive:false})
         window.addEventListener("resize",centerBoard)
         window.addEventListener('dragstart',blockDragging)
@@ -772,6 +775,7 @@ function Board()
             window.removeEventListener('wheel',blockZooming)
             window.removeEventListener("wheel",zoom)
             socket.emit("logout", { noteId: params.id })
+            body.style.overflowY = 'auto'
         }
     },[])
 
@@ -843,12 +847,19 @@ function Board()
     },[edit])
 
     useEffect(()=>{
-        const body = document.querySelector('body')
-        body.style.overflowY = 'hidden'
-        return()=>{
-            body.style.overflowY = 'auto'
+        document.title = `Notatka - ${projectName}`
+    },[projectName])
+
+    useEffect(()=>{
+        if(passwordExist)
+        {
+            document.title = `Hasło notatki`
         }
-    },[])
+        else
+        {
+            document.title = `Notatka - ${projectName}`
+        }
+    },[passwordExist])
 
     return(
         <MessageContext.Provider value={{addMessage,removeMessage}}>

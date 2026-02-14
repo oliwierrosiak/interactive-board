@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import styles from './loginPage.module.css'
 import DisplayLoginContext from '../../context/displayLogin'
 import ArrowIcon from '../../assets/svg/arrowIcon'
@@ -31,6 +31,25 @@ function LoginPage(props)
             displayLoginContext.setDisplayLogin('')
         }
     }
+
+    useEffect(()=>{
+        if(displayLoginContext.displayLogin === 'login')
+        {
+            document.title = 'Logowanie'
+        }
+        else if(displayLoginContext.displayLogin === 'register')
+        {
+            document.title = `Rejestracja`
+        }
+        else if(displayLoginContext.displayLogin === 'passwordForgotten')
+        {
+            document.title = `Odzyskiwanie konta`
+        }
+        else
+        {
+            document.title = 'Strona Główna'
+        }
+    },[displayLoginContext.displayLogin])
 
     return(
         <article onTouchStart={touchStartFunc} onTouchEnd={touchEnd} className={`${styles.container} ${displayLoginContext.displayLogin?styles.displayContainer:''}`}>

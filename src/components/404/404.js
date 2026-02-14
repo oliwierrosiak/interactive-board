@@ -1,10 +1,19 @@
 import { useNavigate } from 'react-router-dom'
 import Icon404 from '../../assets/svg/404Icon'
 import styles from './404.module.css'
+import { useEffect } from 'react'
 
 function Page404()
 {
     const navigate = useNavigate()
+
+    useEffect(()=>{
+        document.title = `404 - Nie znaleziono strony`
+        return()=>
+        {
+            document.title = `Strona Główna`
+        }
+    },[])
 
     return(
         <div className={styles.container}>

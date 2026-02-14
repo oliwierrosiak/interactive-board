@@ -100,6 +100,13 @@ function EditNote(props)
         
     }
 
+    useEffect(()=>{
+        document.title = `Edycja notatki - ${title}`
+        return ()=>{
+            document.title = `Strona Główna`
+        }
+    },[])
+
     return(
         <article className={styles.overlay} onClick={overlayClicked}>
             <form className={styles.container} onSubmit={validate}>

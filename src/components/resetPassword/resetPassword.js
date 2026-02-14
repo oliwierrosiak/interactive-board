@@ -109,7 +109,12 @@ function ResetPassword()
     }
 
     useEffect(()=>{
+        document.title = "Resetowanie hasła"
         checkPasswordResetTokenValidity()
+        return()=>
+        {
+            document.title = `Strona Główna`
+        }
     },[])
 
     return(

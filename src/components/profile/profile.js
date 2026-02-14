@@ -60,6 +60,7 @@ function Profile()
                 nameInputRef.current.focus()
                 nameInputRef.current.blur()
             }, 50);
+            document.title = `Profil - ${response.data.name}`
         }   
         catch(ex)
         {
@@ -163,7 +164,11 @@ function Profile()
     }
 
     useEffect(()=>{
+        document.title = 'Profil'
         getData()
+        return()=>{
+            document.title = 'Strona Główna'
+        }
     },[])
 
     const closeMessage = () =>{
@@ -191,7 +196,6 @@ function Profile()
         try
         {
             setResetPasswordLoading(true)
-            const token = await refreshToken()
             const response = await axios.post(`${ApiAddress}/resetPassword`,{email:loginContext.loggedUser.email})
             setResetPasswordLoading(false)
             addMessage('info','Wysłano wiadomość email. Sprawdź swoją skrzynkę')
@@ -202,6 +206,10 @@ function Profile()
             setResetPasswordLoading(false)
         }
     }
+
+    useEffect(()=>{
+        document.title = displayDeletingAccount?'Usuwanie konta':`Profil - ${name}`
+    },[displayDeletingAccount])
 
     return(
             
