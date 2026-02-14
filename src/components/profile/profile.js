@@ -18,7 +18,7 @@ import ArrowIcon from '../../assets/svg/arrowIcon'
 import InfoIcon from '../../assets/svg/infoIcon'
 import CloseIcon from '../../assets/svg/closeIcon'
 import DeletingAccountConfirm from './deletingAccountConfirm.js/deletingAccountConfirm'
-import logo from '../../assets/img/notely.png'
+import logo from '../../assets/img/logo.png'
 import UnauthorizedActionContext from '../../context/unauthorizedActionContext'
 
 function Profile()

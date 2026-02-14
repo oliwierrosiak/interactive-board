@@ -1,5 +1,5 @@
 import styles from './resetPassword.module.css'
-import logo from '../../assets/img/notely.png'
+import logo from '../../assets/img/logo.png'
 import ResetPasswordIcon from '../../assets/svg/resetPasswordIcon'
 import inputStyles from '../login/login-register.module.css'
 import { useContext, useEffect, useState } from 'react'

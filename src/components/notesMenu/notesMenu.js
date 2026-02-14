@@ -11,7 +11,7 @@ import NoteIcon from '../../assets/svg/noteIcon'
 import MyNotesItem from './myNotesItem/myNotesItem'
 import VisitedNotesItem from './visitedNotesItem/visitedNotesItem'
 import MobileDisplayContext from '../../context/mobileDisplayContext'
-import logo from '../../assets/img/notely.png'
+import logo from '../../assets/img/logo.png'
 
 function NotesMenu(props)
 {

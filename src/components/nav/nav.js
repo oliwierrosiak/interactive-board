@@ -4,7 +4,7 @@ import DisplayLoginContext from '../../context/displayLogin'
 import LoginContext from '../../context/loginContext'
 import ImgLoadingIcon from '../../assets/svg/imgLoadingIcon'
 import LoggedMenu from './loggedMenu/loggedMenu'
-import logo from '../../assets/img/notely.png'
+import logo from '../../assets/img/logo.png'
 import MenuIcon from '../../assets/svg/menuIcon'
 
 function Nav(props)

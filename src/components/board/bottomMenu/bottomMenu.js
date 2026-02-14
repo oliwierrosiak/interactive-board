@@ -10,7 +10,7 @@ import ImageIcon from '../../../assets/svg/imageIcon'
 import ShapesIcon from '../../../assets/svg/shapesIcon'
 import ShapesMenu from './shapesMenu/shapesMenu'
 import BgColorMenu from './textMenu/bgColorMenu'
-import imgTemplatePreview from '../../../assets/img/preview.png'
+import imgTemplatePreview from '../../../assets/img/preview1.png'
 import BackgroundTemplateMenu from './backgroundTemplateMenu'
 
 function BottomMenu(props)

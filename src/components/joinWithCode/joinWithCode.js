@@ -7,7 +7,7 @@ import ApiAddress from '../../ApiAddress'
 import { useNavigate } from 'react-router-dom'
 import AccessTokenContext from '../../context/accessTokenContext'
 import refreshToken from '../auth/refreshToken'
-import logo from '../../assets/img/notely.png'
+import logo from '../../assets/img/logo.png'
 import UnauthorizedActionContext from '../../context/unauthorizedActionContext'
 
 function JoinWithCode(props)
